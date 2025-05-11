@@ -5,11 +5,11 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 <meta charset="utf-8">
-<link rel="icon" href="img/favicon.png">
-<link rel="canonical" href="machines.jsp">
+<link rel="icon" href="<%= request.getContextPath() %>/img/favicon.png">
+<link rel="canonical" href="<%= request.getContextPath() %>/machines.jsp">
 <title>Pwn3d!</title>
 <script async defer src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/style_machines.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/style_machines_tested.css">
 </head>
 
 <body>
@@ -135,7 +135,7 @@
 					                <div class="form-field">
 					                    <label class="form-label" for="level">Level</label>
 					                    <select class="form-control" id="level" name="Level" required>
-					                        <option value="Low">Low</option>
+					                        <option value="Very-Easy">Very-Easy</option>
 					                        <option value="Easy">Easy</option>
 					                        <option value="Medium">Medium</option>
 					                        <option value="Hard">Hard</option>
@@ -191,7 +191,7 @@
 				
 				<ul class="vm-stats">
 				    <li title="Total VMs"><span class="badge badge-vms">9 VMs</span></li>
-				    <li title="Low VMs"><span class="badge badge-low">1 Low</span></li>
+				    <li title="Very-Easy VMs"><span class="badge badge-very-easy">1 Very Easy</span></li>
 				    <li title="Easy VMs"><span class="badge badge-easy">2 Easy</span></li>
 				    <li title="Medium VMs"><span class="badge badge-medium">4 Medium</span></li>
 				    <li title="Hard VMs"><span class="badge badge-hard">2 Hard</span></li>
@@ -202,39 +202,46 @@
 				
 				<div class="filters">
 				    <div class="filter-wrapper" onmouseleave="hideFilters()">
-				        <button type="button" class="filter-by" onclick="toggleFilters()" onmouseover="showFilters()">
-				            Filter by
-				            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-				                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-				                <path d="M6 9l6 6l6 -6" />
-				            </svg>
-				        </button>
-				        <div class="filter-options">
-				            <div class="level-filter">
-				                <input type="checkbox" id="low" name="low" data-difficulty="low" title="Low" checked onclick="filterTable('low')" />
-				                <label for="low">Low</label>
-				            </div>
-				            <div class="level-filter">
-				                <input type="checkbox" id="easy" name="easy" data-difficulty="easy" title="Easy" checked onclick="filterTable('easy')" />
-				                <label for="easy">Easy</label>
-				            </div>
-				            <div class="level-filter">
-				                <input type="checkbox" id="medium" name="medium" data-difficulty="medium" title="Medium" checked onclick="filterTable('medium')" />
-				                <label for="medium">Medium</label>
-				            </div>
-				            <div class="level-filter">
-				                <input type="checkbox" id="hard" name="hard" data-difficulty="hard" title="Hard" checked onclick="filterTable('hard')" />
-				                <label for="hard">Hard</label>
-				            </div>
-				            <div class="os-filter">
-				                <input type="checkbox" id="linux" name="linux" data-os="linux" title="Linux" checked onclick="filterTable('linux')" />
-				                <label for="linux">Linux</label>
-				            </div>
-				            <div class="os-filter">
-				                <input type="checkbox" id="windows" name="windows" data-os="windows" title="Windows" checked onclick="filterTable('windows')" />
-				                <label for="windows">Windows</label>
-				            </div>
-				        </div>
+				        
+				        <!-- Botón para abrir el popup -->
+				        
+						<button type="button" class="filter-by" onclick="openFilterPopup()">Filtrar</button>
+						
+						<!-- Filtro en forma de popup -->
+						
+						<div id="filterPopup" class="popup-overlay-filter">
+						  <div class="popup-content-filter">
+						    <button class="close-btn-filter" onclick="closeFilterPopup()">×</button>
+						    <h3>Filtrar máquinas</h3>
+						    <div class="filter-options">
+						      <div class="level-filter">
+						        <input type="checkbox" id="very-easy" name="very-easy" />
+						        <label for="very-easy">Very Easy</label>
+						      </div>
+						      <div class="level-filter">
+						        <input type="checkbox" id="easy" name="easy" />
+						        <label for="easy">Easy</label>
+						      </div>
+						      <div class="level-filter">
+						        <input type="checkbox" id="medium" name="medium" />
+						        <label for="medium">Medium</label>
+						      </div>
+						      <div class="level-filter">
+						        <input type="checkbox" id="hard" name="hard" />
+						        <label for="hard">Hard</label>
+						      </div>
+						      <div class="os-filter">
+						        <input type="checkbox" id="linux" name="linux" />
+						        <label for="linux">Linux</label>
+						      </div>
+						      <div class="os-filter">
+						        <input type="checkbox" id="windows" name="windows" />
+						        <label for="windows">Windows</label>
+						      </div>
+						    </div>
+						    <button onclick="applyFilters()">Aplicar</button>
+						  </div>
+						</div>
 				    </div>
 				    <button type="button" class="order-by">
 				        Order by
@@ -270,14 +277,14 @@
 					<thead>
 						<tr>
 							<th id="idnum">#</th>
-							<th id="card">Card</th>
-							<th class="vm-name">Name</th>
-							<th id="tested">Tested</th>
-							<th class="url">File</th>
-							<th class="size">Size</th>
+							<th id="card">Info</th>
+							<th class="vm-name">Nombre</th>
+							<th id="tested">Entorno</th>
+							<th class="url">Archivo</th>
+							<th class="size">Tamaño</th>
 							<th id="md5">MD5</th>
-							<th class="first-user">First User</th>
-							<th class="first-root">First Root</th>
+							<th class="first-user">Primer User</th>
+							<th class="first-root">Primer Root</th>
 							<th id="writeups">Writeups</th>
 						</tr>
 					</thead>
@@ -298,7 +305,7 @@
 						
 						    <!-- CARD -->
 						    <td class="card">
-						        <button class="card-btn" title="Show card!" onclick="showCard('Lower5', 'Linux', 'Low', 'd4t4s3c', '09 Apr 2025')">
+						        <button class="card-btn" title="Show card!" onclick="showCard('Lower5', 'Linux', 'Very-Easy', 'd4t4s3c', '09 Apr 2025')">
 						            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-id" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">
 						                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
 						                <path d="M3 4m0 3a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v10a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z" />
@@ -312,16 +319,16 @@
 						
 						    <!-- NAME -->
 						    <td id="vm">
-						        <div class="vm-name-btn level-btn low">
-						            <img class="low-dots" title="LinuxVM" alt="Linuxicon" src="img/Linux.svg" width="22" height="22" loading="lazy">
+						        <div class="vm-name-btn level-btn very-easy">
+						            <img class="very-easy-dots" title="LinuxVM" alt="Linuxicon" src="<%= request.getContextPath() %>/img/Linux.svg" width="22" height="22" loading="lazy">
 						            <span class="vm-name">Lower5</span>
 						        </div>
 						    </td>
 						
 						    <!-- TESTED -->
 						    <td class="tested">
-						        <img title="VirtualBox" alt="VirtualBox logo" src="img/vbox.png" width="25" height="25">
-						        <img title="VMware" alt="VMware logo" src="img/vmware.png" width="25" height="25">
+						        <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/vbox.png" width="25" height="25">
+						        <img title="VMware" alt="VMware logo" src="<%= request.getContextPath() %>/img/vmware.png" width="25" height="25">
 						    </td>
 						
 						    <!-- FILE -->
@@ -440,7 +447,7 @@
 					    <!-- NAME -->
 					    <td id="vm">
 					        <div class="vm-name-btn level-btn medium">
-					            <img class="medium-dots" title="WindowsVM" alt="Windowsicon" src="img/Windows.svg" width="22" height="22"
+					            <img class="medium-dots" title="WindowsVM" alt="Windowsicon" src="<%= request.getContextPath() %>/img/Windows.svg" width="22" height="22"
 					                loading="lazy">
 					            <span class="vm-name">Change</span>
 					        </div>
@@ -448,7 +455,7 @@
 					
 					    <!-- TESTED -->
 					    <td class="tested">
-					        <img title="VirtualBox" alt="VirtualBox logo" src="img/vbox.png" width="25" height="25">
+					        <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/vbox.png" width="25" height="25">
 					    </td>
 					
 					    <!-- FILE -->
@@ -580,15 +587,15 @@
 					    <!-- NAME -->
 					    <td id="vm">
 					        <div class="vm-name-btn level-btn medium">
-					            <img class="medium-dots" title="LinuxVM" alt="Linuxicon" src="img/Linux.svg" width="22" height="22" loading="lazy">
+					            <img class="medium-dots" title="LinuxVM" alt="Linuxicon" src="<%= request.getContextPath() %>/img/Linux.svg" width="22" height="22" loading="lazy">
 					            <span class="vm-name">Anon</span>
 					        </div>
 					    </td>
 					
 					    <!-- TESTED -->
 					    <td class="tested">
-					        <img title="VirtualBox" alt="VirtualBox logo" src="img/vbox.png" width="25" height="25">
-					        <img title="VMware" alt="VMware logo" src="img/vmware.png" width="25" height="25">
+					        <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/vbox.png" width="25" height="25">
+					        <img title="VMware" alt="VMware logo" src="<%= request.getContextPath() %>/img/vmware.png" width="25" height="25">
 					    </td>
 					
 					    <!-- FILE -->
@@ -707,15 +714,15 @@
 					    <!-- NAME -->
 					    <td id="vm">
 					        <div class="vm-name-btn level-btn easy">
-					            <img class="easy-dots" title="LinuxVM" alt="Linuxicon" src="img/Linux.svg" width="22" height="22" loading="lazy">
+					            <img class="easy-dots" title="LinuxVM" alt="Linuxicon" src="<%= request.getContextPath() %>/img/Linux.svg" width="22" height="22" loading="lazy">
 					            <span class="vm-name">Hit</span>
 					        </div>
 					    </td>
 					    
 					    <!-- TESTED -->
 					    <td class="tested">
-					        <img title="VirtualBox" alt="VirtualBox logo" src="img/vbox.png" width="25" height="25">
-					        <img title="VMware" alt="VMware logo" src="img/vmware.png" width="25" height="25">
+					        <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/vbox.png" width="25" height="25">
+					        <img title="VMware" alt="VMware logo" src="<%= request.getContextPath() %>/img/vmware.png" width="25" height="25">
 					    </td>
 					    
 					    <!-- FILE -->
@@ -837,15 +844,15 @@
 					    <td id="vm">
 					        <div class="vm-name-btn level-btn medium">
 					            <img class="medium-dots" title="LinuxVM" alt="Linuxicon"
-					                src="img/Linux.svg" width="22" height="22" loading="lazy">
+					                src="<%= request.getContextPath() %>/img/Linux.svg" width="22" height="22" loading="lazy">
 					            <span class="vm-name">Matrix</span>
 					        </div>
 					    </td>
 					    
 					    <!-- TESTED -->
 					    <td class="tested">
-					        <img title="VirtualBox" alt="VirtualBox logo" src="img/vbox.png" width="25" height="25">
-					        <img title="VMware" alt="VMware logo" src="img/vmware.png" width="25" height="25">
+					        <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/vbox.png" width="25" height="25">
+					        <img title="VMware" alt="VMware logo" src="<%= request.getContextPath() %>/img/vmware.png" width="25" height="25">
 					    </td>
 					    
 					    <!-- FILE -->
@@ -1001,15 +1008,15 @@
 					    <!-- NAME -->
 					    <td id="vm">
 					        <div class="vm-name-btn level-btn hard">
-					            <img class="hard-dots" title="LinuxVM" alt="Linuxicon" src="img/Linux.svg" width="22" height="22" loading="lazy">
+					            <img class="hard-dots" title="LinuxVM" alt="Linuxicon" src="<%= request.getContextPath() %>/img/Linux.svg" width="22" height="22" loading="lazy">
 					            <span class="vm-name">Tunnel</span>
 					        </div>
 					    </td>
 					
 					    <!-- TESTED -->
 					    <td class="tested">
-					        <img title="VirtualBox" alt="VirtualBox logo" src="img/vbox.png" width="25" height="25">
-					        <img title="VMware" alt="VMware logo" src="img/vmware.png" width="25" height="25">
+					        <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/vbox.png" width="25" height="25">
+					        <img title="VMware" alt="VMware logo" src="<%= request.getContextPath() %>/img/vmware.png" width="25" height="25">
 					    </td>
 					
 					    <!-- FILE -->
@@ -1123,14 +1130,14 @@
 					    <!-- NAME -->
 					    <td id="vm">
 					        <div class="vm-name-btn level-btn easy">
-					            <img class="easy-dots" title="WindowsVM" alt="Windows icon" src="img/Windows.svg" width="22" height="22" loading="lazy">
+					            <img class="easy-dots" title="WindowsVM" alt="Windows icon" src="<%= request.getContextPath() %>/img/Windows.svg" width="22" height="22" loading="lazy">
 					            <span class="vm-name">War</span>
 					        </div>
 					    </td>
 					
 					    <!-- TESTED -->
 					    <td class="tested">
-					        <img title="VirtualBox" alt="VirtualBox logo" src="img/vbox.png" width="25" height="25">
+					        <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/vbox.png" width="25" height="25">
 					    </td>
 					
 					    <!-- FILE -->
@@ -1252,15 +1259,15 @@
 					    <!-- NAME -->
 					    <td id="vm">
 					        <div class="vm-name-btn level-btn hard">
-					            <img class="hard-dots" title="LinuxVM" alt="Linuxicon" src="img/Linux.svg" width="22" height="22" loading="lazy">
+					            <img class="hard-dots" title="LinuxVM" alt="Linuxicon" src="<%= request.getContextPath() %>/img/Linux.svg" width="22" height="22" loading="lazy">
 					            <span class="vm-name">Manager</span>
 					        </div>
 					    </td>
 					
 					    <!-- TESTED -->
 					    <td class="tested">
-					        <img title="VirtualBox" alt="VirtualBox logo" src="img/vbox.png" width="25" height="25">
-					        <img title="VMware" alt="VMware logo" src="img/vmware.png" width="25" height="25">
+					        <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/vbox.png" width="25" height="25">
+					        <img title="VMware" alt="VMware logo" src="<%= request.getContextPath() %>/img/vmware.png" width="25" height="25">
 					    </td>
 					
 					    <!-- FILE -->
@@ -1374,14 +1381,14 @@
 						  <!-- NAME -->
 						  <td id="vm">
 						    <div class="vm-name-btn level-btn medium">
-						      <img class="medium-dots" title="WindowsVM" alt="Windows icon" src="img/Windows.svg" width="22" height="22" loading="lazy">
+						      <img class="medium-dots" title="WindowsVM" alt="Windows icon" src="<%= request.getContextPath() %>/img/Windows.svg" width="22" height="22" loading="lazy">
 						      <span class="vm-name">Controler</span>
 						    </div>
 						  </td>
 						  
 						  <!-- TESTED -->
 						  <td class="tested">
-						    <img title="VirtualBox" alt="VirtualBox logo" src="img/vbox.png" width="25" height="25">
+						    <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/vbox.png" width="25" height="25">
 						  </td>
 						  
 						  <!-- FILE -->
@@ -1644,14 +1651,14 @@
 		</section>
 	</main>
 	<footer>
-		<img src="img/logoSM.png" alt="Pwn3d! small footer logo"
+		<img src="<%= request.getContextPath() %>/img/logoSM.png" alt="Pwn3d! small footer logo"
 			loading="lazy">
 		<p>© Pwn3d! 2024-2025</p>
 		<button id="toggle-theme" class="toggle-button">
 		  Modo Oscuro 🌙
 		</button>
 	</footer>
-	<script src="<%= request.getContextPath() %>/js/machines.js"></script>
+	<script src="<%= request.getContextPath() %>/js/script_machines_tested.js"></script>
 	<script>
 	  // Obtén el botón de cambio de tema y el body
 	  const toggleBtn = document.getElementById('toggle-theme');
