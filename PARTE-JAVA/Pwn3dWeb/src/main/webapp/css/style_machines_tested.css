@@ -739,7 +739,8 @@ details {
     cursor: pointer;
 }
 
-.modal, .form-writeup, .form-vm, .form-flag {
+
+.modal, .form-flag {
     display: none;
     position: fixed;
     z-index: 10;
@@ -759,15 +760,15 @@ details {
     overflow: hidden;
 }
 
-.form-writeup, .form-flag {
+.form-flag {
     padding-top: 10vh;
     overflow: scroll;
 }
-
+/*
 .form-vm {
     padding-top: 5vh;
     overflow: scroll;
-}
+}*/
 
 .modal-content {
     width: 300px;
@@ -1014,95 +1015,178 @@ details {
     transform: scale(1.1);
 }
 
-.form-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: -1 rem !important;
-    bottom: -20px !important;
-    flex-direction: column;
-    background: var(--color-form-bg);
-    border-radius: 0.25rem;
-    padding: 2rem;
-    width: 40vw;
-    margin: auto;
+/* Asegurarse de que el modal está centrado en la pantalla */
+.form-vm {
+  display: none; /* Crucial para que esté oculto por defecto */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--popup-overlay);
+  backdrop-filter: blur(5px);
+  justify-content: center;
+  align-items: center; /* Centra el contenido en el eje vertical */
+  z-index: 9998;
 }
 
+.form-writeup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--popup-overlay);
+  backdrop-filter: blur(5px);
+  justify-content: center;
+  align-items: center;
+  z-index: 9998;
+}
+
+/* Contenedor de formulario */
+.form-container {
+  background: var(--popup-filter-bg-color);
+  padding: 2rem;
+  border-radius: 1rem;
+  max-width: 480px;
+  width: 95%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.3s ease-out;
+  color: var(--popup-text);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; /* Espacio entre secciones */
+  justify-content: center;
+  align-items: center;
+}
+
+/* Título y cierre */
 .form-title {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 4fr 1fr;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 0.25rem;
+  display: flex;
+  flex-direction: column; /* Hacer el título en columna */
+  justify-content: center;
+  align-items: center; /* Centrado del título */
+  text-align: center; /* Asegura que el texto se centre */
+}
+
+.form-title h1 {
+  font-size: 1.5rem; /* Tamaño del título */
+  margin: 0;
+  color: var(--popup-text);
 }
 
 .form-text {
-    margin: 0;
-    margin-bottom: 1rem;
-    text-align: start;
-    font-size: 0.85rem;
-    width: 100%;
-    color: var(--color-text-form-light) !important;
+	align-items: center;
+	text-align: center;
+	justify-content: center;
 }
 
+.close-form {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--close-btn-color);
+  align-self: flex-end; /* Para colocar el botón de cierre en la esquina superior derecha */
+}
+
+.close-form:hover {
+  color: var(--close-btn-hover);
+}
+
+/* Descripción */
+.form-description {
+  font-size: 1rem; /* Un poco más grande la descripción */
+  color: var(--popup-text-filter-color);
+  margin-top: 0.5rem; /* Un espacio pequeño arriba */
+  margin-bottom: 1.5rem; /* Más espacio abajo */
+  text-align: center; /* Centramos el texto */
+}
+
+/* Form layout */
 .form-section {
-    display: flex;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Aumentamos el gap entre las secciones */
+}
+
+.form-field-group {
+  display: flex;
+  gap: 1.5rem; /* Más espacio entre los grupos de campos */
+  flex-wrap: wrap;
 }
 
 .form-field {
-    width: 100%;
-    display: flex;
-    align-items: start;
-    justify-content: start;
-    flex-direction: column;
-    gap: 0.25rem;
-}
-
-.form-checkbox {
-    display: flex;
-    gap: 0.5rem;
-    color: var(--color-text-form-light) !important;
-}
-
-.form-btns {
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    gap: 0.5rem;
-}
-
-.form>div ~ div {
-    margin-top: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Mayor separación entre label y input */
+  min-width: 45%;
 }
 
 .form-label {
-    display: inline-block;
-    margin-bottom: 5px;
-    font-size: 0.875rem;
-    font-weight: 700;
-    color: var(--color-text-form-light) !important;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--popup-text-filter-color);
+  margin-bottom: 0.5rem; /* Añadimos espacio abajo del label */
 }
 
 .form-control {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    font: 0.875rem/1.5 sans-serif;
-    color: var(--color-text-light);
-    background-color: lightgray;
-    border: 1px solid var(--color-border-light);
-    border-radius: 4px;
-    box-sizing: border-box;
+  background-color: #2a2f37;
+  border: 1px solid var(--color-border-dark);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem; /* Más relleno en los inputs */
+  color: #f1f1f1;
+  transition: border 0.3s ease, background 0.3s ease;
+  font-size: 1rem; /* Tamaño de fuente ligeramente más grande */
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--checkbox-accent);
+  background-color: #3a4049;
+}
+
+/* Buttons + footer */
+.form-btns,
+.form-footer {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.button {
+  background-color: var(--button-bg);
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: var(--button-hover-bg);
 }
 
 .form-footer {
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    color: var(--color-text-form-light) !important;
+  font-size: 0.75rem;
+  color: var(--popup-text-filter-color);
+  text-align: center;
+  margin-top: 2rem;
 }
+
+@media (max-width: 500px) {
+  .form-field {
+    min-width: 100%;
+  }
+
+  .form-container {
+    padding: 1.5rem;
+  }
+}
+
 
 .submit-vm, .submit-writeup, .submit-flag {
     text-align: start;
@@ -1140,6 +1224,11 @@ button[type="submit"] {
 
 button[type="reset"] {
     background-color: var(--color-button-reset);
+}
+
+button[type="submit"]:hover {
+    color: black;
+    background-color: var(--color-accent-danger);
 }
 
 footer {
