@@ -26,13 +26,13 @@
 	                            '</tr>' +
 	                            '<tr>' +
 	                                '<td class="card-creator">' +
-	                                    '<span class="card-text">Creator: </span>' +
+	                                    '<span class="card-text">Creador: </span>' +
 	                                    '<span>' + creator + '</span>' +
 	                                '</td>' +
 	                            '</tr>' +
 	                            '<tr>' +
 	                                '<td class="card-difficulty">' +
-	                                    '<span class="card-text">Difficulty:</span>' +
+	                                    '<span class="card-text">Dificultad:</span>' +
 	                                    '<div class="card-difficulty-text vm-name-btn level-btn ' + difficulty.toLowerCase() + '">' +
 	                                        '<span class="' + difficulty.toLowerCase() + '-dots"></span>' +
 	                                        '<span class="vm-name">' + difficulty + '</span>' +
@@ -41,7 +41,7 @@
 	                            '</tr>' +
 	                            '<tr>' +
 	                                '<td class="card-release">' +
-	                                    '<span class="card-text">Release:</span> ' + release +
+	                                    '<span class="card-text">Lanzamiento:</span> ' + release +
 	                                '</td>' +
 	                            '</tr>' +
 	                        '</tbody>' +
@@ -105,27 +105,39 @@
 	}
 
 	
-    /* SUBMIT VM (SHOW FORM) */
-    const showVMForm = () => {
-        document.querySelector('body').style.overflow = 'hidden';
-        let title = document.querySelector('.submit-writeup');
-        let modal = document.querySelector('.form-vm');
-        modal.style.display = 'block';
+	/* SUBMIT VM (SHOW FORM) */
+	const showVMForm = () => {
+	  const modal = document.querySelector('.form-vm');
+	  const body = document.body;
 
-        let span = modal.querySelector('.close-form');
-        span.onclick = function() {
-            modal.style.display = 'none';
-            document.querySelector('body').style.overflow = 'visible';
-        }
-    }
+	  modal.style.display = 'flex';
+	  body.style.overflow = 'hidden';
 
+	  const span = modal.querySelector('.close-form');
+	  const closeModal = () => {
+	    modal.style.display = 'none';
+	    body.style.overflow = 'visible';
+	  };
+
+	  span.onclick = closeModal;
+
+	  // Cierra si se hace clic fuera del contenido
+	  const handleClickOutside = (e) => {
+	    if (e.target === modal) {
+	      closeModal();
+	      window.removeEventListener('click', handleClickOutside);
+	    }
+	  };
+
+	  window.addEventListener('click', handleClickOutside);
+	};
     
     /* SHOW WRITEUPS */
     function showWriteups(name) {
         document.querySelector('body').style.overflow = 'hidden';
         let modal = document.getElementById(name);
         let title = modal.querySelector('.writeup-title');
-        title.textContent = "Writeups for " + name;
+        title.textContent = "Writeups para " + name;
         let writeupsContainer = modal.querySelector('.writeups-container');
         let span = modal.querySelector('.close');
         modal.style.display = 'block';
@@ -148,20 +160,39 @@
         }
     }
 
-    /* SUBMIT WRITEUP (SHOW FORM) */
-    const showWriteupForm = (name) => {
-        document.querySelector('body').style.overflow = 'hidden';
-        let title = document.querySelector('.submit-writeup');
-        title.textContent = "Writeup submission for " + name;
-        let modal = document.querySelector('.form-writeup');
-        modal.style.display = 'block';
+	/* SUBMIT WRITEUP (SHOW FORM) */
+	const showWriteupForm = (name) => {
+	  const modal = document.querySelector('.form-writeup');
+	  const body = document.body;
 
-        let span = modal.querySelector('.close-form');
-        span.onclick = function() {
-            modal.style.display = 'none';
-            document.querySelector('body').style.overflow = 'visible';
-        };
-    }
+	  // Mostrar el modal y desactivar el desplazamiento de la página
+	  modal.style.display = 'flex';
+	  body.style.overflow = 'hidden';
+
+	  // Cambiar el título dinámicamente
+	  const title = modal.querySelector('h1');
+	  title.textContent = "Nuevo envío de writeup para " + name;
+
+	  // Función para cerrar el modal
+	  const span = modal.querySelector('.close-form');
+	  const closeModal = () => {
+	    modal.style.display = 'none';
+	    body.style.overflow = 'visible';
+	  };
+
+	  // Cerrar al hacer clic en el botón de cierre
+	  span.onclick = closeModal;
+
+	  // Cerrar al hacer clic fuera del contenido del modal
+	  const handleClickOutside = (e) => {
+	    if (e.target === modal) {
+	      closeModal();
+	      window.removeEventListener('click', handleClickOutside);
+	    }
+	  };
+
+	  window.addEventListener('click', handleClickOutside);
+	};
  	
     /* SUBMIT FLAGS (SHOW FORM) */
     const showFlagForm = (type, vmname) => {
@@ -172,7 +203,7 @@
 
         if (body && title && modal && span) {
             body.style.overflow = 'hidden';
-            title.textContent = `First ${type} flag submission for ${vmname}`;
+            title.textContent = `Primera ${type} flag enviada por ${vmname}`;
             modal.style.display = 'block';
 
             span.onclick = function() {
@@ -180,6 +211,6 @@
                 body.style.overflow = 'visible';
             };
         } else {
-            console.error('Error: one or more elements not found.');
+            console.error('Error: uno o varios elementos no encontrados.');
         }
     }
