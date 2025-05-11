@@ -9,7 +9,7 @@
 <link rel="canonical" href="<%= request.getContextPath() %>/machines.jsp">
 <title>Pwn3d!</title>
 <script async defer src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/style_machines_tested.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/style_machines46.css">
 </head>
 
 <body>
@@ -1654,38 +1654,33 @@
 		<img src="<%= request.getContextPath() %>/img/logoSM.png" alt="Pwn3d! small footer logo"
 			loading="lazy">
 		<p>© Pwn3d! 2024-2025</p>
-		<button id="toggle-theme" class="toggle-button">
-		  Modo Oscuro 🌙
+		
+		<!-- BOTON MODO CLARO/OSCURO -->
+		
+		<button id="toggle-theme" class="toggle-button" aria-label="Toggle theme">
+		  <svg viewBox="0 0 100 100" class="theme-icon">
+		    <circle cx="50" cy="50" r="40" class="circle-bg" />
+		    <path d="M50,10 A40,40 0 1,1 49.9,10 Z" class="half" />
+		  </svg>
 		</button>
 	</footer>
-	<script src="<%= request.getContextPath() %>/js/script_machines_tested.js"></script>
+	<script src="<%= request.getContextPath() %>/js/machines1.js"></script>
 	<script>
-	  // Obtén el botón de cambio de tema y el body
 	  const toggleBtn = document.getElementById('toggle-theme');
 	  const body = document.body;
 	
-	  // Verifica si el tema se ha guardado previamente
 	  if (localStorage.getItem('theme') === 'light') {
-	    body.classList.add('light-theme'); // Aplica la clase del modo claro
-	    toggleBtn.textContent = 'Modo Oscuro 🌙'; // Cambia el texto del botón
+	    body.classList.add('light-theme');
 	  } else {
-	    body.classList.remove('light-theme'); // Aplica el modo oscuro por defecto
-	    toggleBtn.textContent = 'Modo Claro 🌞'; // Cambia el texto del botón
+	    body.classList.remove('light-theme');
 	  }
 	
-	  // Agrega el evento para alternar entre los modos cuando el botón es presionado
 	  toggleBtn.addEventListener('click', () => {
-	    body.classList.toggle('light-theme'); // Alterna la clase 'light-theme'
-	
-	    // Verifica si el modo claro está activado
+	    body.classList.toggle('light-theme');
 	    const isLight = body.classList.contains('light-theme');
-	
-	    // Cambia el texto del botón dependiendo del modo
-	    toggleBtn.textContent = isLight ? 'Modo Oscuro 🌙' : 'Modo Claro 🌞';
-	
-	    // Guarda la preferencia de tema en localStorage
 	    localStorage.setItem('theme', isLight ? 'light' : 'dark');
 	  });
 	</script>
+
 </body>
 </html>
