@@ -91,6 +91,8 @@
   --popup-filter-bg-color: #22272e;
   --popup-filter-level-color: #2a2f37;
   --popup-text-filter-color: #c2c2c3;
+  --circle-light: #ffffff;
+  --circle-dark: #333333;
 }
 
 .light-theme {
@@ -1243,22 +1245,47 @@ footer img {
 	}
 }
 
-/* Estilos para el botón */
-.toggle-button {
-  background-color: var(--color-button-light); /* Color del fondo del botón */
-  color: var(--color-text-light-mode); /* Color del texto */
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+/* ESTILO BOTON MODO CLARO/OSCURO */
+
+/* Modo oscuro (por defecto) */
+.circle-bg {
+  fill: var(--circle-dark);
 }
 
-/* Efecto cuando el usuario pasa el ratón por encima */
-.toggle-button:hover {
-  background-color: var(--color-button-hover-light-mode);
+.half {
+  fill: var(--circle-light);
 }
+
+/* Modo claro (aplica cuando tiene .light-theme) */
+body.light-theme .circle-bg {
+  fill: var(--circle-light);
+}
+
+body.light-theme .half {
+  fill: var(--circle-dark);
+}
+
+.theme-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.toggle-button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-button:focus {
+  outline: none;
+}
+
 
 @media ( min-width : 700px) and (max-width: 812px) {
 	#md5-hash {
