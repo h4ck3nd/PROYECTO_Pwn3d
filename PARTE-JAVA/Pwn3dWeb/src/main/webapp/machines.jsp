@@ -34,75 +34,108 @@
 		      </button>
 			</div>
 			
-			<!-- SUBMIT VM -->
-					
-					<section class="form-vm">
-					    <article class="form-container">
-					        <div class="form-title">
-					            <h1 class="submit-vm">New VM Submission</h1>
-					            <span class="close-form">&times;</span>
-					        </div>
-					        <p class="form-text">Complete the form with all the information about your VM. If you want feedback about your upload, please contact us.</p>
-					        <form class="form submit-form" id="vmForm">
-					            <div class="form-section">
-					                <div class="form-field">
-					                    <label class="form-label" for="name">Name</label>
-					                    <input class="form-control" id="name" name="Name" type="text" maxlength="20" placeholder="Enter the machine name" required autocomplete="off">
-					                </div>
-					                <div class="form-field">
-					                    <label class="form-label" for="vm-creator">Creator</label>
-					                    <input class="form-control" id="vm-creator" name="Creator" type="text" maxlength="15" placeholder="Enter your username" required />
-					                </div>
-					            </div>
-					            <div class="form-section">
-					                <div class="form-field">
-					                    <label class="form-label" for="level">Level</label>
-					                    <select class="form-control" id="level" name="Level" required>
-					                        <option value="Very-Easy">Very-Easy</option>
-					                        <option value="Easy">Easy</option>
-					                        <option value="Medium">Medium</option>
-					                        <option value="Hard">Hard</option>
-					                    </select>
-					                </div>
-					                <div class="form-field">
-					                    <label class="form-label" for="vm-url">VM URL</label>
-					                    <input class="form-control" id="vm-url" name="URL" type="url" pattern="https?://.+" placeholder="Enter the public URL of your machine" required />
-					                </div>
-					            </div>
-					            <div class="form-section">
-					                <div class="form-field">
-					                    <label class="form-label" for="user-flag">User Flag</label>
-					                    <input class="form-control" id="user-flag" name="UserFlag" type="text" maxlength="32" placeholder="Enter the user flag" required />
-					                </div>
-					                <div class="form-field">
-					                    <label class="form-label" for="root-flag">Root Flag</label>
-					                    <input class="form-control" id="root-flag" name="RootFlag" type="text" maxlength="32" placeholder="Enter the root flag" required />
-					                </div>
-					            </div>
-					            <div class="form-section">
-					                <div class="form-field">
-					                    <label class="form-label" for="writeup">Writeup URL</label>
-					                    <input class="form-control" id="writeup-url" name="Solution" type="url" pattern="https?://.+" placeholder="Enter the public URL of your writeup" required />
-					                </div>
-					                <div class="form-field">
-					                    <label class="form-label" for="contact">Contact</label>
-					                    <input class="form-control" id="contact" name="Contact" type="text" maxlength="32" placeholder="e.g. mail, linkedin, instagram, discord, twitter" required />
-					                </div>
-					            </div>
-					            <div class="form-field">
-					                <label class="form-label" for="tags">Tags</label>
-					                <textarea class="form-control" id="tags" name="Tags" maxlength="200" rows="1" placeholder="Indicate the main tags that identify the machine separated by commas." required></textarea>
-					            </div>
-					            <div class="form-btns">
-					                <button class="button" type="submit">Submit</button>
-					                <button class="button" type="reset">Clear</button>
-					            </div>
-					            <div class="form-footer">
-					                <small>Please read our <a href="https://vulnyx.com/rules/" target="_blank"><strong>Rules</strong></a> section before submitting a new VM.</small>
-					            </div>
-					        </form>
-					    </article>
-					</section>
+			<!-- SECCION PARA ENVIAR VM -->
+			
+			<section class="form-vm">
+			  <div class="form-container">
+			  <span class="close-form" style="margin-bottom: -30px !important; margin-top: -20px !important; margin-right: -15px !important;">&times;</span>
+			    <div class="form-title">
+			      <h1 style="font-size: 20px !important; color: #3379ac !important; font-style: bold !important; margin-bottom: -20px !important;" >Nuevo envío de VM</h1>
+			    </div>
+			    <p class="form-description" style="font-size: 15px !important; margin-bottom: -17px !important;">
+			      Complete el formulario con toda la información sobre su máquina virtual. Si desea comentarios sobre su subida, contáctenos.
+			    </p>
+			    <form class="form submit-form" id="vmForm">
+			      <!-- Name + Creator -->
+			      <div class="form-section" style="margin-bottom: -15px !important;">
+			        <div class="form-field-group">
+			          <div class="form-field">
+			            <label class="form-label" for="name" style="margin-bottom: -5px !important;">Nombre</label>
+			            <input class="form-control" id="name" name="Name" type="text" maxlength="20" placeholder="Nombre de la maquina" required autocomplete="off" />
+			          </div>
+			          <div class="form-field">
+			            <label class="form-label" for="vm-creator" style="margin-bottom: -5px !important;">Creador</label>
+			            <input class="form-control" id="vm-creator" name="Creator" type="text" maxlength="15" placeholder="Nombre de usuario" required />
+			          </div>
+			        </div>
+			      </div>
+			
+			      <!-- Level + URL -->
+			      <div class="form-section" style="margin-bottom: -15px !important;">
+			        <div class="form-field-group">
+			          <div class="form-field">
+			          <br>
+			            <label class="form-label" for="level" style="margin-bottom: -5px !important;">Dificultad</label>
+			            <select class="form-control" id="level" name="Level" required>
+			              <option value="Very-Easy">Very Easy</option>
+			              <option value="Easy">Easy</option>
+			              <option value="Medium">Medium</option>
+			              <option value="Hard">Hard</option>
+			            </select>
+			          </div>
+			          <div class="form-field">
+			          <br>
+			            <label class="form-label" for="vm-url" style="margin-bottom: -5px !important;">VM URL</label>
+			            <input class="form-control" id="vm-url" name="URL" type="url" pattern="https?://.+" placeholder="URL de VM publica" required />
+			          </div>
+			        </div>
+			      </div>
+			
+			      <!-- Flags -->
+			      <div class="form-section" style="margin-bottom: -15px !important;">
+			        <div class="form-field-group">
+			          <div class="form-field">
+			          <br>
+			            <label class="form-label" for="user-flag" style="margin-bottom: -5px !important;">Flag Usuario</label>
+			            <input class="form-control" id="user-flag" name="UserFlag" type="text" maxlength="32" placeholder="Flag del usuario" required />
+			          </div>
+			          <div class="form-field">
+			          <br>
+			            <label class="form-label" for="root-flag" style="margin-bottom: -5px !important;">Flag Root</label>
+			            <input class="form-control" id="root-flag" name="RootFlag" type="text" maxlength="32" placeholder="Flag de root" required />
+			          </div>
+			        </div>
+			      </div>
+			
+			      <!-- Writeup + Contact -->
+			      <div class="form-section" style="margin-bottom: -15px !important;">
+			        <div class="form-field-group">
+			          <div class="form-field">
+			          <br>
+			            <label class="form-label" for="writeup" style="margin-bottom: -5px !important;">Writeup URL</label>
+			            <input class="form-control" id="writeup-url" name="Solution" type="url" pattern="https?://.+" placeholder="URL del writeup" required />
+			          </div>
+			          <div class="form-field">
+			          <br>
+			            <label class="form-label" for="contact" style="margin-bottom: -5px !important;">Contacto</label>
+			            <input class="form-control" id="contact" name="Contact" type="text" maxlength="32" placeholder="email, Discord, etc..." required />
+			          </div>
+			        </div>
+			      </div>
+			
+			      <!-- Tags -->
+			      <div class="form-section">
+			        <div class="form-field">
+			        <br>
+			          <label class="form-label" for="tags" style="margin-bottom: -5px !important;">Tags</label>
+			          <textarea class="form-control" id="tags" name="Tags" maxlength="200" rows="2" placeholder="Tags separadas por comas" required></textarea>
+			        </div>
+			      </div>
+			
+			      <!-- Buttons -->
+			      <br>
+			      <div class="form-btns" style="margin-bottom: -5px !important;">
+			        <button class="button" type="submit">Enviar</button>
+			        <button class="button" type="reset">Borrar</button>
+			      </div>
+			
+			      <!-- Footer -->
+			      <div class="form-footer" style="margin-bottom: -15px !important;">
+			        <small>Por favor, lea nuestras <a href="https://vulnyx.com/rules/" target="_blank"><strong>Reglas</strong></a> antes de enviar una nueva VM.</small>
+			      </div>
+			    </form>
+			  </div>
+			</section>
 			</section>
 		</header>
 	<main>
@@ -181,11 +214,11 @@
 				                <path d="M21 21l-6 -6" />
 				            </svg>
 				        </div>
-				        <input id="vm-search" type="text" placeholder="Search by name..." aria-label="search" />
+				        <input id="vm-search" type="text" placeholder="Buscar por nombre..." aria-label="search" />
 				        <button class="clear-search" title="Clear search" onclick="clearSearch()">Clear</button>
 				    </div>
 				
-				    <button type="button" class="submit-btn" onclick="showVMForm()">Submit VM</button>
+				    <button type="button" class="submit-btn" onclick="showVMForm()">Envío de VM</button>
 				</div>
 				
 			<!-- ZONA DE MAQUINAS -->
@@ -1430,47 +1463,56 @@
 					</tbody>
 				</table>
 				<p id="search-message">
-					No matches for <span id="query"></span>. Try with other search.
+					No hay coincidencias para <span id="query"></span>. Pruebe con otra búsqueda.
 				</p>
 			</div>
+			
+			<!-- SECCION DE ENVIAR WRITEUP -->
+			
 			<section class="form-writeup">
-			  <article class="form-container">
+			  <div class="form-container">
+			    <!-- Título y botón de cierre -->
+			    <span class="close-form" style="margin-bottom: -30px !important; margin-top: -20px !important; margin-right: -15px !important;">&times;</span>
 			    <div class="form-title">
-			      <p class="submit-writeup"></p>
-			      <span class="close-form">&times;</span>
+			      <h1 style="font-size: 20px !important; color: #3379ac !important; font-style: bold !important; margin-bottom: -20px !important;">Nuevo envío de writeup </h1>
 			    </div>
-			    <p class="form-text">
-			      Complete all fields in the form with the information from your report.
-			      After review, if the report meets our submission rules, the article will
-			      be publicly available on the website for any user.
+			
+			    <!-- Descripción -->
+			    <p class="form-text" style="font-size: 15px !important; margin-bottom: -17px !important;">
+			      Complete todos los campos del formulario con la información de su informe. Después de la revisión, si el informe cumple con nuestras reglas de envío, el artículo estará disponible públicamente en el sitio web para cualquier usuario.
 			    </p>
+			
+			    <!-- Formulario -->
 			    <form class="form submit-form" id="writeupForm">
-			      <div class="form-field">
-			        <label class="form-label" for="writeup-creator">Creator</label>
+			      <!-- Campos del formulario -->
+			      <div class="form-field" style="margin-bottom: -15px !important; margin-top: 5px !important;">
+			        <label class="form-label" for="writeup-creator" style="margin-bottom: -5px !important;">Creador</label>
 			        <input
 			          class="form-control"
 			          id="writeup-creator"
 			          name="Creator"
 			          type="text"
 			          maxlength="15"
-			          placeholder="Enter your username"
+			          placeholder="Nombre de usuario"
 			          required
 			        />
 			      </div>
-			      <div class="form-field">
-			        <label class="form-label" for="writeup-url">URL</label>
+				<br>
+			      <div class="form-field" style="margin-bottom: -15px !important; margin-top: 10px !important;">
+			        <label class="form-label" for="writeup-url" style="margin-bottom: -5px !important;">URL</label>
 			        <input
 			          class="form-control"
 			          id="writeup-url"
 			          name="URL"
 			          type="url"
 			          pattern="https?://.+"
-			          placeholder="Enter the public URL of your writeup"
+			          placeholder="URL del writeup"
 			          required
 			        />
 			      </div>
-			      <div class="form-field">
-			        <span class="form-label">Content Type</span>
+				<br>
+			      <div class="form-field" style="margin-bottom: -15px !important; margin-top: 10px !important;">
+			        <span class="form-label" style="margin-bottom: -5px !important;">Tipo de contenido</span>
 			        <div class="form-checkbox" id="content-type">
 			          <input
 			            type="radio"
@@ -1479,13 +1521,14 @@
 			            value="Text"
 			            checked
 			          />
-			          <label for="text">Text</label>
+			          <label for="text" style="margin-bottom: -5px !important;">Texto</label>
 			          <input type="radio" id="video" name="ContentType" value="Video" />
-			          <label for="video">Video</label>
+			          <label for="video" style="margin-bottom: -5px !important;">Video</label>
 			        </div>
 			      </div>
-			      <div class="form-field">
-			        <label class="form-label" for="language">Language</label>
+				<br>
+			      <div class="form-field" style="margin-bottom: -15px !important; margin-top: 10px !important;">
+			        <label class="form-label" for="language" style="margin-bottom: -5px !important;">Idioma</label>
 			        <select class="form-control" id="language" name="Language" required>
 			          <option value="EN">English</option>
 			          <option value="ES">Español</option>
@@ -1497,34 +1540,41 @@
 			          <option value="None">None (Just Video)</option>
 			        </select>
 			      </div>
-			      <div class="form-field">
-			        <label class="form-label" for="opinion">Opinion (Optional)</label>
+				<br>
+			      <div class="form-field" style="margin-bottom: -15px !important; margin-top: 10px !important;">
+			        <label class="form-label" for="opinion" style="margin-bottom: -5px !important;">Opinion (Opcional)</label>
 			        <textarea
 			          class="form-control"
 			          id="opinion"
 			          name="Opinion"
 			          maxlength="2000"
 			          rows="2"
-			          placeholder="Your opinion will only be shared with the Pwn3d! team and will be helpful as feedback. You are free to review or rate the machine as you want."
+			          placeholder="Tu opinión solo se compartirá con el equipo de Pwn3d! y será útil como retroalimentación. Usted es libre de revisar o calificar la máquina como desee."
 			        ></textarea>
 			      </div>
-			      <div class="form-btns">
-			        <button class="button" type="submit">Submit</button>
-			        <button class="button" type="reset">Clear</button>
+				<br>
+			      <!-- Botones -->
+			      <div class="form-btns" style="margin-bottom: -5px !important; margin-top: 10px !important;">
+			        <button class="button" type="submit">Enviar</button>
+			        <button class="button" type="reset">Borrar</button>
 			      </div>
-			      <div class="form-footer">
+			
+			      <!-- Footer -->
+			      <div class="form-footer" style="margin-bottom: -15px !important; margin-top: 20px !important;"">
 			        <small>
-			          Please read our
+			          Por favor, lea nuestras
 			          <a href="https://vulnyx.com/rules/" target="_blank">
-			            <strong>Rules</strong>
+			            <strong>Reglas</strong>
 			          </a>
-			          section before submitting a new writeup.
+			          antes de enviar un nuevo writeup.
 			        </small>
 			      </div>
 			    </form>
-			  </article>
+			  </div>
 			</section>
-			<!-- SECCION DE  -->
+			
+			<!-- SECCION DE ENVIAR FLAGs -->
+			
 			<section class="form-flag">
 			  <article class="form-container">
 			    <div class="form-title">
@@ -1533,7 +1583,7 @@
 			    </div>
 			    <form class="form submit-form" id="flagForm">
 			      <div class="form-field">
-			        <label class="form-label" for="username">Username</label>
+			        <label class="form-label" for="username">Usuario</label>
 			        <input
 			          class="form-control"
 			          id="username"
@@ -1558,13 +1608,12 @@
 			        />
 			      </div>
 			      <div class="form-btns">
-			        <button class="button" type="submit">Submit</button>
-			        <button class="button" type="reset">Clear</button>
+			        <button class="button" type="submit">Enviar</button>
+			        <button class="button" type="reset">Borrar</button>
 			      </div>
 			      <div class="form-footer">
 			        <small>
-			          As this is a static page, the information is not automatically updated,
-			          so you may not be the first to send it, we apologise in advance.
+			          Al tratarse de una página estática, la información no se actualiza automáticamente, Por lo tanto, es posible que no sea el primero en enviarlo, le pedimos disculpas de antemano.
 			        </small>
 			      </div>
 			    </form>
