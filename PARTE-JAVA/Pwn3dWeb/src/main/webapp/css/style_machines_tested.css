@@ -296,6 +296,7 @@ header {
     align-items: center;
     justify-content: end;
     gap: 1rem;
+    margin-left: 400px;
 }
 
 a.github-button {
@@ -1280,6 +1281,12 @@ body.light-theme .half {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .toggle-button:focus {
