@@ -8,7 +8,7 @@
 	        html: 
 	        '<article class="card-container">' +
 	            '<div class="logo-wrapper">' +
-	                '<img id="card-logo" src="img/card.png" alt="VulNyx Logo" width="250" height="250">' +
+	                '<img id="card-logo" src="img/card1.png" alt="VulNyx Logo" width="250" height="250">' +
 	            '</div>' +
 	            '<div class="card-info">' +
 	                '<h1 class="card-title">' + name + '</h1>' +
@@ -194,23 +194,22 @@
 	  window.addEventListener('click', handleClickOutside);
 	};
  	
-    /* SUBMIT FLAGS (SHOW FORM) */
-    const showFlagForm = (type, vmname) => {
-        const body = document.querySelector('body');
-        const title = document.querySelector('.submit-flag');
-        const modal = document.querySelector('.form-flag');
-        const span = modal.querySelector('.close-form');
+	/* SUBMIT FLAGS (SHOW FORM) */
+	const showFlagForm = (type, vmname) => {
+	  const body = document.querySelector('body');
+	  const modal = document.querySelector('.form-flag');
+	  const span = modal.querySelector('.close-form');
+	  const title = modal.querySelector('.form-title h1');
 
-        if (body && title && modal && span) {
-            body.style.overflow = 'hidden';
-            title.textContent = `Primera ${type} flag enviada por ${vmname}`;
-            modal.style.display = 'block';
-
-            span.onclick = function() {
-                modal.style.display = 'none';
-                body.style.overflow = 'visible';
-            };
-        } else {
-            console.error('Error: uno o varios elementos no encontrados.');
-        }
-    }
+	  if (body && modal && span && title) {
+	    body.style.overflow = 'hidden';
+	    title.textContent = `🏴 Enviar ${type} flag para ${vmname}`;
+	    modal.style.display = 'flex'; // ← esto centra el modal con flexbox
+	    span.onclick = function () {
+	      modal.style.display = 'none';
+	      body.style.overflow = 'visible';
+	    };
+	  } else {
+	    console.error('Error: uno o varios elementos no encontrados.');
+	  }
+	};
