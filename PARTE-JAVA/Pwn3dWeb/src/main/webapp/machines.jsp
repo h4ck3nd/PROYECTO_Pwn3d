@@ -61,6 +61,7 @@
 			      </div>
 			
 			      <!-- Level + URL -->
+			      
 			      <div class="form-section" style="margin-bottom: -15px !important;">
 			        <div class="form-field-group">
 			          <div class="form-field">
@@ -82,6 +83,7 @@
 			      </div>
 			
 			      <!-- Flags -->
+			      
 			      <div class="form-section" style="margin-bottom: -15px !important;">
 			        <div class="form-field-group">
 			          <div class="form-field">
@@ -98,6 +100,7 @@
 			      </div>
 			
 			      <!-- Writeup + Contact -->
+			      
 			      <div class="form-section" style="margin-bottom: -15px !important;">
 			        <div class="form-field-group">
 			          <div class="form-field">
@@ -114,6 +117,7 @@
 			      </div>
 			
 			      <!-- Tags -->
+			      
 			      <div class="form-section">
 			        <div class="form-field">
 			        <br>
@@ -123,6 +127,7 @@
 			      </div>
 			
 			      <!-- Buttons -->
+			      
 			      <br>
 			      <div class="form-btns" style="margin-bottom: -5px !important;">
 			        <button class="button" type="submit">Enviar</button>
@@ -130,6 +135,7 @@
 			      </div>
 			
 			      <!-- Footer -->
+			      
 			      <div class="form-footer" style="margin-bottom: -15px !important;">
 			        <small>Por favor, lea nuestras <a href="https://vulnyx.com/rules/" target="_blank"><strong>Reglas</strong></a> antes de enviar una nueva VM.</small>
 			      </div>
@@ -142,6 +148,24 @@
 		<section class="wrapper">
 			<article class="actions">
 			
+				<!-- BARRA DE BUSQUEDA -->
+					
+				    <div id="vm-search-wrapper" style="margin-right: 300px">
+				        <div class="search-icon">
+				            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2.5" stroke="#999999" fill="none" stroke-linecap="round" stroke-linejoin="round">
+				                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+				                <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+				                <path d="M21 21l-6 -6" />
+				            </svg>
+				        </div>
+				        <input id="vm-search" type="text" placeholder="Buscar por nombre..." aria-label="search" />
+				        <button class="clear-search" title="Clear search" onclick="clearSearch()">Clear</button>
+				    </div>
+				
+				<!-- HEADER ENCIMA DE LA ZONA DE MAQUINAS -->
+				
+				<div class="filters">
+				
 				<!-- STATS -->
 				
 				<ul class="vm-stats">
@@ -153,9 +177,6 @@
 				    <li title="Total Writeups"><span class="badge badge-writeups">42 Writeups</span></li>
 				</ul>
 				
-				<!-- HEADER ENCIMA DE LA ZONA DE MAQUINAS -->
-				
-				<div class="filters">
 				    <div class="filter-wrapper" onmouseleave="hideFilters()">
 				        
 				        <!-- Botón para abrir el popup -->
@@ -198,25 +219,8 @@
 						  </div>
 						</div>
 				    </div>
-				    <button type="button" class="order-by">
-				        Order by
-				        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-				            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-				            <path d="M6 9l6 6l6 -6" />
-				        </svg>
-				    </button>
-				
-				    <div id="vm-search-wrapper">
-				        <div class="search-icon">
-				            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2.5" stroke="#999999" fill="none" stroke-linecap="round" stroke-linejoin="round">
-				                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-				                <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
-				                <path d="M21 21l-6 -6" />
-				            </svg>
-				        </div>
-				        <input id="vm-search" type="text" placeholder="Buscar por nombre..." aria-label="search" />
-				        <button class="clear-search" title="Clear search" onclick="clearSearch()">Clear</button>
-				    </div>
+				    
+				    <!-- BOTON DE ENVIO NEW VM -->
 				
 				    <button type="button" class="submit-btn" onclick="showVMForm()">Envío de VM</button>
 				</div>
@@ -233,10 +237,9 @@
 						<tr>
 							<th id="idnum">#</th>
 							<th id="card">Info</th>
-							<th class="vm-name">Nombre</th>
+							<th class="vm-name" style="text-align: center;">Nombre/Tamaño</th>
 							<th id="tested">Entorno</th>
-							<th class="url">Archivo</th>
-							<th class="size">Tamaño</th>
+							<th class="url">Descargar</th>
 							<th id="md5">MD5</th>
 							<th class="flag">Flag</th>
 							<th class="first-user">Primer User</th>
@@ -262,32 +265,35 @@
 						    <!-- CARD -->
 						    <td class="card">
 						        <button class="card-btn" title="Show card!" onclick="showCard('Lower5', 'Linux', 'Very-Easy', 'd4t4s3c', '09 Apr 2025')">
-						            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-id" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">
-						                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-						                <path d="M3 4m0 3a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v10a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z" />
-						                <path d="M9 10m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-						                <path d="M15 8l2 0" />
-						                <path d="M15 12l2 0" />
-						                <path d="M7 16l10 0" />
-						            </svg>
+						            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+									  <circle cx="12" cy="12" r="10" stroke="#3fa8f4" stroke-width="1.5" fill="none"/>
+									  <line x1="12" y1="8" x2="12" y2="8.01" stroke="#3fa8f4" stroke-width="1.5"/>
+									  <line x1="12" y1="10" x2="12" y2="16" stroke="#3fa8f4" stroke-width="1.5"/>
+									</svg>
 						        </button>
 						    </td>
 						
-						    <!-- NAME -->
+						    <!-- NAME/SIZE -->
+						    
 						    <td id="vm">
-						        <div class="vm-name-btn level-btn very-easy">
-						            <img class="very-easy-dots" title="LinuxVM" alt="Linuxicon" src="<%= request.getContextPath() %>/img/Linux.svg" width="22" height="22" loading="lazy">
-						            <span class="vm-name">Lower5</span>
-						        </div>
-						    </td>
+							  <div class="vm-name-btn level-btn very-easy">
+							    <img class="very-easy-dots" title="LinuxVM" alt="Linuxicon" src="<%= request.getContextPath() %>/img/Linux.svg" width="22" height="22" loading="lazy">
+							    <span class="vm-name-wrapper" style="display: flex; align-items: center;">
+							      <span class="vm-name" style="margin-right: -60px;">Lower5</span>
+							      <span class="vm-size" style="margin-right: 20px; margin-left: auto;">1.8GB</span>
+							    </span>
+							  </div>
+							</td>
 						
 						    <!-- TESTED -->
+						    
 						    <td class="tested">
 						        <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/vbox.png" width="25" height="25">
 						        <img title="VMware" alt="VMware logo" src="<%= request.getContextPath() %>/img/vmware.png" width="25" height="25">
 						    </td>
 						
 						    <!-- FILE -->
+						    
 						    <td class="url">
 						        <a href="https://vulnyx.com/file/Lower5.php" target="_blank" title="Download VM">
 						            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -299,12 +305,8 @@
 						        </a>
 						    </td>
 						
-						    <!-- SIZE -->
-						    <td class="size">
-						        <span id="size">1.8GB</span>
-						    </td>
-						
 						    <!-- MD5 -->
+						    
 						    <td class="md5">
 						        <span id="md5-hash" title="65015966EDD9A1A8ACE257DA2F0D9730">
 						            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-info" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#dad049" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -401,27 +403,25 @@
 					    <td class="card">
 					        <button class="card-btn" title="Show card!"
 					            onclick="showCard('Change','Windows','Medium','d4t4s3c','08 Mar 2025')">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-id" width="24" height="24"
-					                viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round"
-					                stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M3 4m0 3a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v10a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z" />
-					                <path d="M9 10m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-					                <path d="M15 8l2 0" />
-					                <path d="M15 12l2 0" />
-					                <path d="M7 16l10 0" />
-					            </svg>
+					            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+									  <circle cx="12" cy="12" r="10" stroke="#3fa8f4" stroke-width="1.5" fill="none"/>
+									  <line x1="12" y1="8" x2="12" y2="8.01" stroke="#3fa8f4" stroke-width="1.5"/>
+									  <line x1="12" y1="10" x2="12" y2="16" stroke="#3fa8f4" stroke-width="1.5"/>
+									</svg>
 					        </button>
 					    </td>
 					
-					    <!-- NAME -->
-					    <td id="vm">
-					        <div class="vm-name-btn level-btn medium">
-					            <img class="medium-dots" title="WindowsVM" alt="Windowsicon" src="<%= request.getContextPath() %>/img/Windows.svg" width="22" height="22"
-					                loading="lazy">
-					            <span class="vm-name">Change</span>
-					        </div>
-					    </td>
+					    <!-- NAME/SIZE -->
+						    
+						    <td id="vm">
+							  <div class="vm-name-btn level-btn medium">
+							    <img class="medium-dots" title="WindowsVM" alt="Windows" src="<%= request.getContextPath() %>/img/Windows.svg" width="22" height="22" loading="lazy">
+							    <span class="vm-name-wrapper" style="display: flex; align-items: center; gap: 0.4rem;">
+							      <span class="vm-name" style="margin-right: -60px;">Change</span>
+							      <span class="vm-size" style="margin-right: 20px; margin-left: auto;">7.7GB</span>
+							    </span>
+							  </div>
+							</td>
 					
 					    <!-- TESTED -->
 					    <td class="tested">
@@ -440,11 +440,6 @@
 					                <path d="M12 4l0 12" />
 					            </svg>
 					        </a>
-					    </td>
-					
-					    <!-- SIZE -->
-					    <td class="size">
-					        <span id="size">7.7GB</span>
 					    </td>
 					
 					    <!-- MD5 -->
@@ -556,24 +551,25 @@
 					    <!-- CARD -->
 					    <td class="card">
 					        <button class="card-btn" title="Show card!" onclick="showCard('Anon', 'Linux', 'Medium', 'd4t4s3c', '05 Feb 2025')">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-id" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M3 4m0 3a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v10a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z" />
-					                <path d="M9 10m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-					                <path d="M15 8l2 0" />
-					                <path d="M15 12l2 0" />
-					                <path d="M7 16l10 0" />
-					            </svg>
+					            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+									  <circle cx="12" cy="12" r="10" stroke="#3fa8f4" stroke-width="1.5" fill="none"/>
+									  <line x1="12" y1="8" x2="12" y2="8.01" stroke="#3fa8f4" stroke-width="1.5"/>
+									  <line x1="12" y1="10" x2="12" y2="16" stroke="#3fa8f4" stroke-width="1.5"/>
+									</svg>
 					        </button>
 					    </td>
 					
-					    <!-- NAME -->
-					    <td id="vm">
-					        <div class="vm-name-btn level-btn medium">
-					            <img class="medium-dots" title="LinuxVM" alt="Linuxicon" src="<%= request.getContextPath() %>/img/Linux.svg" width="22" height="22" loading="lazy">
-					            <span class="vm-name">Anon</span>
-					        </div>
-					    </td>
+					    <!-- NAME/SIZE -->
+						    
+						    <td id="vm">
+							  <div class="vm-name-btn level-btn medium">
+							    <img class="medium-dots" title="LinuxVM" alt="Linux" src="<%= request.getContextPath() %>/img/Linux.svg" width="22" height="22" loading="lazy">
+							    <span class="vm-name-wrapper" style="display: flex; align-items: center; gap: 0.4rem;">
+							      <span class="vm-name" style="margin-right: -60px;">Anon</span>
+							      <span class="vm-size" style="margin-right: 20px; margin-left: auto;">1.5GB</span>
+							    </span>
+							  </div>
+							</td>
 					
 					    <!-- TESTED -->
 					    <td class="tested">
@@ -592,9 +588,6 @@
 					            </svg>
 					        </a>
 					    </td>
-					
-					    <!-- SIZE -->
-					    <td class="size"><span id="size">1.5GB</span></td>
 					
 					    <!-- MD5 -->
 					    <td class="md5">
@@ -696,24 +689,25 @@
 					    <!-- CARD -->
 					    <td class="card">
 					        <button class="card-btn" title="Show card!" onclick="showCard('Hit', 'Linux', 'Easy', 'd4t4s3c', '04 Feb 2025')">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-id" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M3 4m0 3a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v10a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z" />
-					                <path d="M9 10m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-					                <path d="M15 8l2 0" />
-					                <path d="M15 12l2 0" />
-					                <path d="M7 16l10 0" />
-					            </svg>
+					            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+									  <circle cx="12" cy="12" r="10" stroke="#3fa8f4" stroke-width="1.5" fill="none"/>
+									  <line x1="12" y1="8" x2="12" y2="8.01" stroke="#3fa8f4" stroke-width="1.5"/>
+									  <line x1="12" y1="10" x2="12" y2="16" stroke="#3fa8f4" stroke-width="1.5"/>
+									</svg>
 					        </button>
 					    </td>
 					    
-					    <!-- NAME -->
-					    <td id="vm">
-					        <div class="vm-name-btn level-btn easy">
-					            <img class="easy-dots" title="LinuxVM" alt="Linuxicon" src="<%= request.getContextPath() %>/img/Linux.svg" width="22" height="22" loading="lazy">
-					            <span class="vm-name">Hit</span>
-					        </div>
-					    </td>
+					    <!-- NAME/SIZE -->
+						    
+						    <td id="vm">
+							  <div class="vm-name-btn level-btn easy">
+							    <img class="easy-dots" title="LinuxVM" alt="Linux" src="<%= request.getContextPath() %>/img/Linux.svg" width="22" height="22" loading="lazy">
+							    <span class="vm-name-wrapper" style="display: flex; align-items: center; gap: 0.4rem;">
+							      <span class="vm-name" style="margin-right: -60px;">Hit</span>
+							      <span class="vm-size" style="margin-right: 20px; margin-left: auto;">1.2GB</span>
+							    </span>
+							  </div>
+							</td>
 					    
 					    <!-- TESTED -->
 					    <td class="tested">
@@ -731,11 +725,6 @@
 					                <path d="M12 4l0 12" />
 					            </svg>
 					        </a>
-					    </td>
-					    
-					    <!-- SIZE -->
-					    <td class="size">
-					        <span id="size">1.2GB</span>
 					    </td>
 					    
 					    <!-- MD5 -->
@@ -835,28 +824,25 @@
 					            'Lenam',
 					            '30 Jan 2025'
 					        )">
-					            <svg xmlns="http://www.w3.org/2000/svg"
-					                class="icon icon-tabler icon-tabler-id" width="24" height="24"
-					                viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4"
-					                fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M3 4m0 3a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v10a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z" />
-					                <path d="M9 10m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-					                <path d="M15 8l2 0" />
-					                <path d="M15 12l2 0" />
-					                <path d="M7 16l10 0" />
-					            </svg>
+					            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+									  <circle cx="12" cy="12" r="10" stroke="#3fa8f4" stroke-width="1.5" fill="none"/>
+									  <line x1="12" y1="8" x2="12" y2="8.01" stroke="#3fa8f4" stroke-width="1.5"/>
+									  <line x1="12" y1="10" x2="12" y2="16" stroke="#3fa8f4" stroke-width="1.5"/>
+									</svg>
 					        </button>
 					    </td>
 					    
-					    <!-- NAME -->
-					    <td id="vm">
-					        <div class="vm-name-btn level-btn medium">
-					            <img class="medium-dots" title="LinuxVM" alt="Linuxicon"
-					                src="<%= request.getContextPath() %>/img/Linux.svg" width="22" height="22" loading="lazy">
-					            <span class="vm-name">Matrix</span>
-					        </div>
-					    </td>
+					    <!-- NAME/SIZE -->
+						    
+						    <td id="vm">
+							  <div class="vm-name-btn level-btn medium">
+							    <img class="medium-dots" title="LinuxVM" alt="Linux" src="<%= request.getContextPath() %>/img/Linux.svg" width="22" height="22" loading="lazy">
+							    <span class="vm-name-wrapper" style="display: flex; align-items: center; gap: 0.4rem;">
+							      <span class="vm-name" style="margin-right: -60px;">Matrix</span>
+							      <span class="vm-size" style="margin-right: 20px; margin-left: auto;">750MB</span>
+							    </span>
+							  </div>
+							</td>
 					    
 					    <!-- TESTED -->
 					    <td class="tested">
@@ -879,9 +865,6 @@
 					            </svg>
 					        </a>
 					    </td>
-					    
-					    <!-- SIZE -->
-					    <td class="size"><span id="size">670MB</span></td>
 					    
 					    <!-- MD5 -->
 					    <td class="md5">
@@ -1016,24 +999,25 @@
 					    <!-- CARD -->
 					    <td class="card">
 					        <button class="card-btn" title="Show card!" onclick="showCard('Tunnel', 'Linux', 'Hard', 'd4t4s3c', '13 Dec 2024')">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-id" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M3 4m0 3a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v10a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z" />
-					                <path d="M9 10m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-					                <path d="M15 8l2 0" />
-					                <path d="M15 12l2 0" />
-					                <path d="M7 16l10 0" />
-					            </svg>
+					            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+									  <circle cx="12" cy="12" r="10" stroke="#3fa8f4" stroke-width="1.5" fill="none"/>
+									  <line x1="12" y1="8" x2="12" y2="8.01" stroke="#3fa8f4" stroke-width="1.5"/>
+									  <line x1="12" y1="10" x2="12" y2="16" stroke="#3fa8f4" stroke-width="1.5"/>
+									</svg>
 					        </button>
 					    </td>
 					
-					    <!-- NAME -->
-					    <td id="vm">
-					        <div class="vm-name-btn level-btn hard">
-					            <img class="hard-dots" title="LinuxVM" alt="Linuxicon" src="<%= request.getContextPath() %>/img/Linux.svg" width="22" height="22" loading="lazy">
-					            <span class="vm-name">Tunnel</span>
-					        </div>
-					    </td>
+					    <!-- NAME/SIZE -->
+						    
+						    <td id="vm">
+							  <div class="vm-name-btn level-btn hard">
+							    <img class="hard-dots" title="LinuxVM" alt="Linux" src="<%= request.getContextPath() %>/img/Linux.svg" width="22" height="22" loading="lazy">
+							    <span class="vm-name-wrapper" style="display: flex; align-items: center; gap: 0.4rem;">
+							      <span class="vm-name" style="margin-right: -60px;">Tunnel</span>
+							      <span class="vm-size" style="margin-right: 20px; margin-left: auto;">1.2GB</span>
+							    </span>
+							  </div>
+							</td>
 					
 					    <!-- TESTED -->
 					    <td class="tested">
@@ -1051,11 +1035,6 @@
 					                <path d="M12 4l0 12" />
 					            </svg>
 					        </a>
-					    </td>
-					
-					    <!-- SIZE -->
-					    <td class="size">
-					        <span id="size">2.0GB</span>
 					    </td>
 					
 					    <!-- MD5 -->
@@ -1151,24 +1130,25 @@
 					    <!-- CARD -->
 					    <td class="card">
 					        <button class="card-btn" title="Show card!" onclick="showCard('War', 'Windows', 'Easy', 'd4t4s3c', '07 Dec 2024')">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-id" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M3 4m0 3a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v10a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z" />
-					                <path d="M9 10m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-					                <path d="M15 8l2 0" />
-					                <path d="M15 12l2 0" />
-					                <path d="M7 16l10 0" />
-					            </svg>
+					            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+									  <circle cx="12" cy="12" r="10" stroke="#3fa8f4" stroke-width="1.5" fill="none"/>
+									  <line x1="12" y1="8" x2="12" y2="8.01" stroke="#3fa8f4" stroke-width="1.5"/>
+									  <line x1="12" y1="10" x2="12" y2="16" stroke="#3fa8f4" stroke-width="1.5"/>
+									</svg>
 					        </button>
 					    </td>
 					
-					    <!-- NAME -->
-					    <td id="vm">
-					        <div class="vm-name-btn level-btn easy">
-					            <img class="easy-dots" title="WindowsVM" alt="Windows icon" src="<%= request.getContextPath() %>/img/Windows.svg" width="22" height="22" loading="lazy">
-					            <span class="vm-name">War</span>
-					        </div>
-					    </td>
+					    <!-- NAME/SIZE -->
+						    
+						    <td id="vm">
+							  <div class="vm-name-btn level-btn easy">
+							    <img class="easy-dots" title="WindowsVM" alt="Windows" src="<%= request.getContextPath() %>/img/Windows.svg" width="22" height="22" loading="lazy">
+							    <span class="vm-name-wrapper" style="display: flex; align-items: center; gap: 0.4rem;">
+							      <span class="vm-name" style="margin-right: -60px;">War</span>
+							      <span class="vm-size" style="margin-right: 20px; margin-left: auto;">7.2GB</span>
+							    </span>
+							  </div>
+							</td>
 					
 					    <!-- TESTED -->
 					    <td class="tested">
@@ -1185,11 +1165,6 @@
 					                <path d="M12 4l0 12" />
 					            </svg>
 					        </a>
-					    </td>
-					
-					    <!-- SIZE -->
-					    <td class="size">
-					        <span id="size">7.2GB</span>
 					    </td>
 					
 					    <!-- MD5 -->
@@ -1293,24 +1268,25 @@
 					    <!-- CARD -->
 					    <td class="card">
 					        <button class="card-btn" title="Show card!" onclick="showCard('Manager', 'Linux', 'Hard', 'd4t4s3c', '29 Nov 2024')">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-id" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M3 4m0 3a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v10a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z" />
-					                <path d="M9 10m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-					                <path d="M15 8l2 0" />
-					                <path d="M15 12l2 0" />
-					                <path d="M7 16l10 0" />
-					            </svg>
+					            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+									  <circle cx="12" cy="12" r="10" stroke="#3fa8f4" stroke-width="1.5" fill="none"/>
+									  <line x1="12" y1="8" x2="12" y2="8.01" stroke="#3fa8f4" stroke-width="1.5"/>
+									  <line x1="12" y1="10" x2="12" y2="16" stroke="#3fa8f4" stroke-width="1.5"/>
+									</svg>
 					        </button>
 					    </td>
 					
-					    <!-- NAME -->
-					    <td id="vm">
-					        <div class="vm-name-btn level-btn hard">
-					            <img class="hard-dots" title="LinuxVM" alt="Linuxicon" src="<%= request.getContextPath() %>/img/Linux.svg" width="22" height="22" loading="lazy">
-					            <span class="vm-name">Manager</span>
-					        </div>
-					    </td>
+					    <!-- NAME/SIZE -->
+						    
+						    <td id="vm">
+							  <div class="vm-name-btn level-btn hard">
+							    <img class="hard-dots" title="LinuxVM" alt="Linux" src="<%= request.getContextPath() %>/img/Linux.svg" width="22" height="22" loading="lazy">
+							    <span class="vm-name-wrapper" style="display: flex; align-items: center; gap: 0.4rem;">
+							      <span class="vm-name" style="margin-right: -60px;">Manager</span>
+							      <span class="vm-size" style="margin-right: 20px; margin-left: auto;">1.8GB</span>
+							    </span>
+							  </div>
+							</td>
 					
 					    <!-- TESTED -->
 					    <td class="tested">
@@ -1328,11 +1304,6 @@
 					                <path d="M12 4l0 12" />
 					            </svg>
 					        </a>
-					    </td>
-					
-					    <!-- SIZE -->
-					    <td class="size">
-					        <span id="size">1.8GB</span>
 					    </td>
 					
 					    <!-- MD5 -->
@@ -1428,24 +1399,25 @@
 						  <!-- CARD -->
 						  <td class="card">
 						    <button class="card-btn" title="Show card!" onclick="showCard('Controler', 'Windows', 'Medium', 'd4t4s3c', '23 Oct 2024')">
-						      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-id" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">
-						        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-						        <path d="M3 4m0 3a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v10a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3z" />
-						        <path d="M9 10m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-						        <path d="M15 8l2 0" />
-						        <path d="M15 12l2 0" />
-						        <path d="M7 16l10 0" />
-						      </svg>
+						      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+									  <circle cx="12" cy="12" r="10" stroke="#3fa8f4" stroke-width="1.5" fill="none"/>
+									  <line x1="12" y1="8" x2="12" y2="8.01" stroke="#3fa8f4" stroke-width="1.5"/>
+									  <line x1="12" y1="10" x2="12" y2="16" stroke="#3fa8f4" stroke-width="1.5"/>
+									</svg>
 						    </button>
 						  </td>
 						  
-						  <!-- NAME -->
-						  <td id="vm">
-						    <div class="vm-name-btn level-btn medium">
-						      <img class="medium-dots" title="WindowsVM" alt="Windows icon" src="<%= request.getContextPath() %>/img/Windows.svg" width="22" height="22" loading="lazy">
-						      <span class="vm-name">Controler</span>
-						    </div>
-						  </td>
+						  <!-- NAME/SIZE -->
+						    
+						    <td id="vm">
+							  <div class="vm-name-btn level-btn medium">
+							    <img class="medium-dots" title="WindowsVM" alt="Windows" src="<%= request.getContextPath() %>/img/Windows.svg" width="22" height="22" loading="lazy">
+							    <span class="vm-name-wrapper" style="display: flex; align-items: center; gap: 0.4rem;">
+							      <span class="vm-name" style="margin-right: -60px;">Controler</span>
+							      <span class="vm-size" style="margin-right: 20px; margin-left: auto;">5.0GB</span>
+							    </span>
+							  </div>
+							</td>
 						  
 						  <!-- TESTED -->
 						  <td class="tested">
@@ -1462,11 +1434,6 @@
 						        <path d="M12 4l0 12" />
 						      </svg>
 						    </a>
-						  </td>
-						  
-						  <!-- SIZE -->
-						  <td class="size">
-						    <span id="size">5.0GB</span>
 						  </td>
 						  
 						  <!-- MD5 -->
