@@ -9,7 +9,7 @@
 <link rel="canonical" href="<%= request.getContextPath() %>/machines.jsp">
 <title>Pwn3d!</title>
 <script async defer src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/style_machines134.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/style_machines_tested.css">
 </head>
 
 <body>
@@ -1876,7 +1876,7 @@
 	            </div>
 				</article>
 	</footer>
-	<script src="<%= request.getContextPath() %>/js/machines23.js"></script>
+	<script src="<%= request.getContextPath() %>/js/script_machines_tested.js"></script>
 	<script>
 	  const toggleBtn = document.getElementById('toggle-theme');
 	  const body = document.body;
