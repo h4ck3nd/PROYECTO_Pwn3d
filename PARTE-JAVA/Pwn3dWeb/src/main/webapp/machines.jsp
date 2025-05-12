@@ -9,7 +9,7 @@
 <link rel="canonical" href="<%= request.getContextPath() %>/machines.jsp">
 <title>Pwn3d!</title>
 <script async defer src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/css/style_machines_tested.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/style_machines134.css">
 </head>
 
 <body>
@@ -170,8 +170,32 @@
 				
 				<ul class="vm-stats">
 				    <li title="Total VMs"><span class="badge badge-vms">9 VMs</span></li>
-				    <li title="Very-Easy VMs"><span class="badge badge-very-easy">1 Very Easy</span></li>
-				    <li title="Easy VMs"><span class="badge badge-easy">2 Easy</span></li>
+				    <span class="badge badge-very-easy">
+					  <svg class="wave" viewBox="0 0 120 28" preserveAspectRatio="none">
+					    <defs>
+					      <linearGradient id="waveColor" gradientTransform="rotate(90)">
+					        <stop offset="0%" stop-color="rgba(255,255,255,0.3)" />
+					        <stop offset="100%" stop-color="rgba(255,255,255,0.05)" />
+					      </linearGradient>
+					    </defs>
+					    <path class="wave-path wave1" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />
+					    <path class="wave-path wave2" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />
+					  </svg>
+					  1 Very Easy
+					</span>
+				    <span class="badge badge-easy">
+					  <svg class="wave" viewBox="0 0 120 28" preserveAspectRatio="none">
+					    <defs>
+					      <linearGradient id="waveColor" gradientTransform="rotate(90)">
+					        <stop offset="0%" stop-color="rgba(255,255,255,0.3)" />
+					        <stop offset="100%" stop-color="rgba(255,255,255,0.05)" />
+					      </linearGradient>
+					    </defs>
+					    <path class="wave-path wave1" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />
+					    <path class="wave-path wave2" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />
+					  </svg>
+					  2 Easy
+					</span>
 				    <li title="Medium VMs"><span class="badge badge-medium">4 Medium</span></li>
 				    <li title="Hard VMs"><span class="badge badge-hard">2 Hard</span></li>
 				    <li title="Total Writeups"><span class="badge badge-writeups">42 Writeups</span></li>
@@ -239,12 +263,12 @@
 							<th id="card">Info</th>
 							<th class="vm-name" style="text-align: center;">Nombre/Tamaño</th>
 							<th id="tested">Entorno</th>
-							<th class="url">Descargar</th>
-							<th id="md5">MD5</th>
-							<th class="flag">Flag</th>
-							<th class="first-user">Primer User</th>
-							<th class="first-root">Primer Root</th>
-							<th id="writeups">Writeups</th>
+							<th class="url">MD5</th>
+							<th id="md5">Writeups</th>
+							<th class="flag">Primer User</th>
+							<th class="first-user">Primer Root</th>
+							<th class="first-root">Flag</th>
+							<th id="writeups">Descarga</th>
 						</tr>
 					</thead>
 					
@@ -292,19 +316,6 @@
 						        <img title="VMware" alt="VMware logo" src="<%= request.getContextPath() %>/img/vmware.png" width="25" height="25">
 						    </td>
 						
-						    <!-- FILE -->
-						    
-						    <td class="url">
-						        <a href="https://vulnyx.com/file/Lower5.php" target="_blank" title="Download VM">
-						            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">
-						                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-						                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-						                <path d="M7 11l5 5l5 -5" />
-						                <path d="M12 4l0 12" />
-						            </svg>
-						        </a>
-						    </td>
-						
 						    <!-- MD5 -->
 						    
 						    <td class="md5">
@@ -327,26 +338,7 @@
 						        <div class="tooltip">Copied!</div>
 						    </td>
 							
-							<td class="flag">
-							
-								<!-- BOTON ENVIAR FLAG -->
-						        
-						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Lower5')">
-								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
-								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-								    <path d="M5 5v16" />
-								    <path d="M5 5h14l-3 5l3 5h-14" />
-								  </svg>
-								</button>
-							</td>
-							
-						    <!-- FIRST USER -->
-						    <td class="first-user">suraxddq</td>
-						
-						    <!-- FIRST ROOT -->
-						    <td class="first-user">suraxddq</td>
-						
-						    <!-- WRITEUPS -->
+							<!-- WRITEUPS -->
 						    <td class="writeups">
 						        <script>
 						            writeupObj = {
@@ -375,12 +367,13 @@
 						            </svg>
 						        </button>
 						        <button class="add-writeup-btn" title="Add writeup" onclick="showWriteupForm('Lower5')">
-						            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-plus" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">
-						                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-						                <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
-						                <path d="M9 12h6" />
-						                <path d="M12 9v6" />
-						            </svg>
+						            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">
+									  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+									  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+									  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h6l6 6v10a2 2 0 0 1 -2 2z" />
+									  <path d="M12 17v-6" />
+									  <path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />
+									</svg>
 						        </button>
 						        
 						        <!-- MODAL FOR WRITEUPS -->
@@ -392,6 +385,38 @@
 						                <div class="writeups-container"></div>
 						            </article>
 						        </section>
+							
+						    <!-- FIRST USER -->
+						    <td class="first-user">suraxddq</td>
+						
+						    <!-- FIRST ROOT -->
+						    <td class="first-user">suraxddq</td>
+							
+							<td class="flag">
+							
+								<!-- BOTON ENVIAR FLAG -->
+						        
+						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Lower5')">
+								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
+								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+								    <path d="M5 5v16" />
+								    <path d="M5 5h14l-3 5l3 5h-14" />
+								  </svg>
+								</button>
+							</td>
+						        
+						        <!-- DOWNLOAD -->
+						    
+						    <td class="url">
+						        <a href="https://vulnyx.com/file/Lower5.php" target="_blank" title="Download VM">
+						            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">
+						                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+						                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+						                <path d="M7 11l5 5l5 -5" />
+						                <path d="M12 4l0 12" />
+						            </svg>
+						        </a>
+						    </td>
 						    </td>
 						<tr class="row">
 					    <!-- # -->
@@ -424,22 +449,9 @@
 							</td>
 					
 					    <!-- TESTED -->
+					    
 					    <td class="tested">
 					        <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/vbox.png" width="25" height="25">
-					    </td>
-					
-					    <!-- FILE -->
-					    <td class="url">
-					        <a href="https://vulnyx.com/file/Change.php" target="_blank" title="Download VM">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24"
-					                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round"
-					                stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-					                <path d="M7 11l5 5l5 -5" />
-					                <path d="M12 4l0 12" />
-					            </svg>
-					        </a>
 					    </td>
 					
 					    <!-- MD5 -->
@@ -468,25 +480,6 @@
 					        </button>
 					        <div class="tooltip">Copied!</div>
 					    </td>
-					    
-					    <td class="flag">
-							
-								<!-- BOTON ENVIAR FLAG -->
-						        
-						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Changue')">
-								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
-								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-								    <path d="M5 5v16" />
-								    <path d="M5 5h14l-3 5l3 5h-14" />
-								  </svg>
-								</button>
-							</td>
-					
-					    <!-- FIRST USER -->
-					    <td class="first-user">Flo2699</td>
-					
-					    <!-- FIRST ROOT -->
-					    <td class="first-user">Flo2699</td>
 					
 					    <!-- WRITEUPS -->
 					    <td class="writeups">
@@ -527,14 +520,13 @@
 					            </svg>
 					        </button>
 					        <button class="add-writeup-btn" title="Add writeup" onclick="showWriteupForm('Change')">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-plus" width="22"
-					                height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round"
-					                stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
-					                <path d="M9 12h6" />
-					                <path d="M12 9v6" />
-					            </svg>
+					            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">
+									  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+									  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+									  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h6l6 6v10a2 2 0 0 1 -2 2z" />
+									  <path d="M12 17v-6" />
+									  <path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />
+									</svg>
 					        </button>
 					        <section id="Change" class="modal">
 					            <article class="modal-content">
@@ -543,6 +535,40 @@
 					                <div class="writeups-container"></div>
 					            </article>
 					        </section>
+					        
+					        <!-- FIRST USER -->
+					    <td class="first-user">Flo2699</td>
+					
+					    <!-- FIRST ROOT -->
+					    <td class="first-user">Flo2699</td>
+					        
+					        <td class="flag">
+							
+								<!-- BOTON ENVIAR FLAG -->
+						        
+						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Changue')">
+								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
+								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+								    <path d="M5 5v16" />
+								    <path d="M5 5h14l-3 5l3 5h-14" />
+								  </svg>
+								</button>
+							</td>
+					        
+					        <!-- DOWNLOAD -->
+					    
+					    <td class="url">
+					        <a href="https://vulnyx.com/file/Change.php" target="_blank" title="Download VM">
+					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24"
+					                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round"
+					                stroke-linejoin="round">
+					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+					                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+					                <path d="M7 11l5 5l5 -5" />
+					                <path d="M12 4l0 12" />
+					            </svg>
+					        </a>
+					    </td>
 					    </td>
 						<tr class="row">
 					    <!-- # -->
@@ -572,21 +598,10 @@
 							</td>
 					
 					    <!-- TESTED -->
+					    
 					    <td class="tested">
 					        <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/vbox.png" width="25" height="25">
 					        <img title="VMware" alt="VMware logo" src="<%= request.getContextPath() %>/img/vmware.png" width="25" height="25">
-					    </td>
-					
-					    <!-- FILE -->
-					    <td class="url">
-					        <a href="https://vulnyx.com/file/Anon.php" target="_blank" title="Download VM">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-					                <path d="M7 11l5 5l5 -5" />
-					                <path d="M12 4l0 12" />
-					            </svg>
-					        </a>
 					    </td>
 					
 					    <!-- MD5 -->
@@ -609,25 +624,6 @@
 					        </button>
 					        <div class="tooltip">Copied!</div>
 					    </td>
-					    
-					    <td class="flag">
-							
-								<!-- BOTON ENVIAR FLAG -->
-						        
-						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Anon')">
-								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
-								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-								    <path d="M5 5v16" />
-								    <path d="M5 5h14l-3 5l3 5h-14" />
-								  </svg>
-								</button>
-							</td>
-					
-					    <!-- FIRST USER -->
-					    <td class="first-user">flower</td>
-					
-					    <!-- FIRST ROOT -->
-					    <td class="first-user">lvzhouhang</td>
 					
 					    <!-- WRITEUPS -->
 					    <td class="writeups">
@@ -664,12 +660,13 @@
 					        </button>
 					
 					        <button class="add-writeup-btn" title="Add writeup" onclick="showWriteupForm('Anon')">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-plus" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
-					                <path d="M9 12h6" />
-					                <path d="M12 9v6" />
-					            </svg>
+					            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">
+									  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+									  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+									  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h6l6 6v10a2 2 0 0 1 -2 2z" />
+									  <path d="M12 17v-6" />
+									  <path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />
+									</svg>
 					        </button>
 					
 					        <section id="Anon" class="modal">
@@ -679,6 +676,38 @@
 					                <div class="writeups-container"></div>
 					            </article>
 					        </section>
+					        
+					        <!-- FIRST USER -->
+					    <td class="first-user">flower</td>
+					
+					    <!-- FIRST ROOT -->
+					    <td class="first-user">lvzhouhang</td>
+					        
+					        <td class="flag">
+							
+								<!-- BOTON ENVIAR FLAG -->
+						        
+						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Anon')">
+								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
+								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+								    <path d="M5 5v16" />
+								    <path d="M5 5h14l-3 5l3 5h-14" />
+								  </svg>
+								</button>
+							</td>
+					        
+					        <!-- DOWNLOAD -->
+					    
+					    <td class="url">
+					        <a href="https://vulnyx.com/file/Anon.php" target="_blank" title="Download VM">
+					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">
+					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+					                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+					                <path d="M7 11l5 5l5 -5" />
+					                <path d="M12 4l0 12" />
+					            </svg>
+					        </a>
+					    </td>
 					    </td>
 						<tr class="row">
 					    <!-- # -->
@@ -710,21 +739,10 @@
 							</td>
 					    
 					    <!-- TESTED -->
+					    
 					    <td class="tested">
 					        <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/vbox.png" width="25" height="25">
 					        <img title="VMware" alt="VMware logo" src="<%= request.getContextPath() %>/img/vmware.png" width="25" height="25">
-					    </td>
-					    
-					    <!-- FILE -->
-					    <td class="url">
-					        <a href="https://vulnyx.com/file/Hit.php" target="_blank" title="Download VM">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-					                <path d="M7 11l5 5l5 -5" />
-					                <path d="M12 4l0 12" />
-					            </svg>
-					        </a>
 					    </td>
 					    
 					    <!-- MD5 -->
@@ -747,25 +765,6 @@
 					        </button>
 					        <div class="tooltip">Copied!</div>
 					    </td>
-					    
-					    <td class="flag">
-							
-								<!-- BOTON ENVIAR FLAG -->
-						        
-						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Hit')">
-								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
-								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-								    <path d="M5 5v16" />
-								    <path d="M5 5h14l-3 5l3 5h-14" />
-								  </svg>
-								</button>
-							</td>
-					    
-					    <!-- FIRST USER -->
-					    <td class="first-user">maciiii___</td>
-					    
-					    <!-- FIRST ROOT -->
-					    <td class="first-user">maciiii___</td>
 					    
 					    <!-- WRITEUPS -->
 					    <td class="writeups">
@@ -796,12 +795,13 @@
 					            </svg>
 					        </button>
 					        <button class="add-writeup-btn" title="Add writeup" onclick="showWriteupForm('Hit')">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-plus" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
-					                <path d="M9 12h6" />
-					                <path d="M12 9v6" />
-					            </svg>
+					            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">
+									  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+									  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+									  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h6l6 6v10a2 2 0 0 1 -2 2z" />
+									  <path d="M12 17v-6" />
+									  <path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />
+									</svg>
 					        </button>
 					        <section id="Hit" class="modal">
 					            <article class="modal-content">
@@ -810,6 +810,39 @@
 					                <div class="writeups-container"></div>
 					            </article>
 					        </section>
+					        
+					        <!-- FIRST USER -->
+					    <td class="first-user">maciiii___</td>
+					    
+					    <!-- FIRST ROOT -->
+					    <td class="first-user">maciiii___</td>
+					        
+					        <td class="flag">
+							
+								<!-- BOTON ENVIAR FLAG -->
+						        
+						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Hit')">
+								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
+								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+								    <path d="M5 5v16" />
+								    <path d="M5 5h14l-3 5l3 5h-14" />
+								  </svg>
+								</button>
+							</td>
+					        
+					        <!-- DOWNLOAD -->
+					    
+					    <td class="url">
+					        <a href="https://vulnyx.com/file/Hit.php" target="_blank" title="Download VM">
+					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">
+					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+					                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+					                <path d="M7 11l5 5l5 -5" />
+					                <path d="M12 4l0 12" />
+					            </svg>
+					        </a>
+					    </td>
+					        
 					    </td>
 						<tr class="row">
 					    <!-- # -->
@@ -845,25 +878,10 @@
 							</td>
 					    
 					    <!-- TESTED -->
+					    
 					    <td class="tested">
 					        <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/vbox.png" width="25" height="25">
 					        <img title="VMware" alt="VMware logo" src="<%= request.getContextPath() %>/img/vmware.png" width="25" height="25">
-					    </td>
-					    
-					    <!-- FILE -->
-					    <td class="url">
-					        <a href="https://vulnyx.com/file/Matrix.php" target="_blank" title="Download VM">
-					            <svg xmlns="http://www.w3.org/2000/svg"
-					                class="icon icon-tabler icon-tabler-download" width="24"
-					                height="24" viewBox="0 0 24 24" stroke-width="1.5"
-					                stroke="#d9534f" fill="none" stroke-linecap="round"
-					                stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-					                <path d="M7 11l5 5l5 -5" />
-					                <path d="M12 4l0 12" />
-					            </svg>
-					        </a>
 					    </td>
 					    
 					    <!-- MD5 -->
@@ -894,25 +912,6 @@
 					        </button>
 					        <div class="tooltip">Copied!</div>
 					    </td>
-					    
-					    <td class="flag">
-							
-								<!-- BOTON ENVIAR FLAG -->
-						        
-						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Matrix')">
-								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
-								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-								    <path d="M5 5v16" />
-								    <path d="M5 5h14l-3 5l3 5h-14" />
-								  </svg>
-								</button>
-							</td>
-					    
-					    <!-- FIRST USER -->
-					    <td class="first-user">suraxddq</td>
-					    
-					    <!-- FIRST ROOT -->
-					    <td class="first-user">suraxddq</td>
 					    
 					    <!-- WRITEUPS -->
 					    <td class="writeups">
@@ -971,16 +970,13 @@
 					            </svg>
 					        </button>
 					        <button class="add-writeup-btn" title="Add writeup" onclick="showWriteupForm('Matrix')">
-					            <svg xmlns="http://www.w3.org/2000/svg"
-					                class="icon icon-tabler icon-tabler-circle-plus" width="22"
-					                height="22" viewBox="0 0 24 24" stroke-width="1.5"
-					                stroke="#49da57" fill="none" stroke-linecap="round"
-					                stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
-					                <path d="M9 12h6" />
-					                <path d="M12 9v6" />
-					            </svg>
+					            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">
+									  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+									  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+									  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h6l6 6v10a2 2 0 0 1 -2 2z" />
+									  <path d="M12 17v-6" />
+									  <path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />
+									</svg>
 					        </button>
 					        <section id="Matrix" class="modal">
 					            <article class="modal-content">
@@ -989,6 +985,43 @@
 					                <div class="writeups-container"></div>
 					            </article>
 					        </section>
+					        
+					        <!-- FIRST USER -->
+					    <td class="first-user">suraxddq</td>
+					    
+					    <!-- FIRST ROOT -->
+					    <td class="first-user">suraxddq</td>
+					        
+					        <td class="flag">
+							
+								<!-- BOTON ENVIAR FLAG -->
+						        
+						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Matrix')">
+								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
+								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+								    <path d="M5 5v16" />
+								    <path d="M5 5h14l-3 5l3 5h-14" />
+								  </svg>
+								</button>
+							</td>
+					        
+					        <!-- DOWNLOAD -->
+					    
+					    <td class="url">
+					        <a href="https://vulnyx.com/file/Matrix.php" target="_blank" title="Download VM">
+					            <svg xmlns="http://www.w3.org/2000/svg"
+					                class="icon icon-tabler icon-tabler-download" width="24"
+					                height="24" viewBox="0 0 24 24" stroke-width="1.5"
+					                stroke="#d9534f" fill="none" stroke-linecap="round"
+					                stroke-linejoin="round">
+					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+					                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+					                <path d="M7 11l5 5l5 -5" />
+					                <path d="M12 4l0 12" />
+					            </svg>
+					        </a>
+					    </td>
+					        
 					    </td>
 						<tr class="row">
 					    <!-- # -->
@@ -1020,21 +1053,10 @@
 							</td>
 					
 					    <!-- TESTED -->
+					    
 					    <td class="tested">
 					        <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/vbox.png" width="25" height="25">
 					        <img title="VMware" alt="VMware logo" src="<%= request.getContextPath() %>/img/vmware.png" width="25" height="25">
-					    </td>
-					
-					    <!-- FILE -->
-					    <td class="url">
-					        <a href="https://vulnyx.com/file/Tunnel.php" target="_blank" title="Download VM">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-					                <path d="M7 11l5 5l5 -5" />
-					                <path d="M12 4l0 12" />
-					            </svg>
-					        </a>
 					    </td>
 					
 					    <!-- MD5 -->
@@ -1057,25 +1079,6 @@
 					        </button>
 					        <div class="tooltip">Copied!</div>
 					    </td>
-					    
-					    <td class="flag">
-							
-								<!-- BOTON ENVIAR FLAG -->
-						        
-						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Tunnel')">
-								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
-								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-								    <path d="M5 5v16" />
-								    <path d="M5 5h14l-3 5l3 5h-14" />
-								  </svg>
-								</button>
-							</td>
-					
-					    <!-- FIRST USER -->
-					    <td class="first-user">ll104567</td>
-					
-					    <!-- FIRST ROOT -->
-					    <td class="first-user">ll104567</td>
 					
 					    <!-- WRITEUPS -->
 					    <td class="writeups">
@@ -1106,12 +1109,13 @@
 					            </svg>
 					        </button>
 					        <button class="add-writeup-btn" title="Add writeup" onclick="showWriteupForm('Tunnel')">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-plus" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
-					                <path d="M9 12h6" />
-					                <path d="M12 9v6" />
-					            </svg>
+					            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">
+									  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+									  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+									  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h6l6 6v10a2 2 0 0 1 -2 2z" />
+									  <path d="M12 17v-6" />
+									  <path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />
+									</svg>
 					        </button>
 					        <section id="Tunnel" class="modal">
 					            <article class="modal-content">
@@ -1120,6 +1124,38 @@
 					                <div class="writeups-container"></div>
 					            </article>
 					        </section>
+					        
+					        <!-- FIRST USER -->
+					    <td class="first-user">ll104567</td>
+					
+					    <!-- FIRST ROOT -->
+					    <td class="first-user">ll104567</td>
+					        
+					        <td class="flag">
+							
+								<!-- BOTON ENVIAR FLAG -->
+						        
+						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Tunnel')">
+								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
+								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+								    <path d="M5 5v16" />
+								    <path d="M5 5h14l-3 5l3 5h-14" />
+								  </svg>
+								</button>
+							</td>
+					        
+					        <!-- DOWNLOAD -->
+					    
+					    <td class="url">
+					        <a href="https://vulnyx.com/file/Tunnel.php" target="_blank" title="Download VM">
+					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">
+					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+					                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+					                <path d="M7 11l5 5l5 -5" />
+					                <path d="M12 4l0 12" />
+					            </svg>
+					        </a>
+					    </td>
 					    </td>
 						<tr class="row">
 					    <!-- # -->
@@ -1151,20 +1187,9 @@
 							</td>
 					
 					    <!-- TESTED -->
+					    
 					    <td class="tested">
 					        <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/vbox.png" width="25" height="25">
-					    </td>
-					
-					    <!-- FILE -->
-					    <td class="url">
-					        <a href="https://vulnyx.com/file/War.php" target="_blank" title="Download VM">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-					                <path d="M7 11l5 5l5 -5" />
-					                <path d="M12 4l0 12" />
-					            </svg>
-					        </a>
 					    </td>
 					
 					    <!-- MD5 -->
@@ -1187,25 +1212,6 @@
 					        </button>
 					        <div class="tooltip">Copied!</div>
 					    </td>
-						
-						<td class="flag">
-							
-								<!-- BOTON ENVIAR FLAG -->
-						        
-						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'War')">
-								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
-								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-								    <path d="M5 5v16" />
-								    <path d="M5 5h14l-3 5l3 5h-14" />
-								  </svg>
-								</button>
-							</td>
-						
-					    <!-- FIRST USER -->
-					    <td class="first-user">minidump</td>
-					
-					    <!-- FIRST ROOT -->
-					    <td class="first-user">minidump</td>
 					
 					    <!-- WRITEUPS -->
 					    <td class="writeups">
@@ -1244,12 +1250,13 @@
 					            </svg>
 					        </button>
 					        <button class="add-writeup-btn" title="Add writeup" onclick="showWriteupForm('War')">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-plus" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
-					                <path d="M9 12h6" />
-					                <path d="M12 9v6" />
-					            </svg>
+					            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">
+									  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+									  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+									  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h6l6 6v10a2 2 0 0 1 -2 2z" />
+									  <path d="M12 17v-6" />
+									  <path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />
+									</svg>
 					        </button>
 					        <section id="War" class="modal">
 					            <article class="modal-content">
@@ -1258,6 +1265,37 @@
 					                <div class="writeups-container"></div>
 					            </article>
 					        </section>
+					        
+					        <!-- FIRST USER -->
+					    <td class="first-user">minidump</td>
+					
+					    <!-- FIRST ROOT -->
+					    <td class="first-user">minidump</td>
+					        
+					        <td class="flag">
+							
+								<!-- BOTON ENVIAR FLAG -->
+						        
+						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'War')">
+								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
+								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+								    <path d="M5 5v16" />
+								    <path d="M5 5h14l-3 5l3 5h-14" />
+								  </svg>
+								</button>
+							</td>
+					        
+					        <!-- DOWNLOAD -->
+					    
+					    <td class="url">
+					        <a href="https://vulnyx.com/file/War.php" target="_blank" title="Download VM">
+					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">
+					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+					                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+					                <path d="M7 11l5 5l5 -5" />
+					                <path d="M12 4l0 12" />
+					            </svg>
+					        </a>
 					    </td>
 						<tr class="row">
 					    <!-- # -->
@@ -1289,21 +1327,10 @@
 							</td>
 					
 					    <!-- TESTED -->
+					    
 					    <td class="tested">
 					        <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/vbox.png" width="25" height="25">
 					        <img title="VMware" alt="VMware logo" src="<%= request.getContextPath() %>/img/vmware.png" width="25" height="25">
-					    </td>
-					
-					    <!-- FILE -->
-					    <td class="url">
-					        <a href="https://vulnyx.com/file/Manager.php" target="_blank" title="Download VM">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-					                <path d="M7 11l5 5l5 -5" />
-					                <path d="M12 4l0 12" />
-					            </svg>
-					        </a>
 					    </td>
 					
 					    <!-- MD5 -->
@@ -1326,25 +1353,6 @@
 					        </button>
 					        <div class="tooltip">Copied!</div>
 					    </td>
-					    
-					    <td class="flag">
-							
-								<!-- BOTON ENVIAR FLAG -->
-						        
-						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Manager')">
-								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
-								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-								    <path d="M5 5v16" />
-								    <path d="M5 5h14l-3 5l3 5h-14" />
-								  </svg>
-								</button>
-							</td>
-					
-					    <!-- FIRST USER -->
-					    <td class="first-user">softyhack</td>
-					
-					    <!-- FIRST ROOT -->
-					    <td class="first-user">ll104567</td>
 					
 					    <!-- WRITEUPS -->
 					    <td class="writeups">
@@ -1375,12 +1383,13 @@
 					            </svg>
 					        </button>
 					        <button class="add-writeup-btn" title="Add writeup" onclick="showWriteupForm('Manager')">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-plus" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-					                <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
-					                <path d="M9 12h6"></path>
-					                <path d="M12 9v6"></path>
-					            </svg>
+					            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">
+									  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+									  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+									  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h6l6 6v10a2 2 0 0 1 -2 2z" />
+									  <path d="M12 17v-6" />
+									  <path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />
+									</svg>
 					        </button>
 					        <section id="Manager" class="modal">
 					            <article class="modal-content">
@@ -1389,6 +1398,37 @@
 					                <div class="writeups-container"></div>
 					            </article>
 					        </section>
+					        
+					        <!-- FIRST USER -->
+					    <td class="first-user">softyhack</td>
+					
+					    <!-- FIRST ROOT -->
+					    <td class="first-user">ll104567</td>
+					        
+					        <td class="flag">
+							
+								<!-- BOTON ENVIAR FLAG -->
+						        
+						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Manager')">
+								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
+								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+								    <path d="M5 5v16" />
+								    <path d="M5 5h14l-3 5l3 5h-14" />
+								  </svg>
+								</button>
+							</td>
+					        
+					        <!-- DOWNLOAD -->
+					    
+					    <td class="url">
+					        <a href="https://vulnyx.com/file/Manager.php" target="_blank" title="Download VM">
+					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">
+					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+					                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+					                <path d="M7 11l5 5l5 -5" />
+					                <path d="M12 4l0 12" />
+					            </svg>
+					        </a>
 					    </td>
 						<tr class="row">
 						  <!-- # -->
@@ -1420,20 +1460,9 @@
 							</td>
 						  
 						  <!-- TESTED -->
+						  
 						  <td class="tested">
 						    <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/vbox.png" width="25" height="25">
-						  </td>
-						  
-						  <!-- FILE -->
-						  <td class="url">
-						    <a href="https://vulnyx.com/file/Controler.php" target="_blank" title="Download VM">
-						      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">
-						        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-						        <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-						        <path d="M7 11l5 5l5 -5" />
-						        <path d="M12 4l0 12" />
-						      </svg>
-						    </a>
 						  </td>
 						  
 						  <!-- MD5 -->
@@ -1456,25 +1485,6 @@
 						    </button>
 						    <div class="tooltip">Copied!</div>
 						  </td>
-						  
-						  <td class="flag">
-							
-								<!-- BOTON ENVIAR FLAG -->
-						        
-						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Controler')">
-								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
-								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-								    <path d="M5 5v16" />
-								    <path d="M5 5h14l-3 5l3 5h-14" />
-								  </svg>
-								</button>
-							</td>
-						  
-						  <!-- FIRST USER -->
-						  <td class="first-user">Rev3rKh1ll</td>
-						  
-						  <!-- FIRST ROOT -->
-						  <td class="first-user">Rev3rKh1ll</td>
 						  
 						  <!-- WRITEUPS -->
 						  <td class="writeups">
@@ -1530,12 +1540,13 @@
 						      </svg>
 						    </button>
 						    <button class="add-writeup-btn" title="Add writeup" onclick="showWriteupForm('Controler')">
-						      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-plus" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">
-						        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-						        <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
-						        <path d="M9 12h6" />
-						        <path d="M12 9v6" />
-						      </svg>
+						      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">
+									  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+									  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+									  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h6l6 6v10a2 2 0 0 1 -2 2z" />
+									  <path d="M12 17v-6" />
+									  <path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />
+									</svg>
 						    </button>
 						    
 						    <section id="Controler" class="modal">
@@ -1545,6 +1556,37 @@
 						        <div class="writeups-container"></div>
 						      </article>
 						    </section>
+						    
+						    <!-- FIRST USER -->
+						  <td class="first-user">Rev3rKh1ll</td>
+						  
+						  <!-- FIRST ROOT -->
+						  <td class="first-user">Rev3rKh1ll</td>
+						    
+						    <td class="flag">
+							
+								<!-- BOTON ENVIAR FLAG -->
+						        
+						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Controler')">
+								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
+								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+								    <path d="M5 5v16" />
+								    <path d="M5 5h14l-3 5l3 5h-14" />
+								  </svg>
+								</button>
+							</td>
+						    
+						    <!-- DOWNLOAD -->
+						  
+						  <td class="url">
+						    <a href="https://vulnyx.com/file/Controler.php" target="_blank" title="Download VM">
+						      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">
+						        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+						        <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+						        <path d="M7 11l5 5l5 -5" />
+						        <path d="M12 4l0 12" />
+						      </svg>
+						    </a>
 						  </td>
 					</tbody>
 				</table>
@@ -1834,7 +1876,7 @@
 	            </div>
 				</article>
 	</footer>
-	<script src="<%= request.getContextPath() %>/js/script_machines_tested.js"></script>
+	<script src="<%= request.getContextPath() %>/js/machines23.js"></script>
 	<script>
 	  const toggleBtn = document.getElementById('toggle-theme');
 	  const body = document.body;
