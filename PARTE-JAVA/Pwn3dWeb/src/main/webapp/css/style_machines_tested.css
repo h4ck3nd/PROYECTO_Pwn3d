@@ -604,88 +604,6 @@ td div {
     list-style: none;
 }
 
-
-.card-btn {
-    cursor: pointer;
-    background-color: inherit;
-    border: none;
-}
-
-.card-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    color: var(--color-text-dark);
-    background-color: var(--color-bg-card-generic) !important;
-}
-
-.card-body-wrapper {
-    border: 1px solid var(--color-card-border);
-    border-radius: 0.25rem;
-    overflow: hidden;
-}
-
-.card-body {
-    width: 100%;
-    margin: auto;
-    border-collapse: collapse;
-    border-spacing: 0;
-    font-size: 1rem;
-}
-
-.card-os {
-    border: none;
-}
-
-#Linux, #Windows {
-    width: 22px;
-    height: 22px;
-}
-
-.card-creator, .card-difficulty, .card-release {
-    border-top: 1px solid var(--color-card-border);
-}
-
-#card-logo {
-    position: relative;
-    top: 0.5rem;
-}
-
-.card-os, .card-difficulty {
-    display: flex;
-    align-items: center;
-    background-color: var(--color-card-difi-os-bg) !important;
-}
-
-.card-text {
-    color: var(--color-card-text);
-}
-
-.card-difficulty-text {
-    margin-left: 0.5rem;
-}
-
-.card-icon-wrapper {
-    width: 22px;
-    margin: 0 0.5rem;
-}
-
-.card-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.card-info td {
-    text-align: left;
-}
-
-.card-title {
-    margin-bottom: 0.5rem;
-    color: var(--color-card-title);
-}
-
 .tags {
     color: var(--color-text-dark);
     font-weight: bold;
@@ -824,11 +742,7 @@ details {
     cursor: pointer;
 }
 
-.logo-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: start;
-}
+
 
 .logo {
     width: 160px;
@@ -894,20 +808,6 @@ details {
 
 .vm-name, .vm-name {
 	text-align: left;
-}
-
-.very-easy-dots, .easy-dots, .medium-dots, .hard-dots {
-	width: 24px;
-	height: 24px;
-	padding: 0.15rem;
-	border-radius: 50%;
-}
-
-.card-difficulty .very-easy-dots, .card-difficulty .easy-dots,
-	.card-difficulty .medium-dots, .card-difficulty .hard-dots {
-	width: 16px;
-	height: 16px;
-	border-radius: 50%;
 }
 
 .easy-dots {
@@ -1617,4 +1517,287 @@ label {
 
 .popup-content-filter button:not(.close-btn-filter):hover {
   background-color: var(--button-hover-bg);
+}
+
+/*
+.vm-name-wrapper {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.vm-size {
+  font-size: 12px;
+  margin-left: auto;
+}
+
+*/
+
+/* Pantallas medianas y móviles: los elementos se apilan */
+@media screen and (max-width: 768px) {
+  .vm-name-wrapper {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .vm-name {
+    margin-right: 0 !important;
+  }
+
+  .vm-size {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    font-size: 11px !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .vm-size {
+    font-size: 10px !important;
+  }
+}
+
+/*
+.card-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    color: var(--color-text-dark);
+    background-color: var(--color-bg-card-generic) !important;
+}
+
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+#card-logo {
+    position: relative;
+    top: 0.5rem;
+}
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-info td {
+    text-align: left;
+}
+
+.card-title {
+    margin-bottom: 0.5rem;
+    color: var(--color-card-title);
+}
+
+.card-body-wrapper {
+    border: 1px solid var(--color-card-border);
+    border-radius: 0.25rem;
+    overflow: hidden;
+}
+
+.card-body {
+    width: 100%;
+    margin: auto;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 1rem;
+}
+
+.card-os {
+    border: none;
+}
+
+#Linux, #Windows {
+    width: 22px;
+    height: 22px;
+}
+
+.card-creator, .card-difficulty, .card-release {
+    border-top: 1px solid var(--color-card-border);
+}
+
+.card-os, .card-difficulty {
+    display: flex;
+    align-items: center;
+    background-color: var(--color-card-difi-os-bg) !important;
+}
+*/
+
+.card-btn {
+    cursor: pointer;
+    background-color: inherit;
+    border: none;
+}
+
+/* Estilo general del popup */
+.swal2-popup {
+    font-family: 'Roboto', sans-serif;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    padding: 2rem;
+    font-size: 0.9rem;
+}
+
+/* Contenedor horizontal */
+.card-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+/* Imagen de la VM (izquierda) */
+.logo-section {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+}
+
+#card-logo {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
+/* Info (derecha) */
+.info-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Título */
+.card-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #fff;
+    word-break: break-word;
+}
+
+/* Contenedor de detalles */
+.card-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+/* Item individual */
+.info-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #2c2c2c;
+    padding: 10px 14px;
+    border-radius: 8px;
+}
+
+/* Etiqueta */
+.info-label {
+    font-weight: 500;
+    font-weight: bold;
+    color: #bbb;
+    font-size: 1.1rem;
+}
+
+.info-content span {
+	font-size: 1rem;
+	font-weight: bold;
+}
+
+/* Contenido */
+.info-content {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    gap: 0.5rem;
+    color: #fff;
+    font-size: 1rem;
+}
+
+/* Icono del sistema operativo */
+.os-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Dificultad */
+.difficulty-level {
+    display: flex;
+    align-items: center;
+}
+
+.difficulty-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+
+.easy .difficulty-dot {
+    background-color: #50b83c;
+}
+.medium .difficulty-dot {
+    background-color: #f0a500;
+    width: 10px;
+    height: 10px;
+}
+.hard .difficulty-dot {
+    background-color: #d9534f;
+}
+
+/* Botón de cerrar */
+.swal2-close {
+    color: #fff;
+    font-size: 1rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.swal2-close:hover {
+    color: #3fa8f4;
+}
+
+.very-easy-dots, .easy-dots, .medium-dots, .hard-dots {
+	width: 24px;
+	height: 24px;
+	padding: 0.15rem;
+	border-radius: 50%;
+}
+
+.very-easy-card, .easy-card, .medium-card, .hard-card {
+	width: 16px;
+	height: 16px;
+	padding: 0.15rem;
+	border-radius: 50%;
+	margin-right: 5px;
+}
+
+.difficulty-level span[class="text-difficulty"] {
+	font-size: 0.8rem;
+}
+
+.very-easy-card {
+    background: var(--color-info-bg);
+}
+
+.easy-card {
+    background: var(--color-accent-success);
+}
+
+.medium-card {
+    background: var(--color-accent-warning);
+}
+
+.hard-card {
+    background: var(--color-accent-danger);
 }
