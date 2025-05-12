@@ -1,58 +1,48 @@
 /* SHOW CARD */
-	function showCard(name, os, difficulty, creator, release) {
-	    Swal.fire({
-	        background: '#141414',
-	        width: '36rem',
-	        customClass: 'swal2-border',
-	        padding: '3rem 0',
-	        html: 
-	        '<article class="card-container">' +
-	            '<div class="logo-wrapper">' +
-	                '<img id="card-logo" src="img/card1.png" alt="VulNyx Logo" width="250" height="250">' +
-	            '</div>' +
-	            '<div class="card-info">' +
-	                '<h1 class="card-title">' + name + '</h1>' +
-	                '<div class="card-body-wrapper">' +
-	                    '<table class="card-body">' +
-	                        '<tbody>' +
-	                            '<tr>' +
-	                                '<td class="card-os">' +
-	                                    '<span class="card-text">OS:</span>' +
-	                                    '<span class="card-icon-wrapper">' +
-	                                        '<img id="' + os + '" src="img/' + os + '.svg" alt="' + os + '">' +
-	                                    '</span>' +
-	                                    os +
-	                                '</td>' +
-	                            '</tr>' +
-	                            '<tr>' +
-	                                '<td class="card-creator">' +
-	                                    '<span class="card-text">Creador: </span>' +
-	                                    '<span>' + creator + '</span>' +
-	                                '</td>' +
-	                            '</tr>' +
-	                            '<tr>' +
-	                                '<td class="card-difficulty">' +
-	                                    '<span class="card-text">Dificultad:</span>' +
-	                                    '<div class="card-difficulty-text vm-name-btn level-btn ' + difficulty.toLowerCase() + '">' +
-	                                        '<span class="' + difficulty.toLowerCase() + '-dots"></span>' +
-	                                        '<span class="vm-name">' + difficulty + '</span>' +
-	                                    '</div>' +
-	                                '</td>' +
-	                            '</tr>' +
-	                            '<tr>' +
-	                                '<td class="card-release">' +
-	                                    '<span class="card-text">Lanzamiento:</span> ' + release +
-	                                '</td>' +
-	                            '</tr>' +
-	                        '</tbody>' +
-	                    '</table>' +
-	                '</div>' +
-	            '</div>' +
-	        '</article>',
-	        showConfirmButton: false,
-	        showCloseButton: true
-	    });
-	}
+function showCard(name, os, difficulty, creator, release) {
+    Swal.fire({
+        background: '#1e1e1e',
+        width: '38rem',
+        customClass: 'swal2-border',
+        padding: '2.5rem',
+        html:
+        '<div class="card-container">' +
+            '<div class="logo-section">' +
+                '<img id="card-logo" src="img/card1.png" alt="VulNyx Logo" width="250" height="250">' +
+            '</div>' +
+            '<div class="info-section">' +
+                '<h1 class="card-title">' + name + '</h1>' +
+                '<div class="card-details">' +
+                    '<div class="info-item">' +
+                        '<div class="info-label">OS:</div>' +
+                        '<div class="info-content">' +
+                            '<img src="img/' + os + '.svg" alt="' + os + '" class="os-icon">' +
+                            '<span>' + os + '</span>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="info-item">' +
+                        '<div class="info-label">Creador:</div>' +
+                        '<div class="info-content">' + creator + '</div>' +
+                    '</div>' +
+                    '<div class="info-item difficulty-item">' +
+                        '<div class="info-label">Dificultad:</div>' +
+                        '<div class="difficulty-level ' + difficulty.toLowerCase() + '">' +
+                            '<span class="' + difficulty.toLowerCase() + '-card"> </span>' +
+                            '<span class="text-difficulty"> ' + difficulty + '</span>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="info-item">' +
+                        '<div class="info-label">Lanzamiento:</div>' +
+                        '<div class="info-content">' + release + '</div>' +
+                    '</div>' +
+                '</div>' +
+            '</div>' +
+        '</div>',
+        showConfirmButton: false,
+        showCloseButton: true
+    });
+}
+
 
     /* COPY MD5 */
     function copyToClipboard(button) {
