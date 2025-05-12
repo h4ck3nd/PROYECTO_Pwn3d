@@ -5,7 +5,7 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 <meta charset="utf-8">
-<link rel="icon" href="<%= request.getContextPath() %>/img/favicon.png">
+<link rel="icon" href="<%= request.getContextPath() %>/img/logo1.ico">
 <link rel="canonical" href="<%= request.getContextPath() %>/machines.jsp">
 <title>Pwn3d!</title>
 <script async defer src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -19,7 +19,7 @@
 	        <!-- LOGO -->
 	        
 	        <article class="logo-wrapper">
-	            <img class="logo" alt="Pwn3d! website logo" src="img/logo.png">
+	            <img class="logo" alt="Pwn3d! website logo" src="img/banner.png">
 	        </article>
 		
 			<!-- BOTÓN AGRUPADO -->
@@ -238,6 +238,7 @@
 							<th class="url">Archivo</th>
 							<th class="size">Tamaño</th>
 							<th id="md5">MD5</th>
+							<th class="flag">Flag</th>
 							<th class="first-user">Primer User</th>
 							<th class="first-root">Primer Root</th>
 							<th id="writeups">Writeups</th>
@@ -323,7 +324,20 @@
 						        </button>
 						        <div class="tooltip">Copied!</div>
 						    </td>
-						
+							
+							<td class="flag">
+							
+								<!-- BOTON ENVIAR FLAG -->
+						        
+						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Lower5')">
+								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
+								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+								    <path d="M5 5v16" />
+								    <path d="M5 5h14l-3 5l3 5h-14" />
+								  </svg>
+								</button>
+							</td>
+							
 						    <!-- FIRST USER -->
 						    <td class="first-user">suraxddq</td>
 						
@@ -366,8 +380,9 @@
 						                <path d="M12 9v6" />
 						            </svg>
 						        </button>
-						
+						        
 						        <!-- MODAL FOR WRITEUPS -->
+						        
 						        <section id="Lower5" class="modal">
 						            <article class="modal-content">
 						                <span class="close">&times;</span>
@@ -458,6 +473,19 @@
 					        </button>
 					        <div class="tooltip">Copied!</div>
 					    </td>
+					    
+					    <td class="flag">
+							
+								<!-- BOTON ENVIAR FLAG -->
+						        
+						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Changue')">
+								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
+								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+								    <path d="M5 5v16" />
+								    <path d="M5 5h14l-3 5l3 5h-14" />
+								  </svg>
+								</button>
+							</td>
 					
 					    <!-- FIRST USER -->
 					    <td class="first-user">Flo2699</td>
@@ -588,6 +616,19 @@
 					        </button>
 					        <div class="tooltip">Copied!</div>
 					    </td>
+					    
+					    <td class="flag">
+							
+								<!-- BOTON ENVIAR FLAG -->
+						        
+						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Anon')">
+								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
+								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+								    <path d="M5 5v16" />
+								    <path d="M5 5h14l-3 5l3 5h-14" />
+								  </svg>
+								</button>
+							</td>
 					
 					    <!-- FIRST USER -->
 					    <td class="first-user">flower</td>
@@ -717,6 +758,19 @@
 					        </button>
 					        <div class="tooltip">Copied!</div>
 					    </td>
+					    
+					    <td class="flag">
+							
+								<!-- BOTON ENVIAR FLAG -->
+						        
+						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Hit')">
+								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
+								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+								    <path d="M5 5v16" />
+								    <path d="M5 5h14l-3 5l3 5h-14" />
+								  </svg>
+								</button>
+							</td>
 					    
 					    <!-- FIRST USER -->
 					    <td class="first-user">maciiii___</td>
@@ -857,6 +911,19 @@
 					        </button>
 					        <div class="tooltip">Copied!</div>
 					    </td>
+					    
+					    <td class="flag">
+							
+								<!-- BOTON ENVIAR FLAG -->
+						        
+						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Matrix')">
+								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
+								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+								    <path d="M5 5v16" />
+								    <path d="M5 5h14l-3 5l3 5h-14" />
+								  </svg>
+								</button>
+							</td>
 					    
 					    <!-- FIRST USER -->
 					    <td class="first-user">suraxddq</td>
@@ -1011,6 +1078,19 @@
 					        </button>
 					        <div class="tooltip">Copied!</div>
 					    </td>
+					    
+					    <td class="flag">
+							
+								<!-- BOTON ENVIAR FLAG -->
+						        
+						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Tunnel')">
+								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
+								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+								    <path d="M5 5v16" />
+								    <path d="M5 5h14l-3 5l3 5h-14" />
+								  </svg>
+								</button>
+							</td>
 					
 					    <!-- FIRST USER -->
 					    <td class="first-user">ll104567</td>
@@ -1132,7 +1212,20 @@
 					        </button>
 					        <div class="tooltip">Copied!</div>
 					    </td>
-					
+						
+						<td class="flag">
+							
+								<!-- BOTON ENVIAR FLAG -->
+						        
+						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'War')">
+								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
+								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+								    <path d="M5 5v16" />
+								    <path d="M5 5h14l-3 5l3 5h-14" />
+								  </svg>
+								</button>
+							</td>
+						
 					    <!-- FIRST USER -->
 					    <td class="first-user">minidump</td>
 					
@@ -1262,6 +1355,19 @@
 					        </button>
 					        <div class="tooltip">Copied!</div>
 					    </td>
+					    
+					    <td class="flag">
+							
+								<!-- BOTON ENVIAR FLAG -->
+						        
+						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Manager')">
+								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
+								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+								    <path d="M5 5v16" />
+								    <path d="M5 5h14l-3 5l3 5h-14" />
+								  </svg>
+								</button>
+							</td>
 					
 					    <!-- FIRST USER -->
 					    <td class="first-user">softyhack</td>
@@ -1383,6 +1489,19 @@
 						    </button>
 						    <div class="tooltip">Copied!</div>
 						  </td>
+						  
+						  <td class="flag">
+							
+								<!-- BOTON ENVIAR FLAG -->
+						        
+						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Controler')">
+								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
+								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+								    <path d="M5 5v16" />
+								    <path d="M5 5h14l-3 5l3 5h-14" />
+								  </svg>
+								</button>
+							</td>
 						  
 						  <!-- FIRST USER -->
 						  <td class="first-user">Rev3rKh1ll</td>
@@ -1576,54 +1695,84 @@
 			<!-- SECCION DE ENVIAR FLAGs -->
 			
 			<section class="form-flag">
-			  <article class="form-container">
+			  <div class="form-container">
+			    <!-- Botón de cierre -->
+			    <span class="close-form" style="margin-bottom: -30px !important; margin-top: -20px !important; margin-right: -15px !important;">&times;</span>
+			
+			    <!-- Título -->
 			    <div class="form-title">
-			      <p class="submit-flag"></p>
-			      <span class="close-form">&times;</span>
+			      <h1 style="font-size: 20px !important; color: #f26e56 !important; font-style: bold !important; margin-bottom: -20px !important;">Enviar Flag</h1>
 			    </div>
+			
+			    <!-- Descripción -->
+			    <p class="form-text" style="font-size: 15px !important; margin-bottom: -17px !important;">
+			      Ingrese su nombre de usuario y la flag correspondiente. Este formulario es solo informativo y no garantiza prioridad si otros ya enviaron antes.
+			    </p>
+			
+			    <!-- Formulario -->
 			    <form class="form submit-form" id="flagForm">
-			      <div class="form-field">
-			        <label class="form-label" for="username">Usuario</label>
+			      <!-- Campo: Usuario -->
+			      <div class="form-field" style="margin-bottom: -15px !important; margin-top: 5px !important;">
+			        <label class="form-label" for="username" style="margin-bottom: -5px !important;">Usuario</label>
 			        <input
 			          class="form-control"
 			          id="username"
 			          name="Username"
 			          type="text"
 			          maxlength="15"
-			          placeholder="Enter your username"
+			          placeholder="Nombre de usuario"
 			          required
 			          autocomplete="username"
 			        />
 			      </div>
-			      <div class="form-field">
-			        <label class="form-label" for="flag">Flag</label>
+			      <br>
+			
+			      <!-- Campo: Flag -->
+			      <div class="form-field" style="margin-bottom: -15px !important; margin-top: 10px !important;">
+			        <label class="form-label" for="flag" style="margin-bottom: -5px !important;">Flag</label>
 			        <input
 			          class="form-control"
 			          id="flag"
 			          name="Flag"
 			          type="text"
-			          maxlength="32"
-			          placeholder="Enter the flag"
+			          maxlength="64"
+			          placeholder="Ejemplo: PWNED{example_flag}"
 			          required
 			        />
 			      </div>
-			      <div class="form-btns">
+			      <br>
+			
+			      <!-- Selector: Tipo de Flag -->
+			      <div class="form-field" style="margin-bottom: -15px !important; margin-top: 10px !important;">
+			        <span class="form-label" style="margin-bottom: -5px !important;">Tipo de flag</span>
+			        <div class="form-checkbox" id="flag-type">
+			          <input type="radio" id="user" name="FlagType" value="user" checked />
+			          <label for="user" style="margin-bottom: -5px !important;">User</label>
+			          <input type="radio" id="root" name="FlagType" value="root" />
+			          <label for="root" style="margin-bottom: -5px !important;">Root</label>
+			        </div>
+			      </div>
+			      <br>
+			
+			      <!-- Botones -->
+			      <div class="form-btns" style="margin-bottom: -5px !important; margin-top: 10px !important;">
 			        <button class="button" type="submit">Enviar</button>
 			        <button class="button" type="reset">Borrar</button>
 			      </div>
-			      <div class="form-footer">
+			
+			      <!-- Footer -->
+			      <div class="form-footer" style="margin-bottom: -15px !important; margin-top: 20px !important;">
 			        <small>
-			          Al tratarse de una página estática, la información no se actualiza automáticamente, Por lo tanto, es posible que no sea el primero en enviarlo, le pedimos disculpas de antemano.
+			          Este formulario no valida las flags automáticamente. En un futuro se planea un sistema en tiempo real para mostrar el primero en enviarla.
 			        </small>
 			      </div>
 			    </form>
-			  </article>
+			  </div>
 			</section>
 		</section>
 	</main>
 	<footer>
-		<img src="<%= request.getContextPath() %>/img/logoSM.png" alt="Pwn3d! small footer logo"
-			loading="lazy">
+		<img src="<%= request.getContextPath() %>/img/logo1.ico" alt="Pwn3d! small footer logo" loading="lazy" style="width: 25px !important; height: 30px !important;">
 		<p>© Pwn3d! 2024-2025</p>
 		
 		<!-- REDES SOCIALES -->
