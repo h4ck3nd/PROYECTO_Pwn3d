@@ -28,7 +28,7 @@ function showCard(name, os, difficulty, creator, release) {
                         '<div class="info-label">Dificultad:</div>' +
                         '<div class="difficulty-level ' + difficulty.toLowerCase() + '">' +
                             '<span class="' + difficulty.toLowerCase() + '-card"> </span>' +
-                            '<span class="text-difficulty"> ' + difficulty + '</span>' +
+                            '<span style="font-size: 0.9rem; font-weight: bold;"> ' + difficulty + '</span>' +
                         '</div>' +
                     '</div>' +
                     '<div class="info-item">' +
@@ -123,32 +123,58 @@ function showCard(name, os, difficulty, creator, release) {
 	};
     
     /* SHOW WRITEUPS */
-    function showWriteups(name) {
-        document.querySelector('body').style.overflow = 'hidden';
-        let modal = document.getElementById(name);
-        let title = modal.querySelector('.writeup-title');
-        title.textContent = "Writeups para " + name;
-        let writeupsContainer = modal.querySelector('.writeups-container');
-        let span = modal.querySelector('.close');
-        modal.style.display = 'block';
+	
+	function showWriteups(name) {
+	    const modal = document.getElementById(name);
+	    const title = modal.querySelector('.writeup-title');
+	    const writeupsContainer = modal.querySelector('.writeups-container');
+	    const closeBtn = modal.querySelector('.close');
 
-        span.onclick = function() {
-            modal.style.display = 'none';
-            document.querySelector('body').style.overflow = 'visible';
-        }
+	    // Bloquear scroll de fondo
+	    document.body.style.overflow = 'hidden';
 
-        if (writeupsContainer.childElementCount === 0) {
-            let output = writeupsArr.filter(el => el.name === name);
-            output.forEach(el => {
-                let link = document.createElement('a');
-                link.id = "writeup";
-                link.href = el.url;
-                link.target = '_blank';
-                link.textContent = "by " + el.creator;
-                writeupsContainer.appendChild(link);
-            });
-        }
-    }
+	    // Establecer título
+	    title.textContent = "Writeups para " + name;
+
+	    // Limpiar writeups anteriores si los hay
+	    writeupsContainer.innerHTML = '';
+
+	    // Obtener writeups relacionados
+	    const filteredWriteups = writeupsArr.filter(el => el.name === name);
+
+	    if (filteredWriteups.length === 0) {
+	        const noResult = document.createElement('p');
+	        noResult.textContent = "No hay writeups disponibles para esta máquina.";
+	        noResult.style.color = "#bbb";
+	        noResult.style.textAlign = "center";
+	        writeupsContainer.appendChild(noResult);
+	    } else {
+	        filteredWriteups.forEach(el => {
+	            const link = document.createElement('a');
+	            link.href = el.url;
+	            link.target = '_blank';
+	            link.textContent = `by ${el.creator}`;
+	            writeupsContainer.appendChild(link);
+	        });
+	    }
+
+	    // Mostrar modal
+	    modal.style.display = 'flex';
+
+	    // Cerrar modal al hacer clic en el botón de cierre
+	    closeBtn.onclick = () => {
+	        modal.style.display = 'none';
+	        document.body.style.overflow = 'visible';
+	    };
+
+	    // Cerrar modal al hacer clic fuera del contenido
+	    window.onclick = (e) => {
+	        if (e.target === modal) {
+	            modal.style.display = 'none';
+	            document.body.style.overflow = 'visible';
+	        }
+	    };
+	}
 
 	/* SUBMIT WRITEUP (SHOW FORM) */
 	const showWriteupForm = (name) => {
