@@ -651,79 +651,8 @@ details {
     justify-content: center;
 }
 
-.writeup-btn, .add-writeup-btn {
-    border: none;
-    background-color: inherit;
-    cursor: pointer;
-}
-
-
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 10;
-    padding-top: 45vh;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.form-writeup, .form-vm, .modal {
+.form-writeup, .form-vm {
     background-color: var(--color-modal-bg);
-}
-
-.modal {
-    padding-top: 45vh;
-    overflow: hidden;
-}
-
-.modal-content {
-    width: 300px;
-    background-color: var(--color-modal-content-bg) !important;
-    margin: auto;
-    padding: 1rem;
-    border: 1px solid var(--color-border-light) !important;
-    border-radius: 0.25rem;
-}
-
-.writeups-container {
-    position: relative;
-    bottom: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 0.5rem;
-}
-
-.writeups-container a {
-    color: var(--color-link-writeup);
-}
-
-.writeups-container a:hover {
-    color: var(--color-link-writeup-hover);
-}
-
-.writeup-title {
-    width: fit-content;
-    margin-bottom: 0.25rem;
-    position: relative;
-    bottom: 47px;
-    color: var(--color-link-writeup-title);
-    font-weight: bold;
-}
-
-.close {
-    position: relative;
-    bottom: 15px;
-    left: 125px;
-    width: 1.2em;
-    height: 1.2em;
-    color: var(--color-border-light);
-    font-family: serif;
-    font-size: 2.5em;
-    line-height: 1.2;
-    cursor: pointer;
 }
 
 .close-form {
@@ -756,10 +685,6 @@ details {
     font-size: 0.9rem;
 }
 
-.badge {
-    padding: 0.5rem;
-}
-
 .level-btn {
     padding: 0.25rem;
 }
@@ -790,11 +715,6 @@ details {
     color: var(--color-close-hover) !important;
 }
 
-.badge-easy, #Easy {
-    color: var(--color-badge-easy-text);
-    background-color: var(--color-badge-easy-bg);
-}
-
 .easy {
     color: var(--color-easy-text);
     background-color: var(--color-easy-bg);
@@ -818,11 +738,6 @@ details {
     color: var(--color-accent-success);
 }
 
-.badge-medium, #Medium {
-    color: var(--color-accent-warning);
-    background-color: var(--color-accent-warning-bg);
-}
-
 .medium {
     color: white;
     background-color: var(--color-accent-warning-bg);
@@ -834,11 +749,6 @@ details {
 
 #medium-vms {
     color: var(--color-accent-warning);
-}
-
-.badge-hard, #Hard {
-    color: var(--color-accent-danger);
-    background-color: var(--color-accent-danger-bg);
 }
 
 .hard {
@@ -854,11 +764,6 @@ details {
     color: var(--color-accent-danger);
 }
 
-.badge-very-easy, #Very-Easy {
-    color: var(--color-info-bg);
-    background-color: var(--color-info-bg-light) !important;
-}
-
 .very-easy {
     color: white;
     background-color: var(--color-info-bg-light);
@@ -870,16 +775,6 @@ details {
 
 #very-easy-vms {
     color: var(--color-info-bg);
-}
-
-.badge-vms {
-    color: var(--color-info-link);
-    background-color: var(--color-badge-vms-bg);
-}
-
-.badge-writeups {
-    color: var(--color-highlight-bg);
-    background-color: var(--color-writeups-bg);
 }
 
 #total-writeups, .submit-vm, .submit-writeup, .submit-flag {
@@ -1732,7 +1627,11 @@ label {
 /* Dificultad */
 .difficulty-level {
     display: flex;
+    gap: 0.6rem;           /* Espacio entre los elementos (icono y texto) */
+    padding: 0.4rem; /* Espaciado interno (vertical) */
     align-items: center;
+    border-radius: 6px;
+    width: fit-content;     /* Se ajusta al contenido */
 }
 
 .difficulty-dot {
@@ -1782,10 +1681,6 @@ label {
 	margin-right: 5px;
 }
 
-.difficulty-level span[class="text-difficulty"] {
-	font-size: 0.8rem;
-}
-
 .very-easy-card {
     background: var(--color-info-bg);
 }
@@ -1800,4 +1695,194 @@ label {
 
 .hard-card {
     background: var(--color-accent-danger);
+}
+
+/* MODAL DE WRITEUPS SUBIDOS */
+
+.writeup-btn, .add-writeup-btn {
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    padding-top: 45vh;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-modal-bg);
+    
+    /* Centrado perfecto */
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+ /*
+.modal {
+    padding-top: 45vh;
+    overflow: hidden;
+}*/
+
+/* Contenedor de contenido */
+.modal-content {
+    background-color: var(--color-modal-content-bg, #1f1f1f);
+    border: 1px solid var(--color-border-light, #444);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 480px;
+    padding: 2rem;
+    position: relative;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+    animation: fadeIn 0.3s ease-in-out;
+    color: #fff;
+}
+
+/* Botón cerrar */
+.close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.8rem;
+    line-height: 1;
+    color: #aaa;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.close:hover {
+    color: var(--close-btn-hover);
+}
+
+/* Título */
+.writeup-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--color-link-writeup-title, #3fa8f4);
+    text-align: center;
+}
+
+/* Contenedor de enlaces */
+.writeups-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Estilo de los enlaces */
+.writeups-container a {
+    display: block;
+    padding: 0.75rem 1rem;
+    background-color: #2a2a2a;
+    color: var(--color-link-writeup, #8cc8ff);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.writeups-container a:hover {
+    background-color: #3a3a3a;
+    color: var(--color-link-writeup-hover, #3fa8f4);
+}
+
+/* Animación entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ESTILO DIFICULTADES + INFO DEL HEADER */
+
+.badge {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    color: #fff;
+    padding: 0.6rem 0.8rem;
+    border-radius: 6px;
+    font-weight: bold;
+    z-index: 0;
+}
+
+.badge .wave {
+  position: absolute;
+  top: 0; /* subimos la ola */
+  left: 0;
+  width: 200%; /* doble para que no se note el corte */
+  height: 100%;
+  z-index: -1;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.wave-path {
+  animation: waveAnim 10s linear infinite; /* más duración para que sea suave */
+}
+
+.wave2 {
+  animation-delay: -3s; /* mitad de duración */
+}
+
+@keyframes waveAnim {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.badge-vms {
+    color: var(--color-info-link);
+    background-color: var(--color-badge-vms-bg);
+}
+
+.badge-very-easy, #Very-Easy {
+    color: var(--color-info-bg);
+    background-color: var(--color-info-bg-light) !important;
+}
+
+.badge-easy {
+    --badge-color: #4caf50;
+    background-color: var(--badge-color);
+}
+
+.badge-easy .wave stop:first-child {
+    stop-color: rgba(255, 255, 255, 0.3);
+}
+.badge-easy .wave stop:last-child {
+    stop-color: rgba(255, 255, 255, 0.05);
+}
+
+.badge-easy, #Easy {
+    color: var(--color-badge-easy-text);
+    background-color: var(--color-badge-easy-bg);
+}
+
+.badge-medium, #Medium {
+    color: var(--color-accent-warning);
+    background-color: var(--color-accent-warning-bg);
+}
+
+.badge-hard, #Hard {
+    color: var(--color-accent-danger);
+    background-color: var(--color-accent-danger-bg);
+}
+
+.badge-writeups {
+    color: var(--color-highlight-bg) !important;
+    background-color: var(--color-writeups-bg);
 }
