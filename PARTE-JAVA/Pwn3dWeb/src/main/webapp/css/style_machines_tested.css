@@ -740,7 +740,7 @@ details {
 }
 
 
-.modal, .form-flag {
+.modal {
     display: none;
     position: fixed;
     z-index: 10;
@@ -751,7 +751,7 @@ details {
     height: 100%;
 }
 
-.form-writeup, .form-vm, .form-flag, .modal {
+.form-writeup, .form-vm, .modal {
     background-color: var(--color-modal-bg);
 }
 
@@ -759,16 +759,6 @@ details {
     padding-top: 45vh;
     overflow: hidden;
 }
-
-.form-flag {
-    padding-top: 10vh;
-    overflow: scroll;
-}
-/*
-.form-vm {
-    padding-top: 5vh;
-    overflow: scroll;
-}*/
 
 .modal-content {
     width: 300px;
@@ -1044,6 +1034,20 @@ details {
   z-index: 9998;
 }
 
+.form-flag {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--popup-overlay);
+  backdrop-filter: blur(5px);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
 /* Contenedor de formulario */
 .form-container {
   background: var(--popup-filter-bg-color);
@@ -1153,6 +1157,19 @@ details {
   gap: 1.5rem;
   align-items: center;
   justify-content: flex-start;
+}
+
+.submit-flag-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 6px;
+  transition: transform 0.2s ease;
+}
+
+.submit-flag-btn:hover svg {
+  stroke: #aaa; /* Cambia a un tono más claro al hacer hover */
 }
 
 .button {
