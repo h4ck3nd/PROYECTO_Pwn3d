@@ -70,14 +70,38 @@
     --color-link-writeup: #b2b5b9;
     --color-link-writeup-hover: #FFFF99;
     --color-link-writeup-title: #2575a7;
+    --color-text-form-light: #aaaaaa;
+    --color-card-difi-os-bg: #1e2125;
+    --color-bg-card-generic: #141414;
+    --color-bg-card-all: #141414;
+    --color-close-card: #c4c4c4;
+    --popup-bg: #22272e;
+  --popup-text: #f1f1f1;
+  --popup-overlay: rgba(10, 10, 10, 0.75);
+  --popup-shadow: rgba(0, 0, 0, 0.4);
+  --popup-header-border: #444;
+  --filter-bg: #2a2f37;
+  --filter-bg-hover: #3a4049;
+  --filter-label: #ccc;
+  --checkbox-accent: #3fa8f4;
+  --button-bg: #3fa8f4;
+  --button-hover-bg: #5fc0ff;
+  --close-btn-color: #f1f1f1;
+  --close-btn-hover: #f27474;
+  --popup-filter-bg-color: #22272e;
+  --popup-filter-level-color: #2a2f37;
+  --popup-text-filter-color: #c2c2c3;
+  --circle-light: #ffffff;
+  --circle-dark: #333333;
 }
 
 .light-theme {
   /* MODO CLARO */
     --color-background-dark: #e0e0e0;               /* Más claro que #151515 */
   --color-background-light: #f5f5f5;              /* Ya no es blanco puro */
-  --color-text-dark: #1a1a1a;                     /* Más suave que blanco puro */
-  --color-text-light: #2c2c2c;
+  --color-text-dark: #ffffff;                   /* Más suave que blanco puro */
+  --color-text-light: #8c8c8c;
+  --color-bg-light-popup: #e1e1e1;
 
   --color-header-footer-bg: #d4d4d4;              /* Más claro que #262626 */
   --color-header-footer-text: #4c4c4ca4;
@@ -86,7 +110,7 @@
   --color-link-hover: #3fa8f4;                    /* Se mantiene */
 
   --color-active-link: #daa04a;                   /* Se mantiene */
-  --color-highlight-bg: #eed18a;                  /* Variante más clara */
+  --color-highlight-bg: #e1af32;                  /* Variante más clara */
 
   --color-pre-bg: #e38a7c;                        /* Más suave */
   --color-code-bg: #edd195;                       /* Más claro */
@@ -101,8 +125,8 @@
   --color-accent-info: #ec0725;                   /* Se mantiene */
   --color-accent-danger: #ec0725;                 /* Se mantiene */
 
-  --color-filter-bg: #3fa8f410;                   /* Más clara */
-  --color-button-hover: #3fa8f4a8;                /* Se mantiene */
+  --color-filter-bg: #8dbfc4;                   /* Más clara */
+  --color-button-hover: #678b8e;                /* Se mantiene */
 
   --color-form-bg: #f2f2f2;                       /* Claro pero no blanco */
   --color-form-border: #d0d0d0;
@@ -113,26 +137,26 @@
   --color-accent-success: #28a745;                /* Se mantiene */
   --color-success-bg: #28a7451a;                  /* Se mantiene */
 
-  --color-accent-warning: #e1b300;                /* Se mantiene */
-  --color-warning-bg: #e1b3001a;                  /* Se mantiene */
+  --color-accent-warning: #fbc801;                /* Se mantiene */
+  --color-warning-bg: #a78b1b;                  /* Se mantiene */
 
-  --color-accent-danger-bg: #f5e3e3;              /* Más claro */
+  --color-accent-danger-bg: #cf8181;              /* Más claro */
   --color-danger-bg: #ec0725;                     /* Se mantiene */
 
-  --color-info-bg: #00ffff;                       /* Se mantiene */
-  --color-info-bg-light: #ccfafa;
+  --color-info-bg: #16fff1;                       /* Se mantiene */
+  --color-info-bg-light: #8ba3a3;
 
   --color-accent-warning-bg: #f7e6aa;             /* Ligeramente más clara */
-  --color-info-link: #a0cc3e;
+  --color-info-link: #546c1f;
 
-  --color-info-bg-light: #e4f4f4;                 /* Más claro */
-  --color-writeups-bg: #f2e2c0;
+  --color-info-bg-light: #8ba3a3;                 /* Más claro */
+  --color-writeups-bg: #a89772;
 
   --color-card-border: #dddddd;
-  --color-card-text: #3a3a3a;
-  --color-card-bg-light: #fdfdfd;
-  --color-card-hover: rgba(0, 0, 0, 0.07);
-  --color-card-title: #202020;
+  --color-card-text: #dedede;
+  --color-card-bg-light: #9b9b9b;
+  --color-card-hover: rgba(0, 0, 0, 0.45);
+  --color-card-title: #2e2e2e;
 
   --color-tooltip-bg: #eeeeee;
   --color-tooltip-text: #2b2b2b;
@@ -142,9 +166,9 @@
   --color-close-hover: #f27474;
 
   /* Niveles de dificultad – NO CAMBIADOS */
-  --color-badge-easy-bg: #28a7451a;
-  --color-badge-easy-text: #28a745;
-  --color-easy-bg: #28a7451a;
+  --color-badge-easy-bg: #94c89a;
+  --color-badge-easy-text: #25c839;
+  --color-easy-bg: #8bdf9e;
   --color-easy-text: white;
   --color-badge-medium-bg: #e1b3001a;
   --color-badge-medium-text: #e1b300;
@@ -154,27 +178,51 @@
   --color-badge-hard-text: #ec0725;
   --color-hard-bg: #ec0725;
   --color-hard-text: white;
-  --color-badge-low-bg: #00ffff1a;
+  --color-badge-low-bg: #008b87;
   --color-badge-low-text: #00ffff;
   --color-low-bg: #00ffff1a;
   --color-low-text: white;
 
-  --color-badge-vms-bg: #ececec;
+  --color-badge-vms-bg: #afafaf;
   --color-badge-vms-text: #b3da49;
   --color-badge-writeups-bg: #f1ddbb;
   --color-badge-writeups-text: #daa04a;
 
   --color-total-writeups: #3fa8f4a8;
   --color-link-writeup: #6c6f72;
-  --color-link-writeup-hover: #FFFF99;
+  --color-link-writeup-hover: #c7c775;
   --color-link-writeup-title: #2575a7;
+  --color-text-form-light: #8a8a8a;
+  --color-card-difi-os-bg: #818181;
+  --color-bg-card-generic: #c8c8c8;
+  --color-bg-card-all: #c8c8c8;
+  --color-close-card: #424242;
+  --popup-bg: #f9f9f9;
+  --popup-text: #1e1e1e;
+  --popup-overlay: rgba(255, 255, 255, 0.75);
+  --popup-shadow: rgba(0, 0, 0, 0.1);
+  --popup-header-border: #ddd;
+  --filter-bg: #e6e6e6;
+  --filter-bg-hover: #dcdcdc;
+  --filter-label: #333;
+  --checkbox-accent: #3fa8f4;
+  --button-bg: #3fa8f4;
+  --button-hover-bg: #2575a7;
+  --close-btn-color: #333;
+  --close-btn-hover: #c0392b;
+  --popup-filter-bg-color: #687991;
+  --popup-filter-level-color: #485261;
+  --popup-text-filter-color: #000000;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 * {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
 	font-family: sans, sans-serif;
+	/*font-family: 'Press Start 2P', monospace;*/
 }
 
 body {
@@ -251,6 +299,7 @@ header {
     align-items: center;
     justify-content: end;
     gap: 1rem;
+    margin-left: 400px;
 }
 
 a.github-button {
@@ -374,13 +423,13 @@ main {
     gap: 0.5rem;
 }
 
-.os-filter {
+/*).os-filter {
     display: flex;
     align-items: center;
     font-size: 14px;
     padding: 0.25rem 0;
     gap: 0.5rem;
-}
+}*/
 
 .order-by {
     display: none;
@@ -412,11 +461,12 @@ main {
     padding: 0.35rem;
 }
 
+/*
 .level-filter:hover, .os-filter:hover, .filter-by:hover, .order-by:hover {
     background-color: var(--color-button-hover);
-}
+}*/
 
-.submit-btn:hover, .submit-user-flag:hover, .submit-root-flag:hover {
+.submit-btn:hover, .submit-user-flag:hover, .submit-root-flag:hover, .filter-by:hover {
     background-color: var(--color-submit-hover-bg);
 }
 
@@ -557,85 +607,6 @@ td div {
     list-style: none;
 }
 
-.card-btn {
-    cursor: pointer;
-    background-color: inherit;
-    border: none;
-}
-
-.card-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    color: var(--color-text-dark);
-}
-
-.card-body-wrapper {
-    border: 1px solid var(--color-card-border);
-    border-radius: 0.25rem;
-    overflow: hidden;
-}
-
-.card-body {
-    width: 100%;
-    margin: auto;
-    border-collapse: collapse;
-    border-spacing: 0;
-    font-size: 1rem;
-}
-
-.card-os {
-    border: none;
-}
-
-#Linux, #Windows {
-    width: 22px;
-    height: 22px;
-}
-
-.card-creator, .card-difficulty, .card-release {
-    border-top: 1px solid var(--color-card-border);
-}
-
-#card-logo {
-    position: relative;
-    top: 0.5rem;
-}
-
-.card-os, .card-difficulty {
-    display: flex;
-    align-items: center;
-}
-
-.card-text {
-    color: var(--color-card-text);
-}
-
-.card-difficulty-text {
-    margin-left: 0.5rem;
-}
-
-.card-icon-wrapper {
-    width: 22px;
-    margin: 0 0.5rem;
-}
-
-.card-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.card-info td {
-    text-align: left;
-}
-
-.card-title {
-    margin-bottom: 0.5rem;
-    color: var(--color-card-title);
-}
-
 .tags {
     color: var(--color-text-dark);
     font-weight: bold;
@@ -683,88 +654,8 @@ details {
     justify-content: center;
 }
 
-.writeup-btn, .add-writeup-btn {
-    border: none;
-    background-color: inherit;
-    cursor: pointer;
-}
-
-.modal, .form-writeup, .form-vm, .form-flag {
-    display: none;
-    position: fixed;
-    z-index: 10;
-    padding-top: 45vh;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.form-writeup, .form-vm, .form-flag, .modal {
+.form-writeup, .form-vm {
     background-color: var(--color-modal-bg);
-}
-
-.modal {
-    padding-top: 45vh;
-    overflow: hidden;
-}
-
-.form-writeup, .form-flag {
-    padding-top: 10vh;
-    overflow: scroll;
-}
-
-.form-vm {
-    padding-top: 5vh;
-    overflow: scroll;
-}
-
-.modal-content {
-    width: 300px;
-    background-color: var(--color-modal-content-bg) !important;
-    margin: auto;
-    padding: 1rem;
-    border: 1px solid var(--color-border-light) !important;
-    border-radius: 0.25rem;
-}
-
-.writeups-container {
-    position: relative;
-    bottom: 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 0.5rem;
-}
-
-.writeups-container a {
-    color: var(--color-link-writeup);
-}
-
-.writeups-container a:hover {
-    color: var(--color-link-writeup-hover);
-}
-
-.writeup-title {
-    width: fit-content;
-    margin-bottom: 0.25rem;
-    position: relative;
-    bottom: 47px;
-    color: var(--color-link-writeup-title);
-    font-weight: bold;
-}
-
-.close {
-    position: relative;
-    bottom: 15px;
-    left: 125px;
-    width: 1.2em;
-    height: 1.2em;
-    color: var(--color-border-light);
-    font-family: serif;
-    font-size: 2.5em;
-    line-height: 1.2;
-    cursor: pointer;
 }
 
 .close-form {
@@ -783,11 +674,7 @@ details {
     cursor: pointer;
 }
 
-.logo-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: start;
-}
+
 
 .logo {
     width: 160px;
@@ -799,10 +686,6 @@ details {
     color: var(--color-text-dark);
     font-weight: bold;
     font-size: 0.9rem;
-}
-
-.badge {
-    padding: 0.5rem;
 }
 
 .level-btn {
@@ -821,13 +704,18 @@ details {
     color: var(--color-text-dark) !important;
 }
 
-.swal2-popup.swal2-toast, .swal2-close:focus {
-    box-shadow: none !important;
+.swal2-popup {
+	background-color: var(--color-bg-card-all) !important;
 }
 
-.badge-easy, #Easy {
-    color: var(--color-badge-easy-text);
-    background-color: var(--color-badge-easy-bg);
+.swal2-popup.swal2-toast, .swal2-close:focus {
+    box-shadow: none !important;
+    color: var(--color-close-card) !important;
+}
+
+.swal2-popup.swal2-toast, .swal2-close:hover {
+    box-shadow: none !important;
+    color: var(--color-close-hover) !important;
 }
 
 .easy {
@@ -845,31 +733,12 @@ details {
 	text-align: left;
 }
 
-.low-dots, .easy-dots, .medium-dots, .hard-dots {
-	width: 24px;
-	height: 24px;
-	padding: 0.15rem;
-	border-radius: 50%;
-}
-
-.card-difficulty .low-dots, .card-difficulty .easy-dots,
-	.card-difficulty .medium-dots, .card-difficulty .hard-dots {
-	width: 16px;
-	height: 16px;
-	border-radius: 50%;
-}
-
 .easy-dots {
     background: var(--color-accent-success);
 }
 
 #easy-vms {
     color: var(--color-accent-success);
-}
-
-.badge-medium, #Medium {
-    color: var(--color-accent-warning);
-    background-color: var(--color-accent-warning-bg);
 }
 
 .medium {
@@ -885,11 +754,6 @@ details {
     color: var(--color-accent-warning);
 }
 
-.badge-hard, #Hard {
-    color: var(--color-accent-danger);
-    background-color: var(--color-accent-danger-bg);
-}
-
 .hard {
     color: white;
     background-color: var(--color-accent-danger-bg);
@@ -903,32 +767,17 @@ details {
     color: var(--color-accent-danger);
 }
 
-.badge-low, #Low {
-    color: var(--color-info-bg);
-    background-color: var(--color-info-bg-light);
-}
-
-.low {
+.very-easy {
     color: white;
     background-color: var(--color-info-bg-light);
 }
 
-.low-dots {
+.very-easy-dots {
     background: var(--color-info-bg);
 }
 
-#low-vms {
+#very-easy-vms {
     color: var(--color-info-bg);
-}
-
-.badge-vms {
-    color: var(--color-info-link);
-    background-color: var(--color-badge-vms-bg);
-}
-
-.badge-writeups {
-    color: var(--color-highlight-bg);
-    background-color: var(--color-writeups-bg);
 }
 
 #total-writeups, .submit-vm, .submit-writeup, .submit-flag {
@@ -954,90 +803,205 @@ details {
     transform: scale(1.1);
 }
 
-.form-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1.5rem;
-    flex-direction: column;
-    background: var(--color-form-bg);
-    border-radius: 0.25rem;
-    padding: 2rem;
-    width: 40vw;
-    margin: auto;
+/* Asegurarse de que el modal está centrado en la pantalla */
+.form-vm {
+  display: none; /* Crucial para que esté oculto por defecto */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--popup-overlay);
+  backdrop-filter: blur(5px);
+  justify-content: center;
+  align-items: center; /* Centra el contenido en el eje vertical */
+  z-index: 9998;
 }
 
+.form-writeup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--popup-overlay);
+  backdrop-filter: blur(5px);
+  justify-content: center;
+  align-items: center;
+  z-index: 9998;
+}
+
+.form-flag {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: var(--popup-overlay);
+  backdrop-filter: blur(5px);
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Contenedor de formulario */
+.form-container {
+  background: var(--popup-filter-bg-color);
+  padding: 2rem;
+  border-radius: 1rem;
+  max-width: 480px;
+  width: 95%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.3s ease-out;
+  color: var(--popup-text);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; /* Espacio entre secciones */
+  justify-content: center;
+  align-items: center;
+}
+
+/* Título y cierre */
 .form-title {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 4fr 1fr;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 0.25rem;
+  display: flex;
+  flex-direction: column; /* Hacer el título en columna */
+  justify-content: center;
+  align-items: center; /* Centrado del título */
+  text-align: center; /* Asegura que el texto se centre */
+}
+
+.form-title h1 {
+  font-size: 1.5rem; /* Tamaño del título */
+  margin: 0;
+  color: var(--popup-text);
 }
 
 .form-text {
-    margin: 0;
-    margin-bottom: 1rem;
-    text-align: start;
-    font-size: 0.85rem;
-    width: 100%;
+	align-items: center;
+	text-align: center;
+	justify-content: center;
 }
 
+.close-form {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--close-btn-color);
+  align-self: flex-end; /* Para colocar el botón de cierre en la esquina superior derecha */
+}
+
+.close-form:hover {
+  color: var(--close-btn-hover);
+}
+
+/* Descripción */
+.form-description {
+  font-size: 1rem; /* Un poco más grande la descripción */
+  color: var(--popup-text-filter-color);
+  margin-top: 0.5rem; /* Un espacio pequeño arriba */
+  margin-bottom: 1.5rem; /* Más espacio abajo */
+  text-align: center; /* Centramos el texto */
+}
+
+/* Form layout */
 .form-section {
-    display: flex;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Aumentamos el gap entre las secciones */
+}
+
+.form-field-group {
+  display: flex;
+  gap: 1.5rem; /* Más espacio entre los grupos de campos */
+  flex-wrap: wrap;
 }
 
 .form-field {
-    width: 100%;
-    display: flex;
-    align-items: start;
-    justify-content: start;
-    flex-direction: column;
-    gap: 0.25rem;
-}
-
-.form-checkbox {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.form-btns {
-    display: flex;
-    align-items: center;
-    justify-content: start;
-    gap: 0.5rem;
-}
-
-.form>div ~ div {
-    margin-top: 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Mayor separación entre label y input */
+  min-width: 45%;
 }
 
 .form-label {
-    display: inline-block;
-    margin-bottom: 5px;
-    font-size: 0.875rem;
-    font-weight: 700;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--popup-text-filter-color);
+  margin-bottom: 0.5rem; /* Añadimos espacio abajo del label */
 }
 
 .form-control {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    font: 0.875rem/1.5 sans-serif;
-    color: var(--color-text-light);
-    background-color: lightgray;
-    border: 1px solid var(--color-border-light);
-    border-radius: 4px;
-    box-sizing: border-box;
+  background-color: #2a2f37;
+  border: 1px solid var(--color-border-dark);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem; /* Más relleno en los inputs */
+  color: #f1f1f1;
+  transition: border 0.3s ease, background 0.3s ease;
+  font-size: 1rem; /* Tamaño de fuente ligeramente más grande */
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--checkbox-accent);
+  background-color: #3a4049;
+}
+
+/* Buttons + footer */
+.form-btns,
+.form-footer {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.submit-flag-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 6px;
+  transition: transform 0.2s ease;
+}
+
+.submit-flag-btn:hover svg {
+  stroke: #aaa; /* Cambia a un tono más claro al hacer hover */
+}
+
+.button {
+  background-color: var(--button-bg);
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: var(--button-hover-bg);
 }
 
 .form-footer {
-    display: flex;
-    align-items: center;
-    justify-content: start;
+  font-size: 0.75rem;
+  color: var(--popup-text-filter-color);
+  text-align: center;
+  margin-top: 2rem;
 }
+
+@media (max-width: 500px) {
+  .form-field {
+    min-width: 100%;
+  }
+
+  .form-container {
+    padding: 1.5rem;
+  }
+}
+
 
 .submit-vm, .submit-writeup, .submit-flag {
     text-align: start;
@@ -1075,6 +1039,11 @@ button[type="submit"] {
 
 button[type="reset"] {
     background-color: var(--color-button-reset);
+}
+
+button[type="submit"]:hover {
+    color: black;
+    background-color: var(--color-accent-danger);
 }
 
 footer {
@@ -1181,22 +1150,53 @@ footer img {
 	}
 }
 
-/* Estilos para el botón */
-.toggle-button {
-  background-color: var(--color-button-light); /* Color del fondo del botón */
-  color: var(--color-text-light-mode); /* Color del texto */
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+/* ESTILO BOTON MODO CLARO/OSCURO */
+
+/* Modo oscuro (por defecto) */
+.circle-bg {
+  fill: var(--circle-dark);
 }
 
-/* Efecto cuando el usuario pasa el ratón por encima */
-.toggle-button:hover {
-  background-color: var(--color-button-hover-light-mode);
+.half {
+  fill: var(--circle-light);
 }
+
+/* Modo claro (aplica cuando tiene .light-theme) */
+body.light-theme .circle-bg {
+  fill: var(--circle-light);
+}
+
+body.light-theme .half {
+  fill: var(--circle-dark);
+}
+
+.theme-icon {
+  width: 32px;
+  height: 32px;
+}
+
+.toggle-button {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.toggle-button:focus {
+  outline: none;
+}
+
 
 @media ( min-width : 700px) and (max-width: 812px) {
 	#md5-hash {
@@ -1213,4 +1213,679 @@ footer img {
 	.wrapper, .header-container {
 		width: 80vw;
 	}
+}
+
+/*
+.popup-overlay-filter {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(20, 20, 20, 0.85);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content-filter {
+  background: #1e2125;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 100%;
+  color: #ccc;
+  position: relative;
+}
+
+.close-btn-filter {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.popup-content-filter .filter-options {
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  box-shadow: none;
+  position: static;
+}
+
+.level-filter,
+.os-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.25rem 0;
+  background: none;
+  color: #ccc;
+}
+*/
+
+/* DISEÑO DE POPUP FILTROS */
+
+.popup-content-filter .filter-options {
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  box-shadow: none;
+  position: static;
+}
+
+.level-filter,
+.os-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.25rem 0;
+  background-color: none;
+  color: #ccc;
+}
+
+.popup-overlay-filter {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(10, 10, 10, 0.75);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.popup-content-filter {
+  background: var(--popup-filter-bg-color);
+  padding: 2rem;
+  border-radius: 1rem;
+  max-width: 420px;
+  width: 90%;
+  color: #f1f1f1;
+  position: relative;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    background: rgba(10, 10, 10, 0);
+  }
+  to {
+    background: rgba(10, 10, 10, 0.75);
+  }
+}
+
+.close-btn-filter {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--close-btn-color);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-btn-filter:hover {
+  color: var(--close-btn-hover);
+}
+
+.popup-content-filter h3 {
+  margin-bottom: 1.25rem;
+  font-size: 1.25rem;
+  color: #fff;
+  border-bottom: 1px solid #444;
+  padding-bottom: 0.5rem;
+}
+
+.filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+.level-filter,
+.os-filter {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--popup-filter-level-color);
+  border-radius: 0.5rem;
+  transition: background 0.2s;
+}
+
+.level-filter:hover,
+.os-filter:hover {
+  background-color: var(--filter-bg-hover);
+}
+
+input[type="checkbox"] {
+  accent-color: var(--checkbox-accent);
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+label {
+  font-size: 0.95rem;
+  cursor: pointer;
+  color: var(--popup-text-filter-color) !important;
+}
+
+.popup-content-filter button:not(.close-btn-filter) {
+  background-color: var(--button-bg);
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.popup-content-filter button:not(.close-btn-filter):hover {
+  background-color: var(--button-hover-bg);
+}
+
+/*
+.vm-name-wrapper {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.vm-size {
+  font-size: 12px;
+  margin-left: auto;
+}
+
+*/
+
+/* Pantallas medianas y móviles: los elementos se apilan */
+@media screen and (max-width: 768px) {
+  .vm-name-wrapper {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+
+  .vm-name {
+    margin-right: 0 !important;
+  }
+
+  .vm-size {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    font-size: 11px !important;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .vm-size {
+    font-size: 10px !important;
+  }
+}
+
+/*
+.card-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    color: var(--color-text-dark);
+    background-color: var(--color-bg-card-generic) !important;
+}
+
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+#card-logo {
+    position: relative;
+    top: 0.5rem;
+}
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-info td {
+    text-align: left;
+}
+
+.card-title {
+    margin-bottom: 0.5rem;
+    color: var(--color-card-title);
+}
+
+.card-body-wrapper {
+    border: 1px solid var(--color-card-border);
+    border-radius: 0.25rem;
+    overflow: hidden;
+}
+
+.card-body {
+    width: 100%;
+    margin: auto;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 1rem;
+}
+
+.card-os {
+    border: none;
+}
+
+#Linux, #Windows {
+    width: 22px;
+    height: 22px;
+}
+
+.card-creator, .card-difficulty, .card-release {
+    border-top: 1px solid var(--color-card-border);
+}
+
+.card-os, .card-difficulty {
+    display: flex;
+    align-items: center;
+    background-color: var(--color-card-difi-os-bg) !important;
+}
+*/
+
+.card-btn {
+    cursor: pointer;
+    background-color: inherit;
+    border: none;
+}
+
+/* Estilo general del popup */
+.swal2-popup {
+    font-family: 'Roboto', sans-serif;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    padding: 2rem;
+    font-size: 0.9rem;
+}
+
+/* Contenedor horizontal */
+.card-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+/* Imagen de la VM (izquierda) */
+.logo-section {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 180px;
+}
+
+#card-logo {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+}
+
+/* Info (derecha) */
+.info-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Título */
+.card-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #fff;
+    word-break: break-word;
+}
+
+/* Contenedor de detalles */
+.card-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+/* Item individual */
+.info-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #2c2c2c;
+    padding: 10px 14px;
+    border-radius: 8px;
+}
+
+/* Etiqueta */
+.info-label {
+    font-weight: 500;
+    font-weight: bold;
+    color: #bbb;
+    font-size: 1.1rem;
+}
+
+.info-content span {
+	font-size: 1rem;
+	font-weight: bold;
+}
+
+/* Contenido */
+.info-content {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    gap: 0.5rem;
+    color: #fff;
+    font-size: 1rem;
+}
+
+/* Icono del sistema operativo */
+.os-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Dificultad */
+.difficulty-level {
+    display: flex;
+    gap: 0.6rem;           /* Espacio entre los elementos (icono y texto) */
+    padding: 0.4rem; /* Espaciado interno (vertical) */
+    align-items: center;
+    border-radius: 6px;
+    width: fit-content;     /* Se ajusta al contenido */
+}
+
+.difficulty-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+
+.easy .difficulty-dot {
+    background-color: #50b83c;
+}
+.medium .difficulty-dot {
+    background-color: #f0a500;
+    width: 10px;
+    height: 10px;
+}
+.hard .difficulty-dot {
+    background-color: #d9534f;
+}
+
+/* Botón de cerrar */
+.swal2-close {
+    color: #fff;
+    font-size: 1rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.swal2-close:hover {
+    color: #3fa8f4;
+}
+
+.very-easy-dots, .easy-dots, .medium-dots, .hard-dots {
+	width: 24px;
+	height: 24px;
+	padding: 0.15rem;
+	border-radius: 50%;
+}
+
+.very-easy-card, .easy-card, .medium-card, .hard-card {
+	width: 16px;
+	height: 16px;
+	padding: 0.15rem;
+	border-radius: 50%;
+	margin-right: 5px;
+}
+
+.very-easy-card {
+    background: var(--color-info-bg);
+}
+
+.easy-card {
+    background: var(--color-accent-success);
+}
+
+.medium-card {
+    background: var(--color-accent-warning);
+}
+
+.hard-card {
+    background: var(--color-accent-danger);
+}
+
+/* MODAL DE WRITEUPS SUBIDOS */
+
+.writeup-btn, .add-writeup-btn {
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 10;
+    padding-top: 45vh;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-modal-bg);
+    
+    /* Centrado perfecto */
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+ /*
+.modal {
+    padding-top: 45vh;
+    overflow: hidden;
+}*/
+
+/* Contenedor de contenido */
+.modal-content {
+    background-color: var(--color-modal-content-bg, #1f1f1f);
+    border: 1px solid var(--color-border-light, #444);
+    border-radius: 10px;
+    width: 100%;
+    max-width: 480px;
+    padding: 2rem;
+    position: relative;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+    animation: fadeIn 0.3s ease-in-out;
+    color: #fff;
+}
+
+/* Botón cerrar */
+.close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.8rem;
+    line-height: 1;
+    color: #aaa;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.close:hover {
+    color: var(--close-btn-hover);
+}
+
+/* Título */
+.writeup-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: var(--color-link-writeup-title, #3fa8f4);
+    text-align: center;
+}
+
+/* Contenedor de enlaces */
+.writeups-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Estilo de los enlaces */
+.writeups-container a {
+    display: block;
+    padding: 0.75rem 1rem;
+    background-color: #2a2a2a;
+    color: var(--color-link-writeup, #8cc8ff);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.writeups-container a:hover {
+    background-color: #3a3a3a;
+    color: var(--color-link-writeup-hover, #3fa8f4);
+}
+
+/* Animación entrada */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ESTILO DIFICULTADES + INFO DEL HEADER */
+
+.badge {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    color: #fff;
+    padding: 0.6rem 0.8rem;
+    border-radius: 6px;
+    font-weight: bold;
+    z-index: 0;
+}
+
+.badge .wave {
+  position: absolute;
+  top: 0; /* subimos la ola */
+  left: 0;
+  width: 200%; /* doble para que no se note el corte */
+  height: 100%;
+  z-index: -1;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.wave-path {
+  animation: waveAnim 10s linear infinite; /* más duración para que sea suave */
+}
+
+.wave2 {
+  animation-delay: -3s; /* mitad de duración */
+}
+
+@keyframes waveAnim {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.badge-vms {
+    color: var(--color-info-link);
+    background-color: var(--color-badge-vms-bg);
+}
+
+.badge-very-easy, #Very-Easy {
+    color: var(--color-info-bg);
+    background-color: var(--color-info-bg-light) !important;
+}
+
+.badge-easy {
+    --badge-color: #4caf50;
+    background-color: var(--badge-color);
+}
+
+.badge-easy .wave stop:first-child {
+    stop-color: rgba(255, 255, 255, 0.3);
+}
+.badge-easy .wave stop:last-child {
+    stop-color: rgba(255, 255, 255, 0.05);
+}
+
+.badge-easy, #Easy {
+    color: var(--color-badge-easy-text);
+    background-color: var(--color-badge-easy-bg);
+}
+
+.badge-medium, #Medium {
+    color: var(--color-accent-warning);
+    background-color: var(--color-accent-warning-bg);
+}
+
+.badge-hard, #Hard {
+    color: var(--color-accent-danger);
+    background-color: var(--color-accent-danger-bg);
+}
+
+.badge-writeups {
+    color: var(--color-highlight-bg) !important;
+    background-color: var(--color-writeups-bg);
 }
