@@ -432,23 +432,7 @@ main {
     gap: 0.5rem;
 }*/
 
-.order-by {
-    display: none;
-}
-
-.filter-by {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    font-size: 1rem;
-    border-radius: 0.25rem;
-    padding: 0.5rem;
-    border: none;
-    background-color: var(--color-filter-bg);
-    color: white;
-}
-
-.submit-btn, .submit-user-flag, .submit-root-flag {
+.submit-user-flag, .submit-root-flag {
     cursor: pointer;
     font-size: 1rem;
     border-radius: 0.25rem;
@@ -475,6 +459,7 @@ main {
     display: flex;
     background-color: var(--color-filter-bg);
     border-radius: 0.25rem;
+    padding: 5px !important;
 }
 
 #vm-search-wrapper:focus {
@@ -484,7 +469,8 @@ main {
 .search-icon {
 	position: relative;
 	left: 4px;
-	top: 5px;
+	top: 0px;
+	margin-right: 15px;
 	width: fit-content;
 }
 
@@ -504,8 +490,9 @@ main {
     border: none;
     color: var(--color-text-dark);
     background-color: transparent;
-    font-size: 1rem;
+    font-size: 0.8rem;
     outline: none;
+    width: 33rem;
 }
 
 ::-webkit-input-placeholder {
@@ -682,7 +669,7 @@ details {
     height: 24px;
 }
 
-.level-btn, .badge {
+.level-btn {
     border-radius: 0.25rem;
     color: var(--color-text-dark);
     font-weight: bold;
@@ -1121,7 +1108,7 @@ footer img {
 		padding: 0.1rem;
 		font-size: 0.8rem;
 	}
-	th, td, .level-btn, .badge {
+	th, td, .level-btn {
 		padding: 0.5rem;
 		font-size: 0.85rem;
 	}
@@ -1364,6 +1351,9 @@ body.light-theme .half {
   color: #fff;
   border-bottom: 1px solid #444;
   padding-bottom: 0.5rem;
+  align-content: center;
+  text-align: center;
+  line-height: 4rem;
 }
 
 .filter-options {
@@ -1636,6 +1626,11 @@ label {
     font-size: 0.8rem;
 }
 
+#date-card {
+	white-space: nowrap;
+	font-size: 0.65rem !important;
+}
+
 /* Icono del sistema operativo */
 .os-icon {
     width: 20px;
@@ -1701,11 +1696,11 @@ label {
 }
 
 .very-easy-card {
-	width: 24px !important;
+	width: 16px !important;
 	height: 16px !important;
+	white-space: nowrap;
 	padding: 0.15rem;
 	border-radius: 50%;
-	margin-right: 5px;
 }
 
 .very-easy-card {
@@ -1833,12 +1828,40 @@ label {
 
 /* ESTILO DIFICULTADES + INFO DEL HEADER */
 
+.order-by {
+    display: none;
+}
+
+.filter-by {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    padding: 1.2rem 1rem;
+    border: none;
+    background-color: var(--color-filter-bg);
+    color: white;
+}
+
+.submit-btn {
+    cursor: pointer;
+    font-size: 1rem;
+    white-space: nowrap;
+    border-radius: 0.25rem;
+    padding: 1.2rem 2rem;
+    border: none;
+    background-color: var(--color-submit-bg);
+    color: white;
+}
+
 .badge {
     position: relative;
+    white-space: nowrap;
     display: inline-block;
     overflow: hidden;
     color: #fff;
-    padding: 0.58rem 0.3rem;
+    padding: 1rem 0.6rem;
     border-radius: 6px;
     font-weight: bold;
     z-index: 0;
@@ -1875,16 +1898,63 @@ label {
 .badge-vms {
     color: var(--color-info-link);
     background-color: var(--color-badge-vms-bg);
+    border: 2px solid var(--color-info-link);
+    animation: pulse-border-vms 2s infinite;
+    border-radius: 6px;
+}
+
+@keyframes pulse-border-vms {
+    0% {
+        box-shadow: 0 0 0 0 rgba(30, 144, 255, 0.6); /* azul tipo link */
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(30, 144, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(30, 144, 255, 0);
+    }
 }
 
 .badge-very-easy, #Very-Easy {
     color: var(--color-info-bg);
     background-color: var(--color-info-bg-light) !important;
+    border: 2px solid var(--color-info-bg);
+    animation: pulse-border-veryeasy 2s infinite;
+    border-radius: 6px;
 }
+
+@keyframes pulse-border-veryeasy {
+    0% {
+        box-shadow: 0 0 0 0 rgba(144, 238, 144, 0.6); /* verde muy claro */
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(144, 238, 144, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(144, 238, 144, 0);
+    }
+}
+
 
 .badge-easy {
     --badge-color: #4caf50;
     background-color: var(--badge-color);
+    border: 2px solid var(--badge-color);
+    animation: pulse-border 2s infinite;
+    border-radius: 6px; /* Opcional, mejora visual */
+}
+
+/* Animación del borde */
+@keyframes pulse-border {
+    0% {
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(76, 175, 80, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+    }
 }
 
 .badge-easy .wave stop:first-child {
@@ -1902,14 +1972,62 @@ label {
 .badge-medium, #Medium {
     color: var(--color-accent-warning);
     background-color: var(--color-accent-warning-bg);
+    border: 2px solid var(--color-accent-warning);
+    animation: pulse-border-medium 2s infinite;
+    border-radius: 6px;
 }
 
 .badge-hard, #Hard {
     color: var(--color-accent-danger);
     background-color: var(--color-accent-danger-bg);
+    border: 2px solid var(--color-accent-danger);
+    animation: pulse-border-hard 2s infinite;
+    border-radius: 6px;
 }
+
+/* Animaciones */
+@keyframes pulse-border-medium {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7); /* Amarillo */
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 193, 7, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 193, 7, 0);
+    }
+}
+
+@keyframes pulse-border-hard {
+    0% {
+        box-shadow: 0 0 0 0 rgba(244, 67, 54, 0.7); /* Rojo */
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(244, 67, 54, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(244, 67, 54, 0);
+    }
+}
+
 
 .badge-writeups {
     color: var(--color-highlight-bg) !important;
     background-color: var(--color-writeups-bg);
+    border: 2px solid var(--color-highlight-bg);
+    animation: pulse-border-writeups 2s infinite;
+    border-radius: 6px;
+}
+
+/* Animación */
+@keyframes pulse-border-writeups {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 191, 255, 0.6); /* Color azul claro aprox. */
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(0, 191, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 191, 255, 0);
+    }
 }
