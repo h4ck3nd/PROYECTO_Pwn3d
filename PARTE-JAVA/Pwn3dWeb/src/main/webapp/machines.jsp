@@ -152,7 +152,7 @@
 			
 				<!-- BARRA DE BUSQUEDA -->
 					
-				    <div id="vm-search-wrapper" style="margin-right: 300px">
+				    <div id="vm-search-wrapper" style="margin-right: 200px">
 				        <div class="search-icon">
 				            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2.5" stroke="#999999" fill="none" stroke-linecap="round" stroke-linejoin="round">
 				                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -160,7 +160,7 @@
 				                <path d="M21 21l-6 -6" />
 				            </svg>
 				        </div>
-				        <input id="vm-search" type="text" placeholder="Buscar por nombre..." aria-label="search" />
+				        <input id="vm-search" type="text" placeholder="Buscar por nombre, dificultad, creador..." aria-label="search" />
 				        <button class="clear-search" title="Clear search" onclick="clearSearch()">Clear</button>
 				    </div>
 				
@@ -183,6 +183,19 @@
 					    <path class="wave-path wave2" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />
 					  </svg>
 					  9 VMs
+					</span>
+					<span class="badge badge-writeups">
+					  <svg class="wave" viewBox="0 0 120 28" preserveAspectRatio="none">
+					    <defs>
+					      <linearGradient id="waveColor" gradientTransform="rotate(90)">
+					        <stop offset="0%" stop-color="rgba(255,255,255,0.3)" />
+					        <stop offset="100%" stop-color="rgba(255,255,255,0.05)" />
+					      </linearGradient>
+					    </defs>
+					    <path class="wave-path wave1" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />
+					    <path class="wave-path wave2" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />
+					  </svg>
+					  42 Writeups
 					</span>
 				    <span class="badge badge-very-easy">
 					  <svg class="wave" viewBox="0 0 120 28" preserveAspectRatio="none">
@@ -235,19 +248,6 @@
 					    <path class="wave-path wave2" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />
 					  </svg>
 					  2 Hard
-					</span>
-				    <span class="badge badge-writeups">
-					  <svg class="wave" viewBox="0 0 120 28" preserveAspectRatio="none">
-					    <defs>
-					      <linearGradient id="waveColor" gradientTransform="rotate(90)">
-					        <stop offset="0%" stop-color="rgba(255,255,255,0.3)" />
-					        <stop offset="100%" stop-color="rgba(255,255,255,0.05)" />
-					      </linearGradient>
-					    </defs>
-					    <path class="wave-path wave1" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />
-					    <path class="wave-path wave2" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />
-					  </svg>
-					  42 Writeups
 					</span>
 				</ul>
 				
@@ -390,22 +390,6 @@
 							
 							<!-- WRITEUPS -->
 						    <td class="writeups">
-						        <script>
-						            writeupObj = {
-						                name: "Lower5",
-						                creator: "d4t4s3c",
-						                url: "https://d4t4s3c.com/vulnyx/2025/04/09/Lower5/"
-						            };
-						            writeupsArr.push(writeupObj);
-						        </script>
-						        <script>
-						            writeupObj = {
-						                name: "Lower5",
-						                creator: "ll104567",
-						                url: "https://www.bilibili.com/video/BV1widPYcEVr"
-						            };
-						            writeupsArr.push(writeupObj);
-						        </script>
 						        <button class="writeup-btn" title="Show writeups" onclick="showWriteups('Lower5')">
 						            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#b3da49" fill="none" stroke-linecap="round" stroke-linejoin="round">
 						                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -432,7 +416,7 @@
 						            <article class="modal-content">
 						                <span class="close">&times;</span>
 						                <p class="writeup-title"></p>
-						                <div class="writeups-container"></div>
+						                <div class="writeups-container" style="line-height: 1.8rem;"></div>
 						            </article>
 						        </section>
 							
@@ -1638,6 +1622,128 @@
 						      </svg>
 						    </a>
 						  </td>
+						  <tr class="row">
+						    <!-- # -->
+						    <td class="idnum">
+						        <span id="idnum"><%= request.getAttribute("id") %></span>
+						    </td>
+						
+						    <!-- CARD -->
+						    <td class="card">
+						        <button class="card-btn" title="Show card!" onclick="showCard('<%= request.getAttribute("name_machine") %>', '<%= request.getAttribute("os") %>', '<%= request.getAttribute("difficulty") %>', '<%= request.getAttribute("creator") %>', '<%= request.getAttribute("date") %>')">
+						            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+						                <circle cx="12" cy="12" r="10" stroke="#3fa8f4" stroke-width="1.5" fill="none"/>
+						                <line x1="12" y1="8" x2="12" y2="8.01" stroke="#3fa8f4" stroke-width="1.5"/>
+						                <line x1="12" y1="10" x2="12" y2="16" stroke="#3fa8f4" stroke-width="1.5"/>
+						            </svg>
+						        </button>
+						    </td>
+						
+						    <!-- NAME/SIZE -->
+						    <td id="vm">
+						        <div class="vm-name-btn level-btn medium">
+						            <img class="medium-dots" title="<%= request.getAttribute("os") %>VM" alt="<%= request.getAttribute("os") %>" src="<%= request.getContextPath() %>/img/<%= request.getAttribute("img_name_os") %>.svg" width="22" height="22" loading="lazy">
+						            <span class="vm-name-wrapper" style="display: flex; align-items: center; gap: 0.4rem;">
+						                <span class="vm-name" style="margin-right: -60px;"><%= request.getAttribute("name_machine") %></span>
+						                <span class="vm-size" style="margin-right: 20px; margin-left: auto;"><%= request.getAttribute("size") %></span>
+						            </span>
+						        </div>
+						    </td>
+						
+						    <!-- TESTED -->
+						    <td class="tested">
+						        <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/<%= request.getAttribute("enviroment") %>.png" width="25" height="25">
+						    </td>
+						
+						    <!-- MD5 -->
+						    <td class="md5">
+						        <span id="md5-hash" title="<%= request.getAttribute("md5") %>">
+						            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-info" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#dad049" fill="none" stroke-linecap="round" stroke-linejoin="round">
+						                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+						                <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+						                <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
+						                <path d="M11 14h1v4h1" />
+						                <path d="M12 11h.01" />
+						            </svg>
+						        </span>
+						        <button class="copy-btn" title="Copy to clipboard!" onclick="copyToClipboard(this)">
+						            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#dad049" fill="none" stroke-linecap="round" stroke-linejoin="round">
+						                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+						                <path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
+						                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+						            </svg>
+						        </button>
+						        <div class="tooltip">Copied!</div>
+						    </td>
+						
+						    <!-- WRITEUPS -->
+						    <td class="writeups">
+						        <script>
+						            writeupObj = {
+						                name: "<%= request.getAttribute("name_machine") %>",
+						                creator: "<%= request.getAttribute("creator") %>",
+						                url: "<%= request.getAttribute("writeup_url") %>"
+						            };
+						            writeupsArr.push(writeupObj);
+						        </script>
+						        <button class="writeup-btn" title="Show writeups" onclick="showWriteups('<%= request.getAttribute("name_machine") %>')">
+						            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#b3da49" fill="none" stroke-linecap="round" stroke-linejoin="round">
+						                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+						                <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+						                <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
+						                <line x1="3" y1="6" x2="3" y2="19" />
+						                <line x1="12" y1="6" x2="12" y2="19" />
+						                <line x1="21" y1="6" x2="21" y2="19" />
+						            </svg>
+						        </button>
+						        <button class="add-writeup-btn" title="Add writeup" onclick="showWriteupForm('<%= request.getAttribute("name_machine") %>')">
+						            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">
+						                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+						                <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+						                <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h6l6 6v10a2 2 0 0 1 -2 2z" />
+						                <path d="M12 17v-6" />
+						                <path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />
+						            </svg>
+						        </button>
+						        
+						        <section id="Controler" class="modal">
+						            <article class="modal-content">
+						                <span class="close">&times;</span>
+						                <p class="writeup-title"></p>
+						                <div class="writeups-container"></div>
+						            </article>
+						        </section>
+						    </td>
+						
+						    <!-- FIRST USER -->
+						    <td class="first-user"><%= request.getAttribute("first_user") %></td>
+						
+						    <!-- FIRST ROOT -->
+						    <td class="first-user"><%= request.getAttribute("first_root") %></td>
+						
+						    <td class="flag">
+						        <!-- BOTON ENVIAR FLAG -->
+						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', '<%= request.getAttribute("name_machine") %>')">
+						            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
+						                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+						                <path d="M5 5v16" />
+						                <path d="M5 5h14l-3 5l3 5h-14" />
+						            </svg>
+						        </button>
+						    </td>
+						
+						    <!-- DOWNLOAD -->
+						    <td class="url">
+						        <a href="<%= request.getAttribute("download_url") %>" target="_blank" title="Download VM">
+						            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">
+						                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+						                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+						                <path d="M7 11l5 5l5 -5" />
+						                <path d="M12 4l0 12" />
+						            </svg>
+						        </a>
+						    </td>
+						</tr>
 					</tbody>
 				</table>
 				<p id="search-message">
