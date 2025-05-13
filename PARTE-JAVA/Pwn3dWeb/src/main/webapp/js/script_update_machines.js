@@ -28,12 +28,12 @@ function showCard(name, os, difficulty, creator, release) {
                             '<div class="info-label">Dificultad:</div>' +
                             '<div class="difficulty-level ' + difficulty.toLowerCase() + '" style="margin-left: 10px !important;">' +
                                 '<span class="' + difficulty.toLowerCase() + '-card"> </span>' +
-                                '<span style="font-size: 0.9rem; font-weight: bold;"> ' + difficulty + '</span>' +
+                                '<span style="font-size: 0.7rem; font-weight: bold; white-space: nowrap;"> ' + difficulty + '</span>' +
                             '</div>' +
                         '</div>' +
                         '<div class="info-item">' +
                             '<div class="info-label">Lanzamiento:</div>' +
-                            '<div class="info-content">' + release + '</div>' +
+                            '<div class="info-content" id="date-card">' + release + '</div>' +
                         '</div>' +
                     '</div>' +
                 '</div>' +
@@ -230,3 +230,52 @@ function showCard(name, os, difficulty, creator, release) {
 	    console.error('Error: uno o varios elementos no encontrados.');
 	  }
 	};
+	
+	/* SEARCH LOGIC */
+	
+	document.addEventListener("DOMContentLoaded", function () {
+	    const searchInput = document.getElementById("vm-search");
+	    const tableRows = document.querySelectorAll("#vm-table tbody .row");
+
+	    searchInput.addEventListener("input", function () {
+	        const filter = this.value.toLowerCase().trim();
+
+	        tableRows.forEach(row => {
+	            const vmNameCell = row.querySelector(".vm-name");
+	            const button = row.querySelector(".card-btn");
+	            let nameText = "", difficulty = "", creator = "";
+
+	            if (vmNameCell) {
+	                nameText = vmNameCell.textContent.toLowerCase();
+	            }
+
+	            if (button) {
+	                const onclickAttr = button.getAttribute("onclick");
+	                const regex = /showCard\('([^']*)',\s*'[^']*',\s*'([^']*)',\s*'([^']*)',\s*'[^']*'\)/;
+	                const match = onclickAttr.match(regex);
+	                if (match) {
+	                    // match[1] = name, match[2] = difficulty, match[3] = creator
+	                    nameText = match[1].toLowerCase();
+	                    difficulty = match[2].toLowerCase();
+	                    creator = match[3].toLowerCase();
+	                }
+	            }
+
+	            if (
+	                nameText.includes(filter) ||
+	                difficulty.includes(filter) ||
+	                creator.includes(filter)
+	            ) {
+	                row.style.display = "";
+	            } else {
+	                row.style.display = "none";
+	            }
+	        });
+	    });
+	});
+
+	function clearSearch() {
+	    const searchInput = document.getElementById("vm-search");
+	    searchInput.value = "";
+	    searchInput.dispatchEvent(new Event('input'));
+	}
