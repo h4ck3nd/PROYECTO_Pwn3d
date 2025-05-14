@@ -156,7 +156,7 @@
 			
 				<!-- BARRA DE BUSQUEDA -->
 					
-				    <div id="vm-search-wrapper" style="margin-right: 200px">
+				    <div id="vm-search-wrapper" style="margin-right: 130px">
 				        <div class="search-icon">
 				            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2.5" stroke="#999999" fill="none" stroke-linecap="round" stroke-linejoin="round">
 				                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -839,13 +839,13 @@
 	            
 	                <!-- Ko-fi -->
 	                
-	                <a title="Support us on Ko-fi" href="https://ko-fi.com/vulnyx" target="_blank">
+	                <a title="Support us on Ko-fi" href="https://ko-fi.com/pwn3d" target="_blank">
 	                    <img width="28" height="24" src="https://storage.ko-fi.com/cdn/kofi_stroke_cup.svg" alt="Ko-fi Logo" loading="eager">
 	                </a>
 	
 	                <!-- DISCORD -->
 	                
-	                <a title="Discord" href="https://discord.gg/qdm3bN3Emb" target="_blank">
+	                <a title="Discord" href="https://discord.gg/86kj9wKkkv" target="_blank">
 	                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-discord" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="#5865F2" fill="none" stroke-linecap="round" stroke-linejoin="round">
 	                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
 	                        <circle cx="9" cy="12" r="1" />
@@ -859,7 +859,7 @@
 	
 	                <!-- LinkedIn -->
 	                
-	                <a title="LinkedIn" href="https://www.linkedin.com/company/vulnyx-official/" target="_blank">
+	                <a title="LinkedIn" href="#" target="_blank">
 	                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-linkedin" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#0077B5" fill="none" stroke-linecap="round" stroke-linejoin="round">
 	                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
 	                        <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
@@ -870,29 +870,9 @@
 	                    </svg>
 	                </a>
 	
-	                <!-- INSTAGRAM -->
-	                
-	                <a title="Instagram" href="https://www.instagram.com/vulnyxofficial/" target="_blank">
-	                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-instagram" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#F56040" fill="none" stroke-linecap="round" stroke-linejoin="round">
-	                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-	                        <path d="M4 4m0 4a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z" />
-	                        <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-	                        <path d="M16.5 7.5l0 .01" />
-	                    </svg>
-	                </a>
-	
-	                <!-- X (TWITTER) -->
-	                
-	                <a title="X" href="https://x.com/VulNyxOfficial" target="_blank">
-	                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
-	                        <path d="M4 4l11.733 16h4.267l-11.733 -16z"></path>
-	                        <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"></path>
-	                    </svg>
-	                </a>
-	
 	                <!-- TELEGRAM -->
 	                
-	                <a title="Telegram" href="https://t.me/VulNyx" target="_blank">
+	                <a title="Telegram" href="#" target="_blank">
 	                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#27A7E7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 	                        <path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" />
 	                    </svg>
@@ -900,22 +880,11 @@
 	
 	                <!-- MAIL -->
 	                
-	                <a title="Mail" href="mailto:hello@vulnyx.com" target="_blank">
+	                <a title="Mail" href="mailto:hello.ciberseguridad12345@gmail.com" target="_blank">
 	                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-mail" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="#8a90c7" fill="none" stroke-linecap="round" stroke-linejoin="round">
 	                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
 	                        <rect x="3" y="5" width="18" height="14" rx="2" />
 	                        <polyline points="3 7 12 13 21 7" />
-	                    </svg>
-	                </a>
-	
-	                <!-- RSS -->
-	                
-	                <a title="RSS" href="https://vulnyx.com/feed/rss.xml" target="_blank">
-	                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rss" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#00b341" fill="none" stroke-linecap="round" stroke-linejoin="round">
-	                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-	                        <path d="M5 19m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
-	                        <path d="M4 4a16 16 0 0 1 16 16" />
-	                        <path d="M4 11a9 9 0 0 1 9 9" />
 	                    </svg>
 	                </a>
 	            </div>

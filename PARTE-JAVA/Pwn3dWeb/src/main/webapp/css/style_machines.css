@@ -20,12 +20,21 @@
     --color-button-reset: #c8cbcf;
     --color-accent-info: #ec0725;
     --color-accent-danger: #ec0725;
-    --color-filter-bg: #3fa8f41A;
+    --color-filter-bg: #2b2b2b;
+  --color-filter-hover-bg: #3a3a3a;
+  --color-filter-text: #dddddd;
+  --color-filter-shadow: rgba(0, 0, 0, 0.5);
+  --color-filter-glow: #5efcd433; /* Verde agua translúcido */
+  --color-search-glow: #3fa8f4aa; /* Azul elegante translúcido */
+  --color-search-text: #ddd;
     --color-button-hover: #3fa8f4a8;
     --color-form-bg: #1e2125;
     --color-form-border: #cbc7c7;
-    --color-submit-bg: #3fa8f43f;
-    --color-submit-hover-bg: #3fa8f4a8;
+    --color-submit-bg: #2e2e2e; /* Fondo oscuro principal */
+    --color-submit-hover-bg: #444; /* Más claro al pasar el mouse */
+    --color-submit-text: #e0e0e0; /* Texto gris claro */
+    --color-submit-shadow: rgba(0, 0, 0, 0.4); /* Sombra sutil */
+    --color-glow: #5ee3ff33; /* Azul suave translúcido para el resplandor */
     --color-accent-success: #28a745;
     --color-success-bg: #28a7451a;
     --color-accent-warning: #e1b300;
@@ -451,48 +460,63 @@ main {
     background-color: var(--color-button-hover);
 }*/
 
-.submit-btn:hover, .submit-user-flag:hover, .submit-root-flag:hover, .filter-by:hover {
+.submit-user-flag:hover, .submit-root-flag:hover {
     background-color: var(--color-submit-hover-bg);
 }
 
 #vm-search-wrapper {
-    display: flex;
-    background-color: var(--color-filter-bg);
-    border-radius: 0.25rem;
-    padding: 5px !important;
+  display: flex;
+  align-items: center;
+  background-color: var(--color-filter-bg);
+  border-radius: 0.35rem;
+  padding: 6px 10px;
+  border: 1px solid var(--color-filter-border);
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
 }
 
-#vm-search-wrapper:focus {
-    outline-style: solid;
-}
-
-.search-icon {
-	position: relative;
-	left: 4px;
-	top: 0px;
-	margin-right: 15px;
-	width: fit-content;
-}
-
-.clear-search {
-	display: none;
-	position: absolute;
-	right: 116px;
-	padding: 0.15rem;
-	border-radius: 0.25rem;
-	cursor: pointer;
-	border: 1px solid transparent;
-	top: 6px;
+#vm-search-wrapper:focus-within {
+  background-color: var(--color-filter-focus-bg);
+  box-shadow: 0 0 12px var(--color-search-glow);
 }
 
 #vm-search {
-    padding: 0.5rem;
-    border: none;
-    color: var(--color-text-dark);
-    background-color: transparent;
-    font-size: 0.8rem;
-    outline: none;
-    width: 33rem;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: var(--color-search-text);
+  font-size: 0.83rem;
+  padding: 0.5rem;
+  width: 100%;
+  font-family: inherit;
+}
+
+#vm-search::placeholder {
+  color: #888;
+  font-style: italic;
+}
+
+.search-icon {
+  margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.clear-search {
+  background-color: transparent;
+  border: none;
+  color: #aaa;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  font-size: 0.9rem;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.clear-search:hover {
+  color: var(--color-search-glow);
+  transform: scale(1.1);
 }
 
 ::-webkit-input-placeholder {
@@ -529,7 +553,28 @@ td.vvm-diffi, td.vvm-platf, td.vvm-curl, td.vvm-wal {
     border-radius: 0.25rem;
     max-height: calc(100vh - 205px);
     overflow-y: scroll;
+    
+    /* Fondo general de la barra de desplazamiento */
+    scrollbar-width: thin; /* Para Firefox */
+    scrollbar-color: #444444 #222222; /* Color de la barra y el fondo para Firefox */
 }
+
+/* Estilos para Webkit (Chrome, Safari, Edge) */
+#vm-table-wrapper::-webkit-scrollbar {
+    width: 8px; /* Ancho de la barra de desplazamiento */
+}
+
+#vm-table-wrapper::-webkit-scrollbar-thumb {
+    background-color: #444444; /* Color del "dedo" de la barra de desplazamiento */
+    border-radius: 10px;
+    border: 2px solid #222222; /* Fondo alrededor del "dedo" */
+}
+
+#vm-table-wrapper::-webkit-scrollbar-track {
+    background: #222222; /* Fondo de la barra de desplazamiento */
+    border-radius: 10px;
+}
+
 
 #vm-table {
     width: 100%;
@@ -1839,26 +1884,89 @@ label {
 }
 
 .filter-by {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    font-size: 1rem;
-    border-radius: 0.25rem;
-    padding: 1.2rem 1rem;
-    border: none;
-    background-color: var(--color-filter-bg);
-    color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 0.35rem;
+  padding: 1.2rem 1rem;
+  border: 1px solid #444;
+  background-color: var(--color-filter-bg);
+  color: var(--color-filter-text);
+  box-shadow: 0 2px 6px var(--color-filter-shadow);
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.filter-by::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0%;
+  height: 0%;
+  background: radial-gradient(circle, var(--color-filter-glow) 10%, transparent 60%);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: width 0.4s ease, height 0.4s ease, opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.filter-by:hover {
+  background-color: var(--color-filter-hover-bg);
+  transform: scale(1.03);
+  box-shadow: 0 0 12px var(--color-filter-glow);
+}
+
+.filter-by:hover::before {
+  width: 220%;
+  height: 220%;
+  opacity: 1;
 }
 
 .submit-btn {
-    cursor: pointer;
-    font-size: 1rem;
-    white-space: nowrap;
-    border-radius: 0.25rem;
-    padding: 1.2rem 2rem;
-    border: none;
-    background-color: var(--color-submit-bg);
-    color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  white-space: nowrap;
+  border-radius: 0.35rem;
+  padding: 1.2rem 2rem;
+  border: 1px solid #555;
+  background-color: var(--color-submit-bg);
+  color: var(--color-submit-text);
+  box-shadow: 0 2px 5px var(--color-submit-shadow);
+  transition: 
+    background-color 0.3s ease,
+    transform 0.2s ease,
+    box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-btn::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, var(--color-glow) 0%, transparent 80%);
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.submit-btn:hover {
+  background-color: var(--color-submit-hover-bg);
+  transform: scale(1.03);
+  box-shadow: 0 0 12px var(--color-glow);
+}
+
+.submit-btn:hover::before {
+  transform: scale(1);
+  opacity: 1;
 }
 
 .badge {
