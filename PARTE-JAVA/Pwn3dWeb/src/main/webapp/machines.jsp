@@ -1,5 +1,9 @@
+<%@page import="controller.MachineDetailsServlet"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ page import="model.Machine" %>
+<%
+	Machine machine = null;
+%>
 <!DOCTYPE html>
 <html lang="en">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
@@ -329,659 +333,91 @@
 						    let writeupsArr = [];
 						    let writeupObj = {};
 						</script>
-						
-						<tr class="row">
-						    <!-- # -->
-						    <td class="idnum">
-						        <span id="idnum">1</span>
-						    </td>
-						
-						    <!-- CARD -->
-						    <td class="card">
-						        <button class="card-btn" title="Show card!" onclick="showCard('Lower5', 'Linux', 'Very-Easy', 'd4t4s3c', '09 Apr 2025')">
-						            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">
-									  <circle cx="12" cy="12" r="10" stroke="#3fa8f4" stroke-width="1.5" fill="none"/>
-									  <line x1="12" y1="8" x2="12" y2="8.01" stroke="#3fa8f4" stroke-width="1.5"/>
-									  <line x1="12" y1="10" x2="12" y2="16" stroke="#3fa8f4" stroke-width="1.5"/>
-									</svg>
-						        </button>
-						    </td>
-						
-						    <!-- NAME/SIZE -->
-						    
-						    <td id="vm">
-							  <div class="vm-name-btn level-btn very-easy">
-							    <img class="very-easy-dots" title="LinuxVM" alt="Linuxicon" src="<%= request.getContextPath() %>/img/Linux.svg" width="22" height="22" loading="lazy">
-							    <span class="vm-name-wrapper" style="display: flex; align-items: center;">
-							      <span class="vm-name" style="margin-right: -60px;">Lower5</span>
-							      <span class="vm-size" style="margin-right: 20px; margin-left: auto;">1.8GB</span>
-							    </span>
-							  </div>
-							</td>
-						
-						    <!-- TESTED -->
-						    
-						    <td class="tested">
-						        <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/vbox.png" width="25" height="25">
-						        <img title="VMware" alt="VMware logo" src="<%= request.getContextPath() %>/img/vmware.png" width="25" height="25">
-						    </td>
-						
-						    <!-- MD5 -->
-						    
-						    <td class="md5">
-						        <span id="md5-hash" title="65015966EDD9A1A8ACE257DA2F0D9730">
-						            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-info" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#dad049" fill="none" stroke-linecap="round" stroke-linejoin="round">
-						                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-						                <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-						                <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-						                <path d="M11 14h1v4h1" />
-						                <path d="M12 11h.01" />
-						            </svg>
-						        </span>
-						        <button class="copy-btn" title="Copy to clipboard!" onclick="copyToClipboard(this)">
-						            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#dad049" fill="none" stroke-linecap="round" stroke-linejoin="round">
-						                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-						                <path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
-						                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
-						            </svg>
-						        </button>
-						        <div class="tooltip">Copied!</div>
-						    </td>
-							
-							<!-- WRITEUPS -->
-						    <td class="writeups">
-						        <button class="writeup-btn" title="Show writeups" onclick="showWriteups('Lower5')">
-						            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#b3da49" fill="none" stroke-linecap="round" stroke-linejoin="round">
-						                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-						                <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-						                <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-						                <line x1="3" y1="6" x2="3" y2="19" />
-						                <line x1="12" y1="6" x2="12" y2="19" />
-						                <line x1="21" y1="6" x2="21" y2="19" />
-						            </svg>
-						        </button>
-						        <button class="add-writeup-btn" title="Add writeup" onclick="showWriteupForm('Lower5')">
-						            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">
-									  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-									  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-									  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h6l6 6v10a2 2 0 0 1 -2 2z" />
-									  <path d="M12 17v-6" />
-									  <path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />
-									</svg>
-						        </button>
-						        
-						        <!-- MODAL FOR WRITEUPS -->
-						        
-						        <section id="Lower5" class="modal">
-						            <article class="modal-content">
-						                <span class="close">&times;</span>
-						                <p class="writeup-title"></p>
-						                <div class="writeups-container" style="line-height: 1.8rem;"></div>
-						            </article>
-						        </section>
-							
-						    <!-- FIRST USER -->
-						    <td class="first-user">suraxddq</td>
-						
-						    <!-- FIRST ROOT -->
-						    <td class="first-user">suraxddq</td>
-							
-							<td class="flag">
-							
-								<!-- BOTON ENVIAR FLAG -->
-						        
-						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Lower5')">
-								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
-								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-								    <path d="M5 5v16" />
-								    <path d="M5 5h14l-3 5l3 5h-14" />
-								  </svg>
-								</button>
-							</td>
-						        
-						        <!-- DOWNLOAD -->
-						    
-						    <td class="url">
-						        <a href="https://vulnyx.com/file/Lower5.php" target="_blank" title="Download VM">
-						            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">
-						                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-						                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-						                <path d="M7 11l5 5l5 -5" />
-						                <path d="M12 4l0 12" />
-						            </svg>
-						        </a>
-						    </td>
-						    </td>
-						<tr class="row">
-					    <!-- # -->
-					    <td class="idnum">
-					        <span id="idnum">2</span>
-					    </td>
-					
-					    <!-- CARD -->
-					    <td class="card">
-					        <button class="card-btn" title="Show card!"
-					            onclick="showCard('Change','Windows','Medium','d4t4s3c','08 Mar 2025')">
-					            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">
-									  <circle cx="12" cy="12" r="10" stroke="#3fa8f4" stroke-width="1.5" fill="none"/>
-									  <line x1="12" y1="8" x2="12" y2="8.01" stroke="#3fa8f4" stroke-width="1.5"/>
-									  <line x1="12" y1="10" x2="12" y2="16" stroke="#3fa8f4" stroke-width="1.5"/>
-									</svg>
-					        </button>
-					    </td>
-					
-					    <!-- NAME/SIZE -->
-						    
-						    <td id="vm">
-							  <div class="vm-name-btn level-btn medium">
-							    <img class="medium-dots" title="WindowsVM" alt="Windows" src="<%= request.getContextPath() %>/img/Windows.svg" width="22" height="22" loading="lazy">
-							    <span class="vm-name-wrapper" style="display: flex; align-items: center; gap: 0.4rem;">
-							      <span class="vm-name" style="margin-right: -60px;">Change</span>
-							      <span class="vm-size" style="margin-right: 20px; margin-left: auto;">7.7GB</span>
-							    </span>
-							  </div>
-							</td>
-					
-					    <!-- TESTED -->
-					    
-					    <td class="tested">
-					        <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/vbox.png" width="25" height="25">
-					    </td>
-					
-					    <!-- MD5 -->
-					    <td class="md5">
-					        <span id="md5-hash" title="B11BED45EF5A1066C68FAE86F398D5CB">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-info" width="24"
-					                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#dad049" fill="none" stroke-linecap="round"
-					                stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-					                <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-					                <path d="M11 14h1v4h1" />
-					                <path d="M12 11h.01" />
-					            </svg>
-					        </span>
-					        <button class="copy-btn" title="Copy to clipboard!" onclick="copyToClipboard(this)">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24"
-					                viewBox="0 0 24 24" stroke-width="1.5" stroke="#dad049" fill="none" stroke-linecap="round"
-					                stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path
-					                    d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
-					                <path
-					                    d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
-					            </svg>
-					        </button>
-					        <div class="tooltip">Copied!</div>
-					    </td>
-					
-					    <!-- WRITEUPS -->
-					    <td class="writeups">
-					        <script>
+						<tr class="row" data-machine-id="1">
+						    <td colspan="1">Cargando la máquina Lower5...</td>
+						</tr>
+						<tr class="row" data-machine-id="2">
+						    <td colspan="2">Cargando la máquina Change...</td>
+						    <script>
 					            writeupObj = {
 					                name: "Change",
 					                creator: "d4t4s3c",
 					                url: "https://d4t4s3c.com/vulnyx/2025/03/08/Change/"
 					            };
 					            writeupsArr.push(writeupObj);
-					        </script>
-					        <script>
 					            writeupObj = {
-					                name: "Change",
-					                creator: "hyh",
-					                url: "https://www.hyhforever.top/vulnyx-change"
-					            };
-					            writeupsArr.push(writeupObj);
+						                name: "Change",
+						                creator: "PL4GU3",
+						                url: "https://youtu.be/cfHYpcP5Tdc"
+						            };
+						            writeupsArr.push(writeupObj);
+						            writeupObj = {
+							                name: "Change",
+							                creator: "hyh",
+							                url: "https://www.hyhforever.top/vulnyx-change"
+							            };
+							            writeupsArr.push(writeupObj);
 					        </script>
-					        <script>
-					            writeupObj = {
-					                name: "Change",
-					                creator: "PL4GU3",
-					                url: "https://youtu.be/cfHYpcP5Tdc"
-					            };
-					            writeupsArr.push(writeupObj);
-					        </script>
-					        <button class="writeup-btn" title="Show writeups" onclick="showWriteups('Change')">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24"
-					                viewBox="0 0 24 24" stroke-width="1.5" stroke="#b3da49" fill="none" stroke-linecap="round"
-					                stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-					                <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-					                <line x1="3" y1="6" x2="3" y2="19" />
-					                <line x1="12" y1="6" x2="12" y2="19" />
-					                <line x1="21" y1="6" x2="21" y2="19" />
-					            </svg>
-					        </button>
-					        <button class="add-writeup-btn" title="Add writeup" onclick="showWriteupForm('Change')">
-					            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">
-									  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-									  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-									  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h6l6 6v10a2 2 0 0 1 -2 2z" />
-									  <path d="M12 17v-6" />
-									  <path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />
-									</svg>
-					        </button>
-					        <section id="Change" class="modal">
-					            <article class="modal-content">
-					                <span class="close">&times;</span>
-					                <p class="writeup-title"></p>
-					                <div class="writeups-container"></div>
-					            </article>
-					        </section>
-					        
-					        <!-- FIRST USER -->
-					    <td class="first-user">Flo2699</td>
-					
-					    <!-- FIRST ROOT -->
-					    <td class="first-user">Flo2699</td>
-					        
-					        <td class="flag">
-							
-								<!-- BOTON ENVIAR FLAG -->
-						        
-						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Changue')">
-								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
-								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-								    <path d="M5 5v16" />
-								    <path d="M5 5h14l-3 5l3 5h-14" />
-								  </svg>
-								</button>
-							</td>
-					        
-					        <!-- DOWNLOAD -->
-					    
-					    <td class="url">
-					        <a href="https://vulnyx.com/file/Change.php" target="_blank" title="Download VM">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24"
-					                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round"
-					                stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-					                <path d="M7 11l5 5l5 -5" />
-					                <path d="M12 4l0 12" />
-					            </svg>
-					        </a>
-					    </td>
-					    </td>
-						<tr class="row">
-					    <!-- # -->
-					    <td class="idnum"><span id="idnum">3</span></td>
-					
-					    <!-- CARD -->
-					    <td class="card">
-					        <button class="card-btn" title="Show card!" onclick="showCard('Anon', 'Linux', 'Medium', 'd4t4s3c', '05 Feb 2025')">
-					            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">
-									  <circle cx="12" cy="12" r="10" stroke="#3fa8f4" stroke-width="1.5" fill="none"/>
-									  <line x1="12" y1="8" x2="12" y2="8.01" stroke="#3fa8f4" stroke-width="1.5"/>
-									  <line x1="12" y1="10" x2="12" y2="16" stroke="#3fa8f4" stroke-width="1.5"/>
-									</svg>
-					        </button>
-					    </td>
-					
-					    <!-- NAME/SIZE -->
-						    
-						    <td id="vm">
-							  <div class="vm-name-btn level-btn medium">
-							    <img class="medium-dots" title="LinuxVM" alt="Linux" src="<%= request.getContextPath() %>/img/Linux.svg" width="22" height="22" loading="lazy">
-							    <span class="vm-name-wrapper" style="display: flex; align-items: center; gap: 0.4rem;">
-							      <span class="vm-name" style="margin-right: -60px;">Anon</span>
-							      <span class="vm-size" style="margin-right: 20px; margin-left: auto;">1.5GB</span>
-							    </span>
-							  </div>
-							</td>
-					
-					    <!-- TESTED -->
-					    
-					    <td class="tested">
-					        <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/vbox.png" width="25" height="25">
-					        <img title="VMware" alt="VMware logo" src="<%= request.getContextPath() %>/img/vmware.png" width="25" height="25">
-					    </td>
-					
-					    <!-- MD5 -->
-					    <td class="md5">
-					        <span id="md5-hash" title="74849CA997AA235CF3E47914F158024A">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-info" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#dad049" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-					                <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-					                <path d="M11 14h1v4h1" />
-					                <path d="M12 11h.01" />
-					            </svg>
-					        </span>
-					        <button class="copy-btn" title="Copy to clipboard!" onclick="copyToClipboard(this)">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#dad049" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
-					                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
-					            </svg>
-					        </button>
-					        <div class="tooltip">Copied!</div>
-					    </td>
-					
-					    <!-- WRITEUPS -->
-					    <td class="writeups">
-					        <script>
+						</tr>
+						<tr class="row" data-machine-id="3">
+						    <td colspan="3">Cargando la máquina Anon...</td>
+						    <script>
 					            writeupObj = { name: "Anon", creator: "suraxddq", url: "https://byte-mind.net/vulnyx-machines-anon-writeup" };
 					            writeupsArr.push(writeupObj);
-					        </script>
-					        <script>
 					            writeupObj = { name: "Anon", creator: "ll104567", url: "https://www.bilibili.com/video/BV1VhN7e5Ehw" };
 					            writeupsArr.push(writeupObj);
-					        </script>
-					        <script>
 					            writeupObj = { name: "Anon", creator: "PL4GU3", url: "https://youtu.be/7VKb3Po7fd8" };
 					            writeupsArr.push(writeupObj);
-					        </script>
-					        <script>
 					            writeupObj = { name: "Anon", creator: "MatthyGD", url: "https://www.youtube.com/watch?v=_YqXlvukKE0" };
 					            writeupsArr.push(writeupObj);
-					        </script>
-					        <script>
 					            writeupObj = { name: "Anon", creator: "sunset", url: "https://www.sunset-blog.top/baji/vulnyx/Anon%20193b61af4289808d9254cfc427e4931b.html" };
 					            writeupsArr.push(writeupObj);
 					        </script>
-					
-					        <button class="writeup-btn" title="Show writeups" onclick="showWriteups('Anon')">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#b3da49" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-					                <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-					                <line x1="3" y1="6" x2="3" y2="19" />
-					                <line x1="12" y1="6" x2="12" y2="19" />
-					                <line x1="21" y1="6" x2="21" y2="19" />
-					            </svg>
-					        </button>
-					
-					        <button class="add-writeup-btn" title="Add writeup" onclick="showWriteupForm('Anon')">
-					            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">
-									  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-									  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-									  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h6l6 6v10a2 2 0 0 1 -2 2z" />
-									  <path d="M12 17v-6" />
-									  <path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />
-									</svg>
-					        </button>
-					
-					        <section id="Anon" class="modal">
-					            <article class="modal-content">
-					                <span class="close">&times;</span>
-					                <p class="writeup-title"></p>
-					                <div class="writeups-container"></div>
-					            </article>
-					        </section>
-					        
-					        <!-- FIRST USER -->
-					    <td class="first-user">flower</td>
-					
-					    <!-- FIRST ROOT -->
-					    <td class="first-user">lvzhouhang</td>
-					        
-					        <td class="flag">
-							
-								<!-- BOTON ENVIAR FLAG -->
-						        
-						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Anon')">
-								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
-								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-								    <path d="M5 5v16" />
-								    <path d="M5 5h14l-3 5l3 5h-14" />
-								  </svg>
-								</button>
-							</td>
-					        
-					        <!-- DOWNLOAD -->
-					    
-					    <td class="url">
-					        <a href="https://vulnyx.com/file/Anon.php" target="_blank" title="Download VM">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-					                <path d="M7 11l5 5l5 -5" />
-					                <path d="M12 4l0 12" />
-					            </svg>
-					        </a>
-					    </td>
-					    </td>
-						<tr class="row">
-					    <!-- # -->
-					    <td class="idnum">
-					        <span id="idnum">4</span>
-					    </td>
-					    
-					    <!-- CARD -->
-					    <td class="card">
-					        <button class="card-btn" title="Show card!" onclick="showCard('Hit', 'Linux', 'Easy', 'd4t4s3c', '04 Feb 2025')">
-					            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">
-									  <circle cx="12" cy="12" r="10" stroke="#3fa8f4" stroke-width="1.5" fill="none"/>
-									  <line x1="12" y1="8" x2="12" y2="8.01" stroke="#3fa8f4" stroke-width="1.5"/>
-									  <line x1="12" y1="10" x2="12" y2="16" stroke="#3fa8f4" stroke-width="1.5"/>
-									</svg>
-					        </button>
-					    </td>
-					    
-					    <!-- NAME/SIZE -->
-						    
-						    <td id="vm">
-							  <div class="vm-name-btn level-btn easy">
-							    <img class="easy-dots" title="LinuxVM" alt="Linux" src="<%= request.getContextPath() %>/img/Linux.svg" width="22" height="22" loading="lazy">
-							    <span class="vm-name-wrapper" style="display: flex; align-items: center; gap: 0.4rem;">
-							      <span class="vm-name" style="margin-right: -60px;">Hit</span>
-							      <span class="vm-size" style="margin-right: 20px; margin-left: auto;">1.2GB</span>
-							    </span>
-							  </div>
-							</td>
-					    
-					    <!-- TESTED -->
-					    
-					    <td class="tested">
-					        <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/vbox.png" width="25" height="25">
-					        <img title="VMware" alt="VMware logo" src="<%= request.getContextPath() %>/img/vmware.png" width="25" height="25">
-					    </td>
-					    
-					    <!-- MD5 -->
-					    <td class="md5">
-					        <span id="md5-hash" title="75841477B83B8C86A6719F43B1A9A457">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-info" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#dad049" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-					                <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-					                <path d="M11 14h1v4h1" />
-					                <path d="M12 11h.01" />
-					            </svg>
-					        </span>
-					        <button class="copy-btn" title="Copy to clipboard!" onclick="copyToClipboard(this)">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#dad049" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
-					                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
-					            </svg>
-					        </button>
-					        <div class="tooltip">Copied!</div>
-					    </td>
-					    
-					    <!-- WRITEUPS -->
-					    <td class="writeups">
-					        <script>
-					            writeupObj = {
+						</tr>
+						<tr class="row" data-machine-id="4">
+						    <td colspan="4">Cargando la máquina Hit...</td>
+						    <script>
+						    writeupObj = {
 					                name: "Hit",
 					                creator: "ll104567",
 					                url: "https://www.bilibili.com/video/BV1m7NAedEuh"
 					            };
 					            writeupsArr.push(writeupObj);
-					        </script>
-					        <script>
 					            writeupObj = {
-					                name: "Hit",
-					                creator: "MatthyGD",
-					                url: "https://www.youtube.com/watch?v=Lzrhk3O67YA"
-					            };
-					            writeupsArr.push(writeupObj);
+						                name: "Hit",
+						                creator: "MatthyGD",
+						                url: "https://www.youtube.com/watch?v=Lzrhk3O67YA"
+						            };
+						            writeupsArr.push(writeupObj);
 					        </script>
-					        <button class="writeup-btn" title="Show writeups" onclick="showWriteups('Hit')">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#b3da49" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-					                <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-					                <line x1="3" y1="6" x2="3" y2="19" />
-					                <line x1="12" y1="6" x2="12" y2="19" />
-					                <line x1="21" y1="6" x2="21" y2="19" />
-					            </svg>
-					        </button>
-					        <button class="add-writeup-btn" title="Add writeup" onclick="showWriteupForm('Hit')">
-					            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">
-									  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-									  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-									  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h6l6 6v10a2 2 0 0 1 -2 2z" />
-									  <path d="M12 17v-6" />
-									  <path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />
-									</svg>
-					        </button>
-					        <section id="Hit" class="modal">
-					            <article class="modal-content">
-					                <span class="close">&times;</span>
-					                <p class="writeup-title"></p>
-					                <div class="writeups-container"></div>
-					            </article>
-					        </section>
-					        
-					        <!-- FIRST USER -->
-					    <td class="first-user">maciiii___</td>
-					    
-					    <!-- FIRST ROOT -->
-					    <td class="first-user">maciiii___</td>
-					        
-					        <td class="flag">
-							
-								<!-- BOTON ENVIAR FLAG -->
-						        
-						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Hit')">
-								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
-								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-								    <path d="M5 5v16" />
-								    <path d="M5 5h14l-3 5l3 5h-14" />
-								  </svg>
-								</button>
-							</td>
-					        
-					        <!-- DOWNLOAD -->
-					    
-					    <td class="url">
-					        <a href="https://vulnyx.com/file/Hit.php" target="_blank" title="Download VM">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-					                <path d="M7 11l5 5l5 -5" />
-					                <path d="M12 4l0 12" />
-					            </svg>
-					        </a>
-					    </td>
-					        
-					    </td>
-						<tr class="row">
-					    <!-- # -->
-					    <td class="idnum"><span id="idnum">5</span></td>
-					    
-					    <!-- CARD -->
-					    <td class="card">
-					        <button class="card-btn" title="Show card!" onclick="showCard(
-					            'Matrix',
-					            'Linux',
-					            'Medium',
-					            'Lenam',
-					            '30 Jan 2025'
-					        )">
-					            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">
-									  <circle cx="12" cy="12" r="10" stroke="#3fa8f4" stroke-width="1.5" fill="none"/>
-									  <line x1="12" y1="8" x2="12" y2="8.01" stroke="#3fa8f4" stroke-width="1.5"/>
-									  <line x1="12" y1="10" x2="12" y2="16" stroke="#3fa8f4" stroke-width="1.5"/>
-									</svg>
-					        </button>
-					    </td>
-					    
-					    <!-- NAME/SIZE -->
-						    
-						    <td id="vm">
-							  <div class="vm-name-btn level-btn medium">
-							    <img class="medium-dots" title="LinuxVM" alt="Linux" src="<%= request.getContextPath() %>/img/Linux.svg" width="22" height="22" loading="lazy">
-							    <span class="vm-name-wrapper" style="display: flex; align-items: center; gap: 0.4rem;">
-							      <span class="vm-name" style="margin-right: -60px;">Matrix</span>
-							      <span class="vm-size" style="margin-right: 20px; margin-left: auto;">750MB</span>
-							    </span>
-							  </div>
-							</td>
-					    
-					    <!-- TESTED -->
-					    
-					    <td class="tested">
-					        <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/vbox.png" width="25" height="25">
-					        <img title="VMware" alt="VMware logo" src="<%= request.getContextPath() %>/img/vmware.png" width="25" height="25">
-					    </td>
-					    
-					    <!-- MD5 -->
-					    <td class="md5">
-					        <span id="md5-hash" title="7231B02B3C522DD4AE19917C13FB53F2">
-					            <svg xmlns="http://www.w3.org/2000/svg"
-					                class="icon icon-tabler icon-tabler-file-info" width="24"
-					                height="24" viewBox="0 0 24 24" stroke-width="1.5"
-					                stroke="#dad049" fill="none" stroke-linecap="round"
-					                stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-					                <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-					                <path d="M11 14h1v4h1" />
-					                <path d="M12 11h.01" />
-					            </svg>
-					        </span>
-					        <button class="copy-btn" title="Copy to clipboard!" onclick="copyToClipboard(this)">
-					            <svg xmlns="http://www.w3.org/2000/svg"
-					                class="icon icon-tabler icon-tabler-copy" width="24"
-					                height="24" viewBox="0 0 24 24" stroke-width="1.5"
-					                stroke="#dad049" fill="none" stroke-linecap="round"
-					                stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
-					                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
-					            </svg>
-					        </button>
-					        <div class="tooltip">Copied!</div>
-					    </td>
-					    
-					    <!-- WRITEUPS -->
-					    <td class="writeups">
-					        <script>
-					            writeupObj = {
+						</tr>
+						<tr class="row" data-machine-id="5">
+						    <td colspan="5">Cargando la máquina Matrix...</td>
+						    <script>
+						    writeupObj = {
 					                name: "Matrix",
 					                creator: "MatthyGD",
 					                url: "https://www.youtube.com/watch?v=fc6YmdAzP7s"
 					            };
 					            writeupsArr.push(writeupObj);
-					        </script>
-					        <script>
 					            writeupObj = {
 					                name: "Matrix",
 					                creator: "ll104567",
 					                url: "https://www.bilibili.com/video/BV1escFeSEKM"
 					            };
 					            writeupsArr.push(writeupObj);
-					        </script>
-					        <script>
 					            writeupObj = {
 					                name: "Matrix",
 					                creator: "suraxddq",
 					                url: "https://byte-mind.net/vulnyx-machines-matrix-writeup"
 					            };
 					            writeupsArr.push(writeupObj);
-					        </script>
-					        <script>
 					            writeupObj = {
 					                name: "Matrix",
 					                creator: "Lenam (EN)",
 					                url: "https://len4m.github.io/posts/matrix-writeup-vulnyx-en"
 					            };
 					            writeupsArr.push(writeupObj);
-					        </script>
-					        <script>
 					            writeupObj = {
 					                name: "Matrix",
 					                creator: "Lenam (ES)",
@@ -989,142 +425,16 @@
 					            };
 					            writeupsArr.push(writeupObj);
 					        </script>
-					        <button class="writeup-btn" title="Show writeups" onclick="showWriteups('Matrix')">
-					            <svg xmlns="http://www.w3.org/2000/svg"
-					                class="icon icon-tabler icon-tabler-book" width="24"
-					                height="24" viewBox="0 0 24 24" stroke-width="1.5"
-					                stroke="#b3da49" fill="none" stroke-linecap="round"
-					                stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-					                <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-					                <line x1="3" y1="6" x2="3" y2="19" />
-					                <line x1="12" y1="6" x2="12" y2="19" />
-					                <line x1="21" y1="6" x2="21" y2="19" />
-					            </svg>
-					        </button>
-					        <button class="add-writeup-btn" title="Add writeup" onclick="showWriteupForm('Matrix')">
-					            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">
-									  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-									  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-									  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h6l6 6v10a2 2 0 0 1 -2 2z" />
-									  <path d="M12 17v-6" />
-									  <path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />
-									</svg>
-					        </button>
-					        <section id="Matrix" class="modal">
-					            <article class="modal-content">
-					                <span class="close">&times;</span>
-					                <p class="writeup-title"></p>
-					                <div class="writeups-container"></div>
-					            </article>
-					        </section>
-					        
-					        <!-- FIRST USER -->
-					    <td class="first-user">suraxddq</td>
-					    
-					    <!-- FIRST ROOT -->
-					    <td class="first-user">suraxddq</td>
-					        
-					        <td class="flag">
-							
-								<!-- BOTON ENVIAR FLAG -->
-						        
-						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Matrix')">
-								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
-								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-								    <path d="M5 5v16" />
-								    <path d="M5 5h14l-3 5l3 5h-14" />
-								  </svg>
-								</button>
-							</td>
-					        
-					        <!-- DOWNLOAD -->
-					    
-					    <td class="url">
-					        <a href="https://vulnyx.com/file/Matrix.php" target="_blank" title="Download VM">
-					            <svg xmlns="http://www.w3.org/2000/svg"
-					                class="icon icon-tabler icon-tabler-download" width="24"
-					                height="24" viewBox="0 0 24 24" stroke-width="1.5"
-					                stroke="#d9534f" fill="none" stroke-linecap="round"
-					                stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-					                <path d="M7 11l5 5l5 -5" />
-					                <path d="M12 4l0 12" />
-					            </svg>
-					        </a>
-					    </td>
-					        
-					    </td>
-						<tr class="row">
-					    <!-- # -->
-					    <td class="idnum">
-					        <span id="idnum">6</span>
-					    </td>
-					
-					    <!-- CARD -->
-					    <td class="card">
-					        <button class="card-btn" title="Show card!" onclick="showCard('Tunnel', 'Linux', 'Hard', 'd4t4s3c', '13 Dec 2024')">
-					            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">
-									  <circle cx="12" cy="12" r="10" stroke="#3fa8f4" stroke-width="1.5" fill="none"/>
-									  <line x1="12" y1="8" x2="12" y2="8.01" stroke="#3fa8f4" stroke-width="1.5"/>
-									  <line x1="12" y1="10" x2="12" y2="16" stroke="#3fa8f4" stroke-width="1.5"/>
-									</svg>
-					        </button>
-					    </td>
-					
-					    <!-- NAME/SIZE -->
-						    
-						    <td id="vm">
-							  <div class="vm-name-btn level-btn hard">
-							    <img class="hard-dots" title="LinuxVM" alt="Linux" src="<%= request.getContextPath() %>/img/Linux.svg" width="22" height="22" loading="lazy">
-							    <span class="vm-name-wrapper" style="display: flex; align-items: center; gap: 0.4rem;">
-							      <span class="vm-name" style="margin-right: -60px;">Tunnel</span>
-							      <span class="vm-size" style="margin-right: 20px; margin-left: auto;">1.2GB</span>
-							    </span>
-							  </div>
-							</td>
-					
-					    <!-- TESTED -->
-					    
-					    <td class="tested">
-					        <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/vbox.png" width="25" height="25">
-					        <img title="VMware" alt="VMware logo" src="<%= request.getContextPath() %>/img/vmware.png" width="25" height="25">
-					    </td>
-					
-					    <!-- MD5 -->
-					    <td class="md5">
-					        <span id="md5-hash" title="3D5D92A73B8130FB1DEA281993A8F5FD">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-info" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#dad049" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-					                <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-					                <path d="M11 14h1v4h1" />
-					                <path d="M12 11h.01" />
-					            </svg>
-					        </span>
-					        <button class="copy-btn" title="Copy to clipboard!" onclick="copyToClipboard(this)">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#dad049" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
-					                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
-					            </svg>
-					        </button>
-					        <div class="tooltip">Copied!</div>
-					    </td>
-					
-					    <!-- WRITEUPS -->
-					    <td class="writeups">
-					        <script>
-					            writeupObj = {
+						</tr>
+						<tr class="row" data-machine-id="6">
+						    <td colspan="6">Cargando la máquina Tunnel...</td>
+						    <script>
+						    writeupObj = {
 					                name: "Tunnel",
 					                creator: "ll104567",
 					                url: "https://www.bilibili.com/video/BV16QBGYgE8A"
 					            };
 					            writeupsArr.push(writeupObj);
-					        </script>
-					        <script>
 					            writeupObj = {
 					                name: "Tunnel",
 					                creator: "MatthyGD",
@@ -1132,140 +442,22 @@
 					            };
 					            writeupsArr.push(writeupObj);
 					        </script>
-					        <button class="writeup-btn" title="Show writeups" onclick="showWriteups('Tunnel')">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#b3da49" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-					                <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-					                <line x1="3" y1="6" x2="3" y2="19" />
-					                <line x1="12" y1="6" x2="12" y2="19" />
-					                <line x1="21" y1="6" x2="21" y2="19" />
-					            </svg>
-					        </button>
-					        <button class="add-writeup-btn" title="Add writeup" onclick="showWriteupForm('Tunnel')">
-					            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">
-									  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-									  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-									  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h6l6 6v10a2 2 0 0 1 -2 2z" />
-									  <path d="M12 17v-6" />
-									  <path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />
-									</svg>
-					        </button>
-					        <section id="Tunnel" class="modal">
-					            <article class="modal-content">
-					                <span class="close">&times;</span>
-					                <p class="writeup-title"></p>
-					                <div class="writeups-container"></div>
-					            </article>
-					        </section>
-					        
-					        <!-- FIRST USER -->
-					    <td class="first-user">ll104567</td>
-					
-					    <!-- FIRST ROOT -->
-					    <td class="first-user">ll104567</td>
-					        
-					        <td class="flag">
-							
-								<!-- BOTON ENVIAR FLAG -->
-						        
-						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Tunnel')">
-								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
-								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-								    <path d="M5 5v16" />
-								    <path d="M5 5h14l-3 5l3 5h-14" />
-								  </svg>
-								</button>
-							</td>
-					        
-					        <!-- DOWNLOAD -->
-					    
-					    <td class="url">
-					        <a href="https://vulnyx.com/file/Tunnel.php" target="_blank" title="Download VM">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-					                <path d="M7 11l5 5l5 -5" />
-					                <path d="M12 4l0 12" />
-					            </svg>
-					        </a>
-					    </td>
-					    </td>
-						<tr class="row">
-					    <!-- # -->
-					    <td class="idnum">
-					        <span id="idnum">7</span>
-					    </td>
-					
-					    <!-- CARD -->
-					    <td class="card">
-					        <button class="card-btn" title="Show card!" onclick="showCard('War', 'Windows', 'Easy', 'd4t4s3c', '07 Dec 2024')">
-					            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">
-									  <circle cx="12" cy="12" r="10" stroke="#3fa8f4" stroke-width="1.5" fill="none"/>
-									  <line x1="12" y1="8" x2="12" y2="8.01" stroke="#3fa8f4" stroke-width="1.5"/>
-									  <line x1="12" y1="10" x2="12" y2="16" stroke="#3fa8f4" stroke-width="1.5"/>
-									</svg>
-					        </button>
-					    </td>
-					
-					    <!-- NAME/SIZE -->
-						    
-						    <td id="vm">
-							  <div class="vm-name-btn level-btn easy">
-							    <img class="easy-dots" title="WindowsVM" alt="Windows" src="<%= request.getContextPath() %>/img/Windows.svg" width="22" height="22" loading="lazy">
-							    <span class="vm-name-wrapper" style="display: flex; align-items: center; gap: 0.4rem;">
-							      <span class="vm-name" style="margin-right: -60px;">War</span>
-							      <span class="vm-size" style="margin-right: 20px; margin-left: auto;">7.2GB</span>
-							    </span>
-							  </div>
-							</td>
-					
-					    <!-- TESTED -->
-					    
-					    <td class="tested">
-					        <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/vbox.png" width="25" height="25">
-					    </td>
-					
-					    <!-- MD5 -->
-					    <td class="md5">
-					        <span id="md5-hash" title="A48B73FBA9796957C86C19F8758CC9E5">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-info" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#dad049" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-					                <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-					                <path d="M11 14h1v4h1" />
-					                <path d="M12 11h.01" />
-					            </svg>
-					        </span>
-					        <button class="copy-btn" title="Copy to clipboard!" onclick="copyToClipboard(this)">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#dad049" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
-					                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
-					            </svg>
-					        </button>
-					        <div class="tooltip">Copied!</div>
-					    </td>
-					
-					    <!-- WRITEUPS -->
-					    <td class="writeups">
-					        <script>
-					            writeupObj = {
+						</tr>
+						<tr class="row" data-machine-id="7">
+						    <td colspan="7">Cargando la máquina War...</td>
+						    <script>
+						    writeupObj = {
 					                name: "War",
 					                creator: "d4t4s3c",
 					                url: "https://d4t4s3c.com/vulnyx/2024/12/07/War/"
 					            };
 					            writeupsArr.push(writeupObj);
-					        </script>
-					        <script>
 					            writeupObj = {
 					                name: "War",
 					                creator: "ll104567",
 					                url: "https://www.bilibili.com/video/BV1bzqJYBEjf"
 					            };
 					            writeupsArr.push(writeupObj);
-					        </script>
-					        <script>
 					            writeupObj = {
 					                name: "War",
 					                creator: "beafn28",
@@ -1273,132 +465,16 @@
 					            };
 					            writeupsArr.push(writeupObj);
 					        </script>
-					        <button class="writeup-btn" title="Show writeups" onclick="showWriteups('War')">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#b3da49" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-					                <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-					                <line x1="3" y1="6" x2="3" y2="19" />
-					                <line x1="12" y1="6" x2="12" y2="19" />
-					                <line x1="21" y1="6" x2="21" y2="19" />
-					            </svg>
-					        </button>
-					        <button class="add-writeup-btn" title="Add writeup" onclick="showWriteupForm('War')">
-					            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">
-									  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-									  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-									  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h6l6 6v10a2 2 0 0 1 -2 2z" />
-									  <path d="M12 17v-6" />
-									  <path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />
-									</svg>
-					        </button>
-					        <section id="War" class="modal">
-					            <article class="modal-content">
-					                <span class="close">&times;</span>
-					                <p class="writeup-title"></p>
-					                <div class="writeups-container"></div>
-					            </article>
-					        </section>
-					        
-					        <!-- FIRST USER -->
-					    <td class="first-user">minidump</td>
-					
-					    <!-- FIRST ROOT -->
-					    <td class="first-user">minidump</td>
-					        
-					        <td class="flag">
-							
-								<!-- BOTON ENVIAR FLAG -->
-						        
-						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'War')">
-								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
-								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-								    <path d="M5 5v16" />
-								    <path d="M5 5h14l-3 5l3 5h-14" />
-								  </svg>
-								</button>
-							</td>
-					        
-					        <!-- DOWNLOAD -->
-					    
-					    <td class="url">
-					        <a href="https://vulnyx.com/file/War.php" target="_blank" title="Download VM">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-					                <path d="M7 11l5 5l5 -5" />
-					                <path d="M12 4l0 12" />
-					            </svg>
-					        </a>
-					    </td>
-						<tr class="row">
-					    <!-- # -->
-					    <td class="idnum">
-					        <span id="idnum">8</span>
-					    </td>
-					
-					    <!-- CARD -->
-					    <td class="card">
-					        <button class="card-btn" title="Show card!" onclick="showCard('Manager', 'Linux', 'Hard', 'd4t4s3c', '29 Nov 2024')">
-					            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">
-									  <circle cx="12" cy="12" r="10" stroke="#3fa8f4" stroke-width="1.5" fill="none"/>
-									  <line x1="12" y1="8" x2="12" y2="8.01" stroke="#3fa8f4" stroke-width="1.5"/>
-									  <line x1="12" y1="10" x2="12" y2="16" stroke="#3fa8f4" stroke-width="1.5"/>
-									</svg>
-					        </button>
-					    </td>
-					
-					    <!-- NAME/SIZE -->
-						    
-						    <td id="vm">
-							  <div class="vm-name-btn level-btn hard">
-							    <img class="hard-dots" title="LinuxVM" alt="Linux" src="<%= request.getContextPath() %>/img/Linux.svg" width="22" height="22" loading="lazy">
-							    <span class="vm-name-wrapper" style="display: flex; align-items: center; gap: 0.4rem;">
-							      <span class="vm-name" style="margin-right: -60px;">Manager</span>
-							      <span class="vm-size" style="margin-right: 20px; margin-left: auto;">1.8GB</span>
-							    </span>
-							  </div>
-							</td>
-					
-					    <!-- TESTED -->
-					    
-					    <td class="tested">
-					        <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/vbox.png" width="25" height="25">
-					        <img title="VMware" alt="VMware logo" src="<%= request.getContextPath() %>/img/vmware.png" width="25" height="25">
-					    </td>
-					
-					    <!-- MD5 -->
-					    <td class="md5">
-					        <span id="md5-hash" title="EE5082F8354628AC353D9FEF6EB8784C">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-info" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#dad049" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-					                <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-					                <path d="M11 14h1v4h1" />
-					                <path d="M12 11h.01" />
-					            </svg>
-					        </span>
-					        <button class="copy-btn" title="Copy to clipboard!" onclick="copyToClipboard(this)">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#dad049" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
-					                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
-					            </svg>
-					        </button>
-					        <div class="tooltip">Copied!</div>
-					    </td>
-					
-					    <!-- WRITEUPS -->
-					    <td class="writeups">
-					        <script>
-					            writeupObj = {
+						</tr>
+						<tr class="row" data-machine-id="8">
+						    <td colspan="8">Cargando la máquina Manager...</td>
+						    <script>
+						    writeupObj = {
 					                name: "Manager",
 					                creator: "ll104567",
 					                url: "https://www.bilibili.com/video/BV1uiznY7Eaj"
 					            };
 					            writeupsArr.push(writeupObj);
-					        </script>
-					        <script>
 					            writeupObj = {
 					                name: "Manager",
 					                creator: "pointedsec",
@@ -1406,343 +482,68 @@
 					            };
 					            writeupsArr.push(writeupObj);
 					        </script>
-					        <button class="writeup-btn" title="Show writeups" onclick="showWriteups('Manager')">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#b3da49" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-					                <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-					                <line x1="3" y1="6" x2="3" y2="19" />
-					                <line x1="12" y1="6" x2="12" y2="19" />
-					                <line x1="21" y1="6" x2="21" y2="19" />
-					            </svg>
-					        </button>
-					        <button class="add-writeup-btn" title="Add writeup" onclick="showWriteupForm('Manager')">
-					            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">
-									  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-									  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-									  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h6l6 6v10a2 2 0 0 1 -2 2z" />
-									  <path d="M12 17v-6" />
-									  <path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />
-									</svg>
-					        </button>
-					        <section id="Manager" class="modal">
-					            <article class="modal-content">
-					                <span class="close">&times;</span>
-					                <p class="writeup-title"></p>
-					                <div class="writeups-container"></div>
-					            </article>
-					        </section>
-					        
-					        <!-- FIRST USER -->
-					    <td class="first-user">softyhack</td>
-					
-					    <!-- FIRST ROOT -->
-					    <td class="first-user">ll104567</td>
-					        
-					        <td class="flag">
-							
-								<!-- BOTON ENVIAR FLAG -->
-						        
-						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Manager')">
-								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
-								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-								    <path d="M5 5v16" />
-								    <path d="M5 5h14l-3 5l3 5h-14" />
-								  </svg>
-								</button>
-							</td>
-					        
-					        <!-- DOWNLOAD -->
-					    
-					    <td class="url">
-					        <a href="https://vulnyx.com/file/Manager.php" target="_blank" title="Download VM">
-					            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">
-					                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-					                <path d="M7 11l5 5l5 -5" />
-					                <path d="M12 4l0 12" />
-					            </svg>
-					        </a>
-					    </td>
-						<tr class="row">
-						  <!-- # -->
-						  <td class="idnum">
-						    <span id="idnum">9</span>
-						  </td>
-						  
-						  <!-- CARD -->
-						  <td class="card">
-						    <button class="card-btn" title="Show card!" onclick="showCard('Controler', 'Windows', 'Medium', 'd4t4s3c', '23 Oct 2024')">
-						      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">
-									  <circle cx="12" cy="12" r="10" stroke="#3fa8f4" stroke-width="1.5" fill="none"/>
-									  <line x1="12" y1="8" x2="12" y2="8.01" stroke="#3fa8f4" stroke-width="1.5"/>
-									  <line x1="12" y1="10" x2="12" y2="16" stroke="#3fa8f4" stroke-width="1.5"/>
-									</svg>
-						    </button>
-						  </td>
-						  
-						  <!-- NAME/SIZE -->
-						    
-						    <td id="vm">
-							  <div class="vm-name-btn level-btn medium">
-							    <img class="medium-dots" title="WindowsVM" alt="Windows" src="<%= request.getContextPath() %>/img/Windows.svg" width="22" height="22" loading="lazy">
-							    <span class="vm-name-wrapper" style="display: flex; align-items: center; gap: 0.4rem;">
-							      <span class="vm-name" style="margin-right: -60px;">Controler</span>
-							      <span class="vm-size" style="margin-right: 20px; margin-left: auto;">5.0GB</span>
-							    </span>
-							  </div>
-							</td>
-						  
-						  <!-- TESTED -->
-						  
-						  <td class="tested">
-						    <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/vbox.png" width="25" height="25">
-						  </td>
-						  
-						  <!-- MD5 -->
-						  <td class="md5">
-						    <span id="md5-hash" title="73ECC9FD5D9CEC03A67124D9BE5A2151">
-						      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-info" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#dad049" fill="none" stroke-linecap="round" stroke-linejoin="round">
-						        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-						        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-						        <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-						        <path d="M11 14h1v4h1" />
-						        <path d="M12 11h.01" />
-						      </svg>
-						    </span>
-						    <button class="copy-btn" title="Copy to clipboard!" onclick="copyToClipboard(this)">
-						      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#dad049" fill="none" stroke-linecap="round" stroke-linejoin="round">
-						        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-						        <path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
-						        <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
-						      </svg>
-						    </button>
-						    <div class="tooltip">Copied!</div>
-						  </td>
-						  
-						  <!-- WRITEUPS -->
-						  <td class="writeups">
+						</tr>
+						<tr class="row" data-machine-id="9">
+						    <td colspan="9">Cargando la máquina Controler...</td>
+						    <script>
+						    writeupObj = {
+							        name: "Controler",
+							        creator: "d4t4s3c",
+							        url: "https://d4t4s3c.com/vulnyx/2024/10/23/Controler/"
+							      };
+							      writeupsArr.push(writeupObj);
+							      writeupObj = {
+							        name: "Controler",
+							        creator: "pointedsec",
+							        url: "https://pointedsec.github.io/writeups/controler---vulnyx"
+							      };
+							      writeupsArr.push(writeupObj);
+							      writeupObj = {
+							        name: "Controler",
+							        creator: "ll104567",
+							        url: "https://www.bilibili.com/video/BV1ZeqUYeEcj"
+							      };
+							      writeupsArr.push(writeupObj);
+							      writeupObj = {
+							        name: "Controler",
+							        creator: "J4ckie0x17",
+							        url: "https://j4ckie0x17.gitbook.io/notes-pentesting/writeups/vulnyx/controler"
+							      };
+							      writeupsArr.push(writeupObj);
+							      writeupObj = {
+							        name: "Controler",
+							        creator: "miguel0x1985",
+							        url: "https://github.com/miguellofredo85/PwnLabs/blob/main/Vulnyx/Controller%20AD.pdf"
+							      };
+							      writeupsArr.push(writeupObj);
+					        </script>
+						</tr>
+						  <tr class="row" data-machine-id="10">
+						    <td colspan="10">Cargando la máquina testMachine...</td>
 						    <script>
 						      writeupObj = {
-						        name: "Controler",
-						        creator: "d4t4s3c",
-						        url: "https://d4t4s3c.com/vulnyx/2024/10/23/Controler/"
+						        name: "testMachine",
+						        creator: "user1",
+						        url: "https://test.com/1"
 						      };
 						      writeupsArr.push(writeupObj);
+						      writeupObj = {
+								name: "testMachine",
+								creator: "user2",
+								url: "https://test.com/2"
+							  };
+							  writeupsArr.push(writeupObj);
 						    </script>
+						</tr>
+						<tr class="row" data-machine-id="11">
+						    <td colspan="11">Cargando la máquina r00tless...</td>
 						    <script>
 						      writeupObj = {
-						        name: "Controler",
-						        creator: "pointedsec",
-						        url: "https://pointedsec.github.io/writeups/controler---vulnyx"
+						        name: "r00tless",
+						        creator: "test1",
+						        url: "https://test.com/1"
 						      };
-						      writeupsArr.push(writeupObj);
 						    </script>
-						    <script>
-						      writeupObj = {
-						        name: "Controler",
-						        creator: "ll104567",
-						        url: "https://www.bilibili.com/video/BV1ZeqUYeEcj"
-						      };
-						      writeupsArr.push(writeupObj);
-						    </script>
-						    <script>
-						      writeupObj = {
-						        name: "Controler",
-						        creator: "J4ckie0x17",
-						        url: "https://j4ckie0x17.gitbook.io/notes-pentesting/writeups/vulnyx/controler"
-						      };
-						      writeupsArr.push(writeupObj);
-						    </script>
-						    <script>
-						      writeupObj = {
-						        name: "Controler",
-						        creator: "miguel0x1985",
-						        url: "https://github.com/miguellofredo85/PwnLabs/blob/main/Vulnyx/Controller%20AD.pdf"
-						      };
-						      writeupsArr.push(writeupObj);
-						    </script>
-						    
-						    <button class="writeup-btn" title="Show writeups" onclick="showWriteups('Controler')">
-						      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#b3da49" fill="none" stroke-linecap="round" stroke-linejoin="round">
-						        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-						        <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-						        <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-						        <line x1="3" y1="6" x2="3" y2="19" />
-						        <line x1="12" y1="6" x2="12" y2="19" />
-						        <line x1="21" y1="6" x2="21" y2="19" />
-						      </svg>
-						    </button>
-						    <button class="add-writeup-btn" title="Add writeup" onclick="showWriteupForm('Controler')">
-						      <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">
-									  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-									  <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-									  <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h6l6 6v10a2 2 0 0 1 -2 2z" />
-									  <path d="M12 17v-6" />
-									  <path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />
-									</svg>
-						    </button>
-						    
-						    <section id="Controler" class="modal">
-						      <article class="modal-content">
-						        <span class="close">&times;</span>
-						        <p class="writeup-title"></p>
-						        <div class="writeups-container"></div>
-						      </article>
-						    </section>
-						    
-						    <!-- FIRST USER -->
-						  <td class="first-user">Rev3rKh1ll</td>
-						  
-						  <!-- FIRST ROOT -->
-						  <td class="first-user">Rev3rKh1ll</td>
-						    
-						    <td class="flag">
-							
-								<!-- BOTON ENVIAR FLAG -->
-						        
-						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', 'Controler')">
-								  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
-								    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-								    <path d="M5 5v16" />
-								    <path d="M5 5h14l-3 5l3 5h-14" />
-								  </svg>
-								</button>
-							</td>
-						    
-						    <!-- DOWNLOAD -->
-						  
-						  <td class="url">
-						    <a href="https://vulnyx.com/file/Controler.php" target="_blank" title="Download VM">
-						      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">
-						        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-						        <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-						        <path d="M7 11l5 5l5 -5" />
-						        <path d="M12 4l0 12" />
-						      </svg>
-						    </a>
-						  </td>
-						  <tr class="row">
-						    <!-- # -->
-						    <td class="idnum">
-						        <span id="idnum"><%= request.getAttribute("id") %></span>
-						    </td>
-						
-						    <!-- CARD -->
-						    <td class="card">
-						        <button class="card-btn" title="Show card!" onclick="showCard('<%= request.getAttribute("name_machine") %>', '<%= request.getAttribute("os") %>', '<%= request.getAttribute("difficulty") %>', '<%= request.getAttribute("creator") %>', '<%= request.getAttribute("date") %>')">
-						            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">
-						                <circle cx="12" cy="12" r="10" stroke="#3fa8f4" stroke-width="1.5" fill="none"/>
-						                <line x1="12" y1="8" x2="12" y2="8.01" stroke="#3fa8f4" stroke-width="1.5"/>
-						                <line x1="12" y1="10" x2="12" y2="16" stroke="#3fa8f4" stroke-width="1.5"/>
-						            </svg>
-						        </button>
-						    </td>
-						
-						    <!-- NAME/SIZE -->
-						    <td id="vm">
-						        <div class="vm-name-btn level-btn medium">
-						            <img class="medium-dots" title="<%= request.getAttribute("os") %>VM" alt="<%= request.getAttribute("os") %>" src="<%= request.getContextPath() %>/img/<%= request.getAttribute("img_name_os") %>.svg" width="22" height="22" loading="lazy">
-						            <span class="vm-name-wrapper" style="display: flex; align-items: center; gap: 0.4rem;">
-						                <span class="vm-name" style="margin-right: -60px;"><%= request.getAttribute("name_machine") %></span>
-						                <span class="vm-size" style="margin-right: 20px; margin-left: auto;"><%= request.getAttribute("size") %></span>
-						            </span>
-						        </div>
-						    </td>
-						
-						    <!-- TESTED -->
-						    <td class="tested">
-						        <img title="VirtualBox" alt="VirtualBox logo" src="<%= request.getContextPath() %>/img/<%= request.getAttribute("enviroment") %>.png" width="25" height="25">
-						    </td>
-						
-						    <!-- MD5 -->
-						    <td class="md5">
-						        <span id="md5-hash" title="<%= request.getAttribute("md5") %>">
-						            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-info" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#dad049" fill="none" stroke-linecap="round" stroke-linejoin="round">
-						                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-						                <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-						                <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />
-						                <path d="M11 14h1v4h1" />
-						                <path d="M12 11h.01" />
-						            </svg>
-						        </span>
-						        <button class="copy-btn" title="Copy to clipboard!" onclick="copyToClipboard(this)">
-						            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#dad049" fill="none" stroke-linecap="round" stroke-linejoin="round">
-						                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-						                <path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
-						                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
-						            </svg>
-						        </button>
-						        <div class="tooltip">Copied!</div>
-						    </td>
-						
-						    <!-- WRITEUPS -->
-						    <td class="writeups">
-						        <script>
-						            writeupObj = {
-						                name: "<%= request.getAttribute("name_machine") %>",
-						                creator: "<%= request.getAttribute("creator") %>",
-						                url: "<%= request.getAttribute("writeup_url") %>"
-						            };
-						            writeupsArr.push(writeupObj);
-						        </script>
-						        <button class="writeup-btn" title="Show writeups" onclick="showWriteups('<%= request.getAttribute("name_machine") %>')">
-						            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#b3da49" fill="none" stroke-linecap="round" stroke-linejoin="round">
-						                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-						                <path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-						                <path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />
-						                <line x1="3" y1="6" x2="3" y2="19" />
-						                <line x1="12" y1="6" x2="12" y2="19" />
-						                <line x1="21" y1="6" x2="21" y2="19" />
-						            </svg>
-						        </button>
-						        <button class="add-writeup-btn" title="Add writeup" onclick="showWriteupForm('<%= request.getAttribute("name_machine") %>')">
-						            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">
-						                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-						                <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-						                <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h6l6 6v10a2 2 0 0 1 -2 2z" />
-						                <path d="M12 17v-6" />
-						                <path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />
-						            </svg>
-						        </button>
-						        
-						        <section id="Controler" class="modal">
-						            <article class="modal-content">
-						                <span class="close">&times;</span>
-						                <p class="writeup-title"></p>
-						                <div class="writeups-container"></div>
-						            </article>
-						        </section>
-						    </td>
-						
-						    <!-- FIRST USER -->
-						    <td class="first-user"><%= request.getAttribute("first_user") %></td>
-						
-						    <!-- FIRST ROOT -->
-						    <td class="first-user"><%= request.getAttribute("first_root") %></td>
-						
-						    <td class="flag">
-						        <!-- BOTON ENVIAR FLAG -->
-						        <button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm('user/root', '<%= request.getAttribute("name_machine") %>')">
-						            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">
-						                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-						                <path d="M5 5v16" />
-						                <path d="M5 5h14l-3 5l3 5h-14" />
-						            </svg>
-						        </button>
-						    </td>
-						
-						    <!-- DOWNLOAD -->
-						    <td class="url">
-						        <a href="<%= request.getAttribute("download_url") %>" target="_blank" title="Download VM">
-						            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">
-						                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-						                <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-						                <path d="M7 11l5 5l5 -5" />
-						                <path d="M12 4l0 12" />
-						            </svg>
-						        </a>
-						    </td>
 						</tr>
 					</tbody>
 				</table>
@@ -2035,7 +836,7 @@
 	</footer>
 	<!--<script src="<%= request.getContextPath() %>/js/machines23.js"></script>-->
 	<script src="<%= request.getContextPath() %>/js/jsMachines.jsp"></script>
-	<script>
+	<script defer>
 	  const toggleBtn = document.getElementById('toggle-theme');
 	  const body = document.body;
 	
@@ -2050,6 +851,115 @@
 	    const isLight = body.classList.contains('light-theme');
 	    localStorage.setItem('theme', isLight ? 'light' : 'dark');
 	  });
+	  
+	  document.addEventListener("DOMContentLoaded", function() {
+		    document.querySelectorAll("tr[data-machine-id]").forEach(function(row) {
+		        var machineId = row.dataset.machineId;
+
+		        fetch('/Pwn3dWeb/machineDetails?id=' + machineId)
+		            .then(function(res) {
+		                return res.json();
+		            })
+		            .then(function(machine) {
+		                // Construir dinámicamente el contenido HTML con la concatenación de cadenas
+		                row.innerHTML = 
+		                    '<td class="idnum">' +
+		                        '<span id="idnum">' + machine.id + '</span>' +
+		                    '</td>' +
+		                    '<td class="card">' +
+		                        '<button class="card-btn" title="Show card!" ' +
+		                            'onclick="showCard(\'' + machine.nameMachine + '\', \'' + machine.os + '\', \'' + machine.difficulty + '\', \'' + machine.creator + '\', \'' + machine.date + '\')">' +
+		                            '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+		                                '<circle cx="12" cy="12" r="10" />' +
+		                                '<line x1="12" y1="8" x2="12" y2="8.01" />' +
+		                                '<line x1="12" y1="10" x2="12" y2="16" />' +
+		                            '</svg>' +
+		                        '</button>' +
+		                    '</td>' +
+		                    '<td id="vm">' +
+		                        '<div class="vm-name-btn level-btn ' + machine.difficulty + '">' +
+		                            '<img class="' + machine.difficulty + '-dots" title="' + machine.os + ' VM" ' +
+		                                'alt="' + machine.os + '" src="/Pwn3dWeb/img/' + machine.imgNameOs + '.svg" width="22" height="22" loading="lazy">' +
+		                            '<span class="vm-name-wrapper" style="display: flex; align-items: center; gap: 0.4rem;">' +
+		                                '<span class="vm-name" style="margin-right: -60px;">' + machine.nameMachine + '</span>' +
+		                                '<span class="vm-size" style="margin-right: 20px; margin-left: auto;">' + machine.size + '</span>' +
+		                            '</span>' +
+		                        '</div>' +
+		                    '</td>' +
+		                    '<td class="tested">' +
+		                        '<img title="Env1" alt="' + machine.enviroment + ' logo" src="/Pwn3dWeb/img/' + machine.enviroment + '.png" width="25" height="25">' +
+		                        '<img title="Env2" alt="' + machine.enviroment2 + ' logo" src="/Pwn3dWeb/img/' + machine.enviroment2 + '.png" width="25" height="25"' +
+		                        ((machine.enviroment2 && machine.enviroment2 !== "null") ? '' : ' hidden') + '>' +
+		                    '</td>' +
+		                    '<td class="md5">' +
+		                        '<span id="md5-hash" title="' + machine.md5 + '">' +
+		                            '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-info" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#dad049" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+		                                '<path d="M14 3v4a1 1 0 0 0 1 1h4" />' +
+		                                '<path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />' +
+		                                '<path d="M11 14h1v4h1" />' +
+		                                '<path d="M12 11h.01" />' +
+		                            '</svg>' +
+		                        '</span>' +
+		                        '<button class="copy-btn" title="Copy to clipboard!" onclick="copyToClipboard(this)">' +
+		                            '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#dad049" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+		                                '<path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />' +
+		                                '<path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />' +
+		                            '</svg>' +
+		                        '</button>' +
+		                        '<div class="tooltip">Copied!</div>' +
+		                    '</td>' +
+		                    '<td class="writeups">' +
+		                        '<button class="writeup-btn" title="Show writeups" onclick="showWriteups(\'' + machine.nameMachine + '\')">' +
+		                            '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#b3da49" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+		                                '<path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />' +
+		                                '<path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />' +
+		                                '<line x1="3" y1="6" x2="3" y2="19" />' +
+		                                '<line x1="12" y1="6" x2="12" y2="19" />' +
+		                                '<line x1="21" y1="6" x2="21" y2="19" />' +
+		                            '</svg>' +
+		                        '</button>' +
+		                        '<button class="add-writeup-btn" title="Add writeup" onclick="showWriteupForm(\'' + machine.nameMachine + '\')">' +
+		                            '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+		                                '<path d="M14 3v4a1 1 0 0 0 1 1h4" />' +
+		                                '<path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h6l6 6v10a2 2 0 0 1 -2 2z" />' +
+		                                '<path d="M12 17v-6" />' +
+		                                '<path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />' +
+		                            '</svg>' +
+		                        '</button>' +
+		                        '<section id="' + machine.nameMachine + '" class="modal">' +
+			                    '<article class="modal-content">' +
+			                        '<span class="close">&times;</span>' +
+			                        '<p class="writeup-title"></p>' +
+			                        '<div class="writeups-container"></div>' +
+			                    '</article>' +
+			                '</section>' +
+		                    '<td class="first-user">' + machine.firstUser + '</td>' +
+		                    '<td class="first-user">' + machine.firstRoot + '</td>' +
+		                    '<td class="flag">' +
+		                        '<button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm(\'user/root\', \'' + machine.nameMachine + '\')">' +
+		                            '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+		                                '<path d="M5 5v16" />' +
+		                                '<path d="M5 5h14l-3 5l3 5h-14" />' +
+		                            '</svg>' +
+		                        '</button>' +
+		                    '</td>' +
+		                    '<td class="url">' +
+		                        '<a href="' + machine.downloadUrl + '" target="_blank" title="Download VM">' +
+		                            '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+		                                '<path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />' +
+		                                '<path d="M7 11l5 5l5 -5" />' +
+		                                '<path d="M12 4l0 12" />' +
+		                            '</svg>' +
+		                        '</a>' +
+		                    '</td>';
+		            })
+		            .catch(function(err) {
+		                console.error("Error al cargar máquina ID", machineId, err);
+		                row.innerHTML = '<td colspan="10">⚠️ Error al cargar la máquina ' + machineId + '</td>';
+		            });
+		    });
+		});
+
 	</script>
 
 </body>
