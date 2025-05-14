@@ -18,7 +18,9 @@ public class MachineDataServlet extends HttpServlet {
         String size = request.getParameter("size");
         String os = request.getParameter("os");
         String enviroment = request.getParameter("enviroment");
+        String enviroment2 = request.getParameter("enviroment2");
         String creator = request.getParameter("creator");
+        String difficulty_card = request.getParameter("difficulty_card");
         String difficulty = request.getParameter("difficulty");
         String date = request.getParameter("date");
         String md5 = request.getParameter("md5");
@@ -34,7 +36,9 @@ public class MachineDataServlet extends HttpServlet {
         request.setAttribute("size", size);
         request.setAttribute("os", os);
         request.setAttribute("enviroment", enviroment);
+        request.setAttribute("enviroment2", enviroment2);
         request.setAttribute("creator", creator);
+        request.setAttribute("difficulty_card", difficulty_card);
         request.setAttribute("difficulty", difficulty);
         request.setAttribute("date", date);
         request.setAttribute("md5", md5);
