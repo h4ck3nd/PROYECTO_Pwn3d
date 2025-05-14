@@ -234,162 +234,59 @@
     <nav>
         <a href="#">Inicio</a>
         <a href="<%= request.getContextPath() %>/machines.jsp">Máquinas</a>
-        <a href="<%= request.getContextPath() %>/deletedVM.jsp">Eliminar VM</a>
+        <a href="<%= request.getContextPath() %>/agregarVM.jsp">Añadir VM</a>
         <a href="#">Contacto</a>
     </nav>
 </header>
 <div class="container">
-<form id="machineForm" action="<%= request.getContextPath() %>/machines" method="POST">
-    <h2>➤ Ingreso de Máquina Virtual</h2>
-
-    <!-- Campo con ícono de ID -->
+<form id="deleteForm" action="<%= request.getContextPath() %>/eliminarMaquina" method="post" style="max-width: 400px; margin: 0 auto;">
     <div class="form-group">
-        <label for="id">ID de la Máquina:</label>
-        <div class="input-wrapper">
-            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M3 4v16h18V4H3zm2 2h14v12H5V6zm4 2v2h6V8H9z"/></svg>
-            <input type="text" id="id" name="id" placeholder="1, 2, 3..." required>
+        <label for="idInput" style="color: #9aff8a; margin-bottom: 6px; display: block;">ID de la máquina</label>
+        <div class="input-wrapper" style="display: flex; align-items: center; background-color: #1b1b1b; border: 1px solid #00ff88; border-radius: 6px; padding: 10px; box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.2);">
+            <input 
+                id="idInput"
+                name="id"
+                value="${machine.id}"
+                placeholder="Ej: 13"
+                style="background: transparent; border: none; outline: none; color: #39ff14; width: 100%; font-size: 1rem; font-family: 'Fira Code', monospace;" 
+            />
         </div>
     </div>
 
-    <div class="form-group">
-        <label for="name_machine">Nombre de la máquina:</label>
-        <div class="input-wrapper">
-            <svg width="20" height="20" viewBox="0 0 24 24"><path d="M4 4h16v2H4zm0 4h10v2H4zm0 4h16v2H4zm0 4h10v2H4z"/></svg>
-            <input type="text" id="name_machine" name="name_machine" placeholder="testMachine" required>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="size">Tamaño:</label>
-        <div class="input-wrapper">
-            <input type="text" id="size" name="size" placeholder="1.2GB, 200MB..." required>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="os">Sistema Operativo:</label>
-        <div class="input-wrapper">
-            <select id="os" name="os" required>
-                <option value="" disabled selected>Selecciona la S.O.</option>
-                <option value="Linux">Linux</option>
-                <option value="Windows">Windows</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="enviroment">Entorno:</label>
-        <div class="input-wrapper">
-            <select id="enviroment" name="enviroment" required>
-                <option value="" disabled selected>Selecciona el Entorno</option>
-                <option value="vbox">Virtual Box</option>
-                <option value="vmware">VMWare</option>
-                <option value="docker">Docker</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="enviroment2">Entorno 2 (OPCIONAL):</label>
-        <div class="input-wrapper">
-            <select id="enviroment2" name="enviroment2">
-                <option value="" disabled selected>Selecciona el Entorno 2</option>
-                <option value="vbox">Virtual Box</option>
-                <option value="vmware">VMWare</option>
-                <option value="docker">Docker</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="creator">Creador:</label>
-        <div class="input-wrapper">
-            <input type="text" id="creator" name="creator" placeholder="username..." required>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="difficulty_card">Dificultad Tarjeta:</label>
-        <div class="input-wrapper">
-            <select id="difficulty_card" name="difficulty_card" required>
-                <option value="" disabled selected>Selecciona la dificultad</option>
-                <option value="Very-Easy">Very Easy</option>
-                <option value="Easy">Easy</option>
-                <option value="Medium">Medium</option>
-                <option value="Hard">Hard</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="difficulty">Dificultad:</label>
-        <div class="input-wrapper">
-            <select id="difficulty" name="difficulty" required>
-                <option value="" disabled selected>Selecciona la dificultad</option>
-                <option value="very-easy">Very Easy</option>
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="date">Fecha:</label>
-        <div class="input-wrapper">
-            <input type="date" id="date" name="date" required>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="md5">MD5 Hash:</label>
-        <div class="input-wrapper">
-            <input type="text" id="md5" name="md5" placeholder="ABCDEFGHIJKLMNÑOPQRSTUVWXYZ..." required>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="writeup_url">URL del Writeup:</label>
-        <div class="input-wrapper">
-            <input type="url" id="writeup_url" name="writeup_url" placeholder="https://test.com/" required>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="first_user">Primer usuario:</label>
-        <div class="input-wrapper">
-            <input type="text" id="first_user" name="first_user" placeholder="user..." required>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="first_root">Primer root:</label>
-        <div class="input-wrapper">
-            <input type="text" id="first_root" name="first_root" placeholder="user..." required>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="img_name_os">Imagen del sistema operativo (nombre de archivo):</label>
-        <div class="input-wrapper">
-            <select id="img_name_os" name="img_name_os" required>
-                <option value="" disabled selected>Selecciona la Imagen del S.O.</option>
-                <option value="Linux">Linux</option>
-                <option value="Windows">Windows</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="download_url">URL de descarga:</label>
-        <div class="input-wrapper">
-            <input type="url" id="download_url" name="download_url" placeholder="https://test.com/download" required>
-        </div>
-    </div>
-
-    <button type="submit">Enviar</button>
+    <button 
+        type="button" 
+        id="deleteBtn"
+        style="background-color: crimson; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; width: 100%; margin-top: 12px; font-family: 'Fira Code', monospace; font-weight: bold; box-shadow: 0 0 10px rgba(255, 0, 0, 0.6); transition: transform 0.2s ease;"
+        onmouseover="this.style.transform='scale(1.05)'"
+        onmouseout="this.style.transform='scale(1)'"
+    >
+        🗑️ Eliminar
+    </button>
 </form>
 </div>
 <br>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    document.getElementById('deleteBtn').addEventListener('click', function () {
+        Swal.fire({
+            title: '¿Eliminar máquina?',
+            text: "Esta acción no se puede deshacer.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#39ff14',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, eliminar',
+            background: '#0e0e0e',
+            color: '#39ff14',
+            customClass: {
+                popup: 'neon-popup'
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById('deleteForm').submit();
+            }
+        });
+    });
+</script>
 </body>
 </html>
