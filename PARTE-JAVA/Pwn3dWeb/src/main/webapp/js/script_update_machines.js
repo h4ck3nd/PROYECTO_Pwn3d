@@ -178,29 +178,35 @@ function showCard(name, os, difficulty, creator, release) {
 	}
 
 	/* SUBMIT WRITEUP (SHOW FORM) */
-	const showWriteupForm = (name) => {
+
+	const showWriteupForm = (vmname) => {
 	  const modal = document.querySelector('.form-writeup');
 	  const body = document.body;
 
-	  // Mostrar el modal y desactivar el desplazamiento de la página
+	  if (!modal) {
+	    console.error("No se encontró el formulario .form-writeup");
+	    return;
+	  }
+
+	  // Mostrar modal y desactivar scroll
 	  modal.style.display = 'flex';
 	  body.style.overflow = 'hidden';
 
 	  // Cambiar el título dinámicamente
-	  const title = modal.querySelector('h1');
-	  title.textContent = "Nuevo envío de writeup para " + name;
+	  const title = modal.querySelector('.vb-title');
+	  if (title) {
+	    title.textContent = `Enviar nuevo writeup para ${vmname}`;
+	  }
 
-	  // Función para cerrar el modal
-	  const span = modal.querySelector('.close-form');
+	  // Cerrar al hacer clic en la X
+	  const closeBtn = modal.querySelector('.vb-close');
 	  const closeModal = () => {
 	    modal.style.display = 'none';
 	    body.style.overflow = 'visible';
 	  };
+	  if (closeBtn) closeBtn.onclick = closeModal;
 
-	  // Cerrar al hacer clic en el botón de cierre
-	  span.onclick = closeModal;
-
-	  // Cerrar al hacer clic fuera del contenido del modal
+	  // Cerrar al hacer clic fuera del contenedor del modal
 	  const handleClickOutside = (e) => {
 	    if (e.target === modal) {
 	      closeModal();
@@ -210,7 +216,7 @@ function showCard(name, os, difficulty, creator, release) {
 
 	  window.addEventListener('click', handleClickOutside);
 	};
- 	
+
 	/* SUBMIT FLAGS (SHOW FORM) */
 	const showFlagForm = (type, vmname) => {
 	  const body = document.querySelector('body');

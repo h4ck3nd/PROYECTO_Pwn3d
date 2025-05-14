@@ -9,7 +9,7 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 <meta charset="utf-8">
-<link rel="icon" href="<%= request.getContextPath() %>/img/logo1.ico">
+<link rel="icon" href="<%= request.getContextPath() %>/img/logo-flag-white.ico">
 <link rel="canonical" href="<%= request.getContextPath() %>/machines.jsp">
 <title>Pwn3d!</title>
 <script async defer src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -20,23 +20,32 @@
 <body>
 	<header>
 	    <section class="header-container">
-	    
-	        <!-- LOGO -->
-	        
-	        <article class="logo-wrapper">
-	            <img class="logo" alt="Pwn3d! website logo" src="img/banner.png">
-	        </article>
 		
 			<!-- BOTÓN AGRUPADO -->
 			
 		    <div class="header-controls">
+		    
+		    <!-- LOGO -->
+	        
+	        <article class="logo-wrapper">
+	            <img class="logo" alt="Pwn3d! website logo" src="img/banner.png">
+	        </article>
+	        
 		      <!-- BOTÓN MODO CLARO/OSCURO -->
-		      <button id="toggle-theme" class="toggle-button" aria-label="Toggle theme">
+		      <button title="Alternar entre Claro/Oscuro" id="toggle-theme" class="toggle-button" aria-label="Toggle theme">
 		        <svg viewBox="0 0 100 100" class="theme-icon">
 		          <circle cx="50" cy="50" r="40" class="circle-bg" />
 		          <path d="M50,10 A40,40 0 1,1 49.9,10 Z" class="half" />
 		        </svg>
 		      </button>
+		      
+		      <!-- BOTÓN ADMIN -->
+		    <button 
+		      type="button" 
+		      class="admin-btn" 
+		      onclick="window.location.href='<%= request.getContextPath() %>/agregarVM.jsp'">
+		      Agregar VM
+		    </button>
 			</div>
 			
 			<!-- SECCION PARA ENVIAR VM -->
@@ -164,8 +173,8 @@
 				                <path d="M21 21l-6 -6" />
 				            </svg>
 				        </div>
-				        <input id="vm-search" type="text" placeholder="Buscar por nombre, dificultad, creador..." aria-label="search" />
-				        <button class="clear-search" title="Clear search" onclick="clearSearch()">Clear</button>
+				        <input title="Buscar VM..." id="vm-search" type="text" placeholder="Buscar por nombre, dificultad, creador..." aria-label="search" />
+				        <button class="clear-search" title="Limpiar Busqueda" onclick="clearSearch()">Clear</button>
 				    </div>
 				
 				<!-- HEADER ENCIMA DE LA ZONA DE MAQUINAS -->
@@ -257,9 +266,20 @@
 				
 				    <div class="filter-wrapper" onmouseleave="hideFilters()">
 				        
-				        <!-- Botón para abrir el popup -->
+				        <!-- Botón para abrir el popup Filtro -->
 				        
-						<button type="button" class="filter-by" onclick="openFilterPopup()">Filtrar</button>
+						<button title="Filtrar" type="button" class="filter-by" onclick="openFilterPopup()">
+						<svg xmlns="http://www.w3.org/2000/svg" 
+						     width="24" height="24" 
+						     viewBox="0 0 24 24" 
+						     fill="none" 
+						     stroke="currentColor" 
+						     stroke-width="2" 
+						     stroke-linecap="round" 
+						     stroke-linejoin="round" 
+						     class="feather feather-filter">
+						  <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+						</svg></button>
 						
 						<!-- Filtro en forma de popup -->
 						
@@ -642,107 +662,83 @@
 			<!-- SECCION DE ENVIAR WRITEUP -->
 			
 			<section class="form-writeup">
-			  <div class="form-container">
-			    <!-- Título y botón de cierre -->
-			    <span class="close-form" style="margin-bottom: -30px !important; margin-top: -10px !important; margin-right: -8px !important;">&times;</span>
-			    <div class="form-title">
-			      <h1 style="font-size: 14px !important; color: #3379ac !important; font-style: bold !important; margin-bottom: -20px !important; line-height: 1.6 !important;">Nuevo envío de writeup </h1>
+			  <div class="virtualbox-container">
+			    <!-- Header superior blanco -->
+			    <div class="vb-header">
+			      <img src="<%= request.getContextPath() %>/img/logo-prueba.png" class="vb-icon" />
+			      <button class="vb-close" onclick="document.querySelector('.form-writeup').style.display='none'">×</button>
+			      <span>Añadir Writeup</span>
 			    </div>
 			
-			    <!-- Descripción -->
-			    <p class="form-text" style="font-size: 12px !important; margin-bottom: -25px !important; line-height: 1.6 !important;">
-			      Complete todos los campos del formulario con la información de su informe. Después de la revisión, si el informe cumple con nuestras reglas de envío, el artículo estará disponible públicamente en el sitio web para cualquier usuario.
-			    </p>
-			
-			    <!-- Formulario -->
-			    <form class="form submit-form" id="writeupForm">
-			      <!-- Campos del formulario -->
-			      <div class="form-field" style="margin-bottom: -5px !important; margin-top: 5px !important;">
-			        <label class="form-label" for="writeup-creator" style="margin-bottom: 5px !important;">Creador</label>
-			        <input
-			          class="form-control"
-			          id="writeup-creator"
-			          name="Creator"
-			          type="text"
-			          maxlength="15"
-			          placeholder="Nombre de usuario"
-			          required
-			        />
-			      </div>
-				<br>
-			      <div class="form-field" style="margin-bottom: -5px !important; margin-top: 10px !important;">
-			        <label class="form-label" for="writeup-url" style="margin-bottom: 5px !important;">URL</label>
-			        <input
-			          class="form-control"
-			          id="writeup-url"
-			          name="URL"
-			          type="url"
-			          pattern="https?://.+"
-			          placeholder="URL del writeup"
-			          required
-			        />
-			      </div>
-				<br>
-			      <div class="form-field" style="margin-bottom: -5px !important; margin-top: 10px !important;">
-			        <span class="form-label" style="margin-bottom: 5px !important;">Tipo de contenido</span>
-			        <div class="form-checkbox" id="content-type">
-			          <input
-			            type="radio"
-			            id="text"
-			            name="ContentType"
-			            value="Text"
-			            checked
-			          />
-			          <label for="text" style="margin-bottom: 5px !important;">Texto</label>
-			          <input type="radio" id="video" name="ContentType" value="Video" />
-			          <label for="video" style="margin-bottom: 5px !important;">Video</label>
-			        </div>
-			      </div>
-				<br>
-			      <div class="form-field" style="margin-bottom: -5px !important; margin-top: 10px !important;">
-			        <label class="form-label" for="language" style="margin-bottom: 5px !important;">Idioma</label>
-			        <select class="form-control" id="language" name="Language" required>
-			          <option value="EN">English</option>
-			          <option value="ES">Español</option>
-			          <option value="FR">Français</option>
-			          <option value="DE">Deutsch</option>
-			          <option value="PT">Português</option>
-			          <option value="ZH">Chinese</option>
-			          <option value="Other">Other</option>
-			          <option value="None">None (Just Video)</option>
-			        </select>
-			      </div>
-				<br>
-			      <div class="form-field" style="margin-bottom: -5px !important; margin-top: 10px !important;">
-			        <label class="form-label" for="opinion" style="margin-bottom: 5px !important;">Opinion (Opcional)</label>
-			        <textarea
-			          class="form-control"
-			          id="opinion"
-			          name="Opinion"
-			          maxlength="2000"
-			          rows="2"
-			          placeholder="Tu opinión solo se compartirá con el equipo de Pwn3d! y será útil como retroalimentación. Usted es libre de revisar o calificar la máquina como desee."
-			          style="font-size: 0.75rem !important; line-height: 1.6 !important;"
-			          ></textarea>
-			      </div>
-				<br>
-			      <!-- Botones -->
-			      <div class="form-btns" style="margin-bottom: 5px !important; margin-top: 10px !important;">
-			        <button class="button" type="submit">Enviar</button>
-			        <button class="button" type="reset">Borrar</button>
+			    <div class="vb-inner">
+			      <!-- Lado izquierdo decorativo -->
+			      <div class="vb-side-image">
+			        <img src="<%= request.getContextPath() %>/img/banner-ctf.png" alt="Banner CTF" />
+			        
 			      </div>
 			
-			      <!-- Footer -->
-			      <div class="form-footer" style="margin-bottom: -5px !important; margin-top: 20px !important;"">
-			        <small style="font-size: 0.75rem !important;">
-			          Por favor, lea nuestras
-			          <a href="https://vulnyx.com/rules/" target="_blank">
-			            <strong style="font-size: 0.75rem !important;">Reglas</strong>
-			          </a>
-			          antes de enviar un nuevo writeup.
-			        </small>
+			      <!-- Contenido del formulario -->
+			      <div class="vb-content">
+			        <h2 class="vb-title">Nombre y sistema operativo de la máquina virtual</h2>
+			        <p class="vb-subtext">
+			          Complete todos los campos del formulario con la información de su informe. Después de la revisión, si el informe cumple con nuestras reglas de envío, el artículo estará disponible públicamente en el sitio web para cualquier usuario.
+			        </p>
+			
+			        <form class="submit-form" id="writeupForm">
+			          <div class="vb-field">
+			            <label for="writeup-creator">Creador</label>
+			            <input id="writeup-creator" name="Creator" type="text" maxlength="15" placeholder="Nombre de usuario" required />
+			          </div>
+			
+			          <div class="vb-field">
+			            <label for="writeup-url">URL</label>
+			            <input id="writeup-url" name="URL" type="url" pattern="https?://.+" placeholder="URL del writeup" required />
+			          </div>
+			
+			          <div class="vb-field">
+			            <span>Tipo de contenido</span>
+			            <div class="vb-radio">
+			              <input type="radio" id="text" name="ContentType" value="Text" checked />
+			              <label for="text">Texto</label>
+			              <input type="radio" id="video" name="ContentType" value="Video" />
+			              <label for="video">Video</label>
+			            </div>
+			          </div>
+			
+			          <div class="vb-field">
+			            <label for="language">Idioma</label>
+			            <select id="language" name="Language" required>
+			              <option value="EN">English</option>
+			              <option value="ES">Español</option>
+			              <option value="FR">Français</option>
+			              <option value="DE">Deutsch</option>
+			              <option value="PT">Português</option>
+			              <option value="ZH">Chinese</option>
+			              <option value="Other">Other</option>
+			              <option value="None">None (Just Video)</option>
+			            </select>
+			          </div>
+			
+			          <div class="vb-field">
+			            <label for="opinion">Opinion (Opcional)</label>
+			            <textarea id="opinion" name="Opinion" maxlength="2000" rows="2" placeholder="Tu opinión solo se compartirá con el equipo de Pwn3d! y será útil como retroalimentación. Usted es libre de revisar o calificar la máquina como desee."></textarea>
+			          </div>
+			
+			          <div class="vb-buttons">
+			            <button type="submit">Enviar</button>
+			            <button type="reset">Borrar</button>
+			          </div>
+			
+			          <div class="vb-footer">
+			            <small>
+			              Por favor, lea nuestras
+			              <a href="https://vulnyx.com/rules/" target="_blank"><strong>Reglas</strong></a>
+			              antes de enviar un nuevo writeup.
+			            </small>
+			          </div>
+			        </form>
 			      </div>
-			    </form>
+			    </div>
 			  </div>
 			</section>
 			
@@ -826,7 +822,7 @@
 		</section>
 	</main>
 	<footer>
-		<img src="<%= request.getContextPath() %>/img/logo1.ico" alt="Pwn3d! small footer logo" loading="lazy" style="width: 25px !important; height: 30px !important;">
+		<img src="<%= request.getContextPath() %>/img/logo-flag-white.png" alt="Pwn3d! small footer logo" loading="lazy" style="width: 25px !important; height: 30px !important;">
 		<p>© Pwn3d! 2024-2025</p>
 		
 		<!-- REDES SOCIALES -->
@@ -923,7 +919,7 @@
 		                        '<span id="idnum">' + machine.id + '</span>' +
 		                    '</td>' +
 		                    '<td class="card">' +
-		                        '<button class="card-btn" title="Show card!" ' +
+		                        '<button class="card-btn" title="Ver Info!" ' +
 		                            'onclick="showCard(\'' + machine.nameMachine + '\', \'' + machine.os + '\', \'' + machine.difficulty + '\', \'' + machine.creator + '\', \'' + machine.date + '\')">' +
 		                            '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
 		                                '<circle cx="12" cy="12" r="10" />' +
@@ -943,44 +939,46 @@
 		                        '</div>' +
 		                    '</td>' +
 		                    '<td class="tested">' +
-		                        '<img title="Env1" alt="' + machine.enviroment + ' logo" src="<%= request.getContextPath() %>/img/' + machine.enviroment + '.png" width="25" height="25">' +
-		                        '<img title="Env2" alt="' + machine.enviroment2 + ' logo" src="<%= request.getContextPath() %>/img/' + machine.enviroment2 + '.png" width="25" height="25"' +
+		                        '<img title="Entorno 1" alt="' + machine.enviroment + ' logo" src="<%= request.getContextPath() %>/img/' + machine.enviroment + '.png" width="25" height="25">' +
+		                        '<img title="Entorno 2" alt="' + machine.enviroment2 + ' logo" src="<%= request.getContextPath() %>/img/' + machine.enviroment2 + '.png" width="25" height="25"' +
 		                        ((machine.enviroment2 && machine.enviroment2 !== "null") ? '' : ' hidden') + '>' +
 		                    '</td>' +
 		                    '<td class="md5">' +
 		                        '<span id="md5-hash" title="' + machine.md5 + '">' +
-		                            '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-info" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#dad049" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
-		                                '<path d="M14 3v4a1 1 0 0 0 1 1h4" />' +
-		                                '<path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />' +
-		                                '<path d="M11 14h1v4h1" />' +
-		                                '<path d="M12 11h.01" />' +
-		                            '</svg>' +
+		                        '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-md5" width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="#FFA500" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+			                        '<path d="M14 3v4a1 1 0 0 0 1 1h4" />' +
+			                        '<path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />' +
+			                        '<path d="M6.5 16v-2c0 -0.5 0.5 -1 1 -1s1 0.5 1 1v2" />' +
+			                        '<path d="M8.5 16v-2c0 -0.5 0.5 -1 1 -1s1 0.5 1 1v2" />' +
+			                        '<path d="M11.5 16v-3h1c0.6 0 1 0.5 1 1.5s-0.4 1.5 -1 1.5h-1z" />' +
+			                        '<path d="M16.5 13h-2v1.5c0.3 -0.2 0.7 -0.3 1 -0.3 0.6 0 1 0.4 1 1s-0.4 1 -1 1 -1 -0.4 -1 -1" />' +
+			                    '</svg>' +
 		                        '</span>' +
-		                        '<button class="copy-btn" title="Copy to clipboard!" onclick="copyToClipboard(this)">' +
-		                            '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#dad049" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
-		                                '<path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />' +
-		                                '<path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />' +
-		                            '</svg>' +
+		                        '<button class="copy-btn" title="Copiar al clipboard!" onclick="copyToClipboard(this)">' +
+		                        '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FFB84D" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+			                        '<path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />' +
+			                        '<path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />' +
+			                    '</svg>' +
 		                        '</button>' +
 		                        '<div class="tooltip">Copied!</div>' +
 		                    '</td>' +
 		                    '<td class="writeups">' +
-		                        '<button class="writeup-btn" title="Show writeups" onclick="showWriteups(\'' + machine.nameMachine + '\')">' +
-		                            '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#b3da49" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
-		                                '<path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />' +
-		                                '<path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />' +
-		                                '<line x1="3" y1="6" x2="3" y2="19" />' +
-		                                '<line x1="12" y1="6" x2="12" y2="19" />' +
-		                                '<line x1="21" y1="6" x2="21" y2="19" />' +
-		                            '</svg>' +
+		                        '<button class="writeup-btn" title="Ver writeups" onclick="showWriteups(\'' + machine.nameMachine + '\')">' +
+		                        '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#00ffff" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+			                        '<path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />' +
+			                        '<path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />' +
+			                        '<line x1="3" y1="6" x2="3" y2="19" />' +
+			                        '<line x1="12" y1="6" x2="12" y2="19" />' +
+			                        '<line x1="21" y1="6" x2="21" y2="19" />' +
+			                    '</svg>' +
 		                        '</button>' +
-		                        '<button class="add-writeup-btn" title="Add writeup" onclick="showWriteupForm(\'' + machine.nameMachine + '\')">' +
-		                            '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#49da57" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
-		                                '<path d="M14 3v4a1 1 0 0 0 1 1h4" />' +
-		                                '<path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h6l6 6v10a2 2 0 0 1 -2 2z" />' +
-		                                '<path d="M12 17v-6" />' +
-		                                '<path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />' +
-		                            '</svg>' +
+		                        '<button class="add-writeup-btn" title="Añadir writeup" onclick="showWriteupForm(\'' + machine.nameMachine + '\')">' +
+		                        '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3498db" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+			                        '<path d="M14 3v4a1 1 0 0 0 1 1h4" />' +
+			                        '<path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h6l6 6v10a2 2 0 0 1 -2 2z" />' +
+			                        '<path d="M12 17v-6" />' +
+			                        '<path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />' +
+			                    '</svg>' +
 		                        '</button>' +
 		                        '<section id="' + machine.nameMachine + '" class="modal">' +
 			                    '<article class="modal-content">' +
@@ -1000,7 +998,7 @@
 		                        '</button>' +
 		                    '</td>' +
 		                    '<td class="url">' +
-		                        '<a href="' + machine.downloadUrl + '" target="_blank" title="Download VM">' +
+		                        '<a href="' + machine.downloadUrl + '" target="_blank" title="Descargar VM">' +
 		                            '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
 		                                '<path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />' +
 		                                '<path d="M7 11l5 5l5 -5" />' +
