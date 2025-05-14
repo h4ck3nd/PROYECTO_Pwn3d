@@ -334,10 +334,24 @@
 						    let writeupObj = {};
 						</script>
 						<tr class="row" data-machine-id="1">
-						    <td colspan="1">Cargando la máquina Lower5...</td>
+						    <td colspan="1">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina Lower5...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
 						</tr>
 						<tr class="row" data-machine-id="2">
-						    <td colspan="2">Cargando la máquina Change...</td>
+						    <td colspan="2">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina Change...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
 						    <script>
 					            writeupObj = {
 					                name: "Change",
@@ -360,7 +374,14 @@
 					        </script>
 						</tr>
 						<tr class="row" data-machine-id="3">
-						    <td colspan="3">Cargando la máquina Anon...</td>
+						    <td colspan="3">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina Anon...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
 						    <script>
 					            writeupObj = { name: "Anon", creator: "suraxddq", url: "https://byte-mind.net/vulnyx-machines-anon-writeup" };
 					            writeupsArr.push(writeupObj);
@@ -375,7 +396,14 @@
 					        </script>
 						</tr>
 						<tr class="row" data-machine-id="4">
-						    <td colspan="4">Cargando la máquina Hit...</td>
+						    <td colspan="4">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina Hit...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
 						    <script>
 						    writeupObj = {
 					                name: "Hit",
@@ -392,7 +420,14 @@
 					        </script>
 						</tr>
 						<tr class="row" data-machine-id="5">
-						    <td colspan="5">Cargando la máquina Matrix...</td>
+						    <td colspan="5">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina Matrix...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
 						    <script>
 						    writeupObj = {
 					                name: "Matrix",
@@ -427,7 +462,14 @@
 					        </script>
 						</tr>
 						<tr class="row" data-machine-id="6">
-						    <td colspan="6">Cargando la máquina Tunnel...</td>
+						    <td colspan="6">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina Tunnel...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
 						    <script>
 						    writeupObj = {
 					                name: "Tunnel",
@@ -444,7 +486,14 @@
 					        </script>
 						</tr>
 						<tr class="row" data-machine-id="7">
-						    <td colspan="7">Cargando la máquina War...</td>
+						    <td colspan="7">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina War...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
 						    <script>
 						    writeupObj = {
 					                name: "War",
@@ -467,7 +516,14 @@
 					        </script>
 						</tr>
 						<tr class="row" data-machine-id="8">
-						    <td colspan="8">Cargando la máquina Manager...</td>
+						    <td colspan="8">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina Manager...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
 						    <script>
 						    writeupObj = {
 					                name: "Manager",
@@ -484,7 +540,14 @@
 					        </script>
 						</tr>
 						<tr class="row" data-machine-id="9">
-						    <td colspan="9">Cargando la máquina Controler...</td>
+						    <td colspan="9">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina Controler...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
 						    <script>
 						    writeupObj = {
 							        name: "Controler",
@@ -519,7 +582,14 @@
 					        </script>
 						</tr>
 						  <tr class="row" data-machine-id="10">
-						    <td colspan="10">Cargando la máquina testMachine...</td>
+						    <td colspan="10">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina testMachine...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
 						    <script>
 						      writeupObj = {
 						        name: "testMachine",
@@ -536,7 +606,14 @@
 						    </script>
 						</tr>
 						<tr class="row" data-machine-id="11">
-						    <td colspan="11">Cargando la máquina r00tless...</td>
+						    <td colspan="11">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina r00tless...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
 						    <script>
 						      writeupObj = {
 						        name: "r00tless",
@@ -544,6 +621,16 @@
 						        url: "https://test.com/1"
 						      };
 						    </script>
+						</tr>
+						<tr class="row" data-machine-id="12">
+						    <td colspan="12">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina goodness...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
 						</tr>
 					</tbody>
 				</table>
@@ -856,7 +943,7 @@
 		    document.querySelectorAll("tr[data-machine-id]").forEach(function(row) {
 		        var machineId = row.dataset.machineId;
 
-		        fetch('/Pwn3dWeb/machineDetails?id=' + machineId)
+		        fetch('<%= request.getContextPath() %>/machineDetails?id=' + machineId)
 		            .then(function(res) {
 		                return res.json();
 		            })
@@ -879,7 +966,7 @@
 		                    '<td id="vm">' +
 		                        '<div class="vm-name-btn level-btn ' + machine.difficulty + '">' +
 		                            '<img class="' + machine.difficulty + '-dots" title="' + machine.os + ' VM" ' +
-		                                'alt="' + machine.os + '" src="/Pwn3dWeb/img/' + machine.imgNameOs + '.svg" width="22" height="22" loading="lazy">' +
+		                                'alt="' + machine.os + '" src="<%= request.getContextPath() %>/img/' + machine.imgNameOs + '.svg" width="22" height="22" loading="lazy">' +
 		                            '<span class="vm-name-wrapper" style="display: flex; align-items: center; gap: 0.4rem;">' +
 		                                '<span class="vm-name" style="margin-right: -60px;">' + machine.nameMachine + '</span>' +
 		                                '<span class="vm-size" style="margin-right: 20px; margin-left: auto;">' + machine.size + '</span>' +
@@ -887,8 +974,8 @@
 		                        '</div>' +
 		                    '</td>' +
 		                    '<td class="tested">' +
-		                        '<img title="Env1" alt="' + machine.enviroment + ' logo" src="/Pwn3dWeb/img/' + machine.enviroment + '.png" width="25" height="25">' +
-		                        '<img title="Env2" alt="' + machine.enviroment2 + ' logo" src="/Pwn3dWeb/img/' + machine.enviroment2 + '.png" width="25" height="25"' +
+		                        '<img title="Env1" alt="' + machine.enviroment + ' logo" src="<%= request.getContextPath() %>/img/' + machine.enviroment + '.png" width="25" height="25">' +
+		                        '<img title="Env2" alt="' + machine.enviroment2 + ' logo" src="<%= request.getContextPath() %>/img/' + machine.enviroment2 + '.png" width="25" height="25"' +
 		                        ((machine.enviroment2 && machine.enviroment2 !== "null") ? '' : ' hidden') + '>' +
 		                    '</td>' +
 		                    '<td class="md5">' +
