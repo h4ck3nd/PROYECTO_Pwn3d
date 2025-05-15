@@ -1141,8 +1141,8 @@ footer img {
 		justify-content: center;
 		gap: 1.5rem;
 	}
-	.card, #card, .tested, #tested, .url, .md5, #md5, .first-user,
-		.first-root, .first-flag, .skills, #skills, .size, .submit-btn,
+	.card, #card, .tested, #tested, .url, .md5, #md5, .firts-flags,
+		.creator, .flag, .skills, #skills, .size, .submit-btn,
 		.add-writeup-btn {
 		display: none;
 	}
@@ -1925,7 +1925,7 @@ label {
   cursor: pointer;
   font-size: 1rem;
   border-radius: 5rem;
-  padding: 0.6rem 0.7rem;
+  padding: 0.6rem 0.6rem;
   border: 1px solid #444;
   background-color: var(--color-filter-bg);
   color: var(--color-filter-text);
@@ -1966,7 +1966,7 @@ label {
 	align-items: center;
 	text-align: center;
 	margin-bottom: -2px;
-	margin-top: 5px;
+	margin-top: 1px;
 }
 
 .submit-btn {
@@ -2694,7 +2694,7 @@ button[type="submit"]:hover {
   box-shadow: 0 4px 8px rgba(236, 7, 37, 0.1);
   user-select: none;
   cursor: default;
-  margin-right: 48.5rem;
+  margin-right: 47.5rem;
   overflow: hidden;
 }
 
@@ -2770,4 +2770,15 @@ button[type="submit"]:hover {
   display: inline-block;
   animation: blink-caret 0.8s step-end infinite;
   user-select: none;
+}
+
+.close-form-flag {
+	font-size: 20px;
+  width: 20px;
+  color: gray;
+  cursor: pointer;
+}
+
+.close-form-flag:hover {
+	color: red;
 }

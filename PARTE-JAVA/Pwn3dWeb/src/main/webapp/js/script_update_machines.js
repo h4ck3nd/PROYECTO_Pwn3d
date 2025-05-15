@@ -250,7 +250,7 @@ function showCard(name, os, difficulty, creator, release) {
 	const showFlagForm = (type, vmname) => {
 	  const body = document.querySelector('body');
 	  const modal = document.querySelector('.form-flag');
-	  const span = modal.querySelector('.close-form');
+	  const span = modal.querySelector('.close-form-flag');
 	  const title = modal.querySelector('.form-title h1');
 
 	  if (body && modal && span && title) {
@@ -336,4 +336,3 @@ function showCard(name, os, difficulty, creator, release) {
 
 	  type();
 	});
-

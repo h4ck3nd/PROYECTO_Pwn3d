@@ -339,9 +339,9 @@
 							<th id="tested">Entorno</th>
 							<th class="url">MD5</th>
 							<th id="md5">Writeups</th>
-							<th class="flag">Primer User</th>
-							<th class="first-user">Primer Root</th>
-							<th class="first-root">Flag</th>
+							<th class="first-user">Creador</th>
+							<th class="firts-flags">Primer User/Root</th>
+							<th class="flag">Flag</th>
 							<th id="writeups">Descarga</th>
 						</tr>
 					</thead>
@@ -748,7 +748,7 @@
 			<section class="form-flag">
 			  <div class="form-container">
 			    <!-- Botón de cierre -->
-			    <span class="close-form" style="margin-bottom: -30px !important; margin-top: -10px !important; margin-right: -8px !important;">&times;</span>
+			    <span class="close-form-flag" style="margin-bottom: -30px !important; margin-top: -10px !important; margin-right: -40rem !important;">&times;</span>
 			
 			    <!-- Título -->
 			    <div class="form-title">
@@ -887,6 +887,19 @@
 	            </div>
 				</article>
 	</footer>
+	
+	<!-- Popup First Flags -->
+	<div id="flagPopup" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.7); justify-content:center; align-items:center; z-index:9999;">
+	  <div style="background:#222; color:#fff; padding:20px; border-radius:8px; max-width:300px; text-align:center; position:relative;">
+	    <button onclick="closePopup()" style="position:absolute; top:8px; right:8px; background:none; border:none; color:#ec0725; font-size:18px; cursor:pointer;">×</button>
+	    <h2>Primera Flag</h2>
+	    <p>¡Felicitaciones por conseguir la primera flag de User/Root!</p>
+	    <p><strong>First User:</strong> <span id="popupFirstUser"></span></p>
+	    <p><strong>First Root:</strong> <span id="popupFirstRoot"></span></p>
+	  </div>
+	</div>
+
+	
 	<!--<script src="<%= request.getContextPath() %>/js/machines23.js"></script>-->
 	<script src="<%= request.getContextPath() %>/js/jsMachines.jsp"></script>
 	<script defer>
@@ -988,8 +1001,24 @@
 			                        '<div class="writeups-container"></div>' +
 			                    '</article>' +
 			                '</section>' +
-		                    '<td class="first-user">' + machine.firstUser + '</td>' +
-		                    '<td class="first-user">' + machine.firstRoot + '</td>' +
+			                '<td class="first-user">' + machine.creator + '</td>' +
+		                    //'<td class="first-user">' + machine.firstUser + '</td>' +
+		                    //'<td class="first-user">' + machine.firstRoot + '</td>' +
+		                    '<td class="first-user">' +
+							  '<button title="Primera Flag User/Root" type="button" class="btn-flag" ' +
+							  'data-first-user="' + machine.firstUser + '" ' +
+							  'data-first-root="' + machine.firstRoot + '" ' +
+							  'onclick="openPopup(this)" ' +
+							  'style="background:none; border:none; padding:0; cursor:pointer;">' +
+							    '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 64 64" fill="none" stroke="#ec0725" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+							      '<circle cx="32" cy="36" r="20" fill="#222" stroke="#ec0725" stroke-width="3" />' +
+							      '<rect x="28" y="12" width="8" height="6" fill="#ec0725" rx="1" ry="1" />' +
+							      '<line x1="32" y1="36" x2="32" y2="20" stroke="#ec0725" stroke-width="3" />' +
+							      '<line x1="32" y1="28" x2="32" y2="16" stroke="#ec0725" stroke-width="2" />' +
+							      '<path d="M32 16 L44 22 L32 28 Z" fill="#daa04a" stroke="#daa04a" />' +
+							    '</svg>' +
+							  '</button>' +
+							'</td>' +
 		                    '<td class="flag">' +
 		                        '<button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm(\'user/root\', \'' + machine.nameMachine + '\')">' +
 		                            '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
@@ -1014,6 +1043,62 @@
 		            });
 		    });
 		});
+	  
+	  /* POPUP FIRST FLAGS */
+	  
+	  function openPopup(button) {
+		  const firstUser = button.getAttribute('data-first-user') || 'N/A';
+		  const firstRoot = button.getAttribute('data-first-root') || 'N/A';
+		
+		  const popup = document.createElement('div');
+		  popup.id = 'flagPopupDynamic';
+		  popup.style.cssText = `
+		    display: flex;
+		    position: fixed;
+		    top: 0; left: 0; width: 100vw; height: 100vh;
+		    background: rgba(0, 0, 0, 0.75);
+		    justify-content: center;
+		    align-items: center;
+		    z-index: 9999;
+			line-height: 1.8rem;
+		    animation: fadeIn 0.3s ease forwards;
+		  `;
+		
+		  popup.innerHTML =
+		    '<div style="background:#1e1e1e; color:#eee; padding:30px 25px; border-radius:12px; max-width:320px; width: 90vw; box-shadow: 0 8px 24px rgba(0,0,0,0.6); text-align:center; position:relative; font-family: \'Segoe UI\', Tahoma, Geneva, Verdana, sans-serif;">' +
+		      '<button id="closePopupBtn" aria-label="Cerrar popup" style="position:absolute; top:12px; right:12px; background:#ec0725; border:none; color:#fff; font-size:20px; width:32px; height:32px; border-radius:50%; cursor:pointer; transition: background-color 0.2s ease;">×</button>' +
+		      '<br>' + '<br>' +
+		      '<h2 style="margin-top:0; font-weight: 700; font-size: 1.8rem; letter-spacing: 0.05em; color:#f5a623;">Primera Flag</h2>' +
+		      '<br>' +
+		      '<p style="font-size:1rem; margin-bottom:1.2em;">¡Felicitaciones por conseguir la primera flag de User/Root!</p>' +
+		      '<p style="font-size:1rem; margin:0.5em 0;"><strong>First User:</strong> ' + firstUser + '</p>' +
+		      '<p style="font-size:1rem; margin:0.5em 0;"><strong>First Root:</strong> ' + firstRoot + '</p>' +
+		    '</div>';
+		
+		  document.body.appendChild(popup);
+		
+		  const closeBtn = document.getElementById('closePopupBtn');
+		  closeBtn.onmouseenter = () => closeBtn.style.backgroundColor = '#b1051b';
+		  closeBtn.onmouseleave = () => closeBtn.style.backgroundColor = '#ec0725';
+		  closeBtn.onclick = () => document.body.removeChild(popup);
+		
+		  popup.onclick = function(e) {
+		    if (e.target === popup) {
+		      document.body.removeChild(popup);
+		    }
+		  };
+		
+		  // Añadimos keyframes para la animación fadeIn
+		  const styleSheet = document.createElement('style');
+		  styleSheet.type = 'text/css';
+		  styleSheet.innerText = `
+		    @keyframes fadeIn {
+		      from { opacity: 0; }
+		      to { opacity: 1; }
+		    }
+		  `;
+		  document.head.appendChild(styleSheet);
+		}
 
 	</script>
 
