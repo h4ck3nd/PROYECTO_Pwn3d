@@ -27,8 +27,10 @@
 		    
 		    <!-- LOGO -->
 	        
-	        <article class="logo-wrapper">
-	            <img class="logo" alt="Pwn3d! website logo" src="img/banner.png">
+	        <article class="pwned-header">
+	            <!-- <img class="logo" alt="Pwn3d! website logo" src="<%= request.getContextPath() %>/img/banner.png"> -->
+  				<img src="<%= request.getContextPath() %>/img/logo-flag-white.png" alt="Pwned Icon" class="pwned-icon" />
+	            <h2 class="pwned-title"></h2>
 	        </article>
 	        
 		      <!-- BOTÓN MODO CLARO/OSCURO -->
@@ -51,109 +53,98 @@
 			<!-- SECCION PARA ENVIAR VM -->
 			
 			<section class="form-vm">
-			  <div class="form-container">
-			  <span class="close-form" style="margin-bottom: -30px !important; margin-top: -10px !important; margin-right: -8px !important;">&times;</span>
-			    <div class="form-title">
-			      <h1 style="font-size: 20px !important; color: #3379ac !important; font-style: bold !important; margin-bottom: -20px !important;" >Nuevo envío de VM</h1>
+			  <div class="wizard-vm-container">
+			    <div class="wizard-vm-header">
+			      <img src="<%= request.getContextPath() %>/img/logo-prueba.png" class="vb-icon" />
+			      <span class="wizard-vm-title">Nuevo envío de VM</span>
+			      <span class="close-form" onclick="document.querySelector('.close-form').style.display='none'">&times;</span>
 			    </div>
-			    <p class="form-description" style="font-size: 12px !important; margin-bottom: -17px !important; line-height: 1.6 !important;">
-			      Complete el formulario con toda la información sobre su máquina virtual. Si desea comentarios sobre su subida, contáctenos.
-			    </p>
-			    <form class="form submit-form" id="vmForm">
-			      <!-- Name + Creator -->
-			      <div class="form-section" style="margin-bottom: -5px !important;">
-			        <div class="form-field-group">
-			          <div class="form-field">
-			            <label class="form-label" for="name" style="margin-bottom: 5px !important;">Nombre</label>
-			            <input class="form-control" id="name" name="Name" type="text" maxlength="20" placeholder="Nombre de la maquina" required autocomplete="off" style="font-size: 9px !important"/>
-			          </div>
-			          <div class="form-field">
-			            <label class="form-label" for="vm-creator" style="margin-bottom: 5px !important;">Creador</label>
-			            <input class="form-control" id="vm-creator" name="Creator" type="text" maxlength="15" placeholder="Nombre de usuario" style="font-size: 9px !important" required />
-			          </div>
-			        </div>
+			    <div class="wizard-vm-inner">
+			      <div class="wizard-vm-side">
+			        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Virtualbox_logo.png" alt="VirtualBox Logo" />
 			      </div>
+			      <div class="wizard-vm-content">
+			        <p class="wizard-vm-subtext">
+			          Complete el formulario con toda la información sobre su máquina virtual. Si desea comentarios sobre su subida, contáctenos.
+			        </p>
+			        <form id="wizardVmForm" class="wizard-vm-form-steps">
 			
-			      <!-- Level + URL -->
-			      
-			      <div class="form-section" style="margin-bottom: -5px !important;">
-			        <div class="form-field-group">
-			          <div class="form-field">
-			          <br>
-			            <label class="form-label" for="level" style="margin-bottom: 5px !important;">Dificultad</label>
-			            <select class="form-control" id="level" name="Level" required>
-			              <option value="Very-Easy">Very Easy</option>
-			              <option value="Easy">Easy</option>
-			              <option value="Medium">Medium</option>
-			              <option value="Hard">Hard</option>
-			            </select>
+			          <!-- Nombre y Creador -->
+			          <div class="wizard-vm-field-group">
+			            <div class="wizard-vm-field">
+			              <label for="wizard-vm-name">Nombre</label>
+			              <input id="wizard-vm-name" name="Name" type="text" maxlength="20" placeholder="Nombre de la máquina" required />
+			            </div>
+			            <div class="wizard-vm-field">
+			              <label for="wizard-vm-creator">Creador</label>
+			              <input id="wizard-vm-creator" name="Creator" type="text" maxlength="15" placeholder="Nombre de usuario" required />
+			            </div>
 			          </div>
-			          <div class="form-field">
-			          <br>
-			            <label class="form-label" for="vm-url" style="margin-bottom: 5px !important;">VM URL</label>
-			            <input class="form-control" id="vm-url" name="URL" type="url" pattern="https?://.+" placeholder="URL de VM publica" style="font-size: 9px !important" required />
-			          </div>
-			        </div>
-			      </div>
 			
-			      <!-- Flags -->
-			      
-			      <div class="form-section" style="margin-bottom: -5px !important;">
-			        <div class="form-field-group">
-			          <div class="form-field">
-			          <br>
-			            <label class="form-label" for="user-flag" style="margin-bottom: 5px !important;">Flag Usuario</label>
-			            <input class="form-control" id="user-flag" name="UserFlag" type="text" maxlength="32" placeholder="Flag del usuario" style="font-size: 9px !important" required />
+			          <!-- Dificultad y URL -->
+			          <div class="wizard-vm-field-group">
+			            <div class="wizard-vm-field">
+			              <label for="wizard-vm-level">Dificultad</label>
+			              <select id="wizard-vm-level" name="Level" required>
+			                <option value="Very-Easy">Very Easy</option>
+			                <option value="Easy">Easy</option>
+			                <option value="Medium">Medium</option>
+			                <option value="Hard">Hard</option>
+			              </select>
+			            </div>
+			            <div class="wizard-vm-field">
+			              <label for="wizard-vm-url">VM URL</label>
+			              <input id="wizard-vm-url" name="URL" type="url" pattern="https?://.+" placeholder="URL de VM pública" required />
+			            </div>
 			          </div>
-			          <div class="form-field">
-			          <br>
-			            <label class="form-label" for="root-flag" style="margin-bottom: 5px !important;">Flag Root</label>
-			            <input class="form-control" id="root-flag" name="RootFlag" type="text" maxlength="32" placeholder="Flag de root" style="font-size: 9px !important" required />
+			
+			          <!-- Flags -->
+			          <div class="wizard-vm-field-group">
+			            <div class="wizard-vm-field">
+			              <label for="wizard-user-flag">Flag Usuario</label>
+			              <input id="wizard-user-flag" name="UserFlag" type="text" maxlength="32" placeholder="Flag del usuario" required />
+			            </div>
+			            <div class="wizard-vm-field">
+			              <label for="wizard-root-flag">Flag Root</label>
+			              <input id="wizard-root-flag" name="RootFlag" type="text" maxlength="32" placeholder="Flag de root" required />
+			            </div>
 			          </div>
-			        </div>
-			      </div>
 			
-			      <!-- Writeup + Contact -->
-			      
-			      <div class="form-section" style="margin-bottom: -5px !important;">
-			        <div class="form-field-group">
-			          <div class="form-field">
-			          <br>
-			            <label class="form-label" for="writeup" style="margin-bottom: 5px !important;">Writeup URL</label>
-			            <input class="form-control" id="writeup-url" name="Solution" type="url" pattern="https?://.+" placeholder="URL del writeup" style="font-size: 9px !important" required />
+			          <!-- Writeup y Contacto -->
+			          <div class="wizard-vm-field-group">
+			            <div class="wizard-vm-field">
+			              <label for="wizard-writeup-url">Writeup URL</label>
+			              <input id="wizard-writeup-url" name="Solution" type="url" pattern="https?://.+" placeholder="URL del writeup" required />
+			            </div>
+			            <div class="wizard-vm-field">
+			              <label for="wizard-contact">Contacto</label>
+			              <input id="wizard-contact" name="Contact" type="text" maxlength="32" placeholder="email, Discord, etc..." required />
+			            </div>
 			          </div>
-			          <div class="form-field">
-			          <br>
-			            <label class="form-label" for="contact" style="margin-bottom: 5px !important;">Contacto</label>
-			            <input class="form-control" id="contact" name="Contact" type="text" maxlength="32" placeholder="email, Discord, etc..." style="font-size: 9px !important" required />
+			
+			          <!-- Tags -->
+			          <div class="wizard-vm-field">
+			            <label for="wizard-tags">Tags</label>
+			            <textarea id="wizard-tags" name="Tags" maxlength="200" rows="2" placeholder="Tags separadas por comas" required></textarea>
 			          </div>
-			        </div>
-			      </div>
 			
-			      <!-- Tags -->
-			      
-			      <div class="form-section">
-			        <div class="form-field">
-			        <br>
-			          <label class="form-label" for="tags" style="margin-bottom: 5px !important;">Tags</label>
-			          <textarea class="form-control" id="tags" name="Tags" maxlength="200" rows="2" placeholder="Tags separadas por comas" style="font-size: 9px !important" required></textarea>
-			        </div>
-			      </div>
+			          <!-- Botones -->
+			          <div class="wizard-vm-buttons">
+			            <button type="submit">Enviar</button>
+			            <button type="reset">Borrar</button>
+			          </div>
 			
-			      <!-- Buttons -->
-			      
-			      <br>
-			      <div class="form-btns" style="margin-bottom: 5px !important; margin-top: 5px !important;">
-			        <button class="button" type="submit">Enviar</button>
-			        <button class="button" type="reset">Borrar</button>
+			          <!-- Footer -->
+			          <div class="wizard-vm-footer">
+			            <small>Por favor, lea nuestras 
+			              <a href="https://vulnyx.com/rules/" target="_blank">
+			                <strong>Reglas</strong>
+			              </a> antes de enviar una nueva VM.
+			            </small>
+			          </div>
+			        </form>
 			      </div>
-			
-			      <!-- Footer -->
-			      
-			      <div class="form-footer" style="margin-bottom: -5px !important;">
-			        <small style="font-size: 0.75rem !important;">Por favor, lea nuestras <a href="https://vulnyx.com/rules/" target="_blank"><strong style="font-size: 0.75rem !important;">Reglas</strong></a> antes de enviar una nueva VM.</small>
-			      </div>
-			    </form>
+			    </div>
 			  </div>
 			</section>
 			</section>
@@ -264,7 +255,7 @@
 					</span>
 				</ul>
 				
-				    <div class="filter-wrapper" onmouseleave="hideFilters()">
+				    <div class="filter-wrapper">
 				        
 				        <!-- Botón para abrir el popup Filtro -->
 				        
@@ -312,6 +303,15 @@
 						        <input type="checkbox" id="windows" name="windows" />
 						        <label for="windows">Windows</label>
 						      </div>
+						      <div class="size-sort-filter" style="margin-top: 10px;">
+								  <label for="sizeSort">Ordenar por tamaño:</label>
+								  <br><br>
+								  <select id="sizeSort">
+								    <option value="">-- Sin orden --</option>
+								    <option value="asc">Menor a mayor</option>
+								    <option value="desc">Mayor a menor</option>
+								  </select>
+								</div>
 						    </div>
 						    <button onclick="applyFilters()">Aplicar</button>
 						  </div>
@@ -638,8 +638,9 @@
 						      writeupObj = {
 						        name: "r00tless",
 						        creator: "test1",
-						        url: "https://test.com/1"
+						        url: "http://test.com/"
 						      };
+						      writeupsArr.push(writeupObj);
 						    </script>
 						</tr>
 						<tr class="row" data-machine-id="12">

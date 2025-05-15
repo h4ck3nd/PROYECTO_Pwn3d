@@ -62,24 +62,24 @@ function showCard(name, os, difficulty, creator, release) {
 
     /* FILTER TABLE */
 	function openFilterPopup() {
-	  document.getElementById("filterPopup").style.display = "flex";
-	}
-
-	function closeFilterPopup() {
-	  document.getElementById("filterPopup").style.display = "none";
+	  const popup = document.getElementById("filterPopup");
+	  if (popup) {
+	    popup.style.display = "flex";
+	  }
 	}
 
 	function applyFilters() {
 	  const difficultyFilters = ['very-easy', 'easy', 'medium', 'hard'];
 	  const osFilters = ['linux', 'windows'];
+	  const sizeSort = document.getElementById('sizeSort').value;
 
 	  const activeDifficulties = difficultyFilters.filter(id => document.getElementById(id).checked);
 	  const activeOS = osFilters.filter(id => document.getElementById(id).checked);
 
-	  const rows = document.getElementById('vm-table').getElementsByTagName('tr');
+	  const table = document.getElementById('vm-table');
+	  const rows = Array.from(table.getElementsByTagName('tr')).slice(1); // Ignorar encabezado
 
-	  for (let i = 1; i < rows.length; i++) {
-	    const row = rows[i];
+	  let filteredRows = rows.filter(row => {
 	    const vmCell = row.querySelector('.vm-name-btn');
 	    const osImg = row.querySelector('.vm-name-btn img');
 
@@ -89,10 +89,39 @@ function showCard(name, os, difficulty, creator, release) {
 	    const osMatch = activeOS.length === 0 ||
 	      (osImg && osImg.title && activeOS.some(os => osImg.title.toLowerCase().includes(os)));
 
-	    row.style.display = (difficultyMatch && osMatch) ? '' : 'none';
+	    return difficultyMatch && osMatch;
+	  });
+
+	  if (sizeSort) {
+	    filteredRows.sort((a, b) => {
+	      const sizeA = getSizeInMB(a.querySelector('.vm-size')?.textContent);
+	      const sizeB = getSizeInMB(b.querySelector('.vm-size')?.textContent);
+	      return sizeSort === 'asc' ? sizeA - sizeB : sizeB - sizeA;
+	    });
 	  }
 
-	  closeFilterPopup(); // Cerrar después de aplicar
+	  rows.forEach(row => row.style.display = 'none'); // Ocultar todos
+	  filteredRows.forEach(row => {
+	    table.appendChild(row); // Reordenar y mostrar
+	    row.style.display = '';
+	  });
+
+	  closeFilterPopup();
+	}
+	function closeFilterPopup() {
+	  const popup = document.getElementById("filterPopup");
+	  if (popup) {
+	    popup.style.display = "none";
+	  }
+	}
+
+
+	function getSizeInMB(sizeText) {
+	  if (!sizeText) return 0;
+	  const size = sizeText.trim().toUpperCase();
+	  if (size.endsWith("GB")) return parseFloat(size) * 1024;
+	  if (size.endsWith("MB")) return parseFloat(size);
+	  return 0;
 	}
 
 	
@@ -285,3 +314,26 @@ function showCard(name, os, difficulty, creator, release) {
 	    searchInput.value = "";
 	    searchInput.dispatchEvent(new Event('input'));
 	}
+
+	
+	/* ESCRITURA DE TEXTO */
+	
+	document.addEventListener('DOMContentLoaded', () => {
+	  const titleEl = document.querySelector('.pwned-title');
+	  const text = 'PWNED!';
+	  let index = 0;
+
+	  function type() {
+	    if (index <= text.length) {
+	      titleEl.innerHTML = text.slice(0, index) + '<span class="cursor">_</span>';
+	      index++;
+	      setTimeout(type, 150);
+	    } else {
+	      // Mantener el texto completo con cursor parpadeando
+	      titleEl.innerHTML = text + '<span class="cursor">_</span>';
+	    }
+	  }
+
+	  type();
+	});
+

@@ -704,7 +704,7 @@ details {
     justify-content: center;
 }
 
-.form-writeup, .form-vm {
+.form-writeup{
     background-color: var(--color-modal-bg);
 }
 
@@ -942,17 +942,6 @@ details {
 	align-items: center;
 	text-align: center;
 	justify-content: center;
-}
-
-.close-form {
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: var(--close-btn-color);
-  align-self: flex-end; /* Para colocar el botón de cierre en la esquina superior derecha */
-}
-
-.close-form:hover {
-  color: var(--close-btn-hover);
 }
 
 /* Descripción */
@@ -1366,6 +1355,38 @@ body.light-theme .half {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   animation: slideUp 0.3s ease-out;
 }
+
+#sizeSort {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1.5px solid #444; /* gris oscuro */
+  border-radius: 6px;
+  background-color: #121212; /* negro carbón */
+  color: #eee; /* texto claro */
+  font-size: 1rem;
+  font-weight: 500;
+  appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23eee" height="12" viewBox="0 0 24 24" width="12" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+#sizeSort:hover {
+  border-color: #666; /* gris medio al hover */
+  background-color: #1e1e1e;
+}
+
+#sizeSort:focus {
+  outline: none;
+  border-color: #888; /* gris más claro */
+  box-shadow: 0 0 8px #888;
+  background-color: #1e1e1e;
+}
+
+
 
 @keyframes slideUp {
   from {
@@ -2468,11 +2489,285 @@ button[type="reset"] {
 }
 
 button[type="reset"]:hover {
-    background-color: #ff0000 !important;
+    background-color: var(--button-bg) !important;
     color: #000;
 }
 
 button[type="submit"]:hover {
-    color: #fff;
-    background-color: #000fff;
+    color: #000;
+    background-color: #b00000 !important;
+}
+
+/*ESTILO VIRTUAL BOX ENVIAR VM*/
+
+
+.wizard-vm-container {
+  width: 100%;
+  max-width: 1200px; /* más ancho */
+  background-color: #3c3c3c;
+  border: 1px solid #888;
+  border-radius: 4px;
+  overflow: auto; /* permite scroll si contenido muy alto */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  max-height: 90vh; /* limita alto para evitar overflow fuera de pantalla */
+  display: flex;
+  flex-direction: column;
+}
+
+.wizard-vm-header {
+  background-color: #f1f1f1;
+  color: #333;
+  padding: 8px 12px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+}
+
+.close-form {
+  font-size: 20px;
+  font-weight: bold;
+  width: 20px;
+  color: #333;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+}
+
+.close-form:hover {
+  color: #ffff;
+  background-color: red;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+  border-radius: 5px;
+  width: 22px;
+}
+
+.wizard-vm-inner {
+  display: flex;
+  flex-direction: row;
+}
+
+.wizard-vm-side {
+  width: 180px;
+  background-color: #fbd985;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wizard-vm-side img {
+  width: 1565px !important;
+  height: 200px !important;
+  object-fit: cover !important;
+}
+
+.wizard-vm-content {
+  flex: 1;
+  padding: 20px 30px;
+  background-color: #3c3c3c;
+  color: #fff;
+}
+
+.wizard-vm-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 5px;
+  color: #000;
+  margin-left: -840px;
+}
+
+.wizard-vm-subtext {
+  font-size: 13px;
+  color: #ddd;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.wizard-vm-field {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.wizard-vm-field label,
+.wizard-vm-field span {
+  margin-bottom: 5px;
+  font-size: 13px;
+  color: #f0f0f0;
+}
+
+.wizard-vm-field input[type="text"],
+.wizard-vm-field input[type="url"],
+.wizard-vm-field select,
+.wizard-vm-field textarea {
+  background-color: #2d2d2d;
+  border: 1px solid #666;
+  color: #fff;
+  padding: 8px;
+  font-size: 13px;
+  border-radius: 2px;
+  width: 100%;
+}
+
+.wizard-vm-field textarea {
+  resize: vertical;
+}
+
+.wizard-vm-radio {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: #fff;
+}
+
+.wizard-vm-buttons {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.wizard-vm-buttons button {
+  padding: 8px 16px;
+  font-size: 13px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  background-color: var(--color-button-submit);
+  color: white;
+  transition: background-color 0.2s ease;
+}
+
+.wizard-vm-buttons button[type="reset"] {
+  background-color: #999;
+}
+
+.wizard-vm-buttons button:hover {
+  background-color: #b00000;
+}
+
+.wizard-vm-footer {
+  margin-top: 25px;
+  font-size: 11px;
+  color: #ccc;
+  text-align: center;
+}
+
+.wizard-vm-footer a {
+  color: #4a90e2;
+  text-decoration: none;
+}
+
+.wizard-vm-footer a:hover {
+  text-decoration: underline;
+}
+
+.wizard-vm-field-group {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.wizard-vm-field-group .wizard-vm-field {
+  flex: 1;
+  min-width: 200px;
+}
+
+/* ESTILO DEL BANNER */
+
+.pwned-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  background: linear-gradient(90deg, rgba(236, 7, 37, 0.15), rgba(167, 14, 31, 0.15));
+  padding: 8px 16px;
+  border-radius: 8px;
+  max-width: fit-content;
+  box-shadow: 0 4px 8px rgba(236, 7, 37, 0.1);
+  user-select: none;
+  cursor: default;
+  margin-right: 48.5rem;
+  overflow: hidden;
+}
+
+/* Capa de brillo animada */
+.pwned-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-20deg);
+  animation: shimmer 6s linear infinite;
+  pointer-events: none;
+  border-radius: 8px;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -150%;
+  }
+  100% {
+    left: 150%;
+  }
+}
+
+.pwned-title {
+  position: relative; /* Para que quede por encima del brillo */
+  color: var(--color-text-dark);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-shadow: 0 0 6px rgba(236, 7, 37, 0.5);
+  margin: 0;
+  z-index: 1;
+}
+
+.pwned-icon {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  filter: drop-shadow(0 0 2px rgba(236, 7, 37, 0.6));
+  z-index: 1;
+}
+
+@keyframes blink-caret {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.pwned-title {
+  color: var(--color-text-dark);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-shadow: 0 0 6px rgba(236, 7, 37, 0.5);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.pwned-title .cursor {
+  display: inline-block;
+  animation: blink-caret 0.8s step-end infinite;
+  user-select: none;
 }
