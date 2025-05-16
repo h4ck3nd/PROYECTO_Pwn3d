@@ -265,22 +265,39 @@
   </div>
 	
     <div class="right-panel">
-      <div class="login-container">
-        <h1>CTF SYSTEM LOGIN</h1>
-        <form>
-          <label for="username">USUARIO</label>
-          <input type="text" id="username" name="username" placeholder="username" required />
+	  <div class="login-container">
+	    <h1>CTF SYSTEM LOGIN</h1>
+	    <form method="post" action="<%= request.getContextPath() %>/login">
+	      <label for="username">USUARIO</label>
+	      <input type="text" id="username" name="username" placeholder="username" required />
+	
+	      <label for="password">CONTRASEÑA</label>
+	      <input type="password" id="password" name="password" placeholder="********" required />
+	
+	      <input type="submit" value="LOGIN" />
+	    </form>
+	    <div class="footer">PRESIONA LOGIN PARA INGRESAR</div>
+	    
+	    <!-- MENSAJE DE ERROR MEDIANTE EL CONTROLADOR -->
+	    
+	    <%
+		    String loginError = (String) session.getAttribute("loginError");
+		    if (loginError != null) {
+		%>	
+			<br>
+		    <div style="color: red; font-weight: bold; font-size: 0.8rem;">
+		        <%= loginError %>
+		    </div>
+		<%
+		        session.removeAttribute("loginError"); // Elimina el mensaje después de mostrarlo
+		    }
+		%>
+		
+	    <br><br>
+	    <a href="<%= request.getContextPath() %>/login-register/register.jsp" class="btn-register-small">No tienes una cuenta? Registrate aquí</a>
+	  </div>
+	</div>
 
-          <label for="password">CONTRASEÑA</label>
-          <input type="password" id="password" name="password" placeholder="********" required />
-
-          <input type="submit" value="LOGIN" />
-        </form>
-        <div class="footer">PRESIONA LOGIN PARA INGRESAR</div>
-        <br><br>
-        <a href="<%= request.getContextPath() %>/login-register/register.jsp" class="btn-register-small">No tienes una cuenta? Registrate aquí</a>
-      </div>
-    </div>
   </div>
   <script>
   const canvas = document.getElementById("matrixCanvasText");

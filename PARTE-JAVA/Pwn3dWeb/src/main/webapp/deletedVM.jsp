@@ -1,4 +1,21 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    Cookie[] cookies = request.getCookies();
+    String token = null;
+    if (cookies != null) {
+        for (Cookie c : cookies) {
+            if ("token".equals(c.getName())) {
+                token = c.getValue();
+            }
+        }
+    }
+
+    if (token == null) {
+    	String contextPath = request.getContextPath();
+    	response.sendRedirect(contextPath + "/login-register/login.jsp");
+        return;
+    }
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>

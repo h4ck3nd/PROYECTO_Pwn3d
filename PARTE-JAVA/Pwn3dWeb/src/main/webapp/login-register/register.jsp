@@ -194,6 +194,32 @@
 	.btn-login-small:hover {
 		color: gray;
 	}
+	
+	.password-wrapper {
+	  position: relative;
+	}
+	
+	.password-wrapper input[type="password"],
+	.password-wrapper input[type="text"] {
+	  width: 100%;
+	  padding-right: 2.5rem;
+	}
+	
+	.toggle-password {
+	  position: absolute;
+	  right: 10px;
+	  top: 35%;
+	  transform: translateY(-50%);
+	  cursor: pointer;
+	  color: #00ff00;
+	}
+	
+	.eye-icon {
+	  width: 18px;
+	  height: 18px;
+	  display: inline-block;
+	}
+	
   </style>
 </head>
 <body>
@@ -218,34 +244,117 @@
 	
     <!-- LADO DERECHO CON FORMULARIO -->
     <div class="right-panel">
-      <div class="register-container">
-        <h1>REGISTER TO PWNED!</h1>
-        <form>
-          <label for="first-name">NOMBRE</label>
-          <input type="text" id="first-name" name="first-name" placeholder="nombre" required />
-
-          <label for="last-name">APELLIDOS</label>
-          <input type="text" id="last-name" name="last-name" placeholder="apellidos" required />
-
-          <label for="email">CORREO</label>
-          <input type="email" id="email" name="email" placeholder="tu@email.com" required />
-
-          <label for="username">NOMBRE DE USUARIO</label>
-          <input type="text" id="username" name="username" placeholder="username" required />
-
-          <label for="password">CONTRASEÑA</label>
-          <input type="password" id="password" name="password" placeholder="********" required />
-
-          <label for="confirm-password">REPETIR CONTRASEÑA</label>
-          <input type="password" id="confirm-password" name="confirm-password" placeholder="********" required />
-
-          <input type="submit" value="REGÍSTRATE" />
-        </form>
-        <div class="footer">¡ÚNETE A LA RESISTENCIA!</div>
-        <br><br>
-        <a href="<%= request.getContextPath() %>/login-register/login.jsp" class="btn-login-small">Ya tienes una cuenta? Inicia Sesión aquí</a>
-      </div>
-    </div>
+	  <div class="register-container">
+	    <h1>REGISTER TO PWNED!</h1>
+	    <form method="post" action="<%= request.getContextPath() %>/register">
+	      <label for="first-name">NOMBRE</label>
+	      <input type="text" id="first-name" name="first-name" placeholder="nombre" required />
+	
+	      <label for="last-name">APELLIDOS</label>
+	      <input type="text" id="last-name" name="last-name" placeholder="apellidos" required />
+	
+	      <label for="email">CORREO</label>
+	      <input type="email" id="email" name="email" placeholder="tu@email.com" required />
+	
+	      <label for="username">NOMBRE DE USUARIO</label>
+	      <input type="text" id="username" name="username" placeholder="username" required />
+	
+	      <label for="password">CONTRASEÑA</label>
+			<div class="password-wrapper">
+			  <input type="password" id="password" name="password" placeholder="********" required />
+			  <span class="toggle-password" onclick="togglePassword('password', this)">
+			    <!-- SVG Ojo abierto -->
+			    <svg class="eye-icon open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+			      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+			        d="M1.5 12s4.5-7.5 10.5-7.5S22.5 12 22.5 12s-4.5 7.5-10.5 7.5S1.5 12 1.5 12z" />
+			      <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2" fill="none" />
+			    </svg>
+			    <!-- SVG Ojo cerrado -->
+			    <svg class="eye-icon closed" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display: none;">
+			      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+			        d="M17.94 17.94A10.07 10.07 0 0112 19.5C6 19.5 1.5 12 1.5 12c.71-1.18 1.62-2.27 2.61-3.22m2.55-2.04A10.1 10.1 0 0112 4.5c6 0 10.5 7.5 10.5 7.5-.35.59-.74 1.15-1.15 1.68M3 3l18 18" />
+			    </svg>
+			  </span>
+			</div>
+			
+			<label for="confirm-password">REPETIR CONTRASEÑA</label>
+			<div class="password-wrapper">
+			  <input type="password" id="confirm-password" name="confirm-password" placeholder="********" required />
+			  <span class="toggle-password" onclick="togglePassword('confirm-password', this)">
+			    <!-- SVG Ojo abierto -->
+			    <svg class="eye-icon open" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+			      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+			        d="M1.5 12s4.5-7.5 10.5-7.5S22.5 12 22.5 12s-4.5 7.5-10.5 7.5S1.5 12 1.5 12z" />
+			      <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2" fill="none" />
+			    </svg>
+			    <!-- SVG Ojo cerrado -->
+			    <svg class="eye-icon closed" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="display: none;">
+			      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+			        d="M17.94 17.94A10.07 10.07 0 0112 19.5C6 19.5 1.5 12 1.5 12c.71-1.18 1.62-2.27 2.61-3.22m2.55-2.04A10.1 10.1 0 0112 4.5c6 0 10.5 7.5 10.5 7.5-.35.59-.74 1.15-1.15 1.68M3 3l18 18" />
+			    </svg>
+			  </span>
+			</div>
+		  
+		  <button type="button" id="generate-password-btn" style="margin-bottom:1rem; font-size:0.6rem;">
+		  	Recomendar contraseña segura
+		  </button>
+		  
+	      <input type="submit" value="REGÍSTRATE" />
+	    </form>
+	    <div class="footer">¡ÚNETE A LA RESISTENCIA!</div>
+	    
+	    <!-- MENSAJE DE EXITO MEDIANTE EL CONTROLADOR -->
+	    
+	    <%
+		    String loginExit = (String) session.getAttribute("loginExit");
+		    if (loginExit != null) {
+		%>  
+		    <br>
+		    <div style="color: green; font-weight: bold; font-size: 0.8rem;">
+		        <%= loginExit %>
+		    </div>
+		    <script>
+		        // Redirige a login.jsp después de 3 segundos (3000 ms)
+		        setTimeout(function() {
+		            window.location.href = '<%= request.getContextPath() %>/login-register/login.jsp';
+		        }, 3000);
+		    </script>
+		<%
+		        session.removeAttribute("loginExit"); // Elimina el mensaje después de mostrarlo
+		    }
+		%>
+	    
+	    <!-- MENSAJE DE ERROR MEDIANTE EL CONTROLADOR -->
+	    
+	    <%
+		    String loginError = (String) session.getAttribute("loginError");
+		    if (loginError != null) {
+		%>	
+			<br>
+		    <div style="color: red; font-weight: bold; font-size: 0.8rem;">
+		        <%= loginError %>
+		    </div>
+		<%
+		        session.removeAttribute("loginError"); // Elimina el mensaje después de mostrarlo
+		    }
+		%>
+		
+		<%
+		    String loginErrorPass = (String) session.getAttribute("loginErrorPass");
+		    if (loginErrorPass != null) {
+		%>	
+			<br>
+		    <div style="color: red; font-weight: bold; font-size: 0.8rem;">
+		        <%= loginErrorPass %>
+		    </div>
+		<%
+		        session.removeAttribute("loginErrorPass"); // Elimina el mensaje después de mostrarlo
+		    }
+		%>
+	    <br><br>
+	    <a href="<%= request.getContextPath() %>/login-register/login.jsp" class="btn-login-small">Ya tienes una cuenta? Inicia Sesión aquí</a>
+	  </div>
+	</div>
   </div>
   <script>
   const canvas = document.getElementById("matrixCanvasText");
@@ -326,6 +435,86 @@
 
   resizeCanvas();
   restartTyping();
+  
+//Genera una contraseña segura aleatoria
+  function generateSecurePassword(length = 12) {
+    const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}|;:,.<>?";
+    let password = "";
+    for (let i = 0; i < length; i++) {
+      password += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return password;
+  }
+
+  // Copiar texto al portapapeles
+  function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+      showPasswordMessage(`Contraseña copiada al portapapeles: ${text}`);
+    }).catch(err => {
+      console.error('Error al copiar: ', err);
+    });
+  }
+
+  // Mostrar mensaje temporal con la contraseña
+  function showPasswordMessage(message) {
+    const msgDiv = document.createElement("div");
+    msgDiv.textContent = message;
+    msgDiv.style.position = "fixed";
+    msgDiv.style.bottom = "20px";
+    msgDiv.style.left = "50%";
+    msgDiv.style.transform = "translateX(-50%)";
+    msgDiv.style.backgroundColor = "#222";
+    msgDiv.style.color = "#0f0";
+    msgDiv.style.padding = "10px 20px";
+    msgDiv.style.border = "1px solid #0f0";
+    msgDiv.style.borderRadius = "5px";
+    msgDiv.style.fontSize = "0.7rem";
+    msgDiv.style.zIndex = "1000";
+    document.body.appendChild(msgDiv);
+
+    setTimeout(() => {
+      document.body.removeChild(msgDiv);
+    }, 5000);
+  }
+
+  // Validar longitud mínima y coincidencia
+  document.querySelector("form").addEventListener("submit", function(e) {
+    const password = document.getElementById("password").value;
+    const confirmPassword = document.getElementById("confirm-password").value;
+
+    if (password.length < 8) {
+      e.preventDefault();
+      alert("La contraseña debe tener al menos 8 caracteres.");
+      return false;
+    }
+    if (password !== confirmPassword) {
+      e.preventDefault();
+      alert("Las contraseñas no coinciden.");
+      return false;
+    }
+  });
+
+  // Generar y usar la contraseña segura
+  document.getElementById("generate-password-btn").addEventListener("click", function() {
+    const newPassword = generateSecurePassword();
+    document.getElementById("password").value = newPassword;
+    document.getElementById("confirm-password").value = newPassword;
+    copyToClipboard(newPassword);
+  });
+  
+  /* VISIBILIDAD DE CONTRASEÑA */
+  
+  function togglePassword(fieldId, iconSpan) {
+  const input = document.getElementById(fieldId);
+  const openEye = iconSpan.querySelector(".eye-icon.open");
+  const closedEye = iconSpan.querySelector(".eye-icon.closed");
+
+  const isHidden = input.type === "password";
+  input.type = isHidden ? "text" : "password";
+
+  openEye.style.display = isHidden ? "none" : "inline-block";
+  closedEye.style.display = isHidden ? "inline-block" : "none";
+}
   </script>
 </body>
 </html>
