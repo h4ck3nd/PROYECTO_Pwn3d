@@ -358,14 +358,14 @@
     <div class="form-group">
         <label for="first_user">Primer usuario:</label>
         <div class="input-wrapper">
-            <input type="text" id="first_user" name="first_user" placeholder="user..." required>
+            <input type="text" id="first_user" name="first_user" placeholder="user...">
         </div>
     </div>
 
     <div class="form-group">
         <label for="first_root">Primer root:</label>
         <div class="input-wrapper">
-            <input type="text" id="first_root" name="first_root" placeholder="user..." required>
+            <input type="text" id="first_root" name="first_root" placeholder="user...">
         </div>
     </div>
 

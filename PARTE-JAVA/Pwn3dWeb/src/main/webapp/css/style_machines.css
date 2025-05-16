@@ -667,8 +667,12 @@ td div {
 
 #md5-hash {
     position: relative;
-    left: 8px;
-    top: 2px;
+    left: 4px;
+    top: 0px;
+}
+
+#md5-hash svg {
+    margin-right: -10px;
 }
 
 .copy-btn {
@@ -1647,6 +1651,7 @@ label {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 1rem;
 }
 
@@ -1845,6 +1850,8 @@ label {
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
     animation: fadeIn 0.3s ease-in-out;
     color: #fff;
+    max-height: 400px;      /* O el alto que quieras limitar */
+    overflow-y: auto;       /* Scroll vertical si se pasa */
 }
 
 /* Botón cerrar */
@@ -1876,6 +1883,7 @@ label {
 
 /* Contenedor de enlaces */
 .writeups-container {
+	margin-top: 30px !important;
     display: flex;
     flex-direction: column;
     line-height: 2rem;
@@ -2781,4 +2789,243 @@ button[type="submit"]:hover {
 
 .close-form-flag:hover {
 	color: red;
+}
+
+/* ESTILO POPUP INFO DETALLADA */
+
+#machinePopupDynamic {
+  display: flex;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  animation: fadeIn 0.3s ease forwards;
+  padding: 20px;
+  overflow: auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.5;
+}
+
+#machinePopupDynamic .popup-container {
+  background: #1e1e1e;
+  color: #eee;
+  padding: 30px 40px;
+  border-radius: 20px;
+  max-width: 700px;
+  width: 95vw;
+  max-height: 90vh;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.9);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  position: relative;
+}
+
+#machinePopupDynamic button.close-btn-info {
+  position: absolute;
+  top: 20px; right: 20px;
+  border: none;
+  color: gray;
+  background-color: transparent;
+  font-size: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#machinePopupDynamic button.close-btn-info:hover {
+  color: #b1051b;
+}
+
+#machinePopupDynamic h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #f5a623;
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+
+#machinePopupDynamic .machine-name {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #60d394;
+  margin-bottom: 15px;
+}
+
+#machinePopupDynamic .info-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+  color: #ccc;
+  font-size: 1rem;
+}
+
+#machinePopupDynamic .info-row-1 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 5px;
+  flex-wrap: wrap;
+  color: #ccc;
+  font-size: 1rem;
+}
+
+#machinePopupDynamic .info-row-2 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  color: #ccc;
+  font-size: 1rem;
+}
+
+#machinePopupDynamic .info-row img {
+  border-radius: 4px;
+}
+
+#machinePopupDynamic .level-btn {
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #f5a623;
+  font-weight: 600;
+}
+
+#machinePopupDynamic .level-btn span.date {
+  margin-left: auto;
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+#machinePopupDynamic section h3 {
+  color: #f5a623;
+  margin-bottom: 12px;
+  border-bottom: 2px solid #f5a623;
+  padding-bottom: 6px;
+  font-size: 1.3rem;
+}
+
+#machinePopupDynamic section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  color: #ccc;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+#machinePopupDynamic section ul li {
+  margin-bottom: 8px;
+}
+
+#machinePopupDynamic .metrics {
+  display: flex;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+#machinePopupDynamic .metric {
+  flex: 1;
+  min-width: 120px;
+}
+
+#machinePopupDynamic .metric p {
+  margin: 0 0 6px 0;
+  font-weight: 600;
+  color: #eee;
+}
+
+#machinePopupDynamic .bar-bg {
+  background: #333;
+  border-radius: 10px;
+  overflow: hidden;
+  height: 12px;
+}
+
+#machinePopupDynamic .bar-fill.cpu {
+  background: #60d394;
+  height: 100%;
+}
+
+#machinePopupDynamic .bar-fill.ram {
+  background: #f5a623;
+  height: 100%;
+}
+
+#machinePopupDynamic .bar-fill.disk {
+  background: #ee6055;
+  height: 100%;
+}
+
+#machinePopupDynamic .logs {
+  background: #111;
+  border-radius: 10px;
+  padding: 15px;
+  height: 180px;
+  overflow-y: auto;
+  font-family: monospace;
+  font-size: 0.85rem;
+  color: #aaa;
+  box-shadow: inset 0 0 10px #000;
+  white-space: pre-wrap;
+}
+
+#machinePopupDynamic .actions {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+#machinePopupDynamic .actions button {
+  font-weight: 700;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+}
+
+#machinePopupDynamic .actions button.close-info {
+  background: #ee6055;
+  color: #fff;
+}
+
+#machinePopupDynamic .actions button.close-info:hover {
+  background: #d94f4a;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: scale(0.95);}
+  to {opacity: 1; transform: scale(1);}
+}
+
+.popup-container {
+	/* Fondo general de la barra de desplazamiento */
+    scrollbar-width: thin; /* Para Firefox */
+    scrollbar-color: #444444 #222222; /* Color de la barra y el fondo para Firefox */
+}
+
+/* Estilos para Webkit (Chrome, Safari, Edge) */
+.popup-container::-webkit-scrollbar {
+    width: 8px; /* Ancho de la barra de desplazamiento */
+}
+
+.popup-container::-webkit-scrollbar-thumb {
+    background-color: #444444; /* Color del "dedo" de la barra de desplazamiento */
+    border-radius: 10px;
+    border: 2px solid #222222; /* Fondo alrededor del "dedo" */
+}
+
+.popup-container::-webkit-scrollbar-track {
+    background: #222222; /* Fondo de la barra de desplazamiento */
+    border-radius: 10px;
 }

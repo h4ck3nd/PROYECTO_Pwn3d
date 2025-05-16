@@ -599,6 +599,78 @@
 							        url: "https://github.com/miguellofredo85/PwnLabs/blob/main/Vulnyx/Controller%20AD.pdf"
 							      };
 							      writeupsArr.push(writeupObj);
+							      writeupObj = {
+									        name: "Controler",
+									        creator: "miguel0x1985",
+									        url: "https://github.com/miguellofredo85/PwnLabs/blob/main/Vulnyx/Controller%20AD.pdf"
+									      };
+									      writeupsArr.push(writeupObj);
+									      writeupObj = {
+											        name: "Controler",
+											        creator: "miguel0x1985",
+											        url: "https://github.com/miguellofredo85/PwnLabs/blob/main/Vulnyx/Controller%20AD.pdf"
+											      };
+											      writeupsArr.push(writeupObj);
+											      writeupObj = {
+													        name: "Controler",
+													        creator: "miguel0x1985",
+													        url: "https://github.com/miguellofredo85/PwnLabs/blob/main/Vulnyx/Controller%20AD.pdf"
+													      };
+													      writeupsArr.push(writeupObj);
+													      writeupObj = {
+															        name: "Controler",
+															        creator: "miguel0x1985",
+															        url: "https://github.com/miguellofredo85/PwnLabs/blob/main/Vulnyx/Controller%20AD.pdf"
+															      };
+															      writeupsArr.push(writeupObj);
+															      writeupObj = {
+																	        name: "Controler",
+																	        creator: "miguel0x1985",
+																	        url: "https://github.com/miguellofredo85/PwnLabs/blob/main/Vulnyx/Controller%20AD.pdf"
+																	      };
+																	      writeupsArr.push(writeupObj);
+																	      writeupObj = {
+																			        name: "Controler",
+																			        creator: "miguel0x1985",
+																			        url: "https://github.com/miguellofredo85/PwnLabs/blob/main/Vulnyx/Controller%20AD.pdf"
+																			      };
+																			      writeupsArr.push(writeupObj);
+																			      writeupObj = {
+																					        name: "Controler",
+																					        creator: "miguel0x1985",
+																					        url: "https://github.com/miguellofredo85/PwnLabs/blob/main/Vulnyx/Controller%20AD.pdf"
+																					      };
+																					      writeupsArr.push(writeupObj);
+																					      writeupObj = {
+																							        name: "Controler",
+																							        creator: "miguel0x1985",
+																							        url: "https://github.com/miguellofredo85/PwnLabs/blob/main/Vulnyx/Controller%20AD.pdf"
+																							      };
+																							      writeupsArr.push(writeupObj);
+																							      writeupObj = {
+																									        name: "Controler",
+																									        creator: "miguel0x1985",
+																									        url: "https://github.com/miguellofredo85/PwnLabs/blob/main/Vulnyx/Controller%20AD.pdf"
+																									      };
+																									      writeupsArr.push(writeupObj);
+																									      writeupObj = {
+																											        name: "Controler",
+																											        creator: "miguel0x1985",
+																											        url: "https://github.com/miguellofredo85/PwnLabs/blob/main/Vulnyx/Controller%20AD.pdf"
+																											      };
+																											      writeupsArr.push(writeupObj);
+																											      writeupObj = {
+																													        name: "Controler",
+																													        creator: "miguel0x1985",
+																													        url: "https://github.com/miguellofredo85/PwnLabs/blob/main/Vulnyx/Controller%20AD.pdf"
+																													      };
+																													      writeupsArr.push(writeupObj);
+																													      writeupObj = {
+																															        name: "Controler",
+																															        creator: "miguel0x1985",
+																															        url: "https://github.com/miguellofredo85/PwnLabs/blob/main/Vulnyx/Controller%20AD.pdf"
+																															      };
+																															      writeupsArr.push(writeupObj);
 					        </script>
 						</tr>
 						  <tr class="row" data-machine-id="10">
@@ -653,10 +725,20 @@
 						      </div>
 						    </div>
 						</tr>
+						<tr class="row" data-machine-id="13">
+						    <td colspan="13">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina nullMachine...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
+						</tr>
 					</tbody>
 				</table>
-				<p id="search-message">
-					No hay coincidencias para <span id="query"></span>. Pruebe con otra búsqueda.
+				<p id="search-message" style="display:none;">
+				  No hay coincidencias para <span id="query"></span>. Pruebe con otra búsqueda.
 				</p>
 			</div>
 			
@@ -823,7 +905,7 @@
 		</section>
 	</main>
 	<footer>
-		<img src="<%= request.getContextPath() %>/img/logo-flag-white.png" alt="Pwn3d! small footer logo" loading="lazy" style="width: 25px !important; height: 30px !important;">
+		<img src="<%= request.getContextPath() %>/img/logo-flag-white.png" alt="Pwn3d! small footer logo" loading="lazy" style="width: 25px !important; height: 25px !important;">
 		<p>© Pwn3d! 2024-2025</p>
 		
 		<!-- REDES SOCIALES -->
@@ -933,8 +1015,8 @@
 		                        '<span id="idnum">' + machine.id + '</span>' +
 		                    '</td>' +
 		                    '<td class="card">' +
-		                        '<button class="card-btn" title="Ver Info!" ' +
-		                            'onclick="showCard(\'' + machine.nameMachine + '\', \'' + machine.os + '\', \'' + machine.difficulty + '\', \'' + machine.creator + '\', \'' + machine.date + '\')">' +
+		                        '<button class="card-btn machineBtn" title="Ver Info!" ' +
+		                            'onclick="showCard(\'' + machine.nameMachine + '\', \'' + machine.os + '\', \'' + machine.difficulty + '\', \'' + machine.creator + '\', \'' + machine.date + '\', \'' + machine.id + '\')">' +
 		                            '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
 		                                '<circle cx="12" cy="12" r="10" />' +
 		                                '<line x1="12" y1="8" x2="12" y2="8.01" />' +
@@ -1052,54 +1134,231 @@
 		
 		  const popup = document.createElement('div');
 		  popup.id = 'flagPopupDynamic';
-		  popup.style.cssText = `
-		    display: flex;
-		    position: fixed;
-		    top: 0; left: 0; width: 100vw; height: 100vh;
-		    background: rgba(0, 0, 0, 0.75);
-		    justify-content: center;
-		    align-items: center;
-		    z-index: 9999;
-			line-height: 1.8rem;
-		    animation: fadeIn 0.3s ease forwards;
-		  `;
+		  popup.style.cssText =
+		    'display:flex;' +
+		    'position:fixed;top:0;left:0;width:100vw;height:100vh;' +
+		    'background:linear-gradient(135deg, rgba(0,0,0,0.85), rgba(20,20,20,0.9));' +
+		    'justify-content:center;align-items:center;' +
+		    'z-index:9999;' +
+		    'line-height: 2.3rem;' +
+		    'animation:fadeIn 0.4s ease forwards;';
 		
 		  popup.innerHTML =
-		    '<div style="background:#1e1e1e; color:#eee; padding:30px 25px; border-radius:12px; max-width:320px; width: 90vw; box-shadow: 0 8px 24px rgba(0,0,0,0.6); text-align:center; position:relative; font-family: \'Segoe UI\', Tahoma, Geneva, Verdana, sans-serif;">' +
-		      '<button id="closePopupBtn" aria-label="Cerrar popup" style="position:absolute; top:12px; right:12px; background:#ec0725; border:none; color:#fff; font-size:20px; width:32px; height:32px; border-radius:50%; cursor:pointer; transition: background-color 0.2s ease;">×</button>' +
-		      '<br>' + '<br>' +
-		      '<h2 style="margin-top:0; font-weight: 700; font-size: 1.8rem; letter-spacing: 0.05em; color:#f5a623;">Primera Flag</h2>' +
-		      '<br>' +
-		      '<p style="font-size:1rem; margin-bottom:1.2em;">¡Felicitaciones por conseguir la primera flag de User/Root!</p>' +
-		      '<p style="font-size:1rem; margin:0.5em 0;"><strong>First User:</strong> ' + firstUser + '</p>' +
-		      '<p style="font-size:1rem; margin:0.5em 0;"><strong>First Root:</strong> ' + firstRoot + '</p>' +
+		    '<div style="' +
+		      'background:#121212;' +
+		      'color:#f0f0f0;' +
+		      'padding:40px 35px;' +
+		      'border-radius:20px;' +
+		      'max-width:400px;width:90vw;' +
+		      'box-shadow:0 15px 40px rgba(0,0,0,0.8);' +
+		      'border:2px solid rgba(255,255,255,0.05);' +
+		      'backdrop-filter: blur(8px);' +
+		      'text-align:center;' +
+		      'position:relative;' +
+		      'font-family:Poppins,Segoe UI,Tahoma,sans-serif;' +
+		    '">' +
+		      '<button id="closePopupBtn" aria-label="Cerrar popup" style="' +
+		        'position:absolute;top:14px;right:14px;' +
+		        'background:#ec0725;border:none;' +
+		        'color:#fff;font-size:22px;' +
+		        'width:36px;height:36px;' +
+		        'border-radius:50%;cursor:pointer;' +
+		        'transition:all 0.3s ease;' +
+		        'box-shadow:0 4px 10px rgba(0,0,0,0.5);' +
+		      '">×</button>' +
+		      '<div style="margin-bottom:20px;">' +
+		        '<div style="font-size:2.2rem; color:#f5a623; font-weight:800;">Primeras Flags</div>' +
+		        '<p style="font-size:1.05rem; margin-top:10px; color:#ccc;">¡Los más rápidos en capturar User y Root!</p>' +
+		      '</div>' +
+		      '<div style="margin:15px 0;">' +
+		        '<span style="font-size:1rem; color:#aaa;">👤 <strong style="color:#60d394;">First User:</strong></span><br>' +
+		        '<span style="font-size:1.1rem; font-weight:600; color:#fff;">' + firstUser + '</span>' +
+		      '</div>' +
+		      '<div style="margin:15px 0;">' +
+		        '<span style="font-size:1rem; color:#aaa;">👑 <strong style="color:#ee6055;">First Root:</strong></span><br>' +
+		        '<span style="font-size:1.1rem; font-weight:600; color:#fff;">' + firstRoot + '</span>' +
+		      '</div>' +
 		    '</div>';
 		
 		  document.body.appendChild(popup);
 		
 		  const closeBtn = document.getElementById('closePopupBtn');
-		  closeBtn.onmouseenter = () => closeBtn.style.backgroundColor = '#b1051b';
-		  closeBtn.onmouseleave = () => closeBtn.style.backgroundColor = '#ec0725';
-		  closeBtn.onclick = () => document.body.removeChild(popup);
+		  closeBtn.onmouseenter = function () {
+		    closeBtn.style.backgroundColor = '#a9041b';
+		    closeBtn.style.transform = 'scale(1.1)';
+		  };
+		  closeBtn.onmouseleave = function () {
+		    closeBtn.style.backgroundColor = '#ec0725';
+		    closeBtn.style.transform = 'scale(1)';
+		  };
+		  closeBtn.onclick = function () {
+		    document.body.removeChild(popup);
+		  };
 		
-		  popup.onclick = function(e) {
+		  popup.onclick = function (e) {
 		    if (e.target === popup) {
 		      document.body.removeChild(popup);
 		    }
 		  };
 		
-		  // Añadimos keyframes para la animación fadeIn
 		  const styleSheet = document.createElement('style');
 		  styleSheet.type = 'text/css';
-		  styleSheet.innerText = `
-		    @keyframes fadeIn {
-		      from { opacity: 0; }
-		      to { opacity: 1; }
-		    }
-		  `;
+		  styleSheet.innerText =
+		    '@keyframes fadeIn {' +
+		    '  from { opacity: 0; transform: scale(0.95); }' +
+		    '  to { opacity: 1; transform: scale(1); }' +
+		    '}';
 		  document.head.appendChild(styleSheet);
 		}
-
+	  
+	  /* POPUP INFO MACHINE [+] (SHOW) */
+	  
+	  /* Función para abrir el popup con la info de la máquina */
+		function openMachinePopup(machine) {
+		  // Eliminar popup anterior si existe
+		  const existingPopup = document.getElementById('machinePopupDynamic');
+		  if (existingPopup) existingPopup.remove();
+		
+		  // Crear popup principal
+		  const popup = document.createElement('div');
+		  popup.id = 'machinePopupDynamic';
+		  popup.setAttribute('role', 'dialog');
+		  popup.setAttribute('aria-modal', 'true');
+		  popup.tabIndex = -1;
+		
+		  // HTML interno del popup con estructura y clases para CSS externo
+		  popup.innerHTML =
+		    '<div class="popup-container">' +
+		
+		      '<button id="closeMachinePopupBtn" class="close-btn-info" aria-label="Cerrar popup">&times;</button>' +
+		
+		      '<h2>Información detallada de la máquina</h2>' +
+		
+		      '<p class="machine-name">' + (machine.nameMachine || 'Nombre no disponible') + '</p>' +
+		
+		      // MD5 hash con icono
+		      '<div class="info-row">' +
+		        '<span id="md5-hash" title="' + (machine.md5 || '') + '" aria-label="MD5 hash">' +
+		          '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-md5" width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="#FFA500" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+		            '<path d="M14 3v4a1 1 0 0 0 1 1h4" />' +
+		            '<path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />' +
+		            '<path d="M6.5 16v-2c0 -0.5 0.5 -1 1 -1s1 0.5 1 1v2" />' +
+		            '<path d="M8.5 16v-2c0 -0.5 0.5 -1 1 -1s1 0.5 1 1v2" />' +
+		            '<path d="M11.5 16v-3h1c0.6 0 1 0.5 1 1.5s-0.4 1.5 -1 1.5h-1z" />' +
+		            '<path d="M16.5 13h-2v1.5c0.3 -0.2 0.7 -0.3 1 -0.3 0.6 0 1 0.4 1 1s-0.4 1 -1 1 -1 -0.4 -1 -1" />' +
+		          '</svg>' +
+		        '</span>' +
+		        '<br>' +
+		        '<span>' + 'MD5: ' + '</span>' +
+		        '<span>' + (machine.md5 || 'Sin MD5') + '</span>' +
+		      '</div>' +
+		
+		      // Entornos y SO
+		      '<div class="info-row-1">' +
+				  '<p style="margin:0;">ENTORNOS:</p>' +
+				  '<img title="Entorno 1" alt="' + (machine.enviroment || '') + ' logo" src="' + '<%= request.getContextPath() %>/img/' + (machine.enviroment || '') + '.png" width="25" height="25" />' +
+				
+				  '<img title="Entorno 2" alt="' + (machine.enviroment2 || '') + ' logo" src="' + '<%= request.getContextPath() %>/img/' + (machine.enviroment2 || '') + '.png" width="25" height="25" ' +
+				    ((!machine.enviroment2 || machine.enviroment2 === 'null') ? 'hidden' : '') + ' />' +
+				
+				  '</div>' +  // Cierra div de ENTORNOS
+				
+				  '<div class="info-row-2" style="margin-top: 10px;">' + // Nueva línea para S.O.
+				    '<p style="margin:0;">S.O.:</p>' +
+				    '<img alt="' + (machine.os || '') + '" src="' + '<%= request.getContextPath() %>/img/' + (machine.os || '') + '.svg" width="22" height="22" loading="lazy" style="align-items: center; display: flex; margin-bottom: 5px;" />' +
+				'</div>' +
+		
+		      // Difficulty + Creator + Date
+		      '<div class="level-btn ' + (machine.difficulty || '') + '">' +
+		        '<img class="' + (machine.difficulty || '') + '-dots" title="' + (machine.os || '') + ' VM" alt="VM difficulty dots" src="<%= request.getContextPath() %>/img/' + (machine.imgNameOs || '') + '.svg" width="22" height="22" loading="lazy" />' +
+		        '<span>Creador: ' + (machine.creator || 'Desconocido') + '</span>' +
+		        '<span class="date">Fecha: ' + (machine.date || 'N/A') + '</span>' +
+		      '</div>' +
+		
+		      // Datos generales
+		      '<section>' +
+		        '<h3>Datos generales</h3>' +
+		        '<ul>' +
+		          '<li><strong>ID:</strong> ' + (machine.id || 'No disponible') + '</li>' +
+		          '<li><strong>Ubicación:</strong> ' + (machine.location || 'No disponible') + '</li>' +
+		          '<li><strong>Tipo:</strong> ' + (machine.type || 'No disponible') + '</li>' +
+		          '<li><strong>Última actualización:</strong> ' + (machine.lastUpdate || 'No disponible') + '</li>' +
+		        '</ul>' +
+		      '</section>' +
+		      '<br>' +
+		      // Estado y métricas
+		      '<section>' +
+		        '<h3>Estado y métricas</h3>' +
+		        '<div class="metrics">' +
+		
+		          '<div class="metric">' +
+		            '<p><strong>CPU:</strong> ' + (machine.cpu || 'N/A') + '</p>' +
+		            '<div class="bar-bg"><div class="bar-fill cpu" style="width:' + (machine.cpuPercent || 0) + '%;"></div></div>' +
+		          '</div>' +
+		
+		          '<div class="metric">' +
+		            '<p><strong>RAM:</strong> ' + (machine.ramUsed || 'N/A') + ' / ' + (machine.ramTotal || 'N/A') + '</p>' +
+		            '<div class="bar-bg"><div class="bar-fill ram" style="width:' + (machine.ramPercent || 0) + '%;"></div></div>' +
+		          '</div>' +
+		
+		          '<div class="metric">' +
+		            '<p><strong>Disco:</strong> ' + (machine.diskUsed || 'N/A') + ' / ' + (machine.diskTotal || 'N/A') + '</p>' +
+		            '<div class="bar-bg"><div class="bar-fill disk" style="width:' + (machine.diskPercent || 0) + '%;"></div></div>' +
+		          '</div>' +
+		
+		        '</div>' +
+		      '</section>' +
+		      '<br>' +
+		      // Logs recientes
+		      '<section>' +
+		        '<h3>Logs recientes</h3>' +
+		        '<div class="logs" tabindex="0" aria-label="Logs recientes">' +
+		          (machine.logs && machine.logs.length > 0
+		            ? machine.logs.map(log => '<p style="margin:0 0 6px 0;">' + log + '</p>').join('')
+		            : '<p>No hay logs disponibles.</p>') +
+		        '</div>' +
+		      '</section>' +
+				'<br>' +
+		      // Botones acciones
+		      '<div class="actions">' +
+		        '<button class="close-info" type="button">Cerrar</button>' +
+		      '</div>' +
+		
+		    '</div>';
+		
+		  document.body.appendChild(popup);
+		
+		  // Eventos cerrar popup
+		  const closeBtn = document.getElementById('closeMachinePopupBtn');
+		  closeBtn.onclick = function () {
+		    popup.remove();
+		  };
+		
+		  // Cerrar popup haciendo click fuera del contenido
+		  popup.onclick = function (e) {
+		    if (e.target === popup) popup.remove();
+		  };
+		}
+		
+		/* Función para obtener datos del servidor y mostrar el popup */
+		function showMachinePopup(machineId) {
+		  console.log('Solicitando info para máquina con ID:', machineId);
+		  fetch('<%= request.getContextPath() %>/machineDetails?id=' + machineId)
+		    .then(response => {
+		      if (!response.ok) throw new Error('Error al obtener datos');
+		      return response.json();
+		    })
+		    .then(data => openMachinePopup(data))
+		    .catch(err => alert('No se pudo cargar la información de la máquina: ' + err.message));
+		}
+		
+		// Asignar evento a los botones con clase machineBtn
+		document.querySelectorAll('.machineBtn').forEach(btn => {
+		  btn.addEventListener('click', () => {
+		    const id = btn.getAttribute('data-machine-id');
+		    showMachinePopup(id);
+		  });
+		});
 	</script>
 
 </body>

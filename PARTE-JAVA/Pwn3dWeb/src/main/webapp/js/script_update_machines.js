@@ -1,5 +1,5 @@
 /* SHOW CARD */
-function showCard(name, os, difficulty, creator, release) {
+function showCard(name, os, difficulty, creator, release, id) {
     Swal.fire({
         background: '#1e1e1e',
         width: '45rem',
@@ -10,8 +10,17 @@ function showCard(name, os, difficulty, creator, release) {
                 '<div class="logo-section">' +
                     '<img src="img/card1.png" alt="VulNyx Logo" class="card-logo">' +
                 '</div>' +
-                '<div class="info-section">' +
-                    '<h1 class="card-title">' + name + '</h1>' +
+                '<div class="info-section">' + 
+				'<div style="display: flex; align-items: center;">' +
+				'<button class="machineBtn" title="Ver más info" style="background:none; border:none; padding:0; cursor:pointer; margin-bottom:1rem; margin-right:10px;" aria-label="Ver más información" data-machine-id="' + id + '" onclick="showMachinePopup(\'' + id + '\')">' +
+				    '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 60 60">' +
+				      '<circle cx="30" cy="30" r="28" fill="none" stroke="#00ff00" stroke-width="3" />' +
+				      '<line x1="30" y1="18" x2="30" y2="42" stroke="#00ff00" stroke-width="4" stroke-linecap="round" />' +
+				      '<line x1="18" y1="30" x2="42" y2="30" stroke="#00ff00" stroke-width="4" stroke-linecap="round" />' +
+				    '</svg>' +
+				  '</button>' +
+					'<h1 class="card-title" style="font-size: clamp(1rem, 4vw, 1.5rem); max-width: calc(100vw - 120px); overflow: hidden; text-overflow: ellipsis;">' + name + '</h1>' +
+				'</div>' +
                     '<div class="card-details">' +
                         '<div class="info-item">' +
                             '<div class="info-label">OS:</div>' +
@@ -269,44 +278,59 @@ function showCard(name, os, difficulty, creator, release) {
 	/* SEARCH LOGIC */
 	
 	document.addEventListener("DOMContentLoaded", function () {
-	    const searchInput = document.getElementById("vm-search");
-	    const tableRows = document.querySelectorAll("#vm-table tbody .row");
+	  const searchInput = document.getElementById("vm-search");
+	  const tableRows = document.querySelectorAll("#vm-table tbody .row");
 
-	    searchInput.addEventListener("input", function () {
-	        const filter = this.value.toLowerCase().trim();
+	  searchInput.addEventListener("input", function () {
+	    const filter = this.value.toLowerCase().trim();
 
-	        tableRows.forEach(row => {
-	            const vmNameCell = row.querySelector(".vm-name");
-	            const button = row.querySelector(".card-btn");
-	            let nameText = "", difficulty = "", creator = "";
+	    tableRows.forEach(row => {
+	      const vmNameCell = row.querySelector(".vm-name");
+	      const button = row.querySelector(".card-btn");
+	      let nameText = "", difficulty = "", creator = "";
 
-	            if (vmNameCell) {
-	                nameText = vmNameCell.textContent.toLowerCase();
-	            }
+	      if (vmNameCell) {
+	        nameText = vmNameCell.textContent.toLowerCase();
+	      }
 
-	            if (button) {
-	                const onclickAttr = button.getAttribute("onclick");
-	                const regex = /showCard\('([^']*)',\s*'[^']*',\s*'([^']*)',\s*'([^']*)',\s*'[^']*'\)/;
-	                const match = onclickAttr.match(regex);
-	                if (match) {
-	                    // match[1] = name, match[2] = difficulty, match[3] = creator
-	                    nameText = match[1].toLowerCase();
-	                    difficulty = match[2].toLowerCase();
-	                    creator = match[3].toLowerCase();
-	                }
-	            }
+	      if (button) {
+	        const onclickAttr = button.getAttribute("onclick");
+	        const regex = /showCard\('([^']*)',\s*'([^']*)',\s*'([^']*)',\s*'([^']*)',/;
+	        const match = onclickAttr.match(regex);
+	        if (match) {
+	          nameText = match[1].toLowerCase();
+	          difficulty = match[3].toLowerCase();
+	          creator = match[4].toLowerCase();
+	        }
+	      }
 
-	            if (
-	                nameText.includes(filter) ||
-	                difficulty.includes(filter) ||
-	                creator.includes(filter)
-	            ) {
-	                row.style.display = "";
-	            } else {
-	                row.style.display = "none";
-	            }
-	        });
+	      if (
+	        nameText.includes(filter) ||
+	        difficulty.includes(filter) ||
+	        creator.includes(filter)
+	      ) {
+	        row.style.display = "";
+	      } else {
+	        row.style.display = "none";
+	      }
 	    });
+
+	    // Mostrar mensaje si no hay resultados
+	    const searchMessage = document.getElementById("search-message");
+	    const querySpan = document.getElementById("query");
+
+	    let visibleCount = 0;
+	    tableRows.forEach(row => {
+	      if (row.style.display !== "none") visibleCount++;
+	    });
+
+	    if (visibleCount === 0 && filter !== "") {
+	      querySpan.textContent = this.value;
+	      searchMessage.style.display = "block";
+	    } else {
+	      searchMessage.style.display = "none";
+	    }
+	  });
 	});
 
 	function clearSearch() {
