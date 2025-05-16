@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 :root {
-    --color-background-dark: #151515;
+    --color-background-dark: #11041c;
     --color-background-light: #ffffff;
     --color-text-dark: #ffffff;
     --color-text-light: #141414;
-    --color-header-footer-bg: #262626;
+    --color-header-footer-bg: #1e1e1e;
     --color-header-footer-text: #ffffffa4;
     --color-link-text: #ffffff;
     --color-link-hover: #86d6fc;
@@ -51,8 +51,9 @@
     --color-card-text: #c8cbcf;
     /*--color-card-bg-light: #1e2125;
     --color-card-hover: rgba(0, 0, 0, 0.5);*/
-    --color-card-bg-light: #1e2125;  /* Un tono más suave y oscuro para las filas impares */
-    --color-card-hover: rgba(0, 0, 0, 0.6);  /* Ajuste en el hover con mayor transparencia */
+    --color-card-bg-light: rgba(46, 22, 74, 0.3);  /* Un tono más suave y oscuro para las filas impares */
+    /*--color-card-bg-light: #3A1E4A;*/
+    --color-card-hover: rgba(19, 13, 20, 1);  /* Ajuste en el hover con mayor transparencia */
     --color-card-title: white;
     --color-tooltip-bg: #333;
     --color-tooltip-text: #fff;
@@ -638,7 +639,8 @@ tbody tr:nth-child(odd) {
 */
 
 tbody tr:nth-child(even) {
-    background-color: rgba(30, 33, 37, 0.85);  /* Un tono más oscuro para las filas pares */
+    background-color: rgba(28, 14, 45, 0.4)
+;  /* Un tono más oscuro para las filas pares */
 }
 
 tbody tr:nth-child(odd) {

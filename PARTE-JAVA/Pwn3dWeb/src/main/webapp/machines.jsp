@@ -61,7 +61,10 @@
 			    </div>
 			    <div class="wizard-vm-inner">
 			      <div class="wizard-vm-side">
-			        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Virtualbox_logo.png" alt="VirtualBox Logo" />
+			        <img src="<%= request.getContextPath() %>/img/banner-ctf.png" 
+				     class="vb-icon-send-vm" 
+				     style="height: 180px; max-width: 90%; display: block; margin: 20px auto; object-fit: contain;" 
+				     alt="VirtualBox Logo" />
 			      </div>
 			      <div class="wizard-vm-content">
 			        <p class="wizard-vm-subtext">
