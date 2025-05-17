@@ -79,6 +79,20 @@ public class UserDAO {
         }
     }
     
+    public String getTokenByUserId(int userId) {
+        String sql = "SELECT cookie FROM users WHERE id = ?";
+        try (PreparedStatement pst = con.prepareStatement(sql)) {
+            pst.setInt(1, userId);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getString("cookie"); // Aquí está guardado el token
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
     public User getUserById(int userId) {
         String sql = "SELECT * FROM users WHERE id = ?";
         try (PreparedStatement pst = con.prepareStatement(sql)) {
