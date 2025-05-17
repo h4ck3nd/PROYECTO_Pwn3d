@@ -74,8 +74,17 @@ public class LoginServlet extends HttpServlet {
 
             response.sendRedirect("index.jsp");
         } else {
+        	// Aquí verificamos si el usuario existe solo por nombre
+            User userExist = userDao.getUserByUsername(usuario);
+
             HttpSession session = request.getSession();
-            session.setAttribute("loginError", "Usuario o contraseña incorrectos.");
+            if (userExist == null) {
+                // Usuario no existe
+                session.setAttribute("loginErrorUser", "El usuario no existe.");
+            } else {
+                // Usuario existe pero la contraseña está mal
+                session.setAttribute("loginError", "Usuario o contraseña incorrectos.");
+            }
             response.sendRedirect("login-register/login.jsp");
         }
     }

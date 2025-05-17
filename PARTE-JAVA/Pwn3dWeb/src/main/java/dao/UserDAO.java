@@ -113,4 +113,41 @@ public class UserDAO {
             e.printStackTrace();
         }
     }
+    
+    public boolean deleteUserById(int userId) {
+        String sql = "DELETE FROM users WHERE id = ?";
+        try (PreparedStatement pst = con.prepareStatement(sql)) {
+        	pst.setInt(1, userId);
+            int affectedRows = pst.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public User getUserByUsername(String username) {
+        String sql = "SELECT * FROM users WHERE usuario = ? LIMIT 1";
+        try (PreparedStatement pst = con.prepareStatement(sql)) {
+            pst.setString(1, username);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                User user = new User();
+                user.setId(rs.getInt("id"));
+                user.setUsuario(rs.getString("usuario"));
+                user.setEmail(rs.getString("email"));
+                user.setNombre(rs.getString("nombre"));
+                user.setApellido(rs.getString("apellido"));
+                user.setRol(rs.getString("rol"));
+                user.setCookie(rs.getString("cookie")); // muy importante
+                user.setFlagsUser(rs.getInt("flags_user"));
+                user.setFlagsRoot(rs.getInt("flags_root"));
+                user.setUltimoInicio(rs.getTimestamp("ultimo_inicio"));
+                return user;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
