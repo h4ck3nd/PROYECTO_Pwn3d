@@ -35,3 +35,21 @@ INSERT INTO machines (id, name_machine, size, os, enviroment, enviroment2, creat
 INSERT INTO machines (id, name_machine, size, os, enviroment, enviroment2, creator, difficulty_card, difficulty, date, md5, writeup_url, first_user, first_root, img_name_os, download_url) VALUES (7, 'War', '7.2GB', 'Windows', 'vbox', null, 'd4t4s3c', 'Easy', 'easy', '07 Dec 2024', 'A48B73FBA9796957C86C19F8758CC9E5', 'https://test.com/', 'minidump', 'minidump', 'Windows', 'https://vulnyx.com/file/War.php');
 INSERT INTO machines (id, name_machine, size, os, enviroment, enviroment2, creator, difficulty_card, difficulty, date, md5, writeup_url, first_user, first_root, img_name_os, download_url) VALUES (8, 'Manager', '1.8GB', 'Linux', 'vbox', 'vmware', 'd4t4s3c', 'Hard', 'hard', '29 Nov 2024', 'EE5082F8354628AC353D9FEF6EB8784C', 'https://test.com/', 'softyhack', 'll104567', 'Linux', 'https://vulnyx.com/file/Manager.php');
 INSERT INTO machines (id, name_machine, size, os, enviroment, enviroment2, creator, difficulty_card, difficulty, date, md5, writeup_url, first_user, first_root, img_name_os, download_url) VALUES (9, 'Controler', '5.0GB', 'Windows', 'vbox', null, 'd4t4s3c', 'Medium', 'medium', '23 Oct 2024', '73ECC9FD5D9CEC03A67124D9BE5A2151', 'https://test.com/', 'Rev3rKh1ll', 'Rev3rKh1ll', 'Windows', 'https://vulnyx.com/file/Controler.php');
+
+--=============TABLA DE USUARIOS===============
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    usuario VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    rol VARCHAR(20) DEFAULT 'user',
+    cookie TEXT,
+    flags_user INT DEFAULT 0,
+    flags_root INT DEFAULT 0,
+    ultimo_inicio TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
