@@ -18,24 +18,60 @@ public class LoginServlet extends HttpServlet {
 
         UserDAO userDao = new UserDAO();
         User user = userDao.getUserByCredentials(usuario, passwordHash);
-
+        
         if (user != null) {
-        	String token = JWTUtil.generateToken(
-        		    user.getId(),
-        		    user.getNombre(),
-        		    user.getApellido(),
-        		    user.getUsuario(),
-        		    user.getEmail(),
-        		    user.getRol(),
-        		    user.getCookie(),
-        		    user.getFlagsUser(),
-        		    user.getFlagsRoot(),
-        		    user.getUltimoInicio()
-        		);
-            Cookie cookie = new Cookie("token", token);
+        	
+        	// Actualizar el último inicio
+            userDao.updateUltimoInicio(user.getId());
+
+            // Volver a cargar el usuario para obtener el último_inicio actualizado
+            user = userDao.getUserById(user.getId());
+        	
+            // 1. Generar token temporal sin incluir el campo "cookie"
+            String tempToken = JWTUtil.generateToken(
+                user.getId(),
+                user.getNombre(),
+                user.getApellido(),
+                user.getUsuario(),
+                user.getEmail(),
+                user.getRol(),
+                null, // aún sin cookie
+                user.getFlagsUser(),
+                user.getFlagsRoot(),
+                user.getUltimoInicio()
+            );
+
+            // 2. Guardar token temporal en la base de datos
+            userDao.updateUserToken(user.getId(), tempToken);
+
+            // 3. Volver a cargar al usuario actualizado (con cookie desde la BDD)
+            User updatedUser = userDao.getUserById(user.getId());
+
+            // 4. Regenerar token ahora incluyendo el campo cookie
+            String finalToken = JWTUtil.generateToken(
+                updatedUser.getId(),
+                updatedUser.getNombre(),
+                updatedUser.getApellido(),
+                updatedUser.getUsuario(),
+                updatedUser.getEmail(),
+                updatedUser.getRol(),
+                updatedUser.getCookie(), // ya no es null
+                updatedUser.getFlagsUser(),
+                updatedUser.getFlagsRoot(),
+                updatedUser.getUltimoInicio()
+            );
+
+            // 5. Guardar el token final como cookie
+            Cookie cookie = new Cookie("token", finalToken);
             cookie.setHttpOnly(true);
             cookie.setMaxAge(60 * 60 * 24); // 1 día
+            cookie.setPath("/"); // importante para disponibilidad global
             response.addCookie(cookie);
+            
+            // GUARDAR userId en sesión
+            HttpSession session = request.getSession();
+            session.setAttribute("userId", user.getId());
+
             response.sendRedirect("index.jsp");
         } else {
             HttpSession session = request.getSession();
@@ -44,3 +80,4 @@ public class LoginServlet extends HttpServlet {
         }
     }
 }
+

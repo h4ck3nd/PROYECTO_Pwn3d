@@ -1,11 +1,14 @@
 package utils;
 
 import io.jsonwebtoken.*;
+import io.jsonwebtoken.SignatureAlgorithm;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class JWTUtil {
+
     private static final String SECRET_KEY = "-yTUI4zPf>V7/60x:1?V<MHod}>"; //Clave secreta TOKEN
     private static final long EXPIRATION_TIME = 86400000; // 1 día
 
@@ -38,24 +41,49 @@ public class JWTUtil {
                 .setSubject(usuario)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY.getBytes())
                 .compact();
     }
 
+    // Valida el token (ya lo tienes)
     public static boolean validateToken(String token) {
         try {
-            Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token);
+            Jwts.parser().setSigningKey(SECRET_KEY.getBytes()).parseClaimsJws(token);
             return true;
-        } catch (JwtException e) {
+        } catch (Exception e) {
             return false;
         }
     }
 
+    // Nuevo método para extraer el userId
+    public static Integer getUserIdFromToken(String token) {
+        try {
+            Claims claims = Jwts.parser()
+                .setSigningKey(SECRET_KEY.getBytes())
+                .parseClaimsJws(token)
+                .getBody();
+            // Asumiendo que el id está en el claim "id" y es un número entero
+            Number id = (Number) claims.get("id");
+            return id != null ? id.intValue() : null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static String getUsernameFromToken(String token) {
-        return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody().getSubject();
+        return Jwts.parser()
+                .setSigningKey(SECRET_KEY.getBytes())
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
     }
 
     public static String getRoleFromToken(String token) {
-        return (String) Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody().get("role");
+        return (String) Jwts.parser()
+                .setSigningKey(SECRET_KEY.getBytes())
+                .parseClaimsJws(token)
+                .getBody()
+                .get("rol");
     }
 }

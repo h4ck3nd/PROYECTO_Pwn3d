@@ -1,6 +1,8 @@
 package dao;
 
 import conexionDDBB.ConexionDDBB;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
 import model.User;
 import java.sql.*;
 
@@ -41,11 +43,74 @@ public class UserDAO {
                 user.setNombre(rs.getString("nombre"));
                 user.setApellido(rs.getString("apellido"));
                 user.setRol(rs.getString("rol"));
+                user.setCookie(rs.getString("cookie")); // <- añadir esto también
+                user.setFlagsUser(rs.getInt("flags_user"));
+                user.setFlagsRoot(rs.getInt("flags_root"));
+                user.setUltimoInicio(rs.getTimestamp("ultimo_inicio"));
                 return user;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
+    }
+    
+    public void clearUserTokenByUserId(int userId) {
+        String sql = "UPDATE users SET cookie = NULL WHERE id = ?";
+        try (PreparedStatement pst = con.prepareStatement(sql)) {
+            pst.setInt(1, userId);
+            int filas = pst.executeUpdate();
+            System.out.println("Filas afectadas al limpiar token por userId: " + filas);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void updateUserToken(int userId, String token) {
+        System.out.println("Guardando token en DB para usuario " + userId + ": " + token);
+        String sql = "UPDATE users SET cookie = ? WHERE id = ?";
+        try (PreparedStatement pst = con.prepareStatement(sql)) {
+            pst.setString(1, token);
+            pst.setInt(2, userId);
+            int rows = pst.executeUpdate();
+            System.out.println("Filas afectadas al guardar token: " + rows);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public User getUserById(int userId) {
+        String sql = "SELECT * FROM users WHERE id = ?";
+        try (PreparedStatement pst = con.prepareStatement(sql)) {
+            pst.setInt(1, userId);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                User user = new User();
+                user.setId(rs.getInt("id"));
+                user.setUsuario(rs.getString("usuario"));
+                user.setEmail(rs.getString("email"));
+                user.setNombre(rs.getString("nombre"));
+                user.setApellido(rs.getString("apellido"));
+                user.setRol(rs.getString("rol"));
+                user.setCookie(rs.getString("cookie")); // <- MUY IMPORTANTE
+                user.setFlagsUser(rs.getInt("flags_user"));
+                user.setFlagsRoot(rs.getInt("flags_root"));
+                user.setUltimoInicio(rs.getTimestamp("ultimo_inicio"));
+                return user;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public void updateUltimoInicio(int userId) {
+        String sql = "UPDATE users SET ultimo_inicio = CURRENT_TIMESTAMP WHERE id = ?";
+        try (PreparedStatement pst = con.prepareStatement(sql)) {
+        	pst.setInt(1, userId);
+        	pst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
