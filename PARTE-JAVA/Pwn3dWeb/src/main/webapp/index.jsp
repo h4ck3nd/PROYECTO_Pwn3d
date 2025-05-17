@@ -1,21 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%
-    Cookie[] cookies = request.getCookies();
-    String token = null;
-    if (cookies != null) {
-        for (Cookie c : cookies) {
-            if ("token".equals(c.getName())) {
-                token = c.getValue();
-            }
-        }
-    }
-
-    if (token == null) {
-    	String contextPath = request.getContextPath();
-    	response.sendRedirect(contextPath + "/login-register/login.jsp");
-        return;
-    }
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -385,7 +368,20 @@
         <a href="#">🛠️ Feedback</a>
         <hr />
         <a href="#">⚙️ Settings</a>
-        <a href="#">🔓 Logout</a>
+        <form action="<%= request.getContextPath() %>/logout" method="get" style="display:inline;">
+		    <button type="submit" style="
+		        font-size: 0.6rem;
+		        background-color: #ff3333;
+		        border: 2px solid #aa0000;
+		        padding: 6px 12px;
+		        color: white;
+		        font-family: 'Press Start 2P', monospace;
+		        cursor: pointer;
+		        border-radius: 4px;
+		        margin-left: 10px;">
+		        🔓 CERRAR SESIÓN
+		    </button>
+		</form>
       </nav>
       <div class="theme-toggle">
         <button id="toggle-theme">Modo Claro 🌞</button>

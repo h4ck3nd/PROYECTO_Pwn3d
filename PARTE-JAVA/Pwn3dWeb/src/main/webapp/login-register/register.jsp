@@ -220,6 +220,26 @@
 	  display: inline-block;
 	}
 	
+	.secure-btn {
+	  margin-bottom: 1rem;
+	  font-size: 0.65rem;
+	  font-family: 'Press Start 2P', monospace;
+	  background-color: #00ff00;
+	  color: #000;
+	  border: 2px solid #00ff00;
+	  padding: 10px 14px;
+	  border-radius: 4px;
+	  cursor: pointer;
+	  transition: all 0.3s ease;
+	  display: inline-flex;
+	  align-items: center;
+	  gap: 6px;
+	}
+	
+	.secure-btn:hover {
+	  background-color: transparent;
+	  color: #00ff00;
+	}
   </style>
 </head>
 <body>
@@ -295,9 +315,10 @@
 			  </span>
 			</div>
 		  
-		  <button type="button" id="generate-password-btn" style="margin-bottom:1rem; font-size:0.6rem;">
-		  	Recomendar contraseña segura
-		  </button>
+		  <button type="button" id="generate-password-btn" class="secure-btn">
+		  🔐 Recomendar contraseña segura
+		</button>
+
 		  
 	      <input type="submit" value="REGÍSTRATE" />
 	    </form>
@@ -446,53 +467,59 @@
     return password;
   }
 
-  // Copiar texto al portapapeles
-  function copyToClipboard(text) {
-    navigator.clipboard.writeText(text).then(() => {
-      showPasswordMessage(`Contraseña copiada al portapapeles: ${text}`);
-    }).catch(err => {
-      console.error('Error al copiar: ', err);
-    });
-  }
-
   // Mostrar mensaje temporal con la contraseña
-  function showPasswordMessage(message) {
-    const msgDiv = document.createElement("div");
-    msgDiv.textContent = message;
-    msgDiv.style.position = "fixed";
-    msgDiv.style.bottom = "20px";
-    msgDiv.style.left = "50%";
-    msgDiv.style.transform = "translateX(-50%)";
-    msgDiv.style.backgroundColor = "#222";
-    msgDiv.style.color = "#0f0";
-    msgDiv.style.padding = "10px 20px";
-    msgDiv.style.border = "1px solid #0f0";
-    msgDiv.style.borderRadius = "5px";
-    msgDiv.style.fontSize = "0.7rem";
-    msgDiv.style.zIndex = "1000";
-    document.body.appendChild(msgDiv);
+	function showToast(message, success = true) {
+	  const toast = document.createElement("div");
+	  toast.textContent = message;
+	  toast.style.position = "fixed";
+	  toast.style.bottom = "20px";
+	  toast.style.left = "50%";
+	  toast.style.transform = "translateX(-50%)";
+	  toast.style.backgroundColor = success ? "#111" : "#400";
+	  toast.style.color = success ? "#0f0" : "#f00";
+	  toast.style.padding = "10px 20px";
+	  toast.style.border = success ? "1px solid #0f0" : "1px solid #f00";
+	  toast.style.borderRadius = "6px";
+	  toast.style.fontSize = "0.65rem";
+	  toast.style.fontFamily = "'Press Start 2P', monospace";
+	  toast.style.zIndex = "9999";
+	  toast.style.opacity = "0.95";
+	  toast.style.transition = "opacity 0.5s ease";
+	
+	  document.body.appendChild(toast);
+	
+	  setTimeout(() => {
+	    toast.style.opacity = "0";
+	    setTimeout(() => document.body.removeChild(toast), 500);
+	  }, 4000);
+	}
 
-    setTimeout(() => {
-      document.body.removeChild(msgDiv);
-    }, 5000);
-  }
+	//Copiar texto al portapapeles
+	  function copyToClipboard(text) {
+	    navigator.clipboard.writeText(text).then(() => {
+	      showToast(`Contraseña generada y copiada al portapapeles.`);
+	    }).catch(err => {
+	      console.error('Error al copiar: ', err);
+	      showToast("No se pudo copiar al portapapeles.", false);
+	    });
+	  }
 
-  // Validar longitud mínima y coincidencia
-  document.querySelector("form").addEventListener("submit", function(e) {
-    const password = document.getElementById("password").value;
-    const confirmPassword = document.getElementById("confirm-password").value;
+	  // Validar longitud mínima y coincidencia
+	  document.querySelector("form").addEventListener("submit", function(e) {
+	    const password = document.getElementById("password").value;
+	    const confirmPassword = document.getElementById("confirm-password").value;
 
-    if (password.length < 8) {
-      e.preventDefault();
-      alert("La contraseña debe tener al menos 8 caracteres.");
-      return false;
-    }
-    if (password !== confirmPassword) {
-      e.preventDefault();
-      alert("Las contraseñas no coinciden.");
-      return false;
-    }
-  });
+	    if (password.length < 8) {
+	      e.preventDefault();
+	      showToast("La contraseña debe tener al menos 8 caracteres.", false);
+	      return false;
+	    }
+	    if (password !== confirmPassword) {
+	      e.preventDefault();
+	      showToast("Las contraseñas no coinciden.", false);
+	      return false;
+	    }
+	  });
 
   // Generar y usar la contraseña segura
   document.getElementById("generate-password-btn").addEventListener("click", function() {
