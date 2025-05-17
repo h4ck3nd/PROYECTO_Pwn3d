@@ -278,6 +278,34 @@
 	    </form>
 	    <div class="footer">PRESIONA LOGIN PARA INGRESAR</div>
 	    
+	    <!-- MENSAJE DE EXITO MEDIANTE EL CONTROLADOR DE ELIMINAR CUENTA -->
+	    
+	    <%
+		    String deleteExit = (String) session.getAttribute("deleteExit");
+		    if (deleteExit != null) {
+		%>	
+			<br>
+		    <div style="color: green; font-weight: bold; font-size: 0.8rem;">
+		        <%= deleteExit %>
+		    </div>
+		<%
+		        session.removeAttribute("deleteExit"); // Elimina el mensaje después de mostrarlo
+		    }
+		%>
+	    
+	    <%
+		    String loginErrorUser = (String) session.getAttribute("loginErrorUser");
+		    if (loginErrorUser != null) {
+		%>  
+		    <br>
+		    <div style="color: red; font-weight: bold; font-size: 0.8rem;">
+		        <%= loginErrorUser %>
+		    </div>
+		<%
+		        session.removeAttribute("loginErrorUser"); // Limpia después de mostrar
+		    }
+		%>
+	    
 	    <!-- MENSAJE DE ERROR MEDIANTE EL CONTROLADOR -->
 	    
 	    <%

@@ -5,30 +5,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="icon" href="<%= request.getContextPath() %>/img/logo-flag-white.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <title>HackMyVM Replica - Vulnyx Style</title>
   <style>
 :root {
   /* Oscuro por defecto */
-  --color-background: #0d0d0d;
-  --color-sidebar-bg: #111;
+  --color-background: #2c2b30;
+  --color-sidebar-bg: #333333;
+  --color-text-aside: #fff;
   --color-text: #fff;
-  --color-text-muted: #ccc;
+  --color-text-muted: #6a0dad;
   --color-accent: #ff4f87;
-  --color-accent-alt: #e64864;
+  --color-accent-alt: #8340c4;
+  --color-dot: #c9aee0;
   --color-hover-bg: #2a2a2a;
   --color-card-bg: #1a1a1a;
+  --color-download-bg: #c9aee0;
   --color-shadow: rgba(0, 0, 0, 0.3);
   --color-border: #333;
   --color-gray-dark: #444;
   --color-timestamp: #888;
-  --color-root: #ff4d6d;
-  --color-user: #4da6ff;
+  --color-root: #9b6ad1;
+  --color-user: #00ffff;
 }
 
 .light-theme {
   --color-background: #f4f4f4;
   --color-sidebar-bg: #ffffff;
   --color-text: #111;
+  --color-dot: #a46cc5;
+  --color-text-aside: #000;
   --color-text-muted: #555;
   --color-accent: #d13a6f;
   --color-accent-alt: #c13c5d;
@@ -38,8 +44,8 @@
   --color-border: #ddd;
   --color-gray-dark: #ccc;
   --color-timestamp: #777;
-  --color-root: #e63850;
-  --color-user: #2574b3;
+  --color-root: #5a2a7c;
+  --color-user: #000fff;
 }
     /* Reset básico */
     * {
@@ -51,7 +57,8 @@
     body {
       background-color: var(--color-background);
       color: var(--color-text);
-      font-family: 'Inter', sans-serif;
+      font-family: 'Press Start 2P', monospace !important;
+      line-height: 1.75rem;
     }
 
     .app {
@@ -70,7 +77,7 @@
     }
 
     .sidebar a {
-      color: var(--color-text-muted);
+      color: var(--color-text-aside) !important;
       text-decoration: none;
       padding: 10px 0;
       display: flex;
@@ -88,7 +95,7 @@
       position: absolute;
       top: 10px;
       left: 10px;
-      font-size: 1.8rem;
+      font-size: 1.0rem;
       background: none;
       color: var(--color-text);
       border: none;
@@ -189,6 +196,7 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
+      margin-top: 80px;
     }
 
     .menu a {
@@ -216,7 +224,7 @@
     }
 
     .dot {
-      color: var(--color-accent-alt);
+      color: var(--color-dot);
     }
 
     .vm-info h2, .vm-info h3 {
@@ -238,7 +246,7 @@
     }
 
     .download {
-      background-color: var(--color-accent-alt);
+      background-color: var(--color-download-bg);
       color: var(--color-text);
     }
 
@@ -339,10 +347,39 @@
       color: var(--color-user);
       font-weight: bold;
     }
+    
+    /* ESTILOS PARA EL POPUP DE ELIMINAR CUENTA */
+    
+    @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap');
+    .neon-popup {
+        font-family: 'Fira Code', monospace;
+        font-weight: 600;
+        font-size: 1rem;
+        text-align: center;
+    }
+    .swal2-dark-popup {
+	    box-shadow: 0 0 20px rgba(229, 83, 83, 0.7);
+	    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	    border-radius: 12px;
+	}
+
+    
   </style>
+  
+  <!-- FUENTE DE LETRA PARA EL POPUP DE ELIMINAR CUENTA -->
+  
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
+<!-- FORMULARIO OCULTO PARA ELIMINAR CUENTA CUANDO SE LLAMADA DESDE EL BOTON -->
+
+<form id="deleteForm" method="post" action="deleteAccount" style="display:none;">
+    <!-- Form vacío, se envía solo el userId de sesión en backend -->
+</form>
+
+<!-- MENU DE HABURGUESA -->
+
     <button id="hamburger" class="menu-toggle" style="display: none;">☰</button>
   <div class="app">
     <div id="sidebarWrapper" class="sidebar-wrapper open">
@@ -350,24 +387,21 @@
           <!-- Botón de cerrar -->
           <button id="closeMenu" class="menu-close">❌</button>
           <div class="profile">
-            <img src="profile.jpg" alt="Profile">
+            <img src="<%= request.getContextPath() %>/img/logo-flag-white.png" alt="Profile">
             <p><strong>User:</strong> NAME</p>
           </div>
+          <hr>
       <nav class="menu">
+      <!-- Seccion Usuarios -->
         <a href="#">📊 Dashboard</a>
         <a href="<%= request.getContextPath() %>/machines.jsp">💻 Machines</a>
-        <a href="#">🧪 HMVLabs</a>
-        <a href="#">🎯 Challenges</a>
-        <hr />
-        <a href="#">🏆 Leaderboard</a>
-        <a href="#">🥇 Trophies</a>
-        <a href="#">📤 Submit</a>
-        <hr />
-        <a href="#">💬 Palique</a>
-        <a href="#">❓ FAQ</a>
-        <a href="#">🛠️ Feedback</a>
-        <hr />
-        <a href="#">⚙️ Settings</a>
+        <a href="#">🏆 Ranking</a>
+        <!--<hr/>  -->
+        <!-- Seccion de Autenticacion -->
+        <!--<a href="#">⚙️ Settings</a>-->
+        
+        <!-- BOTON/FORMULARIO PARA CERRAR SESION DEL USUSARIO ACTUAL POR ID -->
+        
         <form action="<%= request.getContextPath() %>/logout" method="get" style="display:inline;">
 		    <button type="submit" style="
 		        font-size: 0.6rem;
@@ -382,6 +416,33 @@
 		        🔓 CERRAR SESIÓN
 		    </button>
 		</form>
+		
+		<!-- BOTON PARA ELIMINAR CUENTA -->
+		
+		<button 
+		    type="button" 
+		    id="deleteBtn"
+		    style="background-color: crimson; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; width: 100%; margin-top: 12px; font-size: 0.55rem; white-space: nowrap; font-family: 'Press Start 2P', monospace !important; font-weight: bold; box-shadow: 0 0 10px rgba(255, 0, 0, 0.6); transition: transform 0.2s ease;"
+		    onmouseover="this.style.transform='scale(1.05)'"
+		    onmouseout="this.style.transform='scale(1)'"
+		>
+		    🗑️ Eliminar Cuenta
+		</button>
+		
+		<!-- MENSAJE DE ERROR MEDIANTE EL CONTROLADOR AL ELIMINAR CUENTA -->
+	    
+	    <%
+		    String deleteError = (String) session.getAttribute("deleteError");
+		    if (deleteError != null) {
+		%>	
+			<br>
+		    <div style="color: red; font-weight: bold; font-size: 0.8rem;">
+		        <%= deleteError %>
+		    </div>
+		<%
+		        session.removeAttribute("deleteError"); // Elimina el mensaje después de mostrarlo
+		    }
+		%>
       </nav>
       <div class="theme-toggle">
         <button id="toggle-theme">Modo Claro 🌞</button>
@@ -436,6 +497,8 @@
         </div>
       </section>
     </main>
+    <!-- PARA SCRIPT BONITO DE ELIMINAR CUENTA -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
        const hamburger = document.getElementById("hamburger");
 const closeBtn = document.getElementById("closeMenu");
@@ -481,6 +544,42 @@ const toggleBtn = document.getElementById('toggle-theme');
     toggleBtn.textContent = isLight ? 'Modo Oscuro 🌙' : 'Modo Claro 🌞';
     localStorage.setItem('theme', isLight ? 'light' : 'dark');
   });
+  
+  	/* ELIMINAR CUENTA */
+  
+	 document.getElementById('deleteBtn').addEventListener('click', function () {
+	    Swal.fire({
+	        title: '¿Eliminar cuenta?',
+	        text: "Esta acción no se puede deshacer.",
+	        icon: 'warning',
+	        input: 'text',
+	        inputPlaceholder: 'Escribe "delete account" para confirmar',
+	        inputAttributes: {
+	            autocapitalize: 'off',
+	            autocorrect: 'off',
+	            spellcheck: 'false'
+	        },
+	        showCancelButton: true,
+	        confirmButtonColor: '#e55353',  // rojo vibrante pero elegante
+	        cancelButtonColor: '#6c757d',   // gris neutro para cancelar
+	        confirmButtonText: 'Sí, eliminar',
+	        cancelButtonText: 'Cancelar',
+	        background: '#1e1e2f',  // fondo oscuro azulado
+	        color: '#f8f9fa',       // texto claro
+	        customClass: {
+	            popup: 'swal2-dark-popup'
+	        },
+	        preConfirm: (inputValue) => {
+	            if (inputValue !== 'delete account') {
+	                Swal.showValidationMessage('La frase no coincide. Intenta de nuevo.');
+	            }
+	        }
+	    }).then((result) => {
+	        if (result.isConfirmed) {
+	            document.getElementById('deleteForm').submit();
+	        }
+	    });
+	});
     </script>
 </body>
 </html>
