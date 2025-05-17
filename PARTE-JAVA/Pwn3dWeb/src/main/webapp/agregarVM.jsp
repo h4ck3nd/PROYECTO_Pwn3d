@@ -235,6 +235,7 @@
         <a href="#">Inicio</a>
         <a href="<%= request.getContextPath() %>/machines.jsp">Máquinas</a>
         <a href="<%= request.getContextPath() %>/deletedVM.jsp">Eliminar VM</a>
+        <a href="<%= request.getContextPath() %>/addWriteupsAdmin.jsp">Agegar Writeups</a>
         <a href="#">Contacto</a>
     </nav>
 </header>

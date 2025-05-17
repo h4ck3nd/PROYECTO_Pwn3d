@@ -5,7 +5,7 @@
 	Machine machine = null;
 %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 <meta charset="utf-8">
@@ -375,26 +375,6 @@
 						        <div class="wave"></div>
 						      </div>
 						    </div>
-						    <script>
-					            writeupObj = {
-					                name: "Change",
-					                creator: "d4t4s3c",
-					                url: "https://d4t4s3c.com/vulnyx/2025/03/08/Change/"
-					            };
-					            writeupsArr.push(writeupObj);
-					            writeupObj = {
-						                name: "Change",
-						                creator: "PL4GU3",
-						                url: "https://youtu.be/cfHYpcP5Tdc"
-						            };
-						            writeupsArr.push(writeupObj);
-						            writeupObj = {
-							                name: "Change",
-							                creator: "hyh",
-							                url: "https://www.hyhforever.top/vulnyx-change"
-							            };
-							            writeupsArr.push(writeupObj);
-					        </script>
 						</tr>
 						<tr class="row" data-machine-id="3">
 						    <td colspan="3">
@@ -405,18 +385,6 @@
 						        <div class="wave"></div>
 						      </div>
 						    </div>
-						    <script>
-					            writeupObj = { name: "Anon", creator: "suraxddq", url: "https://byte-mind.net/vulnyx-machines-anon-writeup" };
-					            writeupsArr.push(writeupObj);
-					            writeupObj = { name: "Anon", creator: "ll104567", url: "https://www.bilibili.com/video/BV1VhN7e5Ehw" };
-					            writeupsArr.push(writeupObj);
-					            writeupObj = { name: "Anon", creator: "PL4GU3", url: "https://youtu.be/7VKb3Po7fd8" };
-					            writeupsArr.push(writeupObj);
-					            writeupObj = { name: "Anon", creator: "MatthyGD", url: "https://www.youtube.com/watch?v=_YqXlvukKE0" };
-					            writeupsArr.push(writeupObj);
-					            writeupObj = { name: "Anon", creator: "sunset", url: "https://www.sunset-blog.top/baji/vulnyx/Anon%20193b61af4289808d9254cfc427e4931b.html" };
-					            writeupsArr.push(writeupObj);
-					        </script>
 						</tr>
 						<tr class="row" data-machine-id="4">
 						    <td colspan="4">
@@ -427,20 +395,6 @@
 						        <div class="wave"></div>
 						      </div>
 						    </div>
-						    <script>
-						    writeupObj = {
-					                name: "Hit",
-					                creator: "ll104567",
-					                url: "https://www.bilibili.com/video/BV1m7NAedEuh"
-					            };
-					            writeupsArr.push(writeupObj);
-					            writeupObj = {
-						                name: "Hit",
-						                creator: "MatthyGD",
-						                url: "https://www.youtube.com/watch?v=Lzrhk3O67YA"
-						            };
-						            writeupsArr.push(writeupObj);
-					        </script>
 						</tr>
 						<tr class="row" data-machine-id="5">
 						    <td colspan="5">
@@ -451,38 +405,6 @@
 						        <div class="wave"></div>
 						      </div>
 						    </div>
-						    <script>
-						    writeupObj = {
-					                name: "Matrix",
-					                creator: "MatthyGD",
-					                url: "https://www.youtube.com/watch?v=fc6YmdAzP7s"
-					            };
-					            writeupsArr.push(writeupObj);
-					            writeupObj = {
-					                name: "Matrix",
-					                creator: "ll104567",
-					                url: "https://www.bilibili.com/video/BV1escFeSEKM"
-					            };
-					            writeupsArr.push(writeupObj);
-					            writeupObj = {
-					                name: "Matrix",
-					                creator: "suraxddq",
-					                url: "https://byte-mind.net/vulnyx-machines-matrix-writeup"
-					            };
-					            writeupsArr.push(writeupObj);
-					            writeupObj = {
-					                name: "Matrix",
-					                creator: "Lenam (EN)",
-					                url: "https://len4m.github.io/posts/matrix-writeup-vulnyx-en"
-					            };
-					            writeupsArr.push(writeupObj);
-					            writeupObj = {
-					                name: "Matrix",
-					                creator: "Lenam (ES)",
-					                url: "https://len4m.github.io/es/posts/matrix-writeup-vulnyx-es"
-					            };
-					            writeupsArr.push(writeupObj);
-					        </script>
 						</tr>
 						<tr class="row" data-machine-id="6">
 						    <td colspan="6">
@@ -493,20 +415,6 @@
 						        <div class="wave"></div>
 						      </div>
 						    </div>
-						    <script>
-						    writeupObj = {
-					                name: "Tunnel",
-					                creator: "ll104567",
-					                url: "https://www.bilibili.com/video/BV16QBGYgE8A"
-					            };
-					            writeupsArr.push(writeupObj);
-					            writeupObj = {
-					                name: "Tunnel",
-					                creator: "MatthyGD",
-					                url: "https://www.youtube.com/watch?v=JyQ7YVqDarc"
-					            };
-					            writeupsArr.push(writeupObj);
-					        </script>
 						</tr>
 						<tr class="row" data-machine-id="7">
 						    <td colspan="7">
@@ -517,26 +425,6 @@
 						        <div class="wave"></div>
 						      </div>
 						    </div>
-						    <script>
-						    writeupObj = {
-					                name: "War",
-					                creator: "d4t4s3c",
-					                url: "https://d4t4s3c.com/vulnyx/2024/12/07/War/"
-					            };
-					            writeupsArr.push(writeupObj);
-					            writeupObj = {
-					                name: "War",
-					                creator: "ll104567",
-					                url: "https://www.bilibili.com/video/BV1bzqJYBEjf"
-					            };
-					            writeupsArr.push(writeupObj);
-					            writeupObj = {
-					                name: "War",
-					                creator: "beafn28",
-					                url: "https://beafn28.gitbook.io/beafn28/writeups/vulnyx/war"
-					            };
-					            writeupsArr.push(writeupObj);
-					        </script>
 						</tr>
 						<tr class="row" data-machine-id="8">
 						    <td colspan="8">
@@ -547,20 +435,6 @@
 						        <div class="wave"></div>
 						      </div>
 						    </div>
-						    <script>
-						    writeupObj = {
-					                name: "Manager",
-					                creator: "ll104567",
-					                url: "https://www.bilibili.com/video/BV1uiznY7Eaj"
-					            };
-					            writeupsArr.push(writeupObj);
-					            writeupObj = {
-					                name: "Manager",
-					                creator: "pointedsec",
-					                url: "https://pointedsec.github.io/writeups/manager---vulnyx"
-					            };
-					            writeupsArr.push(writeupObj);
-					        </script>
 						</tr>
 						<tr class="row" data-machine-id="9">
 						    <td colspan="9">
@@ -571,110 +445,6 @@
 						        <div class="wave"></div>
 						      </div>
 						    </div>
-						    <script>
-						    writeupObj = {
-							        name: "Controler",
-							        creator: "d4t4s3c",
-							        url: "https://d4t4s3c.com/vulnyx/2024/10/23/Controler/"
-							      };
-							      writeupsArr.push(writeupObj);
-							      writeupObj = {
-							        name: "Controler",
-							        creator: "pointedsec",
-							        url: "https://pointedsec.github.io/writeups/controler---vulnyx"
-							      };
-							      writeupsArr.push(writeupObj);
-							      writeupObj = {
-							        name: "Controler",
-							        creator: "ll104567",
-							        url: "https://www.bilibili.com/video/BV1ZeqUYeEcj"
-							      };
-							      writeupsArr.push(writeupObj);
-							      writeupObj = {
-							        name: "Controler",
-							        creator: "J4ckie0x17",
-							        url: "https://j4ckie0x17.gitbook.io/notes-pentesting/writeups/vulnyx/controler"
-							      };
-							      writeupsArr.push(writeupObj);
-							      writeupObj = {
-							        name: "Controler",
-							        creator: "miguel0x1985",
-							        url: "https://github.com/miguellofredo85/PwnLabs/blob/main/Vulnyx/Controller%20AD.pdf"
-							      };
-							      writeupsArr.push(writeupObj);
-							      writeupObj = {
-									        name: "Controler",
-									        creator: "miguel0x1985",
-									        url: "https://github.com/miguellofredo85/PwnLabs/blob/main/Vulnyx/Controller%20AD.pdf"
-									      };
-									      writeupsArr.push(writeupObj);
-									      writeupObj = {
-											        name: "Controler",
-											        creator: "miguel0x1985",
-											        url: "https://github.com/miguellofredo85/PwnLabs/blob/main/Vulnyx/Controller%20AD.pdf"
-											      };
-											      writeupsArr.push(writeupObj);
-											      writeupObj = {
-													        name: "Controler",
-													        creator: "miguel0x1985",
-													        url: "https://github.com/miguellofredo85/PwnLabs/blob/main/Vulnyx/Controller%20AD.pdf"
-													      };
-													      writeupsArr.push(writeupObj);
-													      writeupObj = {
-															        name: "Controler",
-															        creator: "miguel0x1985",
-															        url: "https://github.com/miguellofredo85/PwnLabs/blob/main/Vulnyx/Controller%20AD.pdf"
-															      };
-															      writeupsArr.push(writeupObj);
-															      writeupObj = {
-																	        name: "Controler",
-																	        creator: "miguel0x1985",
-																	        url: "https://github.com/miguellofredo85/PwnLabs/blob/main/Vulnyx/Controller%20AD.pdf"
-																	      };
-																	      writeupsArr.push(writeupObj);
-																	      writeupObj = {
-																			        name: "Controler",
-																			        creator: "miguel0x1985",
-																			        url: "https://github.com/miguellofredo85/PwnLabs/blob/main/Vulnyx/Controller%20AD.pdf"
-																			      };
-																			      writeupsArr.push(writeupObj);
-																			      writeupObj = {
-																					        name: "Controler",
-																					        creator: "miguel0x1985",
-																					        url: "https://github.com/miguellofredo85/PwnLabs/blob/main/Vulnyx/Controller%20AD.pdf"
-																					      };
-																					      writeupsArr.push(writeupObj);
-																					      writeupObj = {
-																							        name: "Controler",
-																							        creator: "miguel0x1985",
-																							        url: "https://github.com/miguellofredo85/PwnLabs/blob/main/Vulnyx/Controller%20AD.pdf"
-																							      };
-																							      writeupsArr.push(writeupObj);
-																							      writeupObj = {
-																									        name: "Controler",
-																									        creator: "miguel0x1985",
-																									        url: "https://github.com/miguellofredo85/PwnLabs/blob/main/Vulnyx/Controller%20AD.pdf"
-																									      };
-																									      writeupsArr.push(writeupObj);
-																									      writeupObj = {
-																											        name: "Controler",
-																											        creator: "miguel0x1985",
-																											        url: "https://github.com/miguellofredo85/PwnLabs/blob/main/Vulnyx/Controller%20AD.pdf"
-																											      };
-																											      writeupsArr.push(writeupObj);
-																											      writeupObj = {
-																													        name: "Controler",
-																													        creator: "miguel0x1985",
-																													        url: "https://github.com/miguellofredo85/PwnLabs/blob/main/Vulnyx/Controller%20AD.pdf"
-																													      };
-																													      writeupsArr.push(writeupObj);
-																													      writeupObj = {
-																															        name: "Controler",
-																															        creator: "miguel0x1985",
-																															        url: "https://github.com/miguellofredo85/PwnLabs/blob/main/Vulnyx/Controller%20AD.pdf"
-																															      };
-																															      writeupsArr.push(writeupObj);
-					        </script>
 						</tr>
 						  <tr class="row" data-machine-id="10">
 						    <td colspan="10">
@@ -685,20 +455,6 @@
 						        <div class="wave"></div>
 						      </div>
 						    </div>
-						    <script>
-						      writeupObj = {
-						        name: "testMachine",
-						        creator: "user1",
-						        url: "https://test.com/1"
-						      };
-						      writeupsArr.push(writeupObj);
-						      writeupObj = {
-								name: "testMachine",
-								creator: "user2",
-								url: "https://test.com/2"
-							  };
-							  writeupsArr.push(writeupObj);
-						    </script>
 						</tr>
 						<tr class="row" data-machine-id="11">
 						    <td colspan="11">
@@ -709,14 +465,6 @@
 						        <div class="wave"></div>
 						      </div>
 						    </div>
-						    <script>
-						      writeupObj = {
-						        name: "r00tless",
-						        creator: "test1",
-						        url: "http://test.com/"
-						      };
-						      writeupsArr.push(writeupObj);
-						    </script>
 						</tr>
 						<tr class="row" data-machine-id="12">
 						    <td colspan="12">
@@ -1128,6 +876,55 @@
 		            });
 		    });
 		});
+	
+	  
+	  /* SHOW WRITEUPS */
+	  
+	 function showWriteups(vmName) {
+  const modal = document.getElementById(vmName);
+  if (!modal) {
+    console.error("No se encontró el modal para:", vmName);
+    return;
+  }
+
+  const container = modal.querySelector('.writeups-container');
+  if (!container) {
+    console.error("No se encontró el contenedor de writeups dentro del modal:", vmName);
+    return;
+  }
+
+  const title = modal.querySelector('.writeup-title');
+  title.textContent = 'Writeup de ' + vmName;
+
+  container.innerHTML = '<p style="text-align:center; color: gray;">Cargando...</p>';
+
+  fetch('<%= request.getContextPath() %>/getWriteupsPublic?vmName=' + encodeURIComponent(vmName))
+    .then(res => res.json())
+    .then(data => {
+      container.innerHTML = '';
+
+      if (!data || data.length === 0) {
+        container.innerHTML = '<p style="text-align:center; color: gray;">No hay writeups para esta máquina.</p>';
+      } else {
+        data.forEach(w => {
+          container.innerHTML += '<p><a href="' + w.url + '" target="_blank">' + w.name + ' - ' + w.creator + '</a></p>';
+        });
+      }
+
+      // Mostrar modal añadiendo clase .show
+      modal.classList.add('show');
+
+      // Añadir el evento para cerrar modal al hacer click en la "x"
+      const closeBtn = modal.querySelector('.close');
+      if (closeBtn) {
+        closeBtn.onclick = () => modal.classList.remove('show');
+      }
+    })
+    .catch(err => {
+      console.error("Error cargando writeups:", err);
+      container.innerHTML = '<p style="color:red;">⚠️ Error al cargar writeups.</p>';
+    });
+}
 	  
 	  /* POPUP FIRST FLAGS */
 	  

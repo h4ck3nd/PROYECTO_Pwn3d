@@ -160,99 +160,46 @@ function showCard(name, os, difficulty, creator, release, id) {
 
 	  window.addEventListener('click', handleClickOutside);
 	};
-    
-    /* SHOW WRITEUPS */
 	
-	function showWriteups(name) {
-	    const modal = document.getElementById(name);
-	    const title = modal.querySelector('.writeup-title');
-	    const writeupsContainer = modal.querySelector('.writeups-container');
-	    const closeBtn = modal.querySelector('.close');
-
-	    // Bloquear scroll de fondo
-	    document.body.style.overflow = 'hidden';
-
-	    // Establecer título
-	    title.textContent = "Writeups para " + name;
-
-	    // Limpiar writeups anteriores si los hay
-	    writeupsContainer.innerHTML = '';
-
-	    // Obtener writeups relacionados
-	    const filteredWriteups = writeupsArr.filter(el => el.name === name);
-
-	    if (filteredWriteups.length === 0) {
-	        const noResult = document.createElement('p');
-	        noResult.textContent = "No hay writeups disponibles para esta máquina.";
-	        noResult.style.color = "#bbb";
-	        noResult.style.textAlign = "center";
-	        writeupsContainer.appendChild(noResult);
-	    } else {
-	        filteredWriteups.forEach(el => {
-	            const link = document.createElement('a');
-	            link.href = el.url;
-	            link.target = '_blank';
-	            link.textContent = `by ${el.creator}`;
-	            writeupsContainer.appendChild(link);
-	        });
-	    }
-
-	    // Mostrar modal
-	    modal.style.display = 'flex';
-
-	    // Cerrar modal al hacer clic en el botón de cierre
-	    closeBtn.onclick = () => {
-	        modal.style.display = 'none';
-	        document.body.style.overflow = 'visible';
-	    };
-
-	    // Cerrar modal al hacer clic fuera del contenido
-	    window.onclick = (e) => {
-	        if (e.target === modal) {
-	            modal.style.display = 'none';
-	            document.body.style.overflow = 'visible';
-	        }
-	    };
-	}
-
+	
 	/* SUBMIT WRITEUP (SHOW FORM) */
+
+	document.getElementById('writeupForm').addEventListener('submit', function (e) {
+	  e.preventDefault();
+
+	  const form = e.target;
+	  const formData = new FormData(form);
+	  formData.append("vmName", form.dataset.vmname);
+
+	  const contextPath = window.location.pathname.split("/")[1]; // e.g. 'pwn3d'
+	  const url = `/${contextPath}/sendWriteup`;
+
+	  fetch(url, {
+	    method: 'POST',
+	    body: new URLSearchParams(formData)
+	  }).then(response => {
+	    if (response.ok) {
+	      alert("Writeup enviado correctamente.");
+	      form.reset();
+	    } else {
+	      response.text().then(msg => {
+	        console.error("[ERROR] Respuesta del servidor:", msg);
+	        alert("Error al enviar el writeup.");
+	      });
+	    }
+	  }).catch(error => {
+	    console.error("[ERROR] Error en fetch:", error);
+	    alert("Error de conexión.");
+	  });
+	});
 
 	const showWriteupForm = (vmname) => {
 	  const modal = document.querySelector('.form-writeup');
-	  const body = document.body;
-
-	  if (!modal) {
-	    console.error("No se encontró el formulario .form-writeup");
-	    return;
-	  }
-
-	  // Mostrar modal y desactivar scroll
 	  modal.style.display = 'flex';
-	  body.style.overflow = 'hidden';
+	  document.body.style.overflow = 'hidden';
 
-	  // Cambiar el título dinámicamente
-	  const title = modal.querySelector('.vb-title');
-	  if (title) {
-	    title.textContent = `Enviar nuevo writeup para ${vmname}`;
-	  }
-
-	  // Cerrar al hacer clic en la X
-	  const closeBtn = modal.querySelector('.vb-close');
-	  const closeModal = () => {
-	    modal.style.display = 'none';
-	    body.style.overflow = 'visible';
-	  };
-	  if (closeBtn) closeBtn.onclick = closeModal;
-
-	  // Cerrar al hacer clic fuera del contenedor del modal
-	  const handleClickOutside = (e) => {
-	    if (e.target === modal) {
-	      closeModal();
-	      window.removeEventListener('click', handleClickOutside);
-	    }
-	  };
-
-	  window.addEventListener('click', handleClickOutside);
+	  modal.querySelector('.vb-title').textContent = `Enviar nuevo writeup para ${vmname}`;
+	  document.getElementById('writeupForm').dataset.vmname = vmname;
 	};
 
 	/* SUBMIT FLAGS (SHOW FORM) */
