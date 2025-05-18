@@ -33,6 +33,7 @@ public class SecurityFilter implements Filter {
                 || path.startsWith("/login")
                 || path.startsWith("/login-register/register.jsp")
                 || path.startsWith("/logout")
+                || path.startsWith("/img")
                 || path.startsWith("/register")) {
             chain.doFilter(request, response);
             return;

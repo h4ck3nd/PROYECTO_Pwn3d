@@ -23,6 +23,7 @@ public class AuthFilter implements Filter {
                 uri.startsWith(contextPath + "/login-register/login.jsp") ||
                 uri.startsWith(contextPath + "/login-register/register.jsp") ||
                 uri.startsWith(contextPath + "/login") ||
+                uri.startsWith(contextPath + "/img") ||
                 uri.startsWith(contextPath + "/register") ||
                 uri.startsWith(contextPath + "/logout");
 

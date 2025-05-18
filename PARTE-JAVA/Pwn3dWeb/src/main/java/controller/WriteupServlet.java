@@ -5,6 +5,8 @@ import dao.WriteupDAO;
 import utils.JWTUtil;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,6 +46,13 @@ public class WriteupServlet extends HttpServlet {
 
         // Parámetros del formulario
         String url = request.getParameter("URL");
+        
+        // 🔒 Validar la URL antes de continuar
+        if (!isUrlSegura(url)) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "URL inválida o potencialmente insegura.");
+            return;
+        }
+        
         String vmName = request.getParameter("vmName");
         String creator = request.getParameter("Creator");
         String contentType = request.getParameter("ContentType");
@@ -72,6 +81,39 @@ public class WriteupServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al insertar el writeup.");
+        }
+    }
+    
+    // SOLAMENTE ADMITE DOMINIOS, NO IPs
+    
+    private boolean isUrlSegura(String url) {
+        try {
+            URL parsedUrl = new URL(url);
+            String host = parsedUrl.getHost();
+
+            // Rechazar si no es HTTPS
+            if (!"https".equalsIgnoreCase(parsedUrl.getProtocol())) {
+                return false;
+            }
+
+            // Rechazar localhost y variantes
+            if (host.equalsIgnoreCase("localhost") ||
+                host.equals("127.0.0.1") ||
+                host.equals("0.0.0.0") ||
+                host.equals("::1")) {
+                return false;
+            }
+
+            // Rechazar IPs IPv4 (ej. 192.168.1.1) o IPv6
+            if (host.matches("^\\d{1,3}(\\.\\d{1,3}){3}$") ||     // IPv4
+                host.matches("^[\\da-fA-F:]+$")) {               // IPv6
+                return false;
+            }
+
+            // Solo permitir dominios
+            return true;
+        } catch (MalformedURLException e) {
+            return false;
         }
     }
 }

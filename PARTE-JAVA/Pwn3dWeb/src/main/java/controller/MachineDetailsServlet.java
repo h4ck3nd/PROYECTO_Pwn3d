@@ -63,18 +63,31 @@ public class MachineDetailsServlet extends HttpServlet {
                 System.out.println("❌ No se encontró ninguna máquina con ID: " + machineId);
             }
 
-            // Cerrar la conexión
+            int totalWriteups = 0;
+            if (machine != null) {
+                String writeupsQuery = "SELECT COUNT(*) FROM writeups_public WHERE vm_name = ?";
+                try (PreparedStatement stmtWriteups = conn.prepareStatement(writeupsQuery)) {
+                    stmtWriteups.setString(1, machine.getNameMachine());
+                    ResultSet rsWriteups = stmtWriteups.executeQuery();
+                    if (rsWriteups.next()) {
+                        totalWriteups = rsWriteups.getInt(1);
+                    }
+                } catch (SQLException e) {
+                    System.err.println("💥 Error al contar writeups:");
+                    e.printStackTrace();
+                    // Puedes decidir dejar totalWriteups = 0 o manejar error
+                }
+            }
+
+            // Cerrar la conexión SOLO después de hacer las dos consultas
             conexionDDBB.cerrarConexion();
             System.out.println("🔒 Conexión cerrada.");
 
-            // Si la máquina fue encontrada, enviamos los datos como JSON
             if (machine != null) {
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
                 PrintWriter out = response.getWriter();
 
-                // Convertir el objeto 'machine' a JSON manualmente o utilizando una librería como Gson o Jackson
-                // Aquí lo estamos construyendo manualmente en formato JSON
                 String jsonResponse = "{"
                         + "\"id\":\"" + machine.getId() + "\","
                         + "\"nameMachine\":\"" + machine.getNameMachine() + "\","
@@ -91,13 +104,13 @@ public class MachineDetailsServlet extends HttpServlet {
                         + "\"firstUser\":\"" + machine.getFirstUser() + "\","
                         + "\"firstRoot\":\"" + machine.getFirstRoot() + "\","
                         + "\"imgNameOs\":\"" + machine.getImgNameOs() + "\","
-                        + "\"downloadUrl\":\"" + machine.getDownloadUrl() + "\""
+                        + "\"downloadUrl\":\"" + machine.getDownloadUrl() + "\","
+                        + "\"totalWriteups\":" + totalWriteups
                         + "}";
 
                 out.print(jsonResponse);
                 out.flush();
             } else {
-                // Enviar error si no se encuentra la máquina
                 response.sendError(HttpServletResponse.SC_NOT_FOUND, "Máquina no encontrada");
             }
 

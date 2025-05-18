@@ -32,11 +32,19 @@ public class GetWriteupsPublicServlet extends HttpServlet {
             out.print("[");
             for (int i = 0; i < publicados.size(); i++) {
                 Writeup w = publicados.get(i);
+
+                String safeVmName = w.getVmName().replace("\"", "\\\"");
+                String safeCreator = w.getCreator().replace("\"", "\\\"");
+                String safeUrl = w.getUrl().replace("\"", "\\\"");
+                String safeType = w.getContentType().replace("\"", "\\\"");
+
                 out.print("{");
-                out.print("\"name\": \"" + w.getVmName() + "\","); // <--- nombre de la máquina
-                out.print("\"creator\": \"" + w.getCreator() + "\",");
-                out.print("\"url\": \"" + w.getUrl() + "\"");
+                out.print("\"name\": \"" + safeVmName + "\",");
+                out.print("\"creator\": \"" + safeCreator + "\",");
+                out.print("\"url\": \"" + safeUrl + "\",");
+                out.print("\"contentType\": \"" + safeType + "\"");
                 out.print("}");
+
                 if (i < publicados.size() - 1) {
                     out.print(",");
                 }
