@@ -1,6 +1,8 @@
 <%@page import="controller.MachineDetailsServlet"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="model.Machine" %>
+<%@ page import="utils.JWTUtil" %>
+<%@ page import="javax.servlet.http.Cookie" %>
 <%
 	Machine machine = null;
 %>
@@ -33,21 +35,53 @@
 	            <h2 class="pwned-title"></h2>
 	        </article>
 	        
+	        <div class="header-controls">
+	        
 		      <!-- BOTÓN MODO CLARO/OSCURO -->
-		      <button title="Alternar entre Claro/Oscuro" id="toggle-theme" class="toggle-button" aria-label="Toggle theme">
+		      
+		      <button title="Alternar entre Claro/Oscuro" id="toggle-theme" class="toggle-button" aria-label="Toggle theme" style="display: none;">
 		        <svg viewBox="0 0 100 100" class="theme-icon">
 		          <circle cx="50" cy="50" r="40" class="circle-bg" />
 		          <path d="M50,10 A40,40 0 1,1 49.9,10 Z" class="half" />
 		        </svg>
 		      </button>
 		      
-		      <!-- BOTÓN ADMIN -->
-		    <button 
-		      type="button" 
-		      class="admin-btn" 
-		      onclick="window.location.href='<%= request.getContextPath() %>/agregarVM.jsp'">
-		      Agregar VM
-		    </button>
+		      <!-- BOTÓN ADMIN (VALIDACION ROL = admin) -->
+		      
+			    <%
+				    // Obtener la cookie 'token' del request
+				    String token = null;
+				    Cookie[] cookies = request.getCookies();
+				    if (cookies != null) {
+				        for (Cookie cookie : cookies) {
+				            if ("token".equals(cookie.getName())) {
+				                token = cookie.getValue();
+				                break;
+				            }
+				        }
+				    }
+				
+				    String role = null;
+				    if (token != null && JWTUtil.validateToken(token)) {
+				        try {
+				            role = JWTUtil.getRoleFromToken(token);
+				        } catch (Exception e) {
+				            role = null;
+				            // Opcional: imprimir error para debug
+				            e.printStackTrace();
+				        }
+				    }
+				%>
+				
+				<!-- Mostrar botón solo si rol es admin -->
+				<% if ("admin".equals(role)) { %>
+				    <button 
+				      type="button" 
+				      class="admin-btn" 
+				      onclick="window.location.href='<%= request.getContextPath() %>/agregarVM.jsp'">
+				      Agregar VM
+				    </button>
+				<% } %>
 			</div>
 			
 			<!-- SECCION PARA ENVIAR VM -->
@@ -159,7 +193,7 @@
 			
 				<!-- BARRA DE BUSQUEDA -->
 					
-				    <div id="vm-search-wrapper" style="margin-right: 130px">
+				    <div id="vm-search-wrapper">
 				        <div class="search-icon">
 				            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2.5" stroke="#999999" fill="none" stroke-linecap="round" stroke-linejoin="round">
 				                <path stroke="none" d="M0 0h24v24H0z" fill="none" />

@@ -286,20 +286,6 @@ a strong:hover {
     opacity: 0.7;
 }
 
-header {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-}
-
-.header-container {
-    width: 90vw;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-}
-
 #page-title {
     margin: auto;
     font-size: 1.15rem;
@@ -360,17 +346,44 @@ main {
     margin: 1rem;
 }
 
-.wrapper {
-    width: 90vw;
+.actions {
+  width: 100%;
+  height: 5rem;
+  display: flex;             /* Cambiar grid por flex */
+  align-items: center;
+  justify-content: space-between; /* Para que los items se separen bien */
+  flex-wrap: nowrap;         /* Que no se vayan a otra línea */
+  gap: 1rem;                 /* Espacio entre elementos */
+  margin-bottom: 1rem;
+  overflow-x: auto;          /* Permite scroll horizontal si es muy pequeño */
+  box-sizing: border-box;
+  padding: 0 1rem;           /* Para un pequeño padding horizontal */
+  max-width: 2200px;
 }
 
-.actions {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    margin-bottom: 1rem;
+/* Estilos para Webkit (Chrome, Safari, Edge) */
+.actions::-webkit-scrollbar {
+    width: 8px; /* Ancho de la barra de desplazamiento */
 }
+
+.actions::-webkit-scrollbar-thumb {
+    background-color: #444444; /* Color del "dedo" de la barra de desplazamiento */
+    border-radius: 10px;
+    border: 2px solid #222222; /* Fondo alrededor del "dedo" */
+}
+
+.actions::-webkit-scrollbar-track {
+    background: #222222; /* Fondo de la barra de desplazamiento */
+    border-radius: 10px;
+}
+
+/* Opcional: para que el wrapper no afecte el ancho */
+.wrapper {
+  width: 90vw;
+  max-width: 2200px;
+  margin: 0 auto;
+}
+
 
 .vm-stats li {
     display: flex;
@@ -478,6 +491,7 @@ main {
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
   position: relative;
   overflow: hidden;
+  width: 65rem;
 }
 
 #vm-search-wrapper:focus-within {
@@ -1127,71 +1141,6 @@ footer img {
     color: var(--color-accent-danger);
 }
 
-@media ( min-width : 320px) and (max-width: 700px) {
-	header {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		gap: 0.5rem;
-	}
-	.logo {
-		margin-top: 1rem;
-	}
-	.wrapper, .header-container, .form-container {
-		width: 95vw;
-	}
-	.header-container {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		gap: 1.5rem;
-	}
-	.card, #card, .tested, #tested, .url, .md5, #md5, .firts-flags,
-		.creator, .flag, .skills, #skills, .size, .submit-btn,
-		.add-writeup-btn {
-		display: none;
-	}
-	#vm-search {
-		width: 160px;
-	}
-	.clear-search {
-		right: 4px;
-		top: 8px;
-		padding: 0.1rem;
-		font-size: 0.8rem;
-	}
-	th, td, .level-btn {
-		padding: 0.5rem;
-		font-size: 0.85rem;
-	}
-	#page-title {
-		font-size: 0.9rem;
-		width: 40ch;
-	}
-	.actions {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 1.5rem;
-	}
-	.filters {
-		align-items: center;
-		justify-content: end;
-	}
-	.vm-stats, .filters {
-		gap: 0.25rem;
-	}
-	.card-container {
-		gap: 0;
-	}
-	#card-logo {
-		top: 1rem;
-		width: 150px;
-		height: 150px;
-	}
-}
-
 /* ESTILO BOTON MODO CLARO/OSCURO */
 
 /* Modo oscuro (por defecto) */
@@ -1217,29 +1166,6 @@ body.light-theme .half {
   height: 32px;
 }
 
-.toggle-button {
-  background: transparent;
-  border: none;
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.header-controls {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.toggle-button:focus {
-  outline: none;
-}
-
-
 @media ( min-width : 700px) and (max-width: 812px) {
 	#md5-hash {
 		left: 0px;
@@ -1248,12 +1174,6 @@ body.light-theme .half {
 	.copy-btn {
 		top: 0px;
 		left: 25px;
-	}
-}
-
-@media ( min-width : 1600px) {
-	.wrapper, .header-container {
-		width: 80vw;
 	}
 }
 
@@ -2039,52 +1959,6 @@ label {
     margin-right: 50rem;
 }
 
-/* ESTILO BOTON ADMIN */
-
-.admin-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 15rem;
-  cursor: pointer;
-  font-size: 1rem;
-  border-radius: 0.35rem;
-  padding: 1.2rem;
-  border: 1px solid #444;
-  background-color: var(--color-filter-bg);
-  color: var(--color-filter-text);
-  box-shadow: 0 2px 6px var(--color-filter-shadow);
-  overflow: hidden;
-  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-  margin-left: 55rem;
-}
-
-.admin-btn::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0%;
-  height: 0%;
-  background: radial-gradient(circle, var(--color-filter-glow) 10%, transparent 60%);
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: width 0.4s ease, height 0.4s ease, opacity 0.4s ease;
-  pointer-events: none;
-}
-
-.admin-btn:hover {
-  background-color: var(--color-filter-hover-bg);
-  transform: scale(1.03);
-  box-shadow: 0 0 12px var(--color-filter-glow);
-}
-
-.admin-btn:hover::before {
-  width: 220%;
-  height: 220%;
-  opacity: 1;
-}
-
 .badge {
     position: relative;
     white-space: nowrap;
@@ -2702,110 +2576,6 @@ button[type="submit"]:hover {
   min-width: 200px;
 }
 
-/* ESTILO DEL BANNER */
-
-.pwned-header {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 12px;
-  background: linear-gradient(90deg, rgba(236, 7, 37, 0.15), rgba(167, 14, 31, 0.15));
-  padding: 8px 16px;
-  border-radius: 8px;
-  max-width: fit-content;
-  box-shadow: 0 4px 8px rgba(236, 7, 37, 0.1);
-  user-select: none;
-  cursor: default;
-  margin-right: 47.5rem;
-  overflow: hidden;
-}
-
-/* Capa de brillo animada */
-.pwned-header::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -150%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(
-    120deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.2) 50%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  transform: skewX(-20deg);
-  animation: shimmer 6s linear infinite;
-  pointer-events: none;
-  border-radius: 8px;
-}
-
-@keyframes shimmer {
-  0% {
-    left: -150%;
-  }
-  100% {
-    left: 150%;
-  }
-}
-
-.pwned-title {
-  position: relative; /* Para que quede por encima del brillo */
-  color: var(--color-text-dark);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: 700;
-  font-size: 1.4rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  text-shadow: 0 0 6px rgba(236, 7, 37, 0.5);
-  margin: 0;
-  z-index: 1;
-}
-
-.pwned-icon {
-  position: relative;
-  width: 28px;
-  height: 28px;
-  filter: drop-shadow(0 0 2px rgba(236, 7, 37, 0.6));
-  z-index: 1;
-}
-
-@keyframes blink-caret {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-.pwned-title {
-  color: var(--color-text-dark);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: 700;
-  font-size: 1.4rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  text-shadow: 0 0 6px rgba(236, 7, 37, 0.5);
-  margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.pwned-title .cursor {
-  display: inline-block;
-  animation: blink-caret 0.8s step-end infinite;
-  user-select: none;
-}
-
-.close-form-flag {
-	font-size: 20px;
-  width: 20px;
-  color: gray;
-  cursor: pointer;
-}
-
-.close-form-flag:hover {
-	color: red;
-}
-
 /* ESTILO POPUP INFO DETALLADA */
 
 #machinePopupDynamic {
@@ -2991,6 +2761,7 @@ button[type="submit"]:hover {
   white-space: pre-wrap;
 }
 
+/*
 #machinePopupDynamic .actions {
   margin-top: auto;
   display: flex;
@@ -3017,6 +2788,7 @@ button[type="submit"]:hover {
 #machinePopupDynamic .actions button.close-info:hover {
   background: #d94f4a;
 }
+*/
 
 @keyframes fadeIn {
   from {opacity: 0; transform: scale(0.95);}
@@ -3118,3 +2890,335 @@ button[type="submit"]:hover {
   }
 }
 
+/* ESTILO PARA EL HEADER DE LA PAGINA */
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap; /* Que los botones bajen a otra línea en pantallas pequeñas */
+  justify-content: flex-end;
+  flex: 1 1 auto; /* Que ocupe el espacio disponible y se reduzca si es necesario */
+  min-width: 200px; /* Para evitar que colapse demasiado */
+  box-sizing: border-box;
+}
+
+.toggle-button, .admin-btn {
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.8rem 1.2rem;
+  border-radius: 0.35rem;
+  white-space: nowrap;
+}
+
+/* Remueve los márgenes locos */
+.admin-btn {
+  margin-left: 0;
+}
+
+/* Opcional: para pantallas muy pequeñas */
+@media (max-width: 600px) {
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .header-controls {
+    justify-content: flex-start;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+}
+
+.toggle-button:focus {
+  outline: none;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.header-container {
+  width: 90vw;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  gap: 1rem;
+  flex-wrap: wrap; /* Permite que en pantallas pequeñas se acomode */
+  box-sizing: border-box;
+}
+
+@media ( min-width : 320px) and (max-width: 700px) {
+	header {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: 0.5rem;
+	}
+	.logo {
+		margin-top: 1rem;
+	}
+	.wrapper, .header-container, .form-container {
+		width: 95vw;
+	}
+	.header-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 1.5rem;
+	}
+	.card, #card, .tested, #tested, .url, .md5, #md5, .firts-flags,
+		.creator, .flag, .skills, #skills, .size, .submit-btn,
+		.add-writeup-btn {
+		display: none;
+	}
+	#vm-search {
+		width: 160px;
+	}
+	.clear-search {
+		right: 4px;
+		top: 8px;
+		padding: 0.1rem;
+		font-size: 0.8rem;
+	}
+	th, td, .level-btn {
+		padding: 0.5rem;
+		font-size: 0.85rem;
+	}
+	#page-title {
+		font-size: 0.9rem;
+		width: 40ch;
+	}
+	.actions {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 1.5rem;
+	}
+	.filters {
+		align-items: center;
+		justify-content: end;
+	}
+	.vm-stats, .filters {
+		gap: 0.25rem;
+	}
+	.card-container {
+		gap: 0;
+	}
+	#card-logo {
+		top: 1rem;
+		width: 150px;
+		height: 150px;
+	}
+}
+
+@media ( min-width : 1600px) {
+	.wrapper, .header-container {
+		width: 80vw;
+	}
+}
+
+/* ESTILO DEL BANNER */
+
+.pwned-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 12px;
+  background: linear-gradient(90deg, rgba(236, 7, 37, 0.15), rgba(167, 14, 31, 0.15));
+  padding: 8px 16px;
+  border-radius: 8px;
+  max-width: fit-content;
+  box-shadow: 0 4px 8px rgba(236, 7, 37, 0.1);
+  user-select: none;
+  cursor: default;
+  max-width: 100%; /* que no se salga */
+  overflow: hidden;
+  margin-left: clamp(-2rem, -5vw, -16rem);
+}
+
+/* Capa de brillo animada */
+.pwned-header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-20deg);
+  animation: shimmer 6s linear infinite;
+  pointer-events: none;
+  border-radius: 8px;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -150%;
+  }
+  100% {
+    left: 150%;
+  }
+}
+
+.pwned-title {
+  position: relative; /* Para que quede por encima del brillo */
+  color: var(--color-text-dark);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-shadow: 0 0 6px rgba(236, 7, 37, 0.5);
+  margin: 0;
+  z-index: 1;
+}
+
+.pwned-icon {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  filter: drop-shadow(0 0 2px rgba(236, 7, 37, 0.6));
+  z-index: 1;
+}
+
+@keyframes blink-caret {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.pwned-title {
+  color: var(--color-text-dark);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-shadow: 0 0 6px rgba(236, 7, 37, 0.5);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.pwned-title .cursor {
+  display: inline-block;
+  animation: blink-caret 0.8s step-end infinite;
+  user-select: none;
+}
+
+.close-form-flag {
+	font-size: 20px;
+  width: 20px;
+  color: gray;
+  cursor: pointer;
+}
+
+.close-form-flag:hover {
+	color: red;
+}
+
+.toggle-button, .admin-btn {
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0.8rem 1.2rem;
+  border-radius: 0.35rem;
+  white-space: nowrap;
+  flex-shrink: 0; /* Que no se reduzcan demasiado */
+}
+
+/* Quitamos márgenes fijos que generan desalineación */
+.admin-btn {
+  margin-left: 0;
+}
+
+#toggle-theme {
+	background: transparent;
+	border: inherit;
+}
+
+/* Adaptación en pantallas muy pequeñas */
+@media (max-width: 600px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0.5rem 1rem;
+  }
+
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+    width: 95vw;
+  }
+
+  .pwned-header {
+    max-width: 100%;
+    white-space: normal; /* Permite que el texto se vaya a otra línea */
+  }
+
+  .header-controls {
+    justify-content: flex-start;
+    width: 100%;
+  }
+}
+
+/* ESTILO BOTON ADMIN */
+
+.admin-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15rem;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 0.35rem;
+  padding: 1.2rem;
+  border: 1px solid #444;
+  background-color: var(--color-filter-bg);
+  color: var(--color-filter-text);
+  box-shadow: 0 2px 6px var(--color-filter-shadow);
+  overflow: hidden;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  margin-left: clamp(1rem, 10vw, 55rem);
+  margin-right: clamp(-2rem, -5vw, -16rem);
+}
+
+.admin-btn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0%;
+  height: 0%;
+  background: radial-gradient(circle, var(--color-filter-glow) 10%, transparent 60%);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: width 0.4s ease, height 0.4s ease, opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.admin-btn:hover {
+  background-color: var(--color-filter-hover-bg);
+  transform: scale(1.03);
+  box-shadow: 0 0 12px var(--color-filter-glow);
+}
+
+.admin-btn:hover::before {
+  width: 220%;
+  height: 220%;
+  opacity: 1;
+}

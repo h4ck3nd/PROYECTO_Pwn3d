@@ -1,4 +1,40 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="utils.JWTUtil" %>
+<%@ page import="javax.servlet.http.Cookie" %>
+<%
+    // Obtener la cookie 'token' del request
+    String token = null;
+    Cookie[] cookies = request.getCookies();
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if ("token".equals(cookie.getName())) {
+                token = cookie.getValue();
+                break;
+            }
+        }
+    }
+
+    // Verificar rol
+    String role = null;
+    boolean allowed = false;
+
+    if (token != null && JWTUtil.validateToken(token)) {
+        try {
+            role = JWTUtil.getRoleFromToken(token);
+            if ("admin".equals(role)) {
+                allowed = true;
+            }
+        } catch (Exception e) {
+            // Manejar error si se desea
+        }
+    }
+
+    // Si no está autorizado, redirigir
+    if (!allowed) {
+        response.sendRedirect(request.getContextPath() + "/index.jsp");
+        return; // Termina la ejecución del JSP
+    }
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
