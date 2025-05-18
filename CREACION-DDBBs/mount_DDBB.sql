@@ -24,6 +24,7 @@ CREATE TABLE machines (
 
 ALTER TABLE machines ALTER COLUMN id TYPE VARCHAR(50);
 
+
 --INSERTs de ejemplo
 
 INSERT INTO machines (id, name_machine, size, os, enviroment, enviroment2, creator, difficulty_card, difficulty, date, md5, writeup_url, first_user, first_root, img_name_os, download_url) VALUES (1, 'Lower5', '1.8GB', 'Linux', 'vbox', 'vmware', 'd4t4s3c', 'Very-Easy', 'very-easy', '09 Apr 2025', '65015966EDD9A1A8ACE257DA2F0D9730', 'https://test.com/', 'suraxddq', 'suraxddq', 'Linux', 'https://vulnyx.com/file/Lower5.php');
@@ -35,6 +36,10 @@ INSERT INTO machines (id, name_machine, size, os, enviroment, enviroment2, creat
 INSERT INTO machines (id, name_machine, size, os, enviroment, enviroment2, creator, difficulty_card, difficulty, date, md5, writeup_url, first_user, first_root, img_name_os, download_url) VALUES (7, 'War', '7.2GB', 'Windows', 'vbox', null, 'd4t4s3c', 'Easy', 'easy', '07 Dec 2024', 'A48B73FBA9796957C86C19F8758CC9E5', 'https://test.com/', 'minidump', 'minidump', 'Windows', 'https://vulnyx.com/file/War.php');
 INSERT INTO machines (id, name_machine, size, os, enviroment, enviroment2, creator, difficulty_card, difficulty, date, md5, writeup_url, first_user, first_root, img_name_os, download_url) VALUES (8, 'Manager', '1.8GB', 'Linux', 'vbox', 'vmware', 'd4t4s3c', 'Hard', 'hard', '29 Nov 2024', 'EE5082F8354628AC353D9FEF6EB8784C', 'https://test.com/', 'softyhack', 'll104567', 'Linux', 'https://vulnyx.com/file/Manager.php');
 INSERT INTO machines (id, name_machine, size, os, enviroment, enviroment2, creator, difficulty_card, difficulty, date, md5, writeup_url, first_user, first_root, img_name_os, download_url) VALUES (9, 'Controler', '5.0GB', 'Windows', 'vbox', null, 'd4t4s3c', 'Medium', 'medium', '23 Oct 2024', '73ECC9FD5D9CEC03A67124D9BE5A2151', 'https://test.com/', 'Rev3rKh1ll', 'Rev3rKh1ll', 'Windows', 'https://vulnyx.com/file/Controler.php');
+
+ALTER TABLE machines
+ADD COLUMN user_flag VARCHAR(255) DEFAULT '',
+ADD COLUMN root_flag VARCHAR(255) DEFAULT '';
 
 --=============TABLA DE USUARIOS===============
 DROP TABLE IF EXISTS users;
@@ -103,3 +108,16 @@ CREATE TABLE new_vm (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- TABLA DE FLAGS
+
+DROP TABLE IF EXISTS flags;
+CREATE TABLE flags (
+    id SERIAL PRIMARY KEY,
+    id_user INT NOT NULL,
+    vm_name VARCHAR(255) NOT NULL,
+    username VARCHAR(50) NOT NULL,
+    tipo_flag VARCHAR(10) CHECK (tipo_flag IN ('user', 'root')) NOT NULL,
+    flag VARCHAR(255) NOT NULL,
+    first_flag_user BOOLEAN NOT NULL,
+    first_flag_root BOOLEAN NOT NULL
+);
