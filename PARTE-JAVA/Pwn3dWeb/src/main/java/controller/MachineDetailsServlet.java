@@ -18,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/machineDetails")
 public class MachineDetailsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Obtener el ID de la máquina desde la solicitud (lo que se pasa por URL)
         String machineId = request.getParameter("id");
         System.out.println("👉 ID recibido desde el cliente: " + machineId);
 
@@ -28,7 +27,6 @@ public class MachineDetailsServlet extends HttpServlet {
             return;
         }
 
-        // Conexión a la base de datos
         ConexionDDBB conexionDDBB = new ConexionDDBB();
         Connection conn = conexionDDBB.conectar();
         System.out.println("✅ Conexión establecida con la base de datos.");
@@ -41,24 +39,26 @@ public class MachineDetailsServlet extends HttpServlet {
             Machine machine = null;
             if (rs.next()) {
                 machine = new Machine(
-                    rs.getString("id"),
-                    rs.getString("name_machine"),
-                    rs.getString("size"),
-                    rs.getString("os"),
-                    rs.getString("enviroment"),
-                    rs.getString("enviroment2"),
-                    rs.getString("creator"),
-                    rs.getString("difficulty_card"),
-                    rs.getString("difficulty"),
-                    rs.getString("date"),
-                    rs.getString("md5"),
-                    rs.getString("writeup_url"),
-                    rs.getString("first_user"),
-                    rs.getString("first_root"),
-                    rs.getString("img_name_os"),
-                    rs.getString("download_url")
+                        rs.getString("id"),
+                        rs.getString("name_machine"),
+                        rs.getString("size"),
+                        rs.getString("os"),
+                        rs.getString("enviroment"),
+                        rs.getString("enviroment2"),
+                        rs.getString("creator"),
+                        rs.getString("difficulty_card"),
+                        rs.getString("difficulty"),
+                        rs.getString("date"),
+                        rs.getString("md5"),
+                        rs.getString("writeup_url"),
+                        rs.getString("first_user"),  // Ya no se usarán en el JSON
+                        rs.getString("first_root"),
+                        rs.getString("img_name_os"),
+                        rs.getString("download_url"),
+                        rs.getString("user_flag"),
+                        rs.getString("root_flag")
                 );
-                System.out.println("✅ Máquina encontrada: " + machine.getNameMachine() + machine.getCreator() + machine.getDate() + machine.getDifficulty() + machine.getDifficultyCard() + machine.getDownloadUrl() + machine.getEnviroment() + machine.getEnviroment2() + machine.getFirstRoot() + machine.getFirstUser() + machine.getImgNameOs() + machine.getMd5());
+                System.out.println("✅ Máquina encontrada: " + machine.getNameMachine());
             } else {
                 System.out.println("❌ No se encontró ninguna máquina con ID: " + machineId);
             }
@@ -75,11 +75,32 @@ public class MachineDetailsServlet extends HttpServlet {
                 } catch (SQLException e) {
                     System.err.println("💥 Error al contar writeups:");
                     e.printStackTrace();
-                    // Puedes decidir dejar totalWriteups = 0 o manejar error
                 }
             }
 
-            // Cerrar la conexión SOLO después de hacer las dos consultas
+            // NUEVO: obtener el primer user/root desde tabla flags
+            String firstUserName = "";
+            String firstRootName = "";
+
+            if (machine != null) {
+                String flagQuery = "SELECT username, first_flag_user, first_flag_root FROM flags WHERE vm_name = ?";
+                try (PreparedStatement flagStmt = conn.prepareStatement(flagQuery)) {
+                    flagStmt.setString(1, machine.getNameMachine());
+                    ResultSet flagRs = flagStmt.executeQuery();
+                    while (flagRs.next()) {
+                        if (flagRs.getBoolean("first_flag_user")) {
+                            firstUserName = flagRs.getString("username");
+                        }
+                        if (flagRs.getBoolean("first_flag_root")) {
+                            firstRootName = flagRs.getString("username");
+                        }
+                    }
+                } catch (SQLException e) {
+                    System.err.println("💥 Error al consultar la tabla flags:");
+                    e.printStackTrace();
+                }
+            }
+
             conexionDDBB.cerrarConexion();
             System.out.println("🔒 Conexión cerrada.");
 
@@ -101,11 +122,13 @@ public class MachineDetailsServlet extends HttpServlet {
                         + "\"date\":\"" + machine.getDate() + "\","
                         + "\"md5\":\"" + machine.getMd5() + "\","
                         + "\"writeupUrl\":\"" + machine.getWriteupUrl() + "\","
-                        + "\"firstUser\":\"" + machine.getFirstUser() + "\","
-                        + "\"firstRoot\":\"" + machine.getFirstRoot() + "\","
+                        + "\"firstUser\":\"" + firstUserName + "\","
+                        + "\"firstRoot\":\"" + firstRootName + "\","
                         + "\"imgNameOs\":\"" + machine.getImgNameOs() + "\","
                         + "\"downloadUrl\":\"" + machine.getDownloadUrl() + "\","
-                        + "\"totalWriteups\":" + totalWriteups
+                        + "\"totalWriteups\":" + totalWriteups + ","
+                        + "\"userFlag\":\"" + machine.getUserFlag() + "\","
+                        + "\"rootFlag\":\"" + machine.getRootFlag() + "\""
                         + "}";
 
                 out.print(jsonResponse);

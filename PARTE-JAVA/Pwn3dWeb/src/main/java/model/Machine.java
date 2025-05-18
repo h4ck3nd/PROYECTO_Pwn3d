@@ -17,27 +17,51 @@ public class Machine {
     private String firstRoot;
     private String imgNameOs;
     private String downloadUrl;
+    private String userFlag;
+    private String rootFlag;
 
     // Constructor
-    public Machine(String id, String nameMachine, String size, String os, String enviroment, String enviroment2, String creator, String difficultyCard, String difficulty, String date, String md5, String writeupUrl, String firstUser, String firstRoot, String imgNameOs, String downloadUrl) {
-        this.id = id;
-        this.nameMachine = nameMachine;
-        this.size = size;
-        this.os = os;
-        this.enviroment = enviroment;
-        this.enviroment2 = enviroment2;
-        this.creator = creator;
-        this.difficultyCard = difficultyCard;
-        this.difficulty = difficulty;
-        this.date = date;
-        this.md5 = md5;
-        this.writeupUrl = writeupUrl;
-        this.firstUser = firstUser;
-        this.firstRoot = firstRoot;
-        this.imgNameOs = imgNameOs;
-        this.downloadUrl = downloadUrl;
-    }
-
+    public Machine(String id, String nameMachine, String size, String os, String enviroment, String enviroment2, String creator,
+            String difficultyCard, String difficulty, String date, String md5, String writeupUrl,
+            String firstUser, String firstRoot, String imgNameOs, String downloadUrl,
+            String userFlag, String rootFlag) {
+	 this.id = id;
+	 this.nameMachine = nameMachine;
+	 this.size = size;
+	 this.os = os;
+	 this.enviroment = enviroment;
+	 this.enviroment2 = enviroment2;
+	 this.creator = creator;
+	 this.difficultyCard = difficultyCard;
+	 this.difficulty = difficulty;
+	 this.date = date;
+	 this.md5 = md5;
+	 this.writeupUrl = writeupUrl;
+	 this.firstUser = firstUser;
+	 this.firstRoot = firstRoot;
+	 this.imgNameOs = imgNameOs;
+	 this.downloadUrl = downloadUrl;
+	 this.userFlag = userFlag;
+	 this.rootFlag = rootFlag;
+	}
+	
+	// Getters y setters
+	public String getUserFlag() {
+	 return userFlag;
+	}
+	
+	public void setUserFlag(String userFlag) {
+	 this.userFlag = userFlag;
+	}
+	
+	public String getRootFlag() {
+	 return rootFlag;
+	}
+	
+	public void setRootFlag(String rootFlag) {
+	 this.rootFlag = rootFlag;
+	}
+	
     // Getters y setters
     public String getId() {
         return id;

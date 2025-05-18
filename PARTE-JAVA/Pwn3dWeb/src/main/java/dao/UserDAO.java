@@ -1,17 +1,22 @@
 package dao;
 
 import conexionDDBB.ConexionDDBB;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
 import model.User;
+
 import java.sql.*;
 
 public class UserDAO {
 
     private final Connection con;
 
+    // Constructor por defecto conecta usando ConexionDDBB
     public UserDAO() {
-        con = new ConexionDDBB().conectar();
+        this.con = new ConexionDDBB().conectar();
+    }
+
+    // Constructor que recibe conexión (para reusar)
+    public UserDAO(Connection con) {
+        this.con = con;
     }
 
     public boolean registerUser(User user) {
@@ -36,25 +41,14 @@ public class UserDAO {
             pst.setString(2, passwordHash);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                User user = new User();
-                user.setId(rs.getInt("id"));
-                user.setUsuario(rs.getString("usuario"));
-                user.setEmail(rs.getString("email"));
-                user.setNombre(rs.getString("nombre"));
-                user.setApellido(rs.getString("apellido"));
-                user.setRol(rs.getString("rol"));
-                user.setCookie(rs.getString("cookie")); // <- añadir esto también
-                user.setFlagsUser(rs.getInt("flags_user"));
-                user.setFlagsRoot(rs.getInt("flags_root"));
-                user.setUltimoInicio(rs.getTimestamp("ultimo_inicio"));
-                return user;
+                return mapResultSetToUser(rs);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
-    
+
     public void clearUserTokenByUserId(int userId) {
         String sql = "UPDATE users SET cookie = NULL WHERE id = ?";
         try (PreparedStatement pst = con.prepareStatement(sql)) {
@@ -65,7 +59,7 @@ public class UserDAO {
             e.printStackTrace();
         }
     }
-    
+
     public void updateUserToken(int userId, String token) {
         System.out.println("Guardando token en DB para usuario " + userId + ": " + token);
         String sql = "UPDATE users SET cookie = ? WHERE id = ?";
@@ -78,60 +72,49 @@ public class UserDAO {
             e.printStackTrace();
         }
     }
-    
+
     public String getTokenByUserId(int userId) {
         String sql = "SELECT cookie FROM users WHERE id = ?";
         try (PreparedStatement pst = con.prepareStatement(sql)) {
             pst.setInt(1, userId);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                return rs.getString("cookie"); // Aquí está guardado el token
+                return rs.getString("cookie");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
-    
+
     public User getUserById(int userId) {
         String sql = "SELECT * FROM users WHERE id = ?";
         try (PreparedStatement pst = con.prepareStatement(sql)) {
             pst.setInt(1, userId);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                User user = new User();
-                user.setId(rs.getInt("id"));
-                user.setUsuario(rs.getString("usuario"));
-                user.setEmail(rs.getString("email"));
-                user.setNombre(rs.getString("nombre"));
-                user.setApellido(rs.getString("apellido"));
-                user.setRol(rs.getString("rol"));
-                user.setCookie(rs.getString("cookie")); // <- MUY IMPORTANTE
-                user.setFlagsUser(rs.getInt("flags_user"));
-                user.setFlagsRoot(rs.getInt("flags_root"));
-                user.setUltimoInicio(rs.getTimestamp("ultimo_inicio"));
-                return user;
+                return mapResultSetToUser(rs);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
-    
+
     public void updateUltimoInicio(int userId) {
         String sql = "UPDATE users SET ultimo_inicio = CURRENT_TIMESTAMP WHERE id = ?";
         try (PreparedStatement pst = con.prepareStatement(sql)) {
-        	pst.setInt(1, userId);
-        	pst.executeUpdate();
+            pst.setInt(1, userId);
+            pst.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    
+
     public boolean deleteUserById(int userId) {
         String sql = "DELETE FROM users WHERE id = ?";
         try (PreparedStatement pst = con.prepareStatement(sql)) {
-        	pst.setInt(1, userId);
+            pst.setInt(1, userId);
             int affectedRows = pst.executeUpdate();
             return affectedRows > 0;
         } catch (SQLException e) {
@@ -139,29 +122,53 @@ public class UserDAO {
             return false;
         }
     }
-    
+
     public User getUserByUsername(String username) {
         String sql = "SELECT * FROM users WHERE usuario = ? LIMIT 1";
         try (PreparedStatement pst = con.prepareStatement(sql)) {
             pst.setString(1, username);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
-                User user = new User();
-                user.setId(rs.getInt("id"));
-                user.setUsuario(rs.getString("usuario"));
-                user.setEmail(rs.getString("email"));
-                user.setNombre(rs.getString("nombre"));
-                user.setApellido(rs.getString("apellido"));
-                user.setRol(rs.getString("rol"));
-                user.setCookie(rs.getString("cookie")); // muy importante
-                user.setFlagsUser(rs.getInt("flags_user"));
-                user.setFlagsRoot(rs.getInt("flags_root"));
-                user.setUltimoInicio(rs.getTimestamp("ultimo_inicio"));
-                return user;
+                return mapResultSetToUser(rs);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    // Método privado para mapear un ResultSet a un objeto User
+    private User mapResultSetToUser(ResultSet rs) throws SQLException {
+        User user = new User();
+        user.setId(rs.getInt("id"));
+        user.setUsuario(rs.getString("usuario"));
+        user.setEmail(rs.getString("email"));
+        user.setNombre(rs.getString("nombre"));
+        user.setApellido(rs.getString("apellido"));
+        user.setRol(rs.getString("rol"));
+        user.setCookie(rs.getString("cookie"));
+        user.setFlagsUser(rs.getInt("flags_user"));
+        user.setFlagsRoot(rs.getInt("flags_root"));
+        user.setUltimoInicio(rs.getTimestamp("ultimo_inicio"));
+        return user;
+    }
+
+    // Método para obtener el id de usuario por username (usa este DAO)
+    public int getUserIdFromUsername(String username) {
+        User user = getUserByUsername(username);
+        if (user != null) {
+            return user.getId();
+        }
+        return -1; // Devuelve -1 si no encuentra usuario
+    }
+
+    // Incrementa contador flags_user o flags_root según tipoFlag
+    public void incrementFlagCount(int userId, String tipoFlag) throws SQLException {
+        String column = tipoFlag.equals("user") ? "flags_user" : "flags_root";
+        String sql = "UPDATE users SET " + column + " = " + column + " + 1 WHERE id = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+        }
     }
 }
