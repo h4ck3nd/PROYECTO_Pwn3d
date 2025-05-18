@@ -81,4 +81,6 @@ CREATE TABLE writeups_public (
     creator VARCHAR(100) NOT NULL,
     fecha_publicacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+ALTER TABLE writeups_public
+ADD COLUMN content_type VARCHAR(20) NOT NULL DEFAULT 'text';
 
