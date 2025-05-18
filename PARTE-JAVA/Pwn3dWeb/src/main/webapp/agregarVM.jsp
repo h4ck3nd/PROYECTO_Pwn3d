@@ -427,6 +427,20 @@
             <input type="url" id="download_url" name="download_url" placeholder="https://test.com/download" required>
         </div>
     </div>
+	
+	<div class="form-group">
+	    <label for="user_flag">User Flag:</label>
+	    <div class="input-wrapper">
+	        <input type="text" id="user_flag" name="user_flag" placeholder="FLAG{user_flag}">
+	    </div>
+	</div>
+	
+	<div class="form-group">
+	    <label for="root_flag">Root Flag:</label>
+	    <div class="input-wrapper">
+	        <input type="text" id="root_flag" name="root_flag" placeholder="FLAG{root_flag}">
+	    </div>
+	</div>
 
     <button type="submit">Enviar</button>
 </form>

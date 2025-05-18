@@ -520,6 +520,16 @@
 						      </div>
 						    </div>
 						</tr>
+						<tr class="row" data-machine-id="14">
+						    <td colspan="14">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina avengers...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
+						</tr>
 					</tbody>
 				</table>
 				<p id="search-message" style="display:none;">
@@ -619,7 +629,7 @@
 			</section>
 			
 			<!-- SECCION DE ENVIAR FLAGs -->
-			
+
 			<section class="form-flag">
 			  <div class="form-container">
 			    <!-- Botón de cierre -->
@@ -636,14 +646,15 @@
 			    </p>
 			
 			    <!-- Formulario -->
-			    <form class="form submit-form" id="flagForm">
+			    <form class="form submit-form" id="flagForm" method="POST" action="<%= request.getContextPath() %>/submitFlag">
+			      <input type="hidden" id="vmName" name="vmName" value="" />
 			      <!-- Campo: Usuario -->
 			      <div class="form-field" style="margin-bottom: -5px !important; margin-top: 5px !important;">
 			        <label class="form-label" for="username" style="margin-bottom: 5px !important;">Usuario</label>
 			        <input
 			          class="form-control"
 			          id="username"
-			          name="Username"
+			          name="username"
 			          type="text"
 			          maxlength="15"
 			          placeholder="Nombre de usuario"
@@ -659,7 +670,7 @@
 			        <input
 			          class="form-control"
 			          id="flag"
-			          name="Flag"
+			          name="flag"
 			          type="text"
 			          maxlength="64"
 			          placeholder="Ejemplo: PWNED{example_flag}"
@@ -672,9 +683,9 @@
 			      <div class="form-field" style="margin-bottom: -5px !important; margin-top: 10px !important;">
 			        <span class="form-label" style="margin-bottom: 5px !important;">Tipo de flag</span>
 			        <div class="form-checkbox" id="flag-type">
-			          <input type="radio" id="user" name="FlagType" value="user" checked />
+			          <input type="radio" id="user" name="flagType" value="user" checked />
 			          <label for="user" style="margin-bottom: -5px !important;">User</label>
-			          <input type="radio" id="root" name="FlagType" value="root" />
+			          <input type="radio" id="root" name="flagType" value="root" />
 			          <label for="root" style="margin-bottom: -5px !important;">Root</label>
 			        </div>
 			      </div>
@@ -903,7 +914,7 @@
 							  '</button>' +
 							'</td>' +
 		                    '<td class="flag">' +
-		                        '<button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm(\'user/root\', \'' + machine.nameMachine + '\')">' +
+		                    	'<button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm(\'\', \'' + machine.nameMachine + '\')">' +
 		                            '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
 		                                '<path d="M5 5v16" />' +
 		                                '<path d="M5 5h14l-3 5l3 5h-14" />' +
@@ -927,6 +938,77 @@
 		    });
 		});
 		
+	  /* SUMBIT FLAGS (SUBMIT FLAGS (SHOW FORM)) */
+	  
+	  // Mostrar el formulario con datos correctos
+		const showFlagForm = (type, vmname) => {
+		  const body = document.querySelector('body');
+		  const modal = document.querySelector('.form-flag');
+		  const span = modal.querySelector('.close-form-flag');
+		  const title = modal.querySelector('.form-title h1');
+		  const vmNameInput = document.getElementById('vmName');
+		  const userRadio = document.getElementById('user');
+		  const rootRadio = document.getElementById('root');
+		
+		  if (body && modal && span && title && vmNameInput && userRadio && rootRadio) {
+		    body.style.overflow = 'hidden';
+		    modal.style.display = 'flex';
+		    vmNameInput.value = vmname;
+		    title.textContent = `🏴 Enviar ${type || 'flag'} para ${vmname}`;
+		
+		    if (type === 'user') {
+		      userRadio.checked = true;
+		      rootRadio.checked = false;
+		    } else if (type === 'root') {
+		      rootRadio.checked = true;
+		      userRadio.checked = false;
+		    } else {
+		      // Ninguno seleccionado por defecto, que el usuario elija
+		      userRadio.checked = false;
+		      rootRadio.checked = false;
+		      title.textContent = `🏴 Enviar flag para ${vmname}`;
+		    }
+		
+		    span.onclick = function () {
+		      modal.style.display = 'none';
+		      body.style.overflow = 'visible';
+		    };
+		  } else {
+		    console.error('Error: uno o varios elementos no encontrados.');
+		  }
+		};
+		
+		// Envío del formulario
+		document.getElementById('flagForm').addEventListener('submit', async function(event) {
+		  event.preventDefault();
+		
+		  const form = event.target;
+		
+		  // Construir URLSearchParams para enviar como application/x-www-form-urlencoded
+		  const formData = new URLSearchParams(new FormData(form));
+		
+		  try {
+		    const response = await fetch(form.action, {
+		      method: form.method,
+		      headers: {
+		        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+		      },
+		      body: formData.toString(),
+		    });
+		
+		    const result = await response.json();
+		
+		    if (response.ok) {
+		      alert(result.message);
+		      form.reset();
+		    } else {
+		      alert(result.error || result.message);
+		    }
+		  } catch (error) {
+		    alert("Error de red o del servidor.");
+		  }
+		});
+			  
 	  /* SUMBIT NEW VM */
 	  
 	  document.getElementById('wizardVmForm').addEventListener('submit', function (e) {

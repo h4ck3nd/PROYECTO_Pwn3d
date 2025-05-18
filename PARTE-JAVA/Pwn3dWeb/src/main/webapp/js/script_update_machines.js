@@ -201,26 +201,6 @@ function showCard(name, os, difficulty, creator, release, id) {
 	  modal.querySelector('.vb-title').textContent = `Enviar nuevo writeup para ${vmname}`;
 	  document.getElementById('writeupForm').dataset.vmname = vmname;
 	}
-
-	/* SUBMIT FLAGS (SHOW FORM) */
-	const showFlagForm = (type, vmname) => {
-	  const body = document.querySelector('body');
-	  const modal = document.querySelector('.form-flag');
-	  const span = modal.querySelector('.close-form-flag');
-	  const title = modal.querySelector('.form-title h1');
-
-	  if (body && modal && span && title) {
-	    body.style.overflow = 'hidden';
-	    title.textContent = `🏴 Enviar ${type} flag para ${vmname}`;
-	    modal.style.display = 'flex'; // ← esto centra el modal con flexbox
-	    span.onclick = function () {
-	      modal.style.display = 'none';
-	      body.style.overflow = 'visible';
-	    };
-	  } else {
-	    console.error('Error: uno o varios elementos no encontrados.');
-	  }
-	};
 	
 	/* SEARCH LOGIC */
 	
