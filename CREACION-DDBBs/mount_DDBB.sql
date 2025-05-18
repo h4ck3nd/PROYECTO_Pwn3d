@@ -84,3 +84,22 @@ CREATE TABLE writeups_public (
 ALTER TABLE writeups_public
 ADD COLUMN content_type VARCHAR(20) NOT NULL DEFAULT 'text';
 
+-- TABLA PARA EL ENVIO DE NUEVAS VMs
+
+DROP TABLE IF EXISTS new_vm;
+CREATE TABLE new_vm (
+  id SERIAL PRIMARY KEY,
+  user_id INT NOT NULL,
+  name_vm VARCHAR(50) NOT NULL,
+  difficulty VARCHAR(20) NOT NULL,
+  creator VARCHAR(50) NOT NULL,
+  url_vm TEXT NOT NULL,
+  user_flag VARCHAR(64) NOT NULL,
+  root_flag VARCHAR(64) NOT NULL,
+  url_writeup TEXT,
+  contact VARCHAR(100),
+  tags VARCHAR(255),
+  estado VARCHAR(20) DEFAULT 'Pendiente',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
