@@ -117,18 +117,18 @@
 			          <div class="wizard-vm-field-group">
 			            <div class="wizard-vm-field">
 			              <label for="wizard-writeup-url">Writeup URL</label>
-			              <input id="wizard-writeup-url" name="Solution" type="url" pattern="https?://.+" placeholder="URL del writeup" required />
+			              <input id="wizard-writeup-url" name="Solution" type="url" pattern="https?://.+" placeholder="URL del writeup" />
 			            </div>
 			            <div class="wizard-vm-field">
 			              <label for="wizard-contact">Contacto</label>
-			              <input id="wizard-contact" name="Contact" type="text" maxlength="32" placeholder="email, Discord, etc..." required />
+			              <input id="wizard-contact" name="Contact" type="text" maxlength="32" placeholder="email, Discord, etc..." />
 			            </div>
 			          </div>
 			
 			          <!-- Tags -->
 			          <div class="wizard-vm-field">
 			            <label for="wizard-tags">Tags</label>
-			            <textarea id="wizard-tags" name="Tags" maxlength="200" rows="2" placeholder="Tags separadas por comas" required></textarea>
+			            <textarea id="wizard-tags" name="Tags" maxlength="200" rows="2" placeholder="Tags separadas por comas"></textarea>
 			          </div>
 			
 			          <!-- Botones -->
@@ -525,9 +525,17 @@
 			          </div>
 			
 			          <div class="vb-field">
-			            <label for="writeup-url">URL</label>
-			            <input id="writeup-url" name="URL" type="url" pattern="https?://.+" placeholder="URL del writeup" required />
-			          </div>
+						  <label for="writeup-url">URL (solo HTTPS)</label>
+						  <input
+						    id="writeup-url"
+						    name="URL"
+						    type="url"
+						    placeholder="https://example.com/writeup"
+						    pattern="https://.*"
+						    title="La URL debe comenzar con https://"
+						    required
+						  />
+						</div>
 			
 			          <div class="vb-field">
 			            <span>Tipo de contenido</span>
@@ -731,7 +739,15 @@
 	    <p><strong>First Root:</strong> <span id="popupFirstRoot"></span></p>
 	  </div>
 	</div>
-
+	
+	<!-- POPUP SUBMIT WRITEUP MESSAGE -->
+	
+	<div id="popupMensaje" class="popup-overlay-writeup" style="display: none;">
+	  <div class="popup-box-writeup">
+	    <p id="popupTexto"></p>
+	    <button onclick="cerrarPopup()">Cerrar</button>
+	  </div>
+	</div>
 	
 	<!--<script src="<%= request.getContextPath() %>/js/machines23.js"></script>-->
 	<script src="<%= request.getContextPath() %>/js/jsMachines.jsp"></script>
@@ -876,55 +892,98 @@
 		            });
 		    });
 		});
-	
+		
+	  /* SUMBIT NEW VM */
+	  
+	  document.getElementById('wizardVmForm').addEventListener('submit', function (e) {
+		  e.preventDefault();
+		
+		  const form = e.target;
+		  const formData = new FormData(form);
+		
+		  const url = "<%= request.getContextPath() %>/sendNewVM";  // contexto dinámico desde JSP
+		
+		  fetch(url, {
+		    method: 'POST',
+		    body: new URLSearchParams(formData),
+		    credentials: 'include'  // para enviar cookies y así el servlet pueda leer el token JWT
+		  })
+		  .then(response => {
+		    if (response.ok) {
+		      mostrarPopup("✅ Máquina enviada correctamente.");
+		      form.reset();
+		    } else {
+		      response.text().then(msg => {
+		        console.error("[ERROR] Respuesta del servidor:", msg);
+		        mostrarPopup("❌ Error al enviar la máquina.");
+		      });
+		    }
+		  })
+		  .catch(error => {
+		    console.error("[ERROR] Error de red:", error);
+		    mostrarPopup("⚠️ Error de conexión.");
+		  });
+		});
+	  	
+	    /* POPUP SUBMIT WRITEUP */
+	  
+	 	function mostrarPopup(mensaje) {
+		  document.getElementById('popupTexto').textContent = mensaje;
+		  document.getElementById('popupMensaje').style.display = 'flex';
+		}
+
+		function cerrarPopup() {
+		  document.getElementById('popupMensaje').style.display = 'none';
+		}
 	  
 	  /* SHOW WRITEUPS */
 	  
 	 function showWriteups(vmName) {
-  const modal = document.getElementById(vmName);
-  if (!modal) {
-    console.error("No se encontró el modal para:", vmName);
-    return;
-  }
-
-  const container = modal.querySelector('.writeups-container');
-  if (!container) {
-    console.error("No se encontró el contenedor de writeups dentro del modal:", vmName);
-    return;
-  }
-
-  const title = modal.querySelector('.writeup-title');
-  title.textContent = 'Writeup de ' + vmName;
-
-  container.innerHTML = '<p style="text-align:center; color: gray;">Cargando...</p>';
-
-  fetch('<%= request.getContextPath() %>/getWriteupsPublic?vmName=' + encodeURIComponent(vmName))
-    .then(res => res.json())
-    .then(data => {
-      container.innerHTML = '';
-
-      if (!data || data.length === 0) {
-        container.innerHTML = '<p style="text-align:center; color: gray;">No hay writeups para esta máquina.</p>';
-      } else {
-        data.forEach(w => {
-          container.innerHTML += '<p><a href="' + w.url + '" target="_blank">' + w.name + ' - ' + w.creator + '</a></p>';
-        });
-      }
-
-      // Mostrar modal añadiendo clase .show
-      modal.classList.add('show');
-
-      // Añadir el evento para cerrar modal al hacer click en la "x"
-      const closeBtn = modal.querySelector('.close');
-      if (closeBtn) {
-        closeBtn.onclick = () => modal.classList.remove('show');
-      }
-    })
-    .catch(err => {
-      console.error("Error cargando writeups:", err);
-      container.innerHTML = '<p style="color:red;">⚠️ Error al cargar writeups.</p>';
-    });
-}
+		  const modal = document.getElementById(vmName);
+		  if (!modal) {
+		    console.error("No se encontró el modal para:", vmName);
+		    return;
+		  }
+		
+		  const container = modal.querySelector('.writeups-container');
+		  if (!container) {
+		    console.error("No se encontró el contenedor de writeups dentro del modal:", vmName);
+		    return;
+		  }
+		
+		  const title = modal.querySelector('.writeup-title');
+		  title.textContent = 'Writeup de ' + vmName;
+		
+		  container.innerHTML = '<p style="text-align:center; color: gray;">Cargando...</p>';
+		
+		  fetch('<%= request.getContextPath() %>/getWriteupsPublic?vmName=' + encodeURIComponent(vmName))
+		    .then(res => res.json())
+		    .then(data => {
+		      container.innerHTML = '';
+		
+		      if (!data || data.length === 0) {
+		        container.innerHTML = '<p style="text-align:center; color: gray;">No hay writeups para esta máquina.</p>';
+		      } else {
+		        data.forEach(w => {
+		        	let icon = w.contentType === 'Video' ? '📹' : '📄';
+		        	container.innerHTML += '<p>' + '<span class="writeup-icon">' + icon + '</span>' + ' <a href="' + w.url + '" target="_blank">' + w.name + ' - ' + w.creator + '</a></p>';
+		        });
+		      }
+		
+		      // Mostrar modal añadiendo clase .show
+		      modal.classList.add('show');
+		
+		      // Añadir el evento para cerrar modal al hacer click en la "x"
+		      const closeBtn = modal.querySelector('.close');
+		      if (closeBtn) {
+		        closeBtn.onclick = () => modal.classList.remove('show');
+		      }
+		    })
+		    .catch(err => {
+		      console.error("Error cargando writeups:", err);
+		      container.innerHTML = '<p style="color:red;">⚠️ Error al cargar writeups.</p>';
+		    });
+		}
 	  
 	  /* POPUP FIRST FLAGS */
 	  
@@ -1018,7 +1077,11 @@
 		  // Eliminar popup anterior si existe
 		  const existingPopup = document.getElementById('machinePopupDynamic');
 		  if (existingPopup) existingPopup.remove();
-		
+		  
+		  // Barra de progreso
+		  const maxWriteups = 100; // define el máximo para el porcentaje
+		  const writeupsPercent = machine.totalWriteups ? Math.min(100, (machine.totalWriteups / maxWriteups) * 100) : 0;
+		  
 		  // Crear popup principal
 		  const popup = document.createElement('div');
 		  popup.id = 'machinePopupDynamic';
@@ -1075,36 +1138,36 @@
 		        '<span class="date">Fecha: ' + (machine.date || 'N/A') + '</span>' +
 		      '</div>' +
 		
-		      // Datos generales
+		      // Flags y Writeups generales
 		      '<section>' +
-		        '<h3>Datos generales</h3>' +
+		        '<h3>Flags y Writeups generales</h3>' +
 		        '<ul>' +
 		          '<li><strong>ID:</strong> ' + (machine.id || 'No disponible') + '</li>' +
-		          '<li><strong>Ubicación:</strong> ' + (machine.location || 'No disponible') + '</li>' +
-		          '<li><strong>Tipo:</strong> ' + (machine.type || 'No disponible') + '</li>' +
-		          '<li><strong>Última actualización:</strong> ' + (machine.lastUpdate || 'No disponible') + '</li>' +
+		          '<li><strong>Root:</strong> ' + (machine.location || 'No disponible') + '</li>' +
+		          '<li><strong>User:</strong> ' + (machine.type || 'No disponible') + '</li>' +
+		          '<li><strong>Writeups:</strong> ' + (machine.totalWriteups !== undefined ? machine.totalWriteups : 'No disponible') + '</li>' +
 		        '</ul>' +
 		      '</section>' +
 		      '<br>' +
-		      // Estado y métricas
+		      // Barras de estado
 		      '<section>' +
-		        '<h3>Estado y métricas</h3>' +
+		        '<h3>Barras de estado</h3>' +
 		        '<div class="metrics">' +
 		
 		          '<div class="metric">' +
-		            '<p><strong>CPU:</strong> ' + (machine.cpu || 'N/A') + '</p>' +
+		            '<p><strong>Flags Users:</strong> ' + (machine.cpu || 'N/A') + '</p>' +
 		            '<div class="bar-bg"><div class="bar-fill cpu" style="width:' + (machine.cpuPercent || 0) + '%;"></div></div>' +
 		          '</div>' +
 		
 		          '<div class="metric">' +
-		            '<p><strong>RAM:</strong> ' + (machine.ramUsed || 'N/A') + ' / ' + (machine.ramTotal || 'N/A') + '</p>' +
+		            '<p><strong>Flags Root:</strong> ' + (machine.cpu || 'N/A') + '</p>' +
 		            '<div class="bar-bg"><div class="bar-fill ram" style="width:' + (machine.ramPercent || 0) + '%;"></div></div>' +
 		          '</div>' +
-		
+				
 		          '<div class="metric">' +
-		            '<p><strong>Disco:</strong> ' + (machine.diskUsed || 'N/A') + ' / ' + (machine.diskTotal || 'N/A') + '</p>' +
-		            '<div class="bar-bg"><div class="bar-fill disk" style="width:' + (machine.diskPercent || 0) + '%;"></div></div>' +
-		          '</div>' +
+			          '<p><strong>Writeups:</strong> ' + (machine.totalWriteups !== undefined ? machine.totalWriteups : 'N/A') + '</p>' +
+			          '<div class="bar-bg"><div class="bar-fill disk" style="width:' + writeupsPercent + '%;"></div></div>' +
+			        '</div>' +
 		
 		        '</div>' +
 		      '</section>' +
@@ -1160,6 +1223,5 @@
 		  });
 		});
 	</script>
-
 </body>
 </html>

@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="model.NewVM" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -224,6 +225,9 @@
     .input-wrapper:hover svg {
         fill: var(--accent-dark); /* Color del ícono cambia al pasar el cursor */
     }
+    .margin {
+    	margin-top: -30px;
+    }
 </style>
 </head>
 <body>
@@ -391,6 +395,16 @@
     <button type="submit">Enviar</button>
 </form>
 </div>
-<br>
+
+<div class="container margin">
+	<form action="<%= request.getContextPath() %>/publishVM" method="POST">
+	  <h2>Cambiar estado (Publicado) de VM por ID</h2>
+	  <label for="vmIdInput">ID de la VM:</label>
+	  <input type="number" id="vmIdInput" name="id" min="1" style="background: #1b1b1b; color: #4be979;" required />
+	  <br><br>
+	  <button type="submit">Publicar</button>
+	</form>
+</div>
+
 </body>
 </html>

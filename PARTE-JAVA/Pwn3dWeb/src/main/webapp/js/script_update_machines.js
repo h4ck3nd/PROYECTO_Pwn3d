@@ -161,8 +161,7 @@ function showCard(name, os, difficulty, creator, release, id) {
 	  window.addEventListener('click', handleClickOutside);
 	};
 	
-	
-	/* SUBMIT WRITEUP (SHOW FORM) */
+	/* SUBMIT WRITEUP (SHOW/SUBMIT FORM) */
 
 	document.getElementById('writeupForm').addEventListener('submit', function (e) {
 	  e.preventDefault();
@@ -179,28 +178,29 @@ function showCard(name, os, difficulty, creator, release, id) {
 	    body: new URLSearchParams(formData)
 	  }).then(response => {
 	    if (response.ok) {
-	      alert("Writeup enviado correctamente.");
+	      mostrarPopup("✅ Writeup enviado correctamente.");
 	      form.reset();
 	    } else {
 	      response.text().then(msg => {
 	        console.error("[ERROR] Respuesta del servidor:", msg);
-	        alert("Error al enviar el writeup.");
+	        mostrarPopup("❌ Error al enviar el writeup.");
 	      });
 	    }
 	  }).catch(error => {
 	    console.error("[ERROR] Error en fetch:", error);
-	    alert("Error de conexión.");
+	    mostrarPopup("⚠️ Error de conexión.");
 	  });
 	});
 
-	const showWriteupForm = (vmname) => {
+	// 👉 Mueve esta función FUERA del event listener:
+	function showWriteupForm(vmname) {
 	  const modal = document.querySelector('.form-writeup');
 	  modal.style.display = 'flex';
 	  document.body.style.overflow = 'hidden';
 
 	  modal.querySelector('.vb-title').textContent = `Enviar nuevo writeup para ${vmname}`;
 	  document.getElementById('writeupForm').dataset.vmname = vmname;
-	};
+	}
 
 	/* SUBMIT FLAGS (SHOW FORM) */
 	const showFlagForm = (type, vmname) => {

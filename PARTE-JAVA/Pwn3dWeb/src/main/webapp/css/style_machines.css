@@ -1817,6 +1817,24 @@ label {
 	margin-right: 10px !important;
 }
 
+.writeups-container p {
+  display: flex;
+  align-items: center;
+  gap: 0.4em; /* espacio entre icono y texto */
+  margin: 0.2em 0; /* un poco de margen vertical para separar párrafos */
+  font-size: 1rem; /* ajusta tamaño de fuente si quieres */
+}
+
+.writeups-container a {
+  text-decoration: none;
+  color: inherit; /* para que tome el color del contenedor */
+}
+
+.writeup-icon {
+  font-size: 2em; /* Ajusta este valor para más o menos tamaño */
+  line-height: 1;
+}
+
 .modal {
     display: none;           /* oculto por defecto */
     position: fixed;
@@ -3026,3 +3044,77 @@ button[type="submit"]:hover {
     background: #222222; /* Fondo de la barra de desplazamiento */
     border-radius: 10px;
 }
+
+/* ESTILO DEL POPUP SUBMIT WRITEUP */
+
+.popup-overlay-writeup {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(20, 20, 20, 0.7); /* overlay oscuro, semi-transparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  pointer-events: auto;
+  font-family: 'Fira Code', monospace;
+}
+
+.popup-box-writeup {
+  background-color: #121a12; /* verde muy oscuro, casi negro */
+  border: 2px solid #3a6b35; /* verde oscuro elegante */
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0 4px 15px rgba(58, 107, 53, 0.7);
+  color: #a0c8a0; /* verde grisáceo suave */
+  animation: popupFadeIn 0.3s ease forwards;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: center;
+}
+
+.popup-box-writeup p {
+  font-size: 1.2rem;
+  margin: 0;
+  color: #d4e3d4; /* verde muy claro */
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.4); /* fondo negro semi-transparente */
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  display: inline-block;
+  box-shadow: 0 0 8px rgba(58, 107, 53, 0.6);
+}
+
+.popup-box-writeup button {
+  background: #3a6b35;
+  color: #e0e6e0; /* casi blanco suave */
+  border: none;
+  padding: 10px 26px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: 'Fira Code', monospace;
+  box-shadow: 0 0 10px rgba(58, 107, 53, 0.6);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  align-self: center;
+  min-width: 130px;
+}
+
+.popup-box-writeup button:hover {
+  background: #2a4a22;
+  box-shadow: 0 0 15px rgba(42, 74, 34, 0.9);
+}
+
+@keyframes popupFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+

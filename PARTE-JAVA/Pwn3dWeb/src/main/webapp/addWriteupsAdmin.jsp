@@ -197,7 +197,8 @@
         fila.innerHTML =
           "<td>" + w.name + "</td>" +
           "<td>" + w.creator + "</td>" +
-          "<td><a href='" + w.url + "' target='_blank'>Ver</a></td>";
+          "<td><a href='" + w.url + "' target='_blank'>Ver</a></td>" +
+          "<td>" + w.contentType + "</td>";
         contenedor.appendChild(fila);
       });
     }
@@ -228,6 +229,7 @@
           <th>Nombre de la Máquina</th>
           <th>Creador</th>
           <th>URL</th>
+          <th>Tipo</th>
         </tr>
       </thead>
       <tbody id="tablaWriteups">
