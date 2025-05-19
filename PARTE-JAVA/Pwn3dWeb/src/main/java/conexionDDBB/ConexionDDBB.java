@@ -13,21 +13,21 @@ public class ConexionDDBB {
 	   PASSWORD: contraseña del usuario
 	 * ============================================================================*/
 	private static final String DRIVER = "org.postgresql.Driver";
-	private static final String URL = "jdbc:postgresql://localhost:5432/pwn3d";
+	private static final String URL = "jdbc:postgresql://localhost:5432/hackend";
 	private static final String USER = "postgres";
 	private static final String PASSWORD = "1234";
-
+	
 	/* ==================================================================
 	 * Objeto que almacenará la conexión establecida con la base de datos
 	 * ==================================================================*/
 	private Connection conexion = null;
-
+	
 	/* ==================================================================
 	    Bloque estático que carga el driver JDBC al iniciar la clase
 		Es necesario para que el DriverManager pueda utilizarlo
 	   ==================================================================
 	 */
-
+	
 	static{
 		try {
 			Class.forName(DRIVER);
@@ -36,7 +36,7 @@ public class ConexionDDBB {
 			e.printStackTrace();
 		}
 	}
-
+	
 	/* ==================================================================
 	   Método que establece la conexión con la base de datos
 	   Devuelve un objeto Connection si la conexión es exitosa
@@ -52,7 +52,7 @@ public class ConexionDDBB {
 		}
 		return conexion;
 	}
-
+	
 	/* ===================================================================
 	    Método que cierra la conexión con la base de datos
 		Imprime mensajes según si el cierre fue exitoso o no

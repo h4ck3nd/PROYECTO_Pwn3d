@@ -2,100 +2,145 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import conexionDDBB.ConexionDDBB;
-import model.Writeup;
 
 public class WriteupDAO {
-    public void insertWriteup(Writeup writeup) throws SQLException {
-        String sql = "INSERT INTO writeups (url, vm_name, user_id, creator, content_type, language, opinion, estado) VALUES (?, ?, ?, ?, ?, ?, ?, 'Pendiente')";
-        try (Connection conn = new ConexionDDBB().conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, writeup.getUrl());
-            stmt.setString(2, writeup.getVmName());
-            stmt.setInt(3, writeup.getUserId());
-            stmt.setString(4, writeup.getCreator());
-            stmt.setString(5, writeup.getContentType());
-            stmt.setString(6, writeup.getLanguage());
-            stmt.setString(7, writeup.getOpinion());
-            stmt.executeUpdate();
-        }
-    }
 
-    public List<Writeup> getPendingWriteups() throws SQLException {
-        List<Writeup> pending = new ArrayList<>();
-        String sql = "SELECT * FROM writeups WHERE estado = 'Pendiente'";
+	public boolean insertWriteup(int labId, int userId, String url, String username) {
+	    ConexionDDBB db = new ConexionDDBB();
+	    Connection con = null;
+	    boolean exito = false;
 
-        try (Connection conn = new ConexionDDBB().conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+	    String sql = "INSERT INTO writeups (lab_id, user_id, url_writeup, username) " +
+	                 "VALUES (?, ?, ?, ?) " +
+	                 "ON CONFLICT (lab_id, user_id) DO UPDATE SET " +
+	                 "url_writeup = EXCLUDED.url_writeup, " +
+	                 "username = EXCLUDED.username";
 
-            while (rs.next()) {
-                Writeup w = new Writeup();
-                w.setUrl(rs.getString("url"));
-                w.setVmName(rs.getString("vm_name"));
-                w.setUserId(rs.getInt("user_id"));
-                w.setCreator(rs.getString("creator"));
-                w.setEstado(rs.getString("estado"));
-                w.setContentType(rs.getString("content_type")); // 💥 AÑADIR ESTO
-                pending.add(w);
-            }
-        }
-        return pending;
-    }
+	    try {
+	        con = db.conectar();
+	        PreparedStatement stmt = con.prepareStatement(sql);
 
-    public List<Writeup> getWriteupsPublicByVmName(String vmName) throws SQLException {
-        List<Writeup> lista = new ArrayList<>();
-        String sql = "SELECT vm_name, creator, url, content_type FROM writeups_public WHERE vm_name = ?";
+	        stmt.setInt(1, labId);
+	        stmt.setInt(2, userId);
+	        stmt.setString(3, url);
+	        stmt.setString(4, username);
 
-        try (Connection conn = new ConexionDDBB().conectar();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+	        int filas = stmt.executeUpdate();
+	        exito = filas > 0;
 
-            stmt.setString(1, vmName);
-            ResultSet rs = stmt.executeQuery();
+	        stmt.close();
+	    } catch (SQLException e) {
+	        System.err.println("Error al insertar o actualizar writeup:");
+	        e.printStackTrace();
+	    } finally {
+	        db.cerrarConexion();
+	    }
 
-            while (rs.next()) {
-                Writeup w = new Writeup();
-                w.setVmName(rs.getString("vm_name"));
-                w.setCreator(rs.getString("creator"));
-                w.setUrl(rs.getString("url"));
-                w.setContentType(rs.getString("content_type")); // NUEVO
-                lista.add(w);
-            }
-        }
-        return lista;
-    }
+	    return exito;
+	}
+	
+	public boolean insertWriteupDockerpwned(int labId, int userId, String url, String username) {
+	    ConexionDDBB db = new ConexionDDBB();
+	    Connection con = null;
+	    boolean exito = false;
 
-    public void publishWriteup(Writeup w) throws SQLException {
-        try (Connection conn = new ConexionDDBB().conectar()) {
-            conn.setAutoCommit(false);
+	    String sql = "INSERT INTO writeups_dockerpwned (lab_id, user_id, url_writeup, username) " +
+	                 "VALUES (?, ?, ?, ?) " +
+	                 "ON CONFLICT (lab_id, user_id) DO UPDATE SET " +
+	                 "url_writeup = EXCLUDED.url_writeup, " +
+	                 "username = EXCLUDED.username";
 
-            try {
-                String insertSql = "INSERT INTO writeups_public (url, vm_name, user_id, creator, content_type) VALUES (?, ?, ?, ?, ?)";
-                try (PreparedStatement insertStmt = conn.prepareStatement(insertSql)) {
-                    insertStmt.setString(1, w.getUrl());
-                    insertStmt.setString(2, w.getVmName());
-                    insertStmt.setInt(3, w.getUserId());
-                    insertStmt.setString(4, w.getCreator());
-                    insertStmt.setString(5, w.getContentType() != null ? w.getContentType() : "text");
-                    insertStmt.executeUpdate();
-                }
+	    try {
+	        con = db.conectar();
+	        PreparedStatement stmt = con.prepareStatement(sql);
 
-                String updateSql = "UPDATE writeups SET estado = 'Publicado' WHERE url = ?";
-                try (PreparedStatement updateStmt = conn.prepareStatement(updateSql)) {
-                    updateStmt.setString(1, w.getUrl());
-                    updateStmt.executeUpdate();
-                }
+	        stmt.setInt(1, labId);
+	        stmt.setInt(2, userId);
+	        stmt.setString(3, url);
+	        stmt.setString(4, username);
 
-                conn.commit();
-            } catch (SQLException e) {
-                conn.rollback();
-                throw e;
-            }
-        }
-    }
+	        int filas = stmt.executeUpdate();
+	        exito = filas > 0;
+
+	        stmt.close();
+	    } catch (SQLException e) {
+	        System.err.println("Error al insertar o actualizar writeup dockerpwned:");
+	        e.printStackTrace();
+	    } finally {
+	        db.cerrarConexion();
+	    }
+
+	    return exito;
+	}
+	
+	public boolean insertWriteupOvalabs(int labId, int userId, String url, String username) {
+	    ConexionDDBB db = new ConexionDDBB();
+	    Connection con = null;
+	    boolean exito = false;
+
+	    String sql = "INSERT INTO writeups_ovalabs (lab_id, user_id, url_writeup, username) " +
+	                 "VALUES (?, ?, ?, ?) " +
+	                 "ON CONFLICT (lab_id, user_id) DO UPDATE SET " +
+	                 "url_writeup = EXCLUDED.url_writeup, " +
+	                 "username = EXCLUDED.username";
+
+	    try {
+	        con = db.conectar();
+	        PreparedStatement stmt = con.prepareStatement(sql);
+
+	        stmt.setInt(1, labId);
+	        stmt.setInt(2, userId);
+	        stmt.setString(3, url);
+	        stmt.setString(4, username);
+
+	        int filas = stmt.executeUpdate();
+	        exito = filas > 0;
+
+	        stmt.close();
+	    } catch (SQLException e) {
+	        System.err.println("Error al insertar o actualizar writeup ovalabs:");
+	        e.printStackTrace();
+	    } finally {
+	        db.cerrarConexion();
+	    }
+
+	    return exito;
+	}
+	
+	public boolean insertWriteupTimelabs(int labId, int userId, String url, String username) {
+	    ConexionDDBB db = new ConexionDDBB();
+	    Connection con = null;
+	    boolean exito = false;
+
+	    String sql = "INSERT INTO writeups_timelabs (lab_id, user_id, url_writeup, username) " +
+	                 "VALUES (?, ?, ?, ?) " +
+	                 "ON CONFLICT (lab_id, user_id) DO UPDATE SET " +
+	                 "url_writeup = EXCLUDED.url_writeup, " +
+	                 "username = EXCLUDED.username";
+
+	    try {
+	        con = db.conectar();
+	        PreparedStatement stmt = con.prepareStatement(sql);
+
+	        stmt.setInt(1, labId);
+	        stmt.setInt(2, userId);
+	        stmt.setString(3, url);
+	        stmt.setString(4, username);
+
+	        int filas = stmt.executeUpdate();
+	        exito = filas > 0;
+
+	        stmt.close();
+	    } catch (SQLException e) {
+	        System.err.println("Error al insertar o actualizar writeup timelabs:");
+	        e.printStackTrace();
+	    } finally {
+	        db.cerrarConexion();
+	    }
+
+	    return exito;
+	}
 }
