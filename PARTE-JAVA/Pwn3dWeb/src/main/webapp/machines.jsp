@@ -18,9 +18,28 @@
 <script async defer src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <!--<link rel="stylesheet" href="<%= request.getContextPath() %>/css/style_machines134.css">-->
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/cssMachines.jsp">
+<style>
+    #loader {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 1);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5em;
+      z-index: 9999;
+    }
+  </style>
 </head>
-
 <body>
+
+<!-- PANTALLA DE CARGA -->
+
+<div id="loader">Cargando contenido...</div>
+
+<!-- CONTENIDO DE LA PAGINA PRINCIPAL -->
+
 	<header>
 	    <section class="header-container">
 		
@@ -1555,7 +1574,7 @@
 		/* SECCION DE IMAGEN CON ESTADISTICAS DE LAS MAQUINAS Y DIFICULTADES (LOGICA) */
 		
 		function loadMachineStatsUI() {
-		  fetch('<%= request.getContextPath() %>/machines-stats')
+		  fetch('<%= request.getContextPath() %>/machines-stats-principal')
 		    .then(function (response) {
 		      if (!response.ok) throw new Error('Error al cargar las estadísticas');
 		      return response.json();
@@ -1589,8 +1608,7 @@
 		      // DERECHA (barras de dificultad)
 		      html += '<div class="right-bars-img-machines">';
 		
-		      var total = data.totalMachines || 1; // evitar división por 0
-		      var difficulties = ['Very Easy', 'Easy', 'Medium', 'Hard'];
+		      var difficulties = ['Very-Easy', 'Easy', 'Medium', 'Hard'];
 		      var colors = {
 		        'very-easy': 'very-easy',
 		        'easy': 'easy',
@@ -1598,11 +1616,25 @@
 		        'hard': 'hard'
 		      };
 		
+		      var totalByDifficulty = data.countsByDifficulty || {};
+		      var hackedByDifficulty = data.hackedByDifficulty || {};
+		
+		      function normalizeKey(key) {
+		        switch (key.toLowerCase().replace(/\s+/g, '')) {
+		          case 'very-easy': return 'Very-Easy';
+		          case 'easy': return 'Easy';
+		          case 'medium': return 'Medium';
+		          case 'hard': return 'Hard';
+		          default: return key;
+		        }
+		      }
+		
 		      for (var i = 0; i < difficulties.length; i++) {
 		        var label = difficulties[i];
-		        var raw = data.countsByDifficulty[label] || 0;
-		        var percent = Math.round((raw / total) * 100);
 		        var cssClass = label.toLowerCase().replace(/\s+/g, '-');
+		        var total = totalByDifficulty[label] || 1; // prevenir división por 0
+		        var hacked = hackedByDifficulty[normalizeKey(label)] || 0;
+		        var percent = Math.round((hacked / total) * 100);
 		
 		        html += '<div class="difficulty-level-img-machines">';
 		        html += '<div class="difficulty-label-img-machines">' + label + '</div>';
@@ -1624,7 +1656,7 @@
 		          var target = bar.getAttribute('data-width');
 		          bar.style.width = target + '%';
 		        });
-		      }, 100); // pequeño delay para transición visual
+		      }, 100);
 		    })
 		    .catch(function (err) {
 		      console.error('Error al construir el bloque de estadísticas:', err);
@@ -1633,6 +1665,14 @@
 		
 		// Ejecutar al cargar
 		window.addEventListener('load', loadMachineStatsUI);
+		
+		/* TIEMPO DE CARGA DE LA PAGINA */
+		 window.addEventListener('load', function() {
+	      setTimeout(function() {
+	        document.getElementById('loader').style.display = 'none';
+	      }, 1000); // 1 segundo para simular carga
+	    });
 	</script>
 </body>
+
 </html>
