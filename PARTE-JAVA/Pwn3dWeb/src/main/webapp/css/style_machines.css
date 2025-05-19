@@ -3222,3 +3222,135 @@ header {
   height: 220%;
   opacity: 1;
 }
+
+/* ESTILO DE IMAGEN MACHINES JUNTO CON LOS STATS ETC... */
+
+.container-img-machines {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.left-stats-img-machines,
+.right-bars-img-machines {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 120px;
+}
+
+.right-bars-img-machines {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: 150px;
+}
+
+
+.stat-block-img-machines {
+  text-align: center;
+}
+
+.stat-title-img-machines {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.stat-number-img-machines {
+  font-size: 1.5rem;
+  color: #77009c;
+}
+
+.image-wrapper-img-machines {
+  position: relative;
+  max-width: 400px;
+  flex-shrink: 1;
+}
+
+.img-machines-page-img-machines {
+  height: 180px;
+  max-width: 100%;
+  display: block;
+  margin: 20px auto;
+  object-fit: contain;
+}
+
+.overlay-text-img-machines {
+  position: absolute;
+  top: 50%;
+  left: 51%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+  text-align: center;
+  pointer-events: none;
+  width: 60%;
+}
+
+/* Barras */
+.difficulty-level-img-machines {
+  margin-bottom: 10px;
+}
+
+.difficulty-label-img-machines {
+  font-weight: 600;
+  margin-bottom: 3px;
+  text-align: left;
+}
+
+.progress-bar-img-machines {
+  width: 150px;
+  height: 15px;
+  background-color: #e0e0e0;
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.progress-fill-img-machines {
+  height: 100%;
+  background-color: #28a745;
+  width: 0;
+  transition: width 0.5s ease-in-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container-img-machines {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .left-stats-img-machines,
+  .right-bars-img-machines {
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .progress-bar-img-machines {
+    width: 100px;
+    height: 12px;
+  }
+
+  .stat-block-img-machines {
+    text-align: center;
+  }
+}
+
+.progress-fill-img-machines {
+  height: 100%;
+  width: 0; /* Empieza desde 0 */
+  border-radius: 20px;
+  transition: width 1.5s ease-out;
+}
+
+/* Colores */
+.progress-fill-img-machines.very-easy { background-color: #00ffff; }
+.progress-fill-img-machines.easy      { background-color: #5cb85c; }
+.progress-fill-img-machines.medium    { background-color: #f0ad4e; }
+.progress-fill-img-machines.hard      { background-color: #d9534f; }

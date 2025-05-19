@@ -187,6 +187,24 @@
 			</section>
 			</section>
 		</header>
+		<br>
+		<!-- IMAGEN DE LA PAGINA DE MAQUINAS PRINCIPAL -->
+		
+		<div id="machinesStatsContainer"></div>
+
+		<script>
+		  document.addEventListener("DOMContentLoaded", function () {
+		    document.querySelectorAll('.progress-fill-img-machines').forEach(bar => {
+		      const width = bar.getAttribute('data-width');
+		      if (width) {
+		        // Forzamos reflow antes de aplicar el ancho para que el transition funcione
+		        void bar.offsetWidth;
+		        bar.style.width = width + '%';
+		      }
+		    });
+		  });
+		</script>
+		
 	<main>
 		<section class="wrapper">
 		<br><br>
@@ -213,6 +231,8 @@
 				<!-- STATS -->
 				
 				<ul class="vm-stats" id="vmStatsContainer"></ul>
+				
+				<!-- FILTROS -->
 				
 				    <div class="filter-wrapper">
 				        
@@ -759,7 +779,7 @@
 			    </div>
 			  </div>
 			</section>
-			
+			<br>
 			<!-- SECCION DE ENVIAR FLAGs -->
 
 			<section class="form-flag">
@@ -1388,38 +1408,39 @@
 		
 		      // Flags y Writeups generales
 		      '<section>' +
-		        '<h3>Flags y Writeups generales</h3>' +
-		        '<ul>' +
-		          '<li><strong>ID:</strong> ' + (machine.id || 'No disponible') + '</li>' +
-		          '<li><strong>Root:</strong> ' + (machine.location || 'No disponible') + '</li>' +
-		          '<li><strong>User:</strong> ' + (machine.type || 'No disponible') + '</li>' +
-		          '<li><strong>Writeups:</strong> ' + (machine.totalWriteups !== undefined ? machine.totalWriteups : 'No disponible') + '</li>' +
-		        '</ul>' +
-		      '</section>' +
-		      '<br>' +
-		      // Barras de estado
-		      '<section>' +
-		        '<h3>Barras de estado</h3>' +
-		        '<div class="metrics">' +
-		
-		          '<div class="metric">' +
-		            '<p><strong>Flags Users:</strong> ' + (machine.cpu || 'N/A') + '</p>' +
-		            '<div class="bar-bg"><div class="bar-fill cpu" style="width:' + (machine.cpuPercent || 0) + '%;"></div></div>' +
-		          '</div>' +
-		
-		          '<div class="metric">' +
-		            '<p><strong>Flags Root:</strong> ' + (machine.cpu || 'N/A') + '</p>' +
-		            '<div class="bar-bg"><div class="bar-fill ram" style="width:' + (machine.ramPercent || 0) + '%;"></div></div>' +
-		          '</div>' +
-				
-		          '<div class="metric">' +
-			          '<p><strong>Writeups:</strong> ' + (machine.totalWriteups !== undefined ? machine.totalWriteups : 'N/A') + '</p>' +
-			          '<div class="bar-bg"><div class="bar-fill disk" style="width:' + writeupsPercent + '%;"></div></div>' +
-			        '</div>' +
-		
-		        '</div>' +
-		      '</section>' +
-		      '<br>' +
+			    '<h3>Flags y Writeups generales</h3>' +
+			    '<ul>' +
+			      '<li><strong>ID:</strong> ' + (machine.id || 'No disponible') + '</li>' +
+			      '<li><strong>Root:</strong> ' + (machine.flagsRootCount !== undefined ? machine.flagsRootCount : 'No disponible') + '</li>' +
+			      '<li><strong>User:</strong> ' + (machine.flagsUserCount !== undefined ? machine.flagsUserCount : 'No disponible') + '</li>' +
+			      '<li><strong>Writeups:</strong> ' + (machine.totalWriteups !== undefined ? machine.totalWriteups : 'No disponible') + '</li>' +
+			    '</ul>' +
+			  '</section>' +
+			  '<br>' +
+			  // Barras de estado
+			  '<section>' +
+			    '<h3>Barras de estado</h3>' +
+			    '<div class="metrics">' +
+			
+			      '<div class="metric">' +
+			        '<p><strong>Flags Users:</strong> ' + (machine.flagsUserCount !== undefined ? machine.flagsUserCount : 'N/A') + '</p>' +
+			        '<div class="bar-bg"><div class="bar-fill cpu" style="width:' + (machine.flagsUserCount || 0) + '%;"></div></div>' +
+			      '</div>' +
+			
+			      '<div class="metric">' +
+			        '<p><strong>Flags Root:</strong> ' + (machine.flagsRootCount !== undefined ? machine.flagsRootCount : 'N/A') + '</p>' +
+			        '<div class="bar-bg"><div class="bar-fill ram" style="width:' + (machine.flagsRootCount || 0) + '%;"></div></div>' +
+			      '</div>' +
+			    
+			      '<div class="metric">' +
+			        '<p><strong>Writeups:</strong> ' + (machine.totalWriteups !== undefined ? machine.totalWriteups : 'N/A') + '</p>' +
+			        // Aquí asumo que writeupsPercent ya lo calculas aparte basado en totalWriteups y algún total general
+			        '<div class="bar-bg"><div class="bar-fill disk" style="width:' + writeupsPercent + '%;"></div></div>' +
+			      '</div>' +
+			
+			    '</div>' +
+			  '</section>' +
+			  '<br>' +
 		      // Logs recientes
 		      '<section>' +
 		        '<h3>Logs recientes</h3>' +
@@ -1530,6 +1551,88 @@
 		
 		// Llamar a la función para cargar al cargar la página
 		window.addEventListener('load', updateVmStats);
+		
+		/* SECCION DE IMAGEN CON ESTADISTICAS DE LAS MAQUINAS Y DIFICULTADES (LOGICA) */
+		
+		function loadMachineStatsUI() {
+		  fetch('<%= request.getContextPath() %>/machines-stats')
+		    .then(function (response) {
+		      if (!response.ok) throw new Error('Error al cargar las estadísticas');
+		      return response.json();
+		    })
+		    .then(function (data) {
+		      var container = document.getElementById('machinesStatsContainer');
+		      var html = '';
+		
+		      html += '<div class="container-img-machines">';
+		
+		      // IZQUIERDA
+		      html += '<div class="left-stats-img-machines">';
+		      html += '<div class="stat-block-img-machines">';
+		      html += '<div class="stat-title-img-machines">Total VMs</div><br>';
+		      html += '<div class="stat-number-img-machines">' + data.totalMachines + '</div>';
+		      html += '</div>';
+		      html += '<div class="stat-block-img-machines">';
+		      html += '<div class="stat-title-img-machines">Pwn3ds!</div><br>';
+		      html += '<div class="stat-number-img-machines">' + data.pwnedMachines + '</div>';
+		      html += '</div>';
+		      html += '</div>';
+		
+		      // CENTRO (imagen)
+		      html += '<div class="image-wrapper-img-machines">';
+		      html += '<img src="<%= request.getContextPath() %>/img/monitor.png" class="img-machines-page-img-machines" alt="Monitor Image" />';
+		      html += '<div class="overlay-text-img-machines">';
+		      html += '<img src="<%= request.getContextPath() %>/img/logo-flag-white.png" width="50%" height="50%" /><br><br>Pwned!';
+		      html += '</div>';
+		      html += '</div>';
+		
+		      // DERECHA (barras de dificultad)
+		      html += '<div class="right-bars-img-machines">';
+		
+		      var total = data.totalMachines || 1; // evitar división por 0
+		      var difficulties = ['Very Easy', 'Easy', 'Medium', 'Hard'];
+		      var colors = {
+		        'very-easy': 'very-easy',
+		        'easy': 'easy',
+		        'medium': 'medium',
+		        'hard': 'hard'
+		      };
+		
+		      for (var i = 0; i < difficulties.length; i++) {
+		        var label = difficulties[i];
+		        var raw = data.countsByDifficulty[label] || 0;
+		        var percent = Math.round((raw / total) * 100);
+		        var cssClass = label.toLowerCase().replace(/\s+/g, '-');
+		
+		        html += '<div class="difficulty-level-img-machines">';
+		        html += '<div class="difficulty-label-img-machines">' + label + '</div>';
+		        html += '<div class="progress-bar-img-machines">';
+		        html += '<div class="progress-fill-img-machines ' + colors[cssClass] + '" data-width="' + percent + '"></div>';
+		        html += '</div>';
+		        html += '</div>';
+		      }
+		
+		      html += '</div>'; // end right bars
+		      html += '</div>'; // end container
+		
+		      container.innerHTML = html;
+		
+		      // Forzar animación
+		      setTimeout(function () {
+		        var bars = container.querySelectorAll('.progress-fill-img-machines');
+		        bars.forEach(function (bar) {
+		          var target = bar.getAttribute('data-width');
+		          bar.style.width = target + '%';
+		        });
+		      }, 100); // pequeño delay para transición visual
+		    })
+		    .catch(function (err) {
+		      console.error('Error al construir el bloque de estadísticas:', err);
+		    });
+		}
+		
+		// Ejecutar al cargar
+		window.addEventListener('load', loadMachineStatsUI);
 	</script>
 </body>
 </html>
