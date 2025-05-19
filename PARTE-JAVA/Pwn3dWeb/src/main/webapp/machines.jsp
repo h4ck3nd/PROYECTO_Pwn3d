@@ -3,6 +3,7 @@
 <%@ page import="model.Machine" %>
 <%@ page import="utils.JWTUtil" %>
 <%@ page import="javax.servlet.http.Cookie" %>
+
 <%
 	Machine machine = null;
 %>
@@ -211,86 +212,7 @@
 				
 				<!-- STATS -->
 				
-				<ul class="vm-stats">
-				    <span class="badge badge-vms">
-					  <svg class="wave" viewBox="0 0 120 28" preserveAspectRatio="none">
-					    <defs>
-					      <linearGradient id="waveColor" gradientTransform="rotate(90)">
-					        <stop offset="0%" stop-color="rgba(255,255,255,0.3)" />
-					        <stop offset="100%" stop-color="rgba(255,255,255,0.05)" />
-					      </linearGradient>
-					    </defs>
-					    <path class="wave-path wave1" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />
-					    <path class="wave-path wave2" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />
-					  </svg>
-					  9 VMs
-					</span>
-					<span class="badge badge-writeups">
-					  <svg class="wave" viewBox="0 0 120 28" preserveAspectRatio="none">
-					    <defs>
-					      <linearGradient id="waveColor" gradientTransform="rotate(90)">
-					        <stop offset="0%" stop-color="rgba(255,255,255,0.3)" />
-					        <stop offset="100%" stop-color="rgba(255,255,255,0.05)" />
-					      </linearGradient>
-					    </defs>
-					    <path class="wave-path wave1" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />
-					    <path class="wave-path wave2" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />
-					  </svg>
-					  42 Writeups
-					</span>
-				    <span class="badge badge-very-easy">
-					  <svg class="wave" viewBox="0 0 120 28" preserveAspectRatio="none">
-					    <defs>
-					      <linearGradient id="waveColor" gradientTransform="rotate(90)">
-					        <stop offset="0%" stop-color="rgba(255,255,255,0.3)" />
-					        <stop offset="100%" stop-color="rgba(255,255,255,0.05)" />
-					      </linearGradient>
-					    </defs>
-					    <path class="wave-path wave1" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />
-					    <path class="wave-path wave2" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />
-					  </svg>
-					  1 Very Easy
-					</span>
-				    <span class="badge badge-easy">
-					  <svg class="wave" viewBox="0 0 120 28" preserveAspectRatio="none">
-					    <defs>
-					      <linearGradient id="waveColor" gradientTransform="rotate(90)">
-					        <stop offset="0%" stop-color="rgba(255,255,255,0.3)" />
-					        <stop offset="100%" stop-color="rgba(255,255,255,0.05)" />
-					      </linearGradient>
-					    </defs>
-					    <path class="wave-path wave1" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />
-					    <path class="wave-path wave2" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />
-					  </svg>
-					  2 Easy
-					</span>
-				    <span class="badge badge-medium">
-					  <svg class="wave" viewBox="0 0 120 28" preserveAspectRatio="none">
-					    <defs>
-					      <linearGradient id="waveColor" gradientTransform="rotate(90)">
-					        <stop offset="0%" stop-color="rgba(255,255,255,0.3)" />
-					        <stop offset="100%" stop-color="rgba(255,255,255,0.05)" />
-					      </linearGradient>
-					    </defs>
-					    <path class="wave-path wave1" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />
-					    <path class="wave-path wave2" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />
-					  </svg>
-					  4 Medium
-					</span>
-				    <span class="badge badge-hard">
-					  <svg class="wave" viewBox="0 0 120 28" preserveAspectRatio="none">
-					    <defs>
-					      <linearGradient id="waveColor" gradientTransform="rotate(90)">
-					        <stop offset="0%" stop-color="rgba(255,255,255,0.3)" />
-					        <stop offset="100%" stop-color="rgba(255,255,255,0.05)" />
-					      </linearGradient>
-					    </defs>
-					    <path class="wave-path wave1" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />
-					    <path class="wave-path wave2" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />
-					  </svg>
-					  2 Hard
-					</span>
-				</ul>
+				<ul class="vm-stats" id="vmStatsContainer"></ul>
 				
 				    <div class="filter-wrapper">
 				        
@@ -525,6 +447,216 @@
 						    <div class="loading-container">
 						      <div class="liquid-loader dark">
 						        <span>Cargando la máquina avengers...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
+						</tr>
+						<tr class="row" data-machine-id="15">
+						    <td colspan="15">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina CrackOff...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
+						</tr>
+						<tr class="row" data-machine-id="16">
+						    <td colspan="16">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina 404-not-found...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
+						</tr>
+						<tr class="row" data-machine-id="17">
+						    <td colspan="17">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina PressEnter...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
+						</tr>
+						<tr class="row" data-machine-id="18">
+						    <td colspan="18">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina Memesploit...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
+						</tr>
+						<tr class="row" data-machine-id="19">
+						    <td colspan="19">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina HackMeDaddy...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
+						</tr>
+						<tr class="row" data-machine-id="20">
+						    <td colspan="20">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina Mapache2...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
+						</tr>
+						<tr class="row" data-machine-id="21">
+						    <td colspan="21">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina Jenkhack...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
+						</tr>
+						<tr class="row" data-machine-id="22">
+						    <td colspan="22">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina chmod-4755...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
+						</tr>
+						<tr class="row" data-machine-id="23">
+						    <td colspan="23">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina hackzones...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
+						</tr>
+						<tr class="row" data-machine-id="24">
+						    <td colspan="24">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina darkweb...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
+						</tr>
+						<tr class="row" data-machine-id="25">
+						    <td colspan="25">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina Flow...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
+						</tr>
+						<tr class="row" data-machine-id="26">
+						    <td colspan="26">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina Sender...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
+						</tr>
+						<tr class="row" data-machine-id="27">
+						    <td colspan="27">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina Cracker...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
+						</tr>
+						<tr class="row" data-machine-id="28">
+						    <td colspan="28">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina Express...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
+						</tr>
+						<tr class="row" data-machine-id="29">
+						    <td colspan="29">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina CineHack...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
+						</tr>
+						<tr class="row" data-machine-id="30">
+						    <td colspan="30">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina LifeOrDead...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
+						</tr>
+						<tr class="row" data-machine-id="31">
+						    <td colspan="31">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina TpRoot...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
+						</tr>
+						<tr class="row" data-machine-id="32">
+						    <td colspan="32">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina Gitea...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
+						</tr>
+						<tr class="row" data-machine-id="33">
+						    <td colspan="33">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina SecureLAB...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
+						</tr>
+						<tr class="row" data-machine-id="34">
+						    <td colspan="34">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina Goodness...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
+						</tr>
+						<tr class="row" data-machine-id="35">
+						    <td colspan="35">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina LogisticCloud...</span>
 						        <div class="liquid"></div>
 						        <div class="wave"></div>
 						      </div>
@@ -1338,6 +1470,66 @@
 		    showMachinePopup(id);
 		  });
 		});
+		
+		/* STATS LOGIC SHOW */
+		
+		function updateVmStats() {
+		  fetch('<%= request.getContextPath() %>/machines-stats')  // Ajusta la URL de tu API o servlet JSON
+		    .then(function(response) {
+		      if (!response.ok) throw new Error('Error en la respuesta');
+		      return response.json();
+		    })
+		    .then(function(data) {
+		      var ul = document.getElementById('vmStatsContainer');
+		      var html = '';
+		
+		      // Badge total máquinas
+		      html += '<span class="badge badge-vms">' +
+		        '<svg class="wave" viewBox="0 0 120 28" preserveAspectRatio="none">' +
+		          '<defs>' +
+		            '<linearGradient id="waveColor" gradientTransform="rotate(90)">' +
+		              '<stop offset="0%" stop-color="rgba(255,255,255,0.3)" />' +
+		              '<stop offset="100%" stop-color="rgba(255,255,255,0.05)" />' +
+		            '</linearGradient>' +
+		          '</defs>' +
+		          '<path class="wave-path wave1" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />' +
+		          '<path class="wave-path wave2" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />' +
+		        '</svg>' +
+		        data.totalMachines + ' VMs' +
+		      '</span>';
+		
+		      // Recorrer dificultades
+		      for (var difficulty in data.countsByDifficulty) {
+		        if (data.countsByDifficulty.hasOwnProperty(difficulty)) {
+		
+		          // Crear clase CSS: todo minúsculas y sin espacios (por ej: "Very Easy" -> "veryeasy")
+		          var classDifficulty = difficulty.toLowerCase().replace(/\s+/g, '-');
+		
+		          html += '<span class="badge badge-' + classDifficulty + '">' +
+		            '<svg class="wave" viewBox="0 0 120 28" preserveAspectRatio="none">' +
+		              '<defs>' +
+		                '<linearGradient id="waveColor" gradientTransform="rotate(90)">' +
+		                  '<stop offset="0%" stop-color="rgba(255,255,255,0.3)" />' +
+		                  '<stop offset="100%" stop-color="rgba(255,255,255,0.05)" />' +
+		                '</linearGradient>' +
+		              '</defs>' +
+		              '<path class="wave-path wave1" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />' +
+		              '<path class="wave-path wave2" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />' +
+		            '</svg>' +
+		            data.countsByDifficulty[difficulty] + ' ' + difficulty +
+		          '</span>';
+		        }
+		      }
+		
+		      ul.innerHTML = html;
+		    })
+		    .catch(function(error) {
+		      console.error('Error al cargar las stats:', error);
+		    });
+		}
+		
+		// Llamar a la función para cargar al cargar la página
+		window.addEventListener('load', updateVmStats);
 	</script>
 </body>
 </html>
