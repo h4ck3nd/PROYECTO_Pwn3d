@@ -103,6 +103,30 @@ public class MachineDetailsServlet extends HttpServlet {
                 }
             }
 
+            // NUEVO: contar flags agrupados por tipo_flag
+            int flagsUserCount = 0;
+            int flagsRootCount = 0;
+
+            if (machine != null) {
+                String countFlagsQuery = "SELECT tipo_flag, COUNT(*) AS total FROM flags WHERE vm_name = ? GROUP BY tipo_flag";
+                try (PreparedStatement countStmt = conn.prepareStatement(countFlagsQuery)) {
+                    countStmt.setString(1, machine.getNameMachine());
+                    ResultSet countRs = countStmt.executeQuery();
+                    while (countRs.next()) {
+                        String tipoFlag = countRs.getString("tipo_flag");
+                        int total = countRs.getInt("total");
+                        if ("user".equals(tipoFlag)) {
+                            flagsUserCount = total;
+                        } else if ("root".equals(tipoFlag)) {
+                            flagsRootCount = total;
+                        }
+                    }
+                } catch (SQLException e) {
+                    System.err.println("💥 Error al contar flags:");
+                    e.printStackTrace();
+                }
+            }
+
             conexionDDBB.cerrarConexion();
             System.out.println("🔒 Conexión cerrada.");
 
@@ -129,6 +153,8 @@ public class MachineDetailsServlet extends HttpServlet {
                         + "\"imgNameOs\":\"" + machine.getImgNameOs() + "\","
                         + "\"downloadUrl\":\"" + machine.getDownloadUrl() + "\","
                         + "\"totalWriteups\":" + totalWriteups + ","
+                        + "\"flagsUserCount\":" + flagsUserCount + ","
+                        + "\"flagsRootCount\":" + flagsRootCount + ","
                         + "\"userFlag\":\"" + machine.getUserFlag() + "\","
                         + "\"rootFlag\":\"" + machine.getRootFlag() + "\""
                         + "}";
