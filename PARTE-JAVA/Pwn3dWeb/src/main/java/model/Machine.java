@@ -44,24 +44,24 @@ public class Machine {
 	 this.userFlag = userFlag;
 	 this.rootFlag = rootFlag;
 	}
-	
+
 	// Getters y setters
 	public String getUserFlag() {
 	 return userFlag;
 	}
-	
+
 	public void setUserFlag(String userFlag) {
 	 this.userFlag = userFlag;
 	}
-	
+
 	public String getRootFlag() {
 	 return rootFlag;
 	}
-	
+
 	public void setRootFlag(String rootFlag) {
 	 this.rootFlag = rootFlag;
 	}
-	
+
     // Getters y setters
     public String getId() {
         return id;

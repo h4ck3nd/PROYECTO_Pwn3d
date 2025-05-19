@@ -1,13 +1,13 @@
 package dao;
 
-import model.Flag;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+
+import model.Flag;
 
 public class FlagsDAO {
     private final Connection conn;
@@ -62,7 +62,7 @@ public class FlagsDAO {
             ps.executeUpdate();
         }
     }
-    
+
     public Map<String, String> getFirstUsersForVM(String vmName) throws SQLException {
         Map<String, String> result = new HashMap<>();
         String sql = "SELECT tipo_flag, username FROM flags WHERE vm_name = ? AND (first_flag_user = TRUE OR first_flag_root = TRUE)";

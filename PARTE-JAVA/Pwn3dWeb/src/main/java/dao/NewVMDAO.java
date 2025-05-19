@@ -1,11 +1,11 @@
 package dao;
 
-import model.NewVM;
-import conexionDDBB.ConexionDDBB;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import conexionDDBB.ConexionDDBB;
+import model.NewVM;
 
 public class NewVMDAO {
 
@@ -36,17 +36,21 @@ public class NewVMDAO {
         } catch (SQLException e) {
             throw new Exception("Error al insertar la VM: " + e.getMessage(), e);
         } finally {
-            if (stmt != null) stmt.close();
-            if (conn != null) db.cerrarConexion();
+            if (stmt != null) {
+				stmt.close();
+			}
+            if (conn != null) {
+				db.cerrarConexion();
+			}
         }
     }
-    
+
     public boolean updateEstadoPublicado(int id) throws Exception {
         String sql = "UPDATE new_vm SET estado = 'Publicado' WHERE id = ?";
         ConexionDDBB db = new ConexionDDBB();
         Connection conn = null;
         PreparedStatement stmt = null;
-        
+
         try {
             conn = db.conectar();
             stmt = conn.prepareStatement(sql);
@@ -56,8 +60,12 @@ public class NewVMDAO {
         } catch (SQLException e) {
             throw new Exception("Error al actualizar estado: " + e.getMessage(), e);
         } finally {
-            if (stmt != null) stmt.close();
-            if (conn != null) db.cerrarConexion();
+            if (stmt != null) {
+				stmt.close();
+			}
+            if (conn != null) {
+				db.cerrarConexion();
+			}
         }
     }
 }

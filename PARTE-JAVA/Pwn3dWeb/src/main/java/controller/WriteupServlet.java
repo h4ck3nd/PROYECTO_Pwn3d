@@ -1,9 +1,5 @@
 package controller;
 
-import model.Writeup;
-import dao.WriteupDAO;
-import utils.JWTUtil;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -14,6 +10,10 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import dao.WriteupDAO;
+import model.Writeup;
+import utils.JWTUtil;
 
 @WebServlet("/sendWriteup")
 public class WriteupServlet extends HttpServlet {
@@ -46,13 +46,13 @@ public class WriteupServlet extends HttpServlet {
 
         // Parámetros del formulario
         String url = request.getParameter("URL");
-        
+
         // 🔒 Validar la URL antes de continuar
         if (!isUrlSegura(url)) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "URL inválida o potencialmente insegura.");
             return;
         }
-        
+
         String vmName = request.getParameter("vmName");
         String creator = request.getParameter("Creator");
         String contentType = request.getParameter("ContentType");
@@ -83,9 +83,9 @@ public class WriteupServlet extends HttpServlet {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al insertar el writeup.");
         }
     }
-    
+
     // SOLAMENTE ADMITE DOMINIOS, NO IPs
-    
+
     private boolean isUrlSegura(String url) {
         try {
             URL parsedUrl = new URL(url);

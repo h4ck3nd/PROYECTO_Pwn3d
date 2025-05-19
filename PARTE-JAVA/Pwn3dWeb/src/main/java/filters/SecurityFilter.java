@@ -1,13 +1,22 @@
 package filters;
 
+import java.io.IOException;
+
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import dao.UserDAO;
 import model.User;
 import utils.JWTUtil;
-
-import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.*;
-import java.io.IOException;
 
 @WebFilter("/*")
 public class SecurityFilter implements Filter {
@@ -34,6 +43,7 @@ public class SecurityFilter implements Filter {
                 || path.startsWith("/login-register/register.jsp")
                 || path.startsWith("/logout")
                 || path.startsWith("/img")
+                || path.startsWith("/reset-password")
                 || path.startsWith("/register")) {
             chain.doFilter(request, response);
             return;

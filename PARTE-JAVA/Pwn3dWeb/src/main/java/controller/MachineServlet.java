@@ -1,12 +1,20 @@
 package controller;
 
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import conexionDDBB.ConexionDDBB;
 import model.Machine;
-import java.io.*;
-import javax.servlet.*;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
-import java.sql.*;
 
 @WebServlet("/machines")
 public class MachineServlet extends HttpServlet {
@@ -22,7 +30,8 @@ public class MachineServlet extends HttpServlet {
     }
 
  // Método para manejar el POST
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Obtener los datos del formulario
         String id = request.getParameter("id");
         String nameMachine = request.getParameter("name_machine");
@@ -65,7 +74,7 @@ public class MachineServlet extends HttpServlet {
     private boolean isIdExists(String id) throws SQLException {
         // Asegúrate de que 'id' esté en formato String
         String checkQuery = "SELECT COUNT(*) FROM machines WHERE id = CAST(? AS VARCHAR)";  // Conversión explícita a VARCHAR
-        
+
         try (PreparedStatement ps = connection.prepareStatement(checkQuery)) {
             ps.setString(1, id); // Aquí se pasa el valor de 'id' como String
             ResultSet rs = ps.executeQuery();
@@ -105,10 +114,10 @@ public class MachineServlet extends HttpServlet {
             ps.setString(14, machine.getFirstRoot());
             ps.setString(15, machine.getImgNameOs());
             ps.setString(16, machine.getDownloadUrl());
-            
+
             ps.setString(17, machine.getUserFlag());
             ps.setString(18, machine.getRootFlag());
-            
+
             // Ejecutar la actualización
             ps.executeUpdate();
         }

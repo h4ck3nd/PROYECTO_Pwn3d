@@ -377,6 +377,35 @@
 	  </div>
 	</div>
   </div>
+  <%
+    String codigoSeguro = (String) session.getAttribute("codigoSeguro");
+    if (codigoSeguro != null) {
+        // Borramos para que no se vuelva a disparar al refrescar la página
+        session.removeAttribute("codigoSeguro");
+%>
+<script>
+  // Generar archivo .txt y forzar descarga
+  const codigoSeguro = "<%= codigoSeguro %>";
+  const usuario = "<%= session.getAttribute("usuario") != null ? session.getAttribute("usuario") : "usuario" %>";
+  const contenido = "Tu código seguro para recuperar la contraseña:\n" + codigoSeguro;
+
+  const blob = new Blob([contenido], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = usuario + "_codigo_seguro.txt";
+  document.body.appendChild(a);
+  a.click();
+
+  setTimeout(() => {
+    URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+    // Redirigir a login o donde quieras
+    window.location.href = "login.jsp";
+  }, 3000);
+</script>
+<% } %>
   <script>
   const canvas = document.getElementById("matrixCanvasText");
   const ctx = canvas.getContext("2d");

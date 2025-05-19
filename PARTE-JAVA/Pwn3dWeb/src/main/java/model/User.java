@@ -14,7 +14,8 @@ public class User {
     private int flagsUser;
     private int flagsRoot;
     private java.sql.Timestamp ultimoInicio;
-    
+    private String codeSecure;
+
 	public User(int id, String nombre, String apellido, String usuario, String email, String password, String rol,
 			String cookie, int flagsUser, int flagsRoot, Timestamp ultimoInicio) {
 		super();
@@ -98,5 +99,13 @@ public class User {
 	}
 	public void setUltimoInicio(java.sql.Timestamp ultimoInicio) {
 		this.ultimoInicio = ultimoInicio;
+	}
+	
+	public String getCodeSecure() {
+	    return codeSecure;
+	}
+
+	public void setCodeSecure(String codeSecure) {
+	    this.codeSecure = codeSecure;
 	}
 }

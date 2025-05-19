@@ -1,4 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%
+    String nuevoCodigoSeguro = (String) session.getAttribute("nuevoCodigoSeguro");
+    String usuario = (String) session.getAttribute("usuario");
+    String mensajeExito = (String) session.getAttribute("ResetPasswordExit");
+
+    // Limpiar sesión para que no se repita
+    session.removeAttribute("nuevoCodigoSeguro");
+    session.removeAttribute("usuario");
+    session.removeAttribute("ResetPasswordExit");
+%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -276,7 +286,107 @@
 	
 	      <input type="submit" value="LOGIN" />
 	    </form>
+	    <br>
+		<!-- Enlace para abrir el popup -->
+		<a href="#" class="btn-register-small" onclick="document.getElementById('popup').style.display='flex'; return false;">
+		  ¿Has olvidado tu contraseña?
+		</a>
+		
+		<!-- Popup -->
+		<div id="popup" style="
+		  display: none;
+		  position: fixed;
+		  top: 0; left: 0; right: 0; bottom: 0;
+		  background: rgba(0, 0, 0, 0.85);
+		  justify-content: center;
+		  align-items: center;
+		  z-index: 9999;
+		  font-family: 'Press Start 2P', monospace;
+		">
+		
+		  <div style="
+		    background-color: #2c2c2c;
+		    padding: 2rem;
+		    border: 3px solid #ffffff;
+		    border-radius: 4px;
+		    width: 460px;
+		    max-width: 90%;
+		    color: #ffffff;
+		  ">
+		
+		    <h3 style="text-align: center; font-size: 0.75rem; margin-bottom: 1.5rem; color: #00ff00;">
+		      🔐 Restablecer Contraseña
+		    </h3>
+		
+		    <form method="post" action="<%= request.getContextPath() %>/reset-password" style="display: flex; flex-direction: column;">
+		      <label for="code" style="font-size: 0.6rem; margin-bottom: 0.5rem;">Código seguro:</label>
+		      <input type="text" name="code" id="code" required placeholder="Introduce tu código"
+		        style="padding: 0.5rem; margin-bottom: 1rem; border: 2px solid #555; background-color: #000;
+		               color: #00ff00; font-family: 'Press Start 2P', monospace; font-size: 0.7rem; border-radius: 2px; outline: none;">
+		
+		      <label for="new-password" style="font-size: 0.6rem; margin-bottom: 0.5rem;">Nueva contraseña:</label>
+		      <input type="password" name="new-password" id="new-password" required placeholder="Nueva contraseña"
+		        style="padding: 0.5rem; margin-bottom: 1rem; border: 2px solid #555; background-color: #000;
+		               color: #00ff00; font-family: 'Press Start 2P', monospace; font-size: 0.7rem; border-radius: 2px; outline: none;">
+		
+		      <div style="display: flex; justify-content: space-between; margin-top: 1rem;">
+		        <input type="submit" value="Restablecer"
+		          style="padding: 0.8rem; background-color: #ffffff; color: #000000; font-weight: bold;
+		                 border: 2px solid #000; border-radius: 2px; cursor: pointer; font-size: 0.7rem;">
+		        
+		        <button type="button" onclick="document.getElementById('popup').style.display='none';"
+		          style="padding: 0.8rem; background-color: #000; color: #f00; font-weight: bold;
+		                 border: 2px solid #f00; border-radius: 2px; cursor: pointer; font-size: 0.7rem;">
+		          Cancelar
+		        </button>
+		      </div>
+		    </form>
+		
+		  </div>
+		</div>
+
 	    <div class="footer">PRESIONA LOGIN PARA INGRESAR</div>
+	    
+	    <h2><%= mensajeExito != null ? mensajeExito : "" %></h2>
+	    
+	    <% if (nuevoCodigoSeguro != null && usuario != null) { %>
+		    <script>
+		        const codigoSeguro = "<%= nuevoCodigoSeguro %>";
+		        const usuario = "<%= usuario %>";
+		        const contenido = "Tu nuevo código seguro para recuperar la contraseña:\n" + codigoSeguro;
+		
+		        const blob = new Blob([contenido], { type: "text/plain" });
+		        const url = URL.createObjectURL(blob);
+		
+		        const a = document.createElement("a");
+		        a.href = url;
+		        a.download = usuario + "_codigo_seguro.txt";
+		        document.body.appendChild(a);
+		        a.click();
+		
+		        setTimeout(() => {
+		            URL.revokeObjectURL(url);
+		            document.body.removeChild(a);
+		            // Redirigir al login o página que quieras después
+		            window.location.href = "login.jsp";
+		        }, 3000);
+		    </script>
+		    <% } %>
+	    
+	    <!-- MENSAJE DE ERROR MEDIANTE EL CONTROLADOR CODIGO DE SEGURIDAD ERRONEO -->
+	    
+	    <%
+		    String loginCodeError = (String) session.getAttribute("loginCodeError");
+		    if (loginCodeError != null) {
+		%>	
+			<br>
+		    <div style="color: red; font-weight: bold; font-size: 0.8rem;">
+		        <%= loginCodeError %>
+		    </div>
+		<%
+		        session.removeAttribute("loginCodeError"); // Elimina el mensaje después de mostrarlo
+		    }
+		%>
 	    
 	    <!-- MENSAJE DE ERROR MEDIANTE EL CONTROLADOR DEL SECURITY (TOKEN ERROR) -->
 	    
@@ -336,7 +446,7 @@
 		    }
 		%>
 		
-	    <br><br>
+	    <br>
 	    <a href="<%= request.getContextPath() %>/login-register/register.jsp" class="btn-register-small">No tienes una cuenta? Registrate aquí</a>
 	  </div>
 	</div>

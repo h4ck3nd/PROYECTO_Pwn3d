@@ -1,9 +1,14 @@
 package dao;
 
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.UUID;
+
 import conexionDDBB.ConexionDDBB;
 import model.User;
-
-import java.sql.*;
 
 public class UserDAO {
 
@@ -18,17 +23,31 @@ public class UserDAO {
     public UserDAO(Connection con) {
         this.con = con;
     }
-
+    
     public boolean registerUser(User user) {
-        String sql = "INSERT INTO users (nombre, apellido, usuario, email, password) VALUES (?, ?, ?, ?, ?)";
-        try (PreparedStatement pst = con.prepareStatement(sql)) {
-            pst.setString(1, user.getNombre());
-            pst.setString(2, user.getApellido());
-            pst.setString(3, user.getUsuario());
-            pst.setString(4, user.getEmail());
-            pst.setString(5, user.getPassword());
-            return pst.executeUpdate() > 0;
-        } catch (SQLException e) {
+        String codeSecure = UUID.randomUUID().toString();
+        user.setCodeSecure(codeSecure);
+
+        String sql = "INSERT INTO users (nombre, apellido, email, usuario, password, code_secure) VALUES (?, ?, ?, ?, ?, ?)";
+        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setString(1, user.getNombre());
+            stmt.setString(2, user.getApellido());
+            stmt.setString(3, user.getEmail());
+            stmt.setString(4, user.getUsuario());
+            stmt.setString(5, user.getPassword());
+            stmt.setString(6, user.getCodeSecure());
+
+            int rows = stmt.executeUpdate();
+            if (rows > 0) {
+                // Crear archivo .txt con el código
+                String fileName = user.getUsuario() + "_codigo_seguro.txt";
+                try (PrintWriter writer = new PrintWriter(fileName)) {
+                    writer.println("Tu código seguro para recuperar la contraseña:");
+                    writer.println(codeSecure);
+                }
+                return true;
+            }
+        } catch (SQLException | java.io.IOException e) {
             e.printStackTrace();
         }
         return false;
@@ -170,5 +189,34 @@ public class UserDAO {
             ps.setInt(1, userId);
             ps.executeUpdate();
         }
+    }
+    
+    public boolean updatePasswordAndCode(int userId, String newPasswordHash, String nuevoCodigoSeguro) {
+        String sql = "UPDATE users SET password = ?, code_secure = ? WHERE id = ?";
+        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setString(1, newPasswordHash);
+            stmt.setString(2, nuevoCodigoSeguro);
+            stmt.setInt(3, userId);
+            int rows = stmt.executeUpdate();
+            System.out.println("Filas actualizadas: " + rows);
+            return rows > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public User getUserByCode(String code) {
+        String sql = "SELECT * FROM users WHERE code_secure = ?";
+        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setString(1, code);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return mapResultSetToUser(rs); // Usa tu método ya definido
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

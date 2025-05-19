@@ -1,15 +1,19 @@
 package controller;
 
-import dao.NewVMDAO;
-import model.NewVM;
-import utils.JWTUtil;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import javax.servlet.*;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
-import java.io.IOException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import dao.NewVMDAO;
+import model.NewVM;
+import utils.JWTUtil;
 
 @WebServlet("/sendNewVM")
 public class NewVMServlet extends HttpServlet {
@@ -74,7 +78,7 @@ public class NewVMServlet extends HttpServlet {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al insertar VM.");
         }
     }
-    
+
     private boolean isUrlSegura(String url) {
         try {
             URL parsedUrl = new URL(url);

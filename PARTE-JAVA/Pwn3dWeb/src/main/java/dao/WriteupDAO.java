@@ -1,10 +1,14 @@
 package dao;
 
-import conexionDDBB.ConexionDDBB;
-import model.Writeup;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import conexionDDBB.ConexionDDBB;
+import model.Writeup;
 
 public class WriteupDAO {
     public void insertWriteup(Writeup writeup) throws SQLException {
@@ -43,7 +47,7 @@ public class WriteupDAO {
         }
         return pending;
     }
-    
+
     public List<Writeup> getWriteupsPublicByVmName(String vmName) throws SQLException {
         List<Writeup> lista = new ArrayList<>();
         String sql = "SELECT vm_name, creator, url, content_type FROM writeups_public WHERE vm_name = ?";

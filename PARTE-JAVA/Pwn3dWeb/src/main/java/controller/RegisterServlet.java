@@ -1,16 +1,21 @@
 package controller;
 
-import dao.UserDAO;
-import model.User;
+import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
-import java.io.IOException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import dao.UserDAO;
+import model.User;
 
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nombre = request.getParameter("first-name");
         String apellido = request.getParameter("last-name");
         String email = request.getParameter("email");
@@ -33,11 +38,15 @@ public class RegisterServlet extends HttpServlet {
         user.setEmail(email);
         user.setUsuario(usuario);
         user.setPassword(passwordHash);
-
+        
         UserDAO dao = new UserDAO();
         if (dao.registerUser(user)) {
-        	HttpSession session = request.getSession();
-            session.setAttribute("loginExit", "Registro Exitoso.");
+            // Guardamos el código seguro en sesión para que register.jsp lo pueda usar
+            HttpSession session = request.getSession();
+            session.setAttribute("loginExit", "Registro Exitoso y Codigo descargado con Exito.");
+            session.setAttribute("codigoSeguro", user.getCodeSecure()); // <-- código seguro aquí
+
+            // Redirigimos a register.jsp para que haga la descarga y muestre mensaje
             response.sendRedirect("login-register/register.jsp");
         } else {
             HttpSession session = request.getSession();
