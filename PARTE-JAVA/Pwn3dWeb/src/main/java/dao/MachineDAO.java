@@ -79,5 +79,80 @@ public class MachineDAO {
 
         return total;
     }
+    
+    public Map<String, Integer> getHackedMachinesCountByDifficulty(int userId) {
+        Map<String, Integer> counts = new HashMap<>();
+        ConexionDDBB db = new ConexionDDBB();
+        Connection con = db.conectar();
+
+        String sql =
+            "SELECT m.difficulty, COUNT(*) AS count " +
+            "FROM (" +
+            "  SELECT vm_name " +
+            "  FROM flags " +
+            "  WHERE id_user = ? " +
+            "  GROUP BY vm_name " +
+            "  HAVING COUNT(DISTINCT tipo_flag) = 2" +
+            ") AS completed " +
+            "JOIN machines m ON m.name_machine = completed.vm_name " +
+            "GROUP BY m.difficulty";
+
+        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String difficulty = rs.getString("difficulty");
+                String normalizedDifficulty = normalizeDifficulty(difficulty);
+                counts.put(normalizedDifficulty, rs.getInt("count"));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            db.cerrarConexion();
+        }
+
+        return counts;
+    }
+
+    public Map<String, Integer> getMachinesCountByDifficulty2() {
+        Map<String, Integer> counts = new HashMap<>();
+        ConexionDDBB db = new ConexionDDBB();
+        Connection con = db.conectar();
+
+        String sql = "SELECT difficulty, COUNT(*) AS count FROM machines GROUP BY difficulty";
+
+        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String difficulty = rs.getString("difficulty");
+                String normalizedDifficulty = normalizeDifficulty(difficulty);
+                counts.put(normalizedDifficulty, rs.getInt("count"));
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            db.cerrarConexion();
+        }
+
+        return counts;
+    }
+
+    private String normalizeDifficulty(String diff) {
+        if (diff == null) return "Unknown";
+        switch (diff.trim().toLowerCase()) {
+            case "very-easy":
+                return "Very-Easy";
+            case "easy":
+                return "Easy";
+            case "medium":
+                return "Medium";
+            case "hard":
+                return "Hard";
+            default:
+                return diff;
+        }
+    }
 
 }
