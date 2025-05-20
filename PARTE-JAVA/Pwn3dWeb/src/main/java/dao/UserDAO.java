@@ -219,4 +219,70 @@ public class UserDAO {
         }
         return null;
     }
+    
+    public boolean updateUserProfile(int userId, String nombre, String apellido, String email, String newPasswordHash) {
+        String sql = newPasswordHash == null ?
+            "UPDATE users SET nombre = ?, apellido = ?, email = ? WHERE id = ?" :
+            "UPDATE users SET nombre = ?, apellido = ?, email = ?, password = ? WHERE id = ?";
+
+        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setString(1, nombre);
+            stmt.setString(2, apellido);
+            stmt.setString(3, email);
+            if (newPasswordHash == null) {
+                stmt.setInt(4, userId);
+            } else {
+                stmt.setString(4, newPasswordHash);
+                stmt.setInt(5, userId);
+            }
+
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean updatePassword(int userId, String newHashedPassword) {
+        String sql = "UPDATE users SET password = ? WHERE id = ?";
+        try (PreparedStatement stmt = con.prepareStatement(sql)) {
+            stmt.setString(1, newHashedPassword);
+            stmt.setInt(2, userId);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    
+    private User mapResultSetToUserWithPassword(ResultSet rs) throws SQLException {
+        User user = new User();
+        user.setId(rs.getInt("id"));
+        user.setUsuario(rs.getString("usuario"));
+        user.setEmail(rs.getString("email"));
+        user.setNombre(rs.getString("nombre"));
+        user.setApellido(rs.getString("apellido"));
+        user.setRol(rs.getString("rol"));
+        user.setCookie(rs.getString("cookie"));
+        user.setFlagsUser(rs.getInt("flags_user"));
+        user.setFlagsRoot(rs.getInt("flags_root"));
+        user.setUltimoInicio(rs.getTimestamp("ultimo_inicio"));
+        user.setPassword(rs.getString("password"));  // Incluye el password
+        return user;
+    }
+
+    public User getUserByIdWithPassword(int userId) {
+        String sql = "SELECT * FROM users WHERE id = ?";
+        try (PreparedStatement pst = con.prepareStatement(sql)) {
+            pst.setInt(1, userId);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return mapResultSetToUserWithPassword(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

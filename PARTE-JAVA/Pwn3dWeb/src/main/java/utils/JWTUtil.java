@@ -1,5 +1,7 @@
 package utils;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -86,5 +88,32 @@ public class JWTUtil {
                 .parseClaimsJws(token)
                 .getBody()
                 .get("rol");
+    }
+    
+    public static Map<String, Object> getAllClaims(String token) {
+        try {
+            Claims claims = Jwts.parser()
+                    .setSigningKey(SECRET_KEY.getBytes())
+                    .parseClaimsJws(token)
+                    .getBody();
+            return new HashMap<>(claims);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
+    public static String getTokenIdentity(String token) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(token.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hash) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.substring(0, 10) + "@pwn3d.es"; // ejemplo: ab5cd923f1@pwn3d.es
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException("Error al generar la identidad");
+        }
     }
 }

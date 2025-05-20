@@ -44,6 +44,7 @@ public class SecurityFilter implements Filter {
                 || path.startsWith("/logout")
                 || path.startsWith("/img")
                 || path.startsWith("/reset-password")
+                || path.startsWith("/cambiarPassword")
                 || path.startsWith("/register")) {
             chain.doFilter(request, response);
             return;

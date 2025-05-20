@@ -35,6 +35,7 @@ public class AuthFilter implements Filter {
                 uri.startsWith(contextPath + "/img") ||
                 uri.startsWith(contextPath + "/register") ||
                 uri.startsWith(contextPath + "/reset-password") ||
+                uri.startsWith(contextPath + "/cambiarPassword") ||
                 uri.startsWith(contextPath + "/logout");
 
         if (isExcluded) {
