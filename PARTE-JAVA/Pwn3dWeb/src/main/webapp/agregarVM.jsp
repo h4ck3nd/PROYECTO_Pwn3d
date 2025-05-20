@@ -456,5 +456,31 @@
 	</form>
 </div>
 
+<div class="container margin">
+	<form method="POST" action="<%= request.getContextPath() %>/calcularMD5" style="margin-top: 2rem;">
+	  <h2>Calcular MD5 de una maquina</h2>
+	  <label>Nombre de la máquina:</label>
+	  <input type="text" name="maquina" placeholder="Ej: Sh3llBox" style="background: #1b1b1b; color: #4be979;" required />
+	  <br><br>
+	  <label>URL del archivo:</label>
+	  <input type="url" name="url" placeholder="https://..." required style="width: 400px; background: #1b1b1b; color: #4be979;" />
+	  <br><br>
+	  <button type="submit">Calcular y guardar MD5</button>
+	</form>
+	
+	<%-- Resultado del MD5 si se ha calculado --%>
+	<% String resultado = (String) request.getAttribute("resultado");
+	   String md5 = (String) request.getAttribute("md5");
+	   if (resultado != null) {
+	%>
+	  <div style="margin-top: 1rem; background-color: #1a1a1a; padding: 1rem; border-radius: 8px; color: #ccc;">
+	    <p><strong>Resultado:</strong> <%= resultado %></p>
+	    <% if (md5 != null) { %>
+	      <p><strong>MD5:</strong> <code style="color: #9f79ff;"><%= md5 %></code></p>
+	    <% } %>
+	  </div>
+	<% } %>
+</div>
+
 </body>
 </html>

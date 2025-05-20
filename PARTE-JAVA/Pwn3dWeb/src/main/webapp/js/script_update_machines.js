@@ -202,6 +202,12 @@ function showCard(name, os, difficulty, creator, release, id) {
 	  document.getElementById('writeupForm').dataset.vmname = vmname;
 	}
 	
+	function closeWriteupForm() {
+	  const modal = document.querySelector('.form-writeup');
+	  modal.style.display = 'none';
+	  document.body.style.overflow = ''; // Restaurar scroll
+	}
+	
 	/* SEARCH LOGIC */
 	
 	document.addEventListener("DOMContentLoaded", function () {

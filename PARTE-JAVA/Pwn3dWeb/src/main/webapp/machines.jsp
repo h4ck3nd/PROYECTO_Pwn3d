@@ -715,7 +715,7 @@
 			    <!-- Header superior blanco -->
 			    <div class="vb-header">
 			      <img src="<%= request.getContextPath() %>/img/logo-prueba.png" class="vb-icon" />
-			      <button class="vb-close" onclick="document.querySelector('.form-writeup').style.display='none'">×</button>
+			      <button class="vb-close" onclick="closeWriteupForm()">×</button>
 			      <span>Añadir Writeup</span>
 			    </div>
 			
@@ -799,6 +799,7 @@
 			  </div>
 			</section>
 			<br>
+			
 			<!-- SECCION DE ENVIAR FLAGs -->
 
 			<section class="form-flag">
@@ -813,7 +814,7 @@
 			
 			    <!-- Descripción -->
 			    <p class="form-text" style="font-size: 12px !important; margin-bottom: -25px !important; line-height: 1.6 !important;">
-			      Ingrese su nombre de usuario y la flag correspondiente. Este formulario es solo informativo y no garantiza prioridad si otros ya enviaron antes.
+			      Ingrese su nombre de usuario y la flag correspondiente. No garantiza prioridad si otros ya enviaron antes.
 			    </p>
 			
 			    <!-- Formulario -->
@@ -871,7 +872,7 @@
 			      <!-- Footer -->
 			      <div class="form-footer" style="margin-bottom: -5px !important; margin-top: 20px !important;">
 			        <small style="font-size: 0.75rem !important">
-			          Este formulario no valida las flags automáticamente. En un futuro se planea un sistema en tiempo real para mostrar el primero en enviarla.
+			          Este formulario valida las flags automáticamente. Mostrando asi los primeros usuarios que registran la flag.
 			        </small>
 			      </div>
 			    </form>
@@ -1092,15 +1093,14 @@
 		                            '</svg>' +
 		                        '</button>' +
 		                    '</td>' +
-		                    '<td class="url">' +
-		                        '<a href="' + machine.downloadUrl + '" target="_blank" title="Descargar VM">' +
-		                            '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
-		                                '<path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />' +
-		                                '<path d="M7 11l5 5l5 -5" />' +
-		                                '<path d="M12 4l0 12" />' +
-		                            '</svg>' +
-		                        '</a>' +
-		                    '</td>';
+			                    '<td class="url">' +
+			                    '<a href="' + machine.downloadUrl + '" target="_blank" title="Descargar VM" style="color: white; font-weight: bold;">Download!</a>' +
+			                    // '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+			                    //     '<path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />' +
+			                    //     '<path d="M7 11l5 5l5 -5" />' +
+			                    //     '<path d="M12 4l0 12" />' +
+			                    // '</svg>' +
+			                '</td>';
 		            })
 		            .catch(function(err) {
 		                console.error("Error al cargar máquina ID", machineId, err);
@@ -1469,11 +1469,6 @@
 		            : '<p>No hay logs disponibles.</p>') +
 		        '</div>' +
 		      '</section>' +
-				'<br>' +
-		      // Botones acciones
-		      '<div class="actions">' +
-		        '<button class="close-info" type="button">Cerrar</button>' +
-		      '</div>' +
 		
 		    '</div>';
 		
@@ -1525,18 +1520,8 @@
 		
 		      // Badge total máquinas
 		      html += '<span class="badge badge-vms">' +
-		        '<svg class="wave" viewBox="0 0 120 28" preserveAspectRatio="none">' +
-		          '<defs>' +
-		            '<linearGradient id="waveColor" gradientTransform="rotate(90)">' +
-		              '<stop offset="0%" stop-color="rgba(255,255,255,0.3)" />' +
-		              '<stop offset="100%" stop-color="rgba(255,255,255,0.05)" />' +
-		            '</linearGradient>' +
-		          '</defs>' +
-		          '<path class="wave-path wave1" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />' +
-		          '<path class="wave-path wave2" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />' +
-		        '</svg>' +
-		        data.totalMachines + ' VMs' +
-		      '</span>';
+	           data.totalMachines + ' VMs' +
+	        '</span>';
 		
 		      // Recorrer dificultades
 		      for (var difficulty in data.countsByDifficulty) {
@@ -1546,18 +1531,8 @@
 		          var classDifficulty = difficulty.toLowerCase().replace(/\s+/g, '-');
 		
 		          html += '<span class="badge badge-' + classDifficulty + '">' +
-		            '<svg class="wave" viewBox="0 0 120 28" preserveAspectRatio="none">' +
-		              '<defs>' +
-		                '<linearGradient id="waveColor" gradientTransform="rotate(90)">' +
-		                  '<stop offset="0%" stop-color="rgba(255,255,255,0.3)" />' +
-		                  '<stop offset="100%" stop-color="rgba(255,255,255,0.05)" />' +
-		                '</linearGradient>' +
-		              '</defs>' +
-		              '<path class="wave-path wave1" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />' +
-		              '<path class="wave-path wave2" d="M0 16 Q 30 6 60 16 T 120 16 V 28 H 0 Z" fill="url(#waveColor)" />' +
-		            '</svg>' +
-		            data.countsByDifficulty[difficulty] + ' ' + difficulty +
-		          '</span>';
+		           data.countsByDifficulty[difficulty] + ' ' + difficulty +
+		        '</span>';
 		        }
 		      }
 		
