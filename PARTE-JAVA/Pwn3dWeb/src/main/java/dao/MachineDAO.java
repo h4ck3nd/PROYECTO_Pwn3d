@@ -154,5 +154,28 @@ public class MachineDAO {
                 return diff;
         }
     }
+    
+    public boolean actualizarMD5(String nombreMaquina, String nuevoMD5) {
+        boolean exito = false;
+        ConexionDDBB conexionDB = new ConexionDDBB();
+        Connection con = conexionDB.conectar();
+
+        try {
+            String sql = "UPDATE machines SET md5 = ? WHERE name_machine = ?";
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setString(1, nuevoMD5);
+            stmt.setString(2, nombreMaquina);
+
+            int filas = stmt.executeUpdate();
+            exito = filas > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            conexionDB.cerrarConexion();
+        }
+
+        return exito;
+    }
 
 }
