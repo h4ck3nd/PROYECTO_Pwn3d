@@ -652,25 +652,29 @@ input:focus, select:focus {
 		        session.removeAttribute("successMsg");
 		    }
 		%>    
- <button type="button" id="updateProfileBtn" class="btn-glow yellow">Guardar</button>
+ <button type="button" id="updateProfileBtn" class="btn-glow yellow" style="font-family: 'Press Start 2P', monospace;">Guardar</button>
   </div>
 
 <div id="popup" class="popup-overlay hidden">
-  <div class="popup-content">
+  <div class="popup-content" >
     <div class="popup-header">
       <h3>LINKS</h3>
       <button id="closePopup">&times;</button>
     </div>
+    <br>
     <div class="form-group">
       <label>Título</label>
-      <input type="text" id="inputTitle">
+      <input type="text" id="inputTitle" style="font-family: 'Press Start 2P', monospace;" required>
     </div>
     <div class="form-group">
+    <br>
       <label>URL</label>
-      <input type="text" id="inputURL">
+      <input type="text" id="inputURL" style="font-family: 'Press Start 2P', monospace;" required>
     </div>
+    <br>
     <div class="form-group">
   <label>Selecciona un icono</label>
+  <br>
   <div id="iconSelectorWrapper" class="icon-selector-wrapper">
     <div id="selectedIcon" class="selected-icon">
       <span>Selecciona un icono</span>
@@ -687,6 +691,8 @@ input:focus, select:focus {
     </div>
   </div>
 </div>
+<br>
+	<button id="saveLink" class="btn-glow yellow">Guardar</button>
   </div>
 </div>
 <!-- PARA SCRIPT BONITO DE ELIMINAR CUENTA -->
