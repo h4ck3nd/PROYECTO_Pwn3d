@@ -347,36 +347,10 @@
       color: var(--color-user);
       font-weight: bold;
     }
-    
-    /* ESTILOS PARA EL POPUP DE ELIMINAR CUENTA */
-    
-    @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap');
-    .neon-popup {
-        font-family: 'Fira Code', monospace;
-        font-weight: 600;
-        font-size: 1rem;
-        text-align: center;
-    }
-    .swal2-dark-popup {
-	    box-shadow: 0 0 20px rgba(229, 83, 83, 0.7);
-	    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-	    border-radius: 12px;
-	}
-
-    
   </style>
   
-  <!-- FUENTE DE LETRA PARA EL POPUP DE ELIMINAR CUENTA -->
-  
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
-<!-- FORMULARIO OCULTO PARA ELIMINAR CUENTA CUANDO SE LLAMADA DESDE EL BOTON -->
-
-<form id="deleteForm" method="post" action="deleteAccount" style="display:none;">
-    <!-- Form vacío, se envía solo el userId de sesión en backend -->
-</form>
 
 <!-- MENU DE HABURGUESA -->
 
@@ -393,6 +367,7 @@
           <hr>
       <nav class="menu">
       <!-- Seccion Usuarios -->
+      	<a href="<%= request.getContextPath() %>/perfil">Mi Cuenta</a>
         <a href="#">📊 Dashboard</a>
         <a href="<%= request.getContextPath() %>/machines.jsp">💻 Machines</a>
         <a href="#">🏆 Ranking</a>
@@ -416,33 +391,6 @@
 		        🔓 CERRAR SESIÓN
 		    </button>
 		</form>
-		
-		<!-- BOTON PARA ELIMINAR CUENTA -->
-		
-		<button 
-		    type="button" 
-		    id="deleteBtn"
-		    style="background-color: crimson; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; width: 100%; margin-top: 12px; font-size: 0.55rem; white-space: nowrap; font-family: 'Press Start 2P', monospace !important; font-weight: bold; box-shadow: 0 0 10px rgba(255, 0, 0, 0.6); transition: transform 0.2s ease;"
-		    onmouseover="this.style.transform='scale(1.05)'"
-		    onmouseout="this.style.transform='scale(1)'"
-		>
-		    🗑️ Eliminar Cuenta
-		</button>
-		
-		<!-- MENSAJE DE ERROR MEDIANTE EL CONTROLADOR AL ELIMINAR CUENTA -->
-	    
-	    <%
-		    String deleteError = (String) session.getAttribute("deleteError");
-		    if (deleteError != null) {
-		%>	
-			<br>
-		    <div style="color: red; font-weight: bold; font-size: 0.8rem;">
-		        <%= deleteError %>
-		    </div>
-		<%
-		        session.removeAttribute("deleteError"); // Elimina el mensaje después de mostrarlo
-		    }
-		%>
       </nav>
       <div class="theme-toggle">
         <button id="toggle-theme">Modo Claro 🌞</button>
@@ -497,8 +445,6 @@
         </div>
       </section>
     </main>
-    <!-- PARA SCRIPT BONITO DE ELIMINAR CUENTA -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
        const hamburger = document.getElementById("hamburger");
 const closeBtn = document.getElementById("closeMenu");
@@ -544,42 +490,6 @@ const toggleBtn = document.getElementById('toggle-theme');
     toggleBtn.textContent = isLight ? 'Modo Oscuro 🌙' : 'Modo Claro 🌞';
     localStorage.setItem('theme', isLight ? 'light' : 'dark');
   });
-  
-  	/* ELIMINAR CUENTA */
-  
-	 document.getElementById('deleteBtn').addEventListener('click', function () {
-	    Swal.fire({
-	        title: '¿Eliminar cuenta?',
-	        text: "Esta acción no se puede deshacer.",
-	        icon: 'warning',
-	        input: 'text',
-	        inputPlaceholder: 'Escribe "delete account" para confirmar',
-	        inputAttributes: {
-	            autocapitalize: 'off',
-	            autocorrect: 'off',
-	            spellcheck: 'false'
-	        },
-	        showCancelButton: true,
-	        confirmButtonColor: '#e55353',  // rojo vibrante pero elegante
-	        cancelButtonColor: '#6c757d',   // gris neutro para cancelar
-	        confirmButtonText: 'Sí, eliminar',
-	        cancelButtonText: 'Cancelar',
-	        background: '#1e1e2f',  // fondo oscuro azulado
-	        color: '#f8f9fa',       // texto claro
-	        customClass: {
-	            popup: 'swal2-dark-popup'
-	        },
-	        preConfirm: (inputValue) => {
-	            if (inputValue !== 'delete account') {
-	                Swal.showValidationMessage('La frase no coincide. Intenta de nuevo.');
-	            }
-	        }
-	    }).then((result) => {
-	        if (result.isConfirmed) {
-	            document.getElementById('deleteForm').submit();
-	        }
-	    });
-	});
     </script>
 </body>
 </html>
