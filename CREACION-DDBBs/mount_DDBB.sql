@@ -122,3 +122,12 @@ CREATE TABLE flags (
     first_flag_user BOOLEAN NOT NULL,
     first_flag_root BOOLEAN NOT NULL
 );
+
+-- TABLA ImgPath (FOTO DE PERFIL)
+
+CREATE TABLE imgProfile (
+    id SERIAL PRIMARY KEY,
+    user_id INT UNIQUE NOT NULL,
+    pathImg VARCHAR(255) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
