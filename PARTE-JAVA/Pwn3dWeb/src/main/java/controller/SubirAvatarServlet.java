@@ -26,7 +26,7 @@ public class SubirAvatarServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("[DEBUG] Entrando a SubirAvatarServlet.doPost");
 
-        // Obtener token y validar usuario
+        // Validar token JWT en cookies
         Cookie[] cookies = req.getCookies();
         String token = null;
         if (cookies != null) {
@@ -37,101 +37,71 @@ public class SubirAvatarServlet extends HttpServlet {
                 }
             }
         }
-
-        if (token == null) {
-            System.out.println("[DEBUG] Token no encontrado en cookies");
+        if (token == null || !JWTUtil.validateToken(token)) {
             resp.sendRedirect(req.getContextPath() + "/login-register/login.jsp");
             return;
         }
-
-        if (!JWTUtil.validateToken(token)) {
-            System.out.println("[DEBUG] Token inválido");
-            resp.sendRedirect(req.getContextPath() + "/login-register/login.jsp");
-            return;
-        }
-
         Integer userId = JWTUtil.getUserIdFromToken(token);
-        System.out.println("[DEBUG] userId extraído del token: " + userId);
         if (userId == null) {
-            System.out.println("[DEBUG] userId es null después de extraer del token");
             resp.sendRedirect(req.getContextPath() + "/login-register/login.jsp");
             return;
         }
 
-        // Obtener archivo enviado
+        // Obtener archivo
         Part filePart = req.getPart("avatarInput");
         if (filePart == null || filePart.getSize() == 0) {
-            System.out.println("[DEBUG] No se ha seleccionado ninguna imagen o archivo vacío");
             req.getSession().setAttribute("errorAvatar", "No se ha seleccionado ninguna imagen.");
             resp.sendRedirect(req.getContextPath() + "/perfil");
             return;
         }
-        System.out.println("[DEBUG] Archivo recibido: " + filePart.getSubmittedFileName() + ", tamaño: " + filePart.getSize());
 
-        // Obtener nombre archivo y extensión
         String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
         String extension = "";
         int i = fileName.lastIndexOf('.');
         if (i > 0) {
             extension = fileName.substring(i).toLowerCase();
         }
-        System.out.println("[DEBUG] Extensión del archivo: " + extension);
-
-        // Validar extensión de imagen (opcional)
         if (!extension.matches("\\.(jpg|jpeg|png|gif|bmp)")) {
-            System.out.println("[DEBUG] Extensión no permitida: " + extension);
             req.getSession().setAttribute("errorAvatar", "Solo se permiten imágenes JPG, JPEG, PNG, GIF o BMP.");
             resp.sendRedirect(req.getContextPath() + "/perfil");
             return;
         }
 
-        // Crear carpeta relativa a la aplicación web
-        String uploadPath = getServletContext().getRealPath("") + File.separator + UPLOAD_DIR;
-        File uploadDir = new File(uploadPath);
+        // Ruta absoluta en ${catalina.base}/imgProfile
+        String tomcatBase = System.getProperty("catalina.base");
+        File uploadDir = new File(tomcatBase, UPLOAD_DIR);
         if (!uploadDir.exists()) {
-            boolean created = uploadDir.mkdir();
-            System.out.println("[DEBUG] Carpeta upload creada: " + created + " en " + uploadPath);
-        } else {
-            System.out.println("[DEBUG] Carpeta upload ya existe: " + uploadPath);
+            boolean created = uploadDir.mkdirs();
+            System.out.println("[DEBUG] Carpeta imgProfile creada: " + created + " en " + uploadDir.getAbsolutePath());
         }
 
-        // Nombre único para evitar conflictos: "avatar_userId_timestamp.ext"
         String newFileName = "avatar_" + userId + "_" + System.currentTimeMillis() + extension;
-        System.out.println("[DEBUG] Nuevo nombre archivo: " + newFileName);
-
-        // Guardar archivo físicamente
         File file = new File(uploadDir, newFileName);
         filePart.write(file.getAbsolutePath());
+
+        // DEBUG: Mostrar ruta absoluta del archivo guardado
         System.out.println("[DEBUG] Archivo guardado en: " + file.getAbsolutePath());
 
-        // Ruta relativa para guardar en BD (para llamar desde JSP)
-        String relativePath = UPLOAD_DIR + "/" + newFileName;
+        String relativePath = UPLOAD_DIR + "/" + newFileName; // Ruta relativa para guardar en BD
 
         ImgProfileDAO dao = new ImgProfileDAO();
         try {
-            // Obtener imagen previa
             ImgProfile existingImg = dao.getImgProfileByUserId(userId);
             if (existingImg != null) {
-                System.out.println("[DEBUG] Imagen previa encontrada: " + existingImg.getPathImg());
                 // Borrar archivo anterior
-                File oldFile = new File(getServletContext().getRealPath("") + File.separator + existingImg.getPathImg());
+                File oldFile = new File(tomcatBase, existingImg.getPathImg());
                 if (oldFile.exists()) {
                     boolean deleted = oldFile.delete();
                     System.out.println("[DEBUG] Archivo anterior borrado: " + deleted);
                 }
-                // Actualizar ruta en BD
-                boolean updated = dao.updateImgProfile(userId, relativePath);
-                System.out.println("[DEBUG] Actualización en BD: " + updated);
+                dao.updateImgProfile(userId, relativePath);
             } else {
-                System.out.println("[DEBUG] No existe imagen previa, insertando nueva");
-                boolean inserted = dao.insertImgProfile(userId, relativePath);
-                System.out.println("[DEBUG] Inserción en BD: " + inserted);
+                dao.insertImgProfile(userId, relativePath);
             }
         } finally {
             dao.cerrarConexion();
         }
 
-        // Mensaje éxito y redirección
         req.getSession().setAttribute("successAvatar", "Avatar subido con éxito.");
         resp.sendRedirect(req.getContextPath() + "/perfil");
     }
