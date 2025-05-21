@@ -1,4 +1,57 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<%@ page import="dao.ImgProfileDAO" %>
+<%@ page import="model.ImgProfile" %>
+<%@ page import="dao.EditProfileDAO" %>
+<%@ page import="utils.JWTUtil" %>
+<%@ page import="java.util.Map" %>
+<%@ page import="javax.servlet.http.Cookie" %>
+<%
+    String token = null; // Declarada fuera para ser accesible globalmente
+    Integer userId = null;
+    String nombreUsuario = "Invitado";
+
+    try {
+        javax.servlet.http.Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (javax.servlet.http.Cookie cookie : cookies) {
+                if ("token".equals(cookie.getName())) {
+                    token = cookie.getValue();
+                    break;
+                }
+            }
+        }
+
+        if (token == null || !JWTUtil.validateToken(token)) {
+            response.sendRedirect(request.getContextPath() + "/logout");
+            return;
+        }
+
+        userId = JWTUtil.getUserIdFromToken(token);
+        if (userId == null) {
+            response.sendRedirect(request.getContextPath() + "/logout");
+            return;
+        }
+
+        // Extraer el nombre desde los claims del token
+        Map<String, Object> claims = JWTUtil.getAllClaims(token);
+        if (claims != null && claims.get("usuario") != null) {
+            nombreUsuario = (String) claims.get("usuario");
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        response.sendRedirect(request.getContextPath() + "/logout");
+        return;
+    }
+
+    ImgProfileDAO imgDao = new ImgProfileDAO();
+    ImgProfile img = imgDao.getImgProfileByUserId(userId);
+    imgDao.cerrarConexion();
+
+    String imgSrc = (img != null && img.getPathImg() != null && !img.getPathImg().isEmpty())
+        ? request.getContextPath() + "/" + img.getPathImg()
+        : request.getContextPath() + "/imgProfile/default.png";
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -361,8 +414,8 @@
           <!-- Botón de cerrar -->
           <button id="closeMenu" class="menu-close">❌</button>
           <div class="profile">
-            <img src="<%= request.getContextPath() %>/img/logo-flag-white.png" alt="Profile">
-            <p><strong>User:</strong> NAME</p>
+            <img src="<%= imgSrc %>" alt="Avatar" class="avatar-image" />
+            <p><strong>Username:</strong> <%= nombreUsuario %></p>
           </div>
           <hr>
       <nav class="menu">

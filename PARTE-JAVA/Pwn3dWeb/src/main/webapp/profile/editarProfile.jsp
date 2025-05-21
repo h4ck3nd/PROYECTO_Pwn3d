@@ -2,15 +2,14 @@
 <%@ page import="java.util.*" %>
 <%@ page import="dao.ImgProfileDAO" %>
 <%@ page import="model.ImgProfile" %>
+<%@ page import="dao.EditProfileDAO" %>
+<%@ page import="model.EditProfile" %>
 <%@ page import="utils.JWTUtil" %>
 <%
-    // Obtener y validar usuario desde token JWT (vía cookies)
     Integer userId = null;
-
     try {
         javax.servlet.http.Cookie[] cookies = request.getCookies();
         String token = null;
-
         if (cookies != null) {
             for (javax.servlet.http.Cookie cookie : cookies) {
                 if ("token".equals(cookie.getName())) {
@@ -19,12 +18,10 @@
                 }
             }
         }
-
         if (token == null || !JWTUtil.validateToken(token)) {
             response.sendRedirect(request.getContextPath() + "/logout");
             return;
         }
-
         userId = JWTUtil.getUserIdFromToken(token);
         if (userId == null) {
             response.sendRedirect(request.getContextPath() + "/logout");
@@ -36,7 +33,6 @@
         return;
     }
 
-    // Obtener imagen desde DAO
     ImgProfileDAO imgDao = new ImgProfileDAO();
     ImgProfile img = imgDao.getImgProfileByUserId(userId);
     imgDao.cerrarConexion();
@@ -44,6 +40,10 @@
     String imgSrc = (img != null && img.getPathImg() != null && !img.getPathImg().isEmpty())
         ? request.getContextPath() + "/" + img.getPathImg()
         : request.getContextPath() + "/imgProfile/default.png";
+
+    EditProfileDAO dao = new EditProfileDAO();
+    java.util.List<EditProfile> socialLinks = dao.getLinksByUserId(userId);
+    dao.cerrarConexion();
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -495,6 +495,67 @@ input:focus, select:focus {
 	.alert-success {
 		color: green;
 	}
+	
+	 #socialLinksContainer {
+    display: flex;
+    flex-direction: column; /* columna vertical */
+    gap: 15px; /* separación entre links */
+  }
+
+  .form-group {
+    /*background: #222;*/
+    padding: 10px;
+    border-radius: 8px;
+    color: #eee;
+  }
+
+  .form-group > label {
+    font-weight: bold;
+    margin-bottom: 6px;
+    display: block;
+  }
+
+  .link-content a {
+  color: #ccc;
+  flex-grow: 1;
+  text-decoration: none;
+  white-space: nowrap;        /* Evita que el texto se rompa en varias líneas */
+  overflow: hidden;           /* Oculta el desbordamiento */
+  text-overflow: ellipsis;    /* Muestra "..." si el texto es muy largo */
+  font-size: clamp(6px, 1vw, 12px); /* Tamaño adaptable, nunca menor a 12px ni mayor a 16px */
+}
+
+
+  .link-content img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 5px;
+  }
+
+  .link-content a {
+    color: #ccc;
+    flex-grow: 1;
+    text-decoration: none;
+    word-break: break-all;
+  }
+
+  .btn-delete {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+  }
+
+  .btn-delete:hover {
+    background-color: #c0392b;
+  }
+	
   </style>
 </head>
 <!-- FUENTE DE LETRA PARA EL POPUP DE ELIMINAR CUENTA -->
@@ -526,7 +587,6 @@ input:focus, select:focus {
       <div class="profile-left">
         <div class="avatar-box">
 		    <img src="<%= imgSrc %>" alt="Avatar" class="avatar-image" />
-		
 		    <form action="<%= request.getContextPath() %>/subirAvatar" method="post" enctype="multipart/form-data" id="avatarForm">
 		        <input
 		            type="file"
@@ -538,17 +598,6 @@ input:focus, select:focus {
 		            style="font-family: 'Press Start 2P', monospace; font-size: 0.55rem;"
 		        >
 		    </form>
-		
-		    <br>
-		    <!-- 
-		    <button
-		        class="btn-glow btn-upload"
-		        onclick="document.getElementById('avatarInput').click();"
-		        style="font-family: 'Press Start 2P', monospace;"
-		    >
-		        Subir avatar
-		    </button>
-		     -->
 		</div>
 		
         <div class="form-group">
@@ -592,11 +641,24 @@ input:focus, select:focus {
       <div class="profile-right">
         <!-- Perfil público -->
         <div class="card">
-          <h2>Visibilidad</h2>
-          <label class="checkbox-label">
-            <input type="checkbox">Hacer Perfil Publico
-          </label>
-        </div>
+		  <h2>Visibilidad</h2>
+		  <label class="checkbox-label">
+		    <input type="checkbox" id="perfilPublicoCheckbox"
+		      <%-- Aquí marcamos el checkbox si todos los links están en Publico --%>
+		      <% 
+		         boolean todosPublicos = true;
+		         for (EditProfile link : socialLinks) {
+		             if (!"Publico".equalsIgnoreCase(link.getEstado())) {
+		                 todosPublicos = false;
+		                 break;
+		             }
+		         }
+		         if (todosPublicos) { 
+		      %> checked <% } %>
+		    >
+		    Hacer Perfil Público
+		  </label>
+		</div>
 
         <!-- Cambiar contraseña -->
         <div class="card">
@@ -631,7 +693,19 @@ input:focus, select:focus {
         <!-- Redes sociales -->
         <div class="card">
           <h2>Redes sociales</h2>
-          <div id="socialLinksContainer" class="grid"></div>
+          <div id="socialLinksContainer">
+			  <% for (EditProfile link : socialLinks) { %>
+			    <div class="form-group" data-id="<%= link.getId() %>">
+			      <label><%= link.getTitleSocial() %></label>
+			      <div class="link-content">
+			        <img src="<%= request.getContextPath() %>/img/icons/<%= link.getSocialIcon() %>" alt="<%= link.getTitleSocial() %>">
+			        <a href="<%= link.getUrlSocial() %>" target="_blank"><%= link.getUrlSocial() %></a>
+			        <button class="btn-delete" data-id="<%= link.getId() %>">Eliminar</button>
+			      </div>
+			    </div>
+			  <% } %>
+			</div>
+			<br>
           <button id="addSocialBtn" class="btn-glow" style="font-family: 'Press Start 2P', monospace;">Añadir red social</button>
         </div>
       </div>
@@ -655,8 +729,9 @@ input:focus, select:focus {
  <button type="button" id="updateProfileBtn" class="btn-glow yellow" style="font-family: 'Press Start 2P', monospace;">Guardar</button>
   </div>
 
+<!-- POPUP -->
 <div id="popup" class="popup-overlay hidden">
-  <div class="popup-content" >
+  <div class="popup-content">
     <div class="popup-header">
       <h3>LINKS</h3>
       <button id="closePopup">&times;</button>
@@ -666,108 +741,156 @@ input:focus, select:focus {
       <label>Título</label>
       <input type="text" id="inputTitle" style="font-family: 'Press Start 2P', monospace;" required>
     </div>
-    <div class="form-group">
     <br>
+    <div class="form-group">
       <label>URL</label>
       <input type="text" id="inputURL" style="font-family: 'Press Start 2P', monospace;" required>
     </div>
     <br>
     <div class="form-group">
-  <label>Selecciona un icono</label>
-  <br>
-  <div id="iconSelectorWrapper" class="icon-selector-wrapper">
-    <div id="selectedIcon" class="selected-icon">
-      <span>Selecciona un icono</span>
+      <label>Selecciona un icono</label>
+      <div id="iconSelectorWrapper" class="icon-selector-wrapper">
+        <div id="selectedIcon" class="selected-icon">
+          <span>Selecciona un icono</span>
+        </div>
+        <div id="iconSelector" class="icon-selector hidden">
+          <img src="<%= request.getContextPath() %>/img/icons/instagram.png" data-icon="instagram" alt="Instagram">
+          <img src="<%= request.getContextPath() %>/img/icons/youtube.png" data-icon="youtube" alt="YouTube">
+          <img src="<%= request.getContextPath() %>/img/icons/x.png" data-icon="x" alt="X">
+          <img src="<%= request.getContextPath() %>/img/icons/facebook.png" data-icon="facebook" alt="Facebook">
+          <img src="<%= request.getContextPath() %>/img/icons/github.png" data-icon="github" alt="GitHub">
+          <img src="<%= request.getContextPath() %>/img/icons/linkedin.png" data-icon="linkedin" alt="LinkedIn">
+          <img src="<%= request.getContextPath() %>/img/icons/discord.png" data-icon="discord" alt="Discord">
+          <img src="<%= request.getContextPath() %>/img/icons/website.png" data-icon="website" alt="Website">
+        </div>
+      </div>
     </div>
-    <div id="iconSelector" class="icon-selector hidden">
-      <img src="<%= request.getContextPath() %>/img/icons/instagram.png" data-icon="instagram" alt="Instagram">
-      <img src="<%= request.getContextPath() %>/img/icons/youtube.png" data-icon="youtube" alt="YouTube">
-      <img src="<%= request.getContextPath() %>/img/icons/x.png" data-icon="x" alt="X">
-      <img src="<%= request.getContextPath() %>/img/icons/facebook.png" data-icon="facebook" alt="Facebook">
-      <img src="<%= request.getContextPath() %>/img/icons/github.png" data-icon="github" alt="GitHub">
-      <img src="<%= request.getContextPath() %>/img/icons/linkedin.png" data-icon="linkedin" alt="LinkedIn">
-      <img src="<%= request.getContextPath() %>/img/icons/discord.png" data-icon="discord" alt="Discord">
-      <img src="<%= request.getContextPath() %>/img/icons/website.png" data-icon="website" alt="Website">
-    </div>
+    <br>
+    <button id="saveLink" class="btn-glow yellow">Guardar</button>
   </div>
 </div>
-<br>
-	<button id="saveLink" class="btn-glow yellow">Guardar</button>
-  </div>
-</div>
+
 <!-- PARA SCRIPT BONITO DE ELIMINAR CUENTA -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const popup         = document.getElementById('popup');
-  const openPopupBtn  = document.getElementById('addSocialBtn');
-  const closePopupBtn = document.getElementById('closePopup');
+  document.addEventListener('DOMContentLoaded', function () {
+	  const popup = document.getElementById('popup');
+	  const openPopupBtn = document.getElementById('addSocialBtn');
+	  const closePopupBtn = document.getElementById('closePopup');
+	  const selectedIconDiv = document.getElementById('selectedIcon');
+	  const iconSelector = document.getElementById('iconSelector');
+	  const socialLinksContainer = document.getElementById('socialLinksContainer');
 
-  openPopupBtn.addEventListener('click', () => popup.classList.remove('hidden'));
-  closePopupBtn.addEventListener('click', () => popup.classList.add('hidden'));
+	  let selectedIconKey = null;
+	  const contextPath = '<%= request.getContextPath() %>';
 
-  const selectedIconDiv = document.getElementById('selectedIcon');
-  const iconSelector    = document.getElementById('iconSelector');
-  const iconWrapper     = document.getElementById('iconSelectorWrapper');
-  let   selectedIconKey = null;
+	  openPopupBtn?.addEventListener('click', () => popup.classList.remove('hidden'));
+	  closePopupBtn?.addEventListener('click', () => popup.classList.add('hidden'));
 
-  selectedIconDiv.addEventListener('click', () => {
-    iconSelector.classList.toggle('hidden');
-  });
+	  selectedIconDiv.addEventListener('click', function () {
+	    iconSelector.classList.toggle('hidden');
+	  });
 
-  iconSelector.querySelectorAll('img').forEach(img => {
-    img.addEventListener('click', () => {
-      iconSelector.querySelectorAll('img').forEach(i => i.classList.remove('selected'));
+	  iconSelector.querySelectorAll('img').forEach(function (img) {
+	    img.addEventListener('click', function () {
+	      selectedIconKey = img.getAttribute('data-icon') + ".png";
+	      selectedIconDiv.innerHTML = '<img src="' + img.src + '" alt="' + selectedIconKey + '" style="width:30px; height:30px; object-fit:cover; border-radius:5px;">';
+	      iconSelector.classList.add('hidden');
+	    });
+	  });
 
-      img.classList.add('selected');
-      selectedIconKey = img.dataset.icon;
+	  document.getElementById('saveLink').addEventListener('click', function () {
+	    const titleInput = document.getElementById('inputTitle');
+	    const urlInput = document.getElementById('inputURL');
 
-      selectedIconDiv.innerHTML =
-        '<img src="' + img.src + '" alt="' + img.alt + '"><span>' + img.alt + '</span>';
+	    const title = titleInput.value.trim();
+	    const url = urlInput.value.trim();
 
-      iconSelector.classList.add('hidden');
-    });
-  });
+	    if (!title || !url || !selectedIconKey) {
+	      alert('Completa título, URL y selecciona un icono.');
+	      return;
+	    }
 
-  document.addEventListener('click', e => {
-    if (!iconWrapper.contains(e.target)) {
-      iconSelector.classList.add('hidden');
-    }
-  });
+	    // Validación de máximo 5
+	    if (socialLinksContainer.querySelectorAll('.form-group').length >= 5) {
+	      alert("Solo puedes tener hasta 5 redes sociales.");
+	      return;
+	    }
 
-  document.getElementById('saveLink').addEventListener('click', () => {
-    const titleInput = document.getElementById('inputTitle');
-    const urlInput   = document.getElementById('inputURL');
-    const container  = document.getElementById('socialLinksContainer');
+	    const xhr = new XMLHttpRequest();
+	    xhr.open('POST', contextPath + '/manageSocialLinks', true);
+	    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-    const title = titleInput.value.trim();
-    const url   = urlInput.value.trim();
+	    xhr.onload = function () {
+	      if (xhr.status === 200) {
+	        let response;
+	        try {
+	          response = JSON.parse(xhr.responseText); // Se espera { id: xxx }
+	        } catch (e) {
+	          alert('Error: respuesta no válida del servidor.');
+	          return;
+	        }
+	        const newDiv = document.createElement('div');
+	        newDiv.className = 'form-group';
+	        newDiv.setAttribute('data-id', response.id);
 
-    if (!title || !url || !selectedIconKey) {
-      alert('Completa título, URL y selecciona un icono.');
-      return;
-    }
+	        newDiv.innerHTML =
+	          '<label>' + title + '</label>' +
+	          '<div style="display:flex; align-items:center; gap:10px;">' +
+	          '<img src="' + contextPath + '/img/icons/' + selectedIconKey + '" alt="' + title + '" style="width:30px; height:30px; object-fit:cover; border-radius:5px;">' +
+	          '<a href="' + url + '" target="_blank" style="color:#ccc;">' + url + '</a>' +
+	          '<button class="btn-delete" data-id="' + response.id + '" style="margin-left:10px;">Eliminar</button>' +
+	          '</div>';
 
-    const iconImg = iconSelector.querySelector('img[data-icon="' + selectedIconKey + '"]');
-    const iconSrc = iconImg ? iconImg.src : '';
+	        socialLinksContainer.appendChild(newDiv);
 
-    const div = document.createElement('div');
-    div.className = 'form-group';
-    div.innerHTML =
-      '<label>' + title + '</label>' +
-      '<div style="display:flex; align-items:center; gap:10px;">' +
-        '<img src="' + iconSrc + '" alt="' + title + '" style="width:30px; height:30px; object-fit:cover; border-radius:5px;">' +
-        '<a href="' + url + '" target="_blank" style="color:#ccc;">' + url + '</a>' +
-      '</div>';
-    container.appendChild(div);
+	        titleInput.value = '';
+	        urlInput.value = '';
+	        selectedIconKey = null;
+	        selectedIconDiv.innerHTML = '<span>Selecciona un icono</span>';
+	        iconSelector.querySelectorAll('img').forEach(i => i.classList.remove('selected'));
+	        popup.classList.add('hidden');
+	      } else {
+	        alert(xhr.responseText || 'Error guardando link.');
+	      }
+	    };
 
-    titleInput.value = '';
-    urlInput.value   = '';
-    selectedIconKey  = null;
-    selectedIconDiv.innerHTML = '<span>Selecciona un icono</span>';
-    iconSelector.querySelectorAll('img').forEach(i => i.classList.remove('selected'));
-  });
-});
+	    const params = 'action=add&title=' + encodeURIComponent(title) +
+	      '&url=' + encodeURIComponent(url) +
+	      '&icon=' + encodeURIComponent(selectedIconKey);
+	    xhr.send(params);
+	  });
+
+	  // Eliminar con delegación de evento
+	  socialLinksContainer.addEventListener('click', function (e) {
+	    if (e.target.classList.contains('btn-delete')) {
+	      const parentDiv = e.target.closest('.form-group');
+	      const id = parentDiv.getAttribute('data-id');
+	      console.log("Intentando eliminar ID:", id);
+
+	      if (!id) {
+	        alert('No se puede eliminar este elemento.');
+	        return;
+	      }
+
+	      if (!confirm('¿Seguro que quieres eliminar este link?')) return;
+
+	      const xhr = new XMLHttpRequest();
+	      xhr.open('POST', contextPath + '/manageSocialLinks', true);
+	      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+	      xhr.onload = function () {
+	        if (xhr.status === 200) {
+	          parentDiv.remove();
+	        } else {
+	          alert('Error eliminando link.');
+	        }
+	      };
+
+	      xhr.send('action=delete&id=' + encodeURIComponent(id));
+	    }
+	  });
+	});
 
 /* ELIMINAR CUENTA */
 
@@ -849,6 +972,30 @@ document.getElementById('deleteBtn').addEventListener('click', function () {
      console.log("[DEBUG] Archivo seleccionado: ", this.files[0]);
      document.getElementById('avatarForm').submit();
  });
+
+/* CAMBIAR A ESTADO PUBLICO */
+
+ document.getElementById('perfilPublicoCheckbox').addEventListener('change', function() {
+	  const nuevoEstado = this.checked ? 'Publico' : 'Privado';
+
+	  const xhr = new XMLHttpRequest();
+	  xhr.open('POST', '<%= request.getContextPath() %>/manageSocialLinks', true);
+	  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+	  xhr.onload = () => {
+	    if (xhr.status !== 200) {
+	      alert('Error actualizando la visibilidad de los links.');
+	      // Revertir el cambio visual en el checkbox
+	      this.checked = !this.checked;
+	    } else {
+	      // Opcional: recargar la página para actualizar estados o actualizar visualmente los estados si tienes UI para ello
+	      location.reload();
+	    }
+	  };
+
+	  xhr.send('action=updateAllEstados&nuevoEstado=' + encodeURIComponent(nuevoEstado));
+	});
+
 
 </script>
 </body>

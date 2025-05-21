@@ -1,0 +1,7 @@
+<Context>
+    <Resources>
+        <PreResources className="org.apache.catalina.webresources.DirResourceSet"
+                      base="${catalina.base}/imgProfile"
+                      webAppMount="/imgProfile" />
+    </Resources>
+</Context>
