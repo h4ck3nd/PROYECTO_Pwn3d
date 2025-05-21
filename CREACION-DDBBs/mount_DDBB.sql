@@ -131,3 +131,16 @@ CREATE TABLE imgProfile (
     pathImg VARCHAR(255) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
+
+-- TABLA PARA EL PERFIL (SISTEMA LINKS)
+
+CREATE TABLE editProfile (
+    id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    social_icon VARCHAR(255) NOT NULL,
+    title_social VARCHAR(100) NOT NULL,
+    url_social VARCHAR(255) NOT NULL,
+    estado VARCHAR(10) NOT NULL DEFAULT 'Privado' CHECK (estado IN ('Publico','Privado')),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
