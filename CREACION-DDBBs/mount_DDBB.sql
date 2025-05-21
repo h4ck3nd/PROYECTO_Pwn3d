@@ -122,6 +122,7 @@ CREATE TABLE flags (
     first_flag_user BOOLEAN NOT NULL,
     first_flag_root BOOLEAN NOT NULL
 );
+ALTER TABLE flags ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
 
 -- TABLA ImgPath (FOTO DE PERFIL)
 
