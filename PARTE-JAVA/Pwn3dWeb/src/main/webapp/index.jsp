@@ -59,7 +59,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="icon" href="<%= request.getContextPath() %>/img/logo-flag-white.ico">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <title>HackMyVM Replica - Vulnyx Style</title>
+  <title>Dashboard - Pwn3d!</title>
   <link rel="stylesheet" href="<%= request.getContextPath() %>/css/cssIndex.jsp">
   
 </head>
@@ -123,41 +123,37 @@
       </header>
 
       <section class="stats">
-        <div class="stat"><h3>VMs</h3><p>298</p></div>
-        <div class="stat"><h3>Hackers</h3><p>18403</p></div>
-        <div class="stat"><h3>Challenges</h3><p>89</p></div>
-        <div class="stat"><h3>Writeups</h3><p>2360</p></div>
-      </section>
-
-      <section class="logs">
-        <h2>Logs<span class="dot">.</span></h2>
-        <div class="log-cards">
-          <div class="log-card">
-            <img src="https://i.pravatar.cc/40?u=eureka" alt="Eureka" class="log-avatar">
-            <div class="log-content">
-              <p><span class="timestamp">2025-05-10 13:03</span></p>
-              <p><strong class="hacker-name">Eureka</strong> got <span class="root">root</span> in <em>Noob</em></p>
-            </div>
-          </div>
-      
-          <div class="log-card">
-            <img src="https://i.pravatar.cc/40?u=2020g675" alt="2020G675" class="log-avatar">
-            <div class="log-content">
-              <p><span class="timestamp">2025-05-10 12:43</span></p>
-              <p><strong class="hacker-name">2020G675</strong> got <span class="root">root</span> in <em>Pycrt</em></p>
-            </div>
-          </div>
-      
-          <div class="log-card">
-            <img src="https://i.pravatar.cc/40?u=yliken" alt="Yliken" class="log-avatar">
-            <div class="log-content">
-              <p><span class="timestamp">2025-05-10 11:22</span></p>
-              <p><strong class="hacker-name">Yliken</strong> got <span class="user">user</span> in <em>Airbind</em></p>
-            </div>
-          </div>
-        </div>
-      </section>
+		  <div class="stat">
+		    <h3>VMs</h3>
+		    <p><%= request.getAttribute("totalVMs") != null ? request.getAttribute("totalVMs") : "..." %></p>
+		  </div>
+		  <div class="stat">
+		    <h3>Hackers</h3>
+		    <p><%= request.getAttribute("totalUsers") != null ? request.getAttribute("totalUsers") : "..." %></p>
+		  </div>
+		  <div class="stat">
+		    <h3>Writeups</h3>
+		    <p><%= request.getAttribute("totalWriteups") != null ? request.getAttribute("totalWriteups") : "..." %></p>
+		  </div>
+		</section>
+		
+		<h2>Logs<span class="dot">.</span></h2>
+		<br>
+        <div id="logs-container"></div>
+        
     </main>
     <script src="<%= request.getContextPath() %>/js/jsIndex.jsp"></script>
+    <script>
+	 	// Cargar logs desde el servlet JSON y añadirlo al DOM
+	    fetch('<%= request.getContextPath() %>/logsJson')
+	      .then(response => response.json())
+	      .then(logs => {
+	        document.getElementById('logs-container').innerHTML = buildLogsHTML(logs);
+	      })
+	      .catch(error => {
+	        console.error('Error cargando logs:', error);
+	        document.getElementById('logs-container').innerHTML = '<p>Error cargando logs.</p>';
+	      });
+    </script>
 </body>
 </html>
