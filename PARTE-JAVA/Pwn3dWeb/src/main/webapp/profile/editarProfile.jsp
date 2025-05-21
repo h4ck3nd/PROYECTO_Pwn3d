@@ -50,6 +50,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Mi Perfil</title>
+  <link rel="icon" href="<%= request.getContextPath() %>/img/logo-flag-white.ico">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     body {

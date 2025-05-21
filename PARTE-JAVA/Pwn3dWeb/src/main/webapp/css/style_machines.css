@@ -5,7 +5,8 @@
     --color-background-light: #ffffff;
     --color-text-dark: #ffffff;
     --color-text-light: #141414;
-    --color-header-footer-bg: #1e1e1e;
+    /*--color-header-footer-bg: #1e1e1e;*/ /* COLORES HEADER, HEADER MAQUINAS Y FOOTER */
+    --color-header-footer-bg: #260045; /* COLORES HEADER, HEADER MAQUINAS Y FOOTER (VERSION MORADA) */
     --color-header-footer-text: #ffffffa4;
     --color-link-text: #ffffff;
     --color-link-hover: #86d6fc;
@@ -20,18 +21,20 @@
     --color-button-reset: #c8cbcf;
     --color-accent-info: #ec0725;
     --color-accent-danger: #ec0725;
-    --color-filter-bg: #2b2b2b;
+    /*--color-filter-bg: #2b2b2b;*/ /* FILTRO, BOTON ADMIN Y BARRA DE BUSQUEDA */
+    --color-filter-bg: #280046; /* FILTRO, BOTON ADMIN Y BARRA DE BUSQUEDA (VERSION MORADA) */
   --color-filter-hover-bg: #3a3a3a;
   --color-filter-text: #dddddd;
   --color-filter-shadow: rgba(0, 0, 0, 0.5);
   /*--color-filter-glow: #5efcd433;*/ /* Verde agua translúcido */
   --color-filter-glow: #edabff;
-  --color-search-glow: #bf3ee7; /* Azul elegante translúcido */
+  --color-search-glow: #bf3ee7; /* morado elegante translúcido */
   --color-search-text: #ddd;
     --color-button-hover: #3fa8f4a8;
     --color-form-bg: #1e2125;
     --color-form-border: #cbc7c7;
-    --color-submit-bg: #2e2e2e; /* Fondo oscuro principal */
+    /*--color-submit-bg: #2e2e2e;*/ /* BOTON ENVIAR NUEVA VM */
+    --color-submit-bg: #280046; /* BOTON ENVIAR NUEVA VM (VERSION MORADA) */
     --color-submit-hover-bg: #444; /* Más claro al pasar el mouse */
     --color-submit-text: #e0e0e0; /* Texto gris claro */
     --color-submit-shadow: rgba(0, 0, 0, 0.4); /* Sombra sutil */
@@ -84,7 +87,7 @@
     --color-total-writeups: #3fa8f4a8;
     --color-link-writeup: #b2b5b9;
     --color-link-writeup-hover: #FFFF99;
-    --color-link-writeup-title: #2575a7;
+    --color-link-writeup-title: #6901b7;
     --color-text-form-light: #aaaaaa;
     --color-card-difi-os-bg: #1e2125;
     --color-bg-card-generic: #141414;
@@ -3221,11 +3224,11 @@ header {
   align-items: center;
   justify-content: flex-start;
   gap: 12px;
-  background: linear-gradient(90deg, rgba(128, 0, 255, 0.15), rgba(75, 0, 130, 0.15)); /* tonos morados */
+  background: linear-gradient(90deg, rgba(180, 0, 180, 0.2), rgba(120, 0, 160, 0.2)); /* fucsia más suave */
   padding: 8px 16px;
   border-radius: 8px;
   max-width: fit-content;
-  box-shadow: 0 4px 8px rgba(128, 0, 255, 0.1); /* sombra morada */
+  box-shadow: 0 4px 8px rgba(180, 0, 180, 0.15); /* sombra fucsia */
   user-select: none;
   cursor: default;
   max-width: 100%;

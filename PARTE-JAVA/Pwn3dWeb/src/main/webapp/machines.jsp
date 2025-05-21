@@ -150,8 +150,8 @@
 			              </select>
 			            </div>
 			            <div class="wizard-vm-field">
-			              <label for="wizard-vm-url">VM URL</label>
-			              <input id="wizard-vm-url" name="URL" type="url" pattern="https?://.+" placeholder="URL de VM pública" required />
+			              <label for="wizard-vm-url">VM URL (HTTPS)</label>
+			              <input id="wizard-vm-url" name="URL" type="url" pattern="https?://.+" placeholder="URL de VM pública (Drive, Mega...)" required />
 			            </div>
 			          </div>
 			
@@ -170,8 +170,8 @@
 			          <!-- Writeup y Contacto -->
 			          <div class="wizard-vm-field-group">
 			            <div class="wizard-vm-field">
-			              <label for="wizard-writeup-url">Writeup URL</label>
-			              <input id="wizard-writeup-url" name="Solution" type="url" pattern="https?://.+" placeholder="URL del writeup" />
+			              <label for="wizard-writeup-url">Writeup URL (HTTPS)</label>
+			              <input id="wizard-writeup-url" name="Solution" type="url" pattern="https?://.+" placeholder="URL del writeup (Word, GitHub, Drive...)" style="font-size: 1rem !important;" />
 			            </div>
 			            <div class="wizard-vm-field">
 			              <label for="wizard-contact">Contacto</label>

@@ -1,0 +1,99 @@
+body {
+      background-color: #121212;
+      color: #ccc;
+      font-family: 'Press Start 2P', monospace;
+      scroll-behavior: smooth;
+    }
+
+    .navbar {
+      background-color: #1a1a1a;
+      border-bottom: 2px solid #800080;
+    }
+
+    .navbar a {
+      color: #d35eff !important;
+      margin-right: 15px;
+    }
+
+    h1, h2, h3 {
+      color: #d35eff;
+    }
+
+    .section {
+      margin-top: 100px;
+      padding: 60px 0;
+    }
+
+    .hero {
+      background: radial-gradient(circle, #1a001a, #0d001a);
+      padding: 100px 20px;
+      text-align: center;
+      color: #fff;
+      box-shadow: inset 0 0 50px #80008080;
+    }
+
+    .hero h1 {
+      font-size: 24px;
+      color: #d35eff;
+      text-shadow: 0 0 10px #d35eff;
+    }
+
+    .btn-purple {
+      background-color: #800080;
+      border: none;
+      color: white;
+    }
+
+    .btn-purple:hover {
+      background-color: #a64ca6;
+    }
+
+    .screenshot {
+      width: 100%;
+      border: 2px solid #800080;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #800080;
+      margin: 20px 0;
+      cursor: pointer;
+    }
+
+    .card-dark {
+      background-color: #1e1e1e;
+      border: 1px solid #800080;
+      box-shadow: 0 0 15px #4b0054;
+    }
+
+    .card-dark i {
+      font-size: 32px;
+      color: #d35eff;
+      margin-bottom: 20px;
+    }
+
+    footer {
+      background-color: #1a1a1a;
+      padding: 30px 0;
+      text-align: center;
+      color: #888;
+      margin-top: 60px;
+    }
+
+    a.btn {
+      font-size: 12px;
+    }
+
+    .col-md-4 p {
+      color: gray;
+    }
+
+    .col-md-4 h4 {
+      color: #cbc6cc;
+    }
+    .cursor {
+	  color: #d35eff;
+	  animation: blink 1s step-end infinite;
+	}
+	
+	@keyframes blink {
+	  from, to { opacity: 0; }
+	  50% { opacity: 1; }
+	}

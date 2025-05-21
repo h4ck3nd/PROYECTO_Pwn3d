@@ -7,7 +7,7 @@
 
     <!-- Configuración de la página de inicio (welcome page) -->
     <welcome-file-list>
-        <welcome-file>login-register/login.jsp</welcome-file> <!-- Aquí pones el archivo que quieres que se abra primero -->
+        <welcome-file>welcome.jsp</welcome-file> <!-- Aquí pones el archivo que quieres que se abra primero -->
     </welcome-file-list>
 
 </web-app>

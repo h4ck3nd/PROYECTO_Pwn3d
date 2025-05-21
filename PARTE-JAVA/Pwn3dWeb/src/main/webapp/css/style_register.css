@@ -1,0 +1,276 @@
+* {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background-color: #1a1a1a;
+      color: #ffffff;
+      font-family: 'Press Start 2P', monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* LADO IZQUIERDO */
+    .container {
+      display: flex;
+      width: 100%;
+    }
+    
+    .left-panel {
+      flex: 0.7;
+      display: flex;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
+      padding: 4rem;
+      margin-right: 0;
+    }
+
+    .left-content {
+      text-align: center;
+    }
+
+    .page-title {
+      font-size: 1rem;
+      color: #ffffff;
+      margin-bottom: 1.5rem;
+    }
+
+    .image-box img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .image-box {
+      position: relative;
+      width: 100%;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    .matrix-container {
+      position: absolute;
+      top: 20.5%;
+      left: 20.5%;
+      width: 59%;
+      height: 49%;
+      background-color: transparent;
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    #matrixCanvasText {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* PANEL DERECHO */
+    .right-panel {
+      flex: 0.9;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding-top: 2rem;
+    }
+
+    .register-container {
+      background-color: #1f1b29; /* oscuro con tintes morados */
+  	  border: 3px solid #7e57c2; /* borde morado suave */
+      padding: 2rem;
+      border-radius: 4px;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+      width: 400px;
+      max-width: 95%;
+      text-align: center;
+      color: #dddcef;
+    }
+	
+	.register-container h1 {
+	  font-size: 0.85rem;
+	  margin-bottom: 4rem;
+	  margin-top: -4rem;
+	  color: #b695f6;
+	  text-shadow: 0 0 8px #8e7de6;
+	}
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    label {
+      font-size: 0.6rem;
+      text-align: left;
+      margin-bottom: 0.3rem;
+      color: #b9a9db;
+    }
+
+    input[type="text"],
+	input[type="password"],
+	input[type="email"] {
+	  padding: 0.6rem;
+	  font-family: 'Press Start 2P', monospace;
+	  font-size: 0.75rem;
+	  color: #e1dbff;
+	  background-color: #2b2440;
+	  border: 2px solid #5e4c9a;
+	  border-radius: 4px;
+	  outline: none;
+	  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+	}
+	
+    input[type="text"]::placeholder,
+	input[type="password"]::placeholder,
+	input[type="email"]::placeholder {
+	  color: #6f5f9eaa;
+	  opacity: 0.85;
+	  font-style: italic;
+	}
+	
+	input[type="text"]:focus,
+	input[type="password"]:focus,
+	input[type="email"]:focus {
+	  border-color: #b695f6;
+	  box-shadow: 0 0 8px #b695f6aa;
+	  background-color: #372f57;
+	  color: #fff;
+	}
+	
+	.password-wrapper {
+	  position: relative;
+	}
+	
+	.password-wrapper input[type="password"],
+	.password-wrapper input[type="text"] {
+	  padding-right: 2.8rem;
+	  width: 100%;
+	}
+	
+	.toggle-password {
+	  position: absolute;
+	  right: 8px;
+	  top: 50%;
+	  transform: translateY(-50%);
+	  cursor: pointer;
+	  color: #b695f6;
+	  transition: color 0.3s ease;
+	}
+	
+	.toggle-password:hover {
+	  color: #d9cfff;
+	}
+	
+	.secure-btn {
+	  font-family: 'Press Start 2P', monospace;
+	  font-size: 0.65rem;
+	  background: linear-gradient(135deg, #7b5cff, #a974ff);
+	  border: none;
+	  color: #fff;
+	  padding: 0.8rem 1rem;
+	  border-radius: 6px;
+	  cursor: pointer;
+	  box-shadow: 0 0 10px #a974ffaa;
+	  transition: background 0.3s ease, box-shadow 0.3s ease;
+	  user-select: none;
+	  margin-bottom: 1rem;
+	}
+	
+	.secure-btn:hover {
+	  background: linear-gradient(135deg, #a974ff, #7b5cff);
+	  box-shadow: 0 0 18px #d2b7ff;
+	}
+	
+    input[type="submit"] {
+	  font-family: 'Press Start 2P', monospace;
+	  font-size: 0.75rem;
+	  padding: 0.9rem 0;
+	  background-color: #8e7de6;
+	  border: 2px solid #6a53c0;
+	  border-radius: 6px;
+	  color: #f4ebff;
+	  cursor: pointer;
+	  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+	  text-transform: uppercase;
+	  letter-spacing: 1px;
+	  box-shadow: 0 0 10px #7b5cffaa;
+	}
+	
+	input[type="submit"]:hover {
+	  background-color: #b695f6;
+	  box-shadow: 0 0 18px #b695f6cc;
+	  color: #fff;
+	}
+	
+	.footer {
+	  margin-top: 2rem;
+	  font-size: 0.55rem;
+	  color: #7e72c8;
+	  text-shadow: 0 0 3px #4f47a3;
+	  user-select: none;
+	}
+
+    /* RESPONSIVE */
+    @media (max-width: 800px) {
+      body {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    
+      .container {
+        flex-direction: column;
+        height: auto;
+      }
+    
+      .left-panel {
+        border-right: none;
+        border-bottom: 3px solid #ffffff;
+        padding: 1rem;
+        height: auto;
+      }
+    
+      .right-panel {
+        height: auto;
+        padding: 1rem;
+      }
+    
+      .matrix-container {
+        top: 18%;
+        left: 15%;
+        width: 70%;
+        height: 50%;
+      }
+    }
+    
+	.btn-login-small {
+	  font-size: 0.6rem;
+	  text-decoration: none;
+	  color: #9c8edd;
+	  transition: color 0.3s ease;
+	}
+	
+	.btn-login-small:hover {
+	  color: #d2b7ff;
+	}
+
+	.eye-icon {
+	  width: 18px;
+	  height: 18px;
+	  display: inline-block;
+	}
+	
+	.middle-image {
+        opacity: 0.1;
+    }
+    
+    a[href*="welcome.jsp"]:hover {
+  background-color: #2a0038;
+  color: #ffffff;
+  box-shadow: 0 0 10px #d35effaa;
+  transform: scale(1.02);
+}
