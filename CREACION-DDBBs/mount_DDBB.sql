@@ -125,6 +125,7 @@ CREATE TABLE flags (
 
 -- TABLA ImgPath (FOTO DE PERFIL)
 
+DROP TABLE IF EXISTS imgProfile;
 CREATE TABLE imgProfile (
     id SERIAL PRIMARY KEY,
     user_id INT UNIQUE NOT NULL,
@@ -134,6 +135,7 @@ CREATE TABLE imgProfile (
 
 -- TABLA PARA EL PERFIL (SISTEMA LINKS)
 
+DROP TABLE IF EXISTS editProfile;
 CREATE TABLE editProfile (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL,
