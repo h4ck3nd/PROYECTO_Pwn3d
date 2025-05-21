@@ -1,5 +1,7 @@
 package model;
 
+import java.sql.Timestamp; // Asegúrate de importar esto arriba
+
 public class Flag {
     private int id;
     private int idUser;
@@ -9,6 +11,8 @@ public class Flag {
     private String flag;
     private boolean firstFlagUser;
     private boolean firstFlagRoot;
+    private Timestamp createdAt;
+    private String imgSrc;
 
     // Constructor completo
     public Flag(int id, int idUser, String vmName, String user, String tipoFlag, String flag,
@@ -22,7 +26,23 @@ public class Flag {
         this.firstFlagUser = firstFlagUser;
         this.firstFlagRoot = firstFlagRoot;
     }
+    
+    public String getImgSrc() {
+        return imgSrc;
+    }
 
+    public void setImgSrc(String imgSrc) {
+        this.imgSrc = imgSrc;
+    }
+    
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+    
     // Constructor vacío
     public Flag() {
         // Requerido para frameworks o instanciación manual

@@ -85,7 +85,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("userId", user.getId());
 
             // 8. Redirigir al inicio tras login exitoso
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("stats");
 
         } else {
             // Si las credenciales no son válidas, verificar si el usuario existe al menos por nombre

@@ -48,6 +48,7 @@ public class SecurityFilter implements Filter {
                 || path.startsWith("/welcome.jsp")
                 || path.startsWith("/css")
                 || path.startsWith("/js")
+                || path.startsWith("/stats")
                 || path.startsWith("/register")) {
             chain.doFilter(request, response);
             return;
