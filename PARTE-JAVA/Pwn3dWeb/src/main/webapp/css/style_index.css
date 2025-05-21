@@ -50,7 +50,23 @@
       font-family: 'Press Start 2P', monospace !important;
       line-height: 1.75rem;
     }
+	
+	/* Estilos para Webkit (Chrome, Safari, Edge) */
+body::-webkit-scrollbar {
+    width: 12px; /* Ancho de la barra de desplazamiento */
+}
 
+body::-webkit-scrollbar-thumb {
+    background-color: #444444; /* Color del "dedo" de la barra de desplazamiento */
+    border-radius: 10px;
+    border: 2px solid #222222; /* Fondo alrededor del "dedo" */
+}
+
+body::-webkit-scrollbar-track {
+    background: #222222; /* Fondo de la barra de desplazamiento */
+    border-radius: 10px;
+}
+	
     .app {
       display: flex;
       min-height: 100vh;
@@ -123,12 +139,15 @@
       position: fixed;
       top: 0;
       left: 0;
-      width: 240px;
+      width: 340px;
       height: 100vh;
       background-color: var(--color-sidebar-bg);
       overflow-y: auto;
       z-index: 1000;
       transition: transform 0.3s ease;
+      align-items: center;
+      text-align: center;
+      align-content: center;
     }
 
     /* Menú abierto */
@@ -142,13 +161,14 @@
     }
 
     .sidebar-wrapper.closed ~ .main-content {
-      margin-left: 0;
+      margin-left: 10rem;
+      margin-right: 10rem;
     }
 
     .main-content {
       flex: 1;
       padding: 40px;
-      margin-left: 240px;
+      margin-left: 340px;
     }
 
     /* En pantallas pequeñas, el contenido debe ajustarse */

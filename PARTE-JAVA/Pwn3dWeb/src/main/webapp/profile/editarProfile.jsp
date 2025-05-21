@@ -6,32 +6,43 @@
 <%@ page import="model.EditProfile" %>
 <%@ page import="utils.JWTUtil" %>
 <%
-    Integer userId = null;
-    try {
-        javax.servlet.http.Cookie[] cookies = request.getCookies();
-        String token = null;
-        if (cookies != null) {
-            for (javax.servlet.http.Cookie cookie : cookies) {
-                if ("token".equals(cookie.getName())) {
-                    token = cookie.getValue();
-                    break;
-                }
-            }
-        }
-        if (token == null || !JWTUtil.validateToken(token)) {
-            response.sendRedirect(request.getContextPath() + "/logout");
-            return;
-        }
-        userId = JWTUtil.getUserIdFromToken(token);
-        if (userId == null) {
-            response.sendRedirect(request.getContextPath() + "/logout");
-            return;
-        }
-    } catch (Exception e) {
-        e.printStackTrace();
-        response.sendRedirect(request.getContextPath() + "/logout");
-        return;
-    }
+	String token = null; // Declarada fuera para ser accesible globalmente
+	Integer userId = null;
+	String nombreUsuario = "Invitado";
+	
+	try {
+	    javax.servlet.http.Cookie[] cookies = request.getCookies();
+	    if (cookies != null) {
+	        for (javax.servlet.http.Cookie cookie : cookies) {
+	            if ("token".equals(cookie.getName())) {
+	                token = cookie.getValue();
+	                break;
+	            }
+	        }
+	    }
+	
+	    if (token == null || !JWTUtil.validateToken(token)) {
+	        response.sendRedirect(request.getContextPath() + "/logout");
+	        return;
+	    }
+	
+	    userId = JWTUtil.getUserIdFromToken(token);
+	    if (userId == null) {
+	        response.sendRedirect(request.getContextPath() + "/logout");
+	        return;
+	    }
+	
+	    // Extraer el nombre desde los claims del token
+	    Map<String, Object> claims = JWTUtil.getAllClaims(token);
+	    if (claims != null && claims.get("usuario") != null) {
+	        nombreUsuario = (String) claims.get("usuario");
+	    }
+	
+	} catch (Exception e) {
+	    e.printStackTrace();
+	    response.sendRedirect(request.getContextPath() + "/logout");
+	    return;
+	}
 
     ImgProfileDAO imgDao = new ImgProfileDAO();
     ImgProfile img = imgDao.getImgProfileByUserId(userId);
@@ -45,6 +56,7 @@
     java.util.List<EditProfile> socialLinks = dao.getLinksByUserId(userId);
     dao.cerrarConexion();
 %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,512 +64,7 @@
   <title>Mi Perfil</title>
   <link rel="icon" href="<%= request.getContextPath() %>/img/logo-flag-white.ico">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <style>
-    body {
-  margin: 0;
-  font-family: 'Press Start 2P', monospace;
-  font-size: 10px; /* Necesario porque la fuente es grande */
-  line-height: 0.75rem;
-  background-color: #0f0f11;
-  color: #eee;
-  display: flex;
-  justify-content: center;
-  padding: 2rem;
-}
-.welcome-card {
-  display: flex;
-  background-color: #1e1e1e;
-  border: 2px solid #333;
-  border-radius: 12px;
-  box-shadow: 0 0 12px #000;
-  padding: 2rem;
-  gap: 2rem;
-  margin: 2rem auto;
-  width: 95%;
-}
-
-/* Lado izquierdo limpio, sin fondo total */
-.profile-left {
-  flex: 2.2;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  align-items: center;
-}
-
-/* Avatar */
-.avatar-box {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem; /* Añade espacio entre la imagen y el botón */
-}
-
-.avatar-image {
-  width: 120px;
-  height: 120px;
-  border-radius: 8px;
-  border: 2px solid #444;
-  margin-bottom: 0.5rem;
-}
-
-/* Lado derecho */
-.profile-right {
-  flex: 2.6;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-/* Tarjeta de eliminar cuenta (fuera de la sección principal) */
-.full-width {
-  max-width: 100px;
-  margin: 2rem auto;
-  padding: 1.5rem;
-  border-radius: 12px;
-  background-color: #1e1e1e;
-  box-shadow: 0 0 10px #000;
-  border: 2px solid #333;
-}
-
-.container {
-  width: 100%;
-  max-width: 800px;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.card {
-  background: #1b1b1e;
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 0 20px rgba(255, 0, 128, 0.1);
-  width: 80%;
-  gap: 50px;
-  line-height: 1.4rem;
-}
-
-.card.danger {
-  border: 1px solid #ff4c4c;
-  background: #1e1113;
-  max-width: 95% !important;
-  font-size: 1rem !important;
-}
-
-.avatar-container {
-  text-align: center;
-}
-
-.avatar-container img {
-  width: 100px;
-  border-radius: 50%;
-  margin-bottom: 1rem;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-}
-
-.form-group label {
-  margin-bottom: 0.5rem;
-  color: #aaa;
-}
-
-input, select {
-  background-color: #2a2a2d;
-  border: none;
-  border-radius: 8px;
-  padding: 0.8rem;
-  color: #fff;
-  margin-top: 15px;
-}
-
-.card {
-  background: #1b1b1e;
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 0 20px rgba(255, 0, 128, 0.1);
-  margin-bottom: 2rem;
-  text-align: center;
-}
-
-.card h2 {
-  margin-bottom: 1.5rem;
-  font-size: 1.1rem;
-  color: #ff4dd8;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-}
-
-.btn-glow {
-  padding: 0.8rem 1.5rem;
-  background: #ff4dd8;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(255, 77, 216, 0.6);
-}
-
-.btn-glow:hover {
-  background: #e03cc0;
-  box-shadow: 0 0 20px rgba(255, 77, 216, 0.8);
-}
-
-input:focus, select:focus {
-  outline: 2px solid #ff4dd8;
-}
-
-.checkbox-label {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin: 1rem 0;
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-
-.btn-glow {
-  padding: 0.8rem 1.5rem;
-  background: #ff4dd8;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: all 0.3s;
-  box-shadow: 0 0 10px rgba(255, 77, 216, 0.6);
-}
-
-.btn-password {
-  margin-top: 10px;
-}
-
-.btn-glow:hover {
-  background: #e03cc0;
-  box-shadow: 0 0 20px rgba(255, 77, 216, 0.8);
-}
-
-.btn-glow.delete {
-  background: #ff4c4c;
-  box-shadow: 0 0 10px rgba(255, 77, 77, 0.6);
-}
-
-.btn-glow.delete:hover {
-  background: #e03a3a;
-}
-
-/* Base: fondo oscuro estilo retro */
-.popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(10, 10, 20, 0.8);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-}
-
-#closePopup,
-#saveLink.btn-glow {
-  font-family: 'Press Start 2P', monospace !important;
-  font-size: 0.75rem;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-
-
-/* Tarjeta del popup */
-.popup-content {
-  background: linear-gradient(145deg, #1b1b2f, #222);
-  color: #ccc;
-  border: 1px solid #2d2d4d;
-  border-radius: 12px;
-  padding: 20px 24px;
-  width: 100%;
-  max-width: 420px;
-  box-shadow: 0 0 18px #000;
-  position: relative;
-}
-
-/* Cabecera */
-.popup-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #333;
-  margin-bottom: 15px;
-}
-
-.popup-header h3 {
-  margin: 0;
-  color: #e0b0ff; /* morado suave */
-  font-size: 1.2rem;
-  text-shadow: 0 0 3px #a64ef3;
-}
-
-#closePopup {
-  background: none;
-  border: none;
-  color: #888;
-  font-size: 20px;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-#closePopup:hover {
-  color: #e0b0ff;
-}
-
-/* Campos del formulario */
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 6px;
-  color: #aaa;
-  font-size: 0.9rem;
-  align-items: center;
-}
-
-/* Estilo general del label */
-.checkbox-label {
-  display: flex;
-  align-items: center;      /* Centra verticalmente */
-  justify-content: center;  /* Centra horizontalmente */
-  gap: 0.5rem;
-  font-size: 0.8rem;
-  cursor: pointer;
-  width: 100%;              /* Ocupa todo el ancho del contenedor padre */
-}
-
-/* Oculta el checkbox nativo */
-.checkbox-label input[type="checkbox"] {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #ff4dd8;
-  border-radius: 4px;
-  background-color: #111;
-  position: relative;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: grid;
-  place-content: end; /* Centra el contenido */
-
-}
-
-/* Marca de verificación */
-.checkbox-label input[type="checkbox"]::after {
-  content: '';
-  width: 10px;
-  height: 15px;
-  border-right: 2px solid #ff4dd8;
-  border-bottom: 2px solid #ff4dd8;
-  transform: rotate(45deg);
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-/* Mostrar el tick cuando está activado */
-.checkbox-label input[type="checkbox"]:checked::after {
-  opacity: 1;
-}
-
-.form-group input[type="text"] {
-  width: 100%;
-  padding: 8px 10px;
-  background: #111;
-  border: 1px solid #2e2e48;
-  border-radius: 6px;
-  color: #e0e0e0;
-  font-size: 0.95rem;
-  transition: border-color 0.2s ease;
-}
-.form-group input[type="text"]:focus {
-  border-color: #a64ef3;
-  outline: none;
-}
-
-/* Icon selector wrapper */
-.selected-icon {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: #161622;
-  padding: 8px;
-  border: 1px solid #333;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: border-color 0.2s ease;
-}
-.selected-icon:hover {
-  border-color: #a64ef3;
-}
-.selected-icon img {
-  width: 28px;
-  height: 28px;
-  object-fit: cover;
-  border-radius: 4px;
-}
-
-/* Selector de iconos (desplegable) */
-.icon-selector {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 40px);
-  gap: 10px;
-  margin-top: 10px;
-  padding-top: 5px;
-}
-
-.icon-selector img {
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  border-radius: 6px;
-  padding: 4px;
-  background: #2d2d4d;
-  transition: all 0.2s ease;
-  border: 2px solid transparent;
-}
-
-.icon-selector img:hover {
-  background: #3a3a5c;
-}
-
-.icon-selector img.selected {
-  border-color: #a64ef3;
-  background: #1c1c30;
-}
-
-/* Botón de guardar */
-#saveLink.btn-glow {
-  width: 100%;
-  padding: 10px;
-  background: #a64ef3;
-  color: #fff;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  text-shadow: 0 0 2px #000;
-  cursor: pointer;
-  box-shadow: 0 0 10px #a64ef3a6;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
-}
-
-#saveLink.btn-glow:hover {
-  background: #c77aff;
-  box-shadow: 0 0 16px #d9aaff;
-}
-
-/* Ocultar elementos */
-.hidden {
-  display: none !important;
-}
-/* ESTILOS PARA EL POPUP DE ELIMINAR CUENTA */
-    
-    @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap');
-    .neon-popup {
-        font-family: 'Fira Code', monospace;
-        font-weight: 600;
-        font-size: 1rem;
-        text-align: center;
-    }
-    .swal2-dark-popup {
-	    box-shadow: 0 0 20px rgba(229, 83, 83, 0.7);
-	    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-	    border-radius: 12px;
-	}
-	.alert-danger {
-		color: red;
-	}
-	.alert-success {
-		color: green;
-	}
-	
-	 #socialLinksContainer {
-    display: flex;
-    flex-direction: column; /* columna vertical */
-    gap: 15px; /* separación entre links */
-  }
-
-  .form-group {
-    /*background: #222;*/
-    padding: 10px;
-    border-radius: 8px;
-    color: #eee;
-  }
-
-  .form-group > label {
-    font-weight: bold;
-    margin-bottom: 6px;
-    display: block;
-  }
-
-  .link-content a {
-  color: #ccc;
-  flex-grow: 1;
-  text-decoration: none;
-  white-space: nowrap;        /* Evita que el texto se rompa en varias líneas */
-  overflow: hidden;           /* Oculta el desbordamiento */
-  text-overflow: ellipsis;    /* Muestra "..." si el texto es muy largo */
-  font-size: clamp(6px, 1vw, 12px); /* Tamaño adaptable, nunca menor a 12px ni mayor a 16px */
-}
-
-
-  .link-content img {
-    width: 30px;
-    height: 30px;
-    object-fit: cover;
-    border-radius: 5px;
-  }
-
-  .link-content a {
-    color: #ccc;
-    flex-grow: 1;
-    text-decoration: none;
-    word-break: break-all;
-  }
-
-  .btn-delete {
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-    margin-left: 10px;
-  }
-
-  .btn-delete:hover {
-    background-color: #c0392b;
-  }
-	
-  </style>
+  <link rel="stylesheet" href="<%= request.getContextPath() %>/css/cssEditProfile.jsp">
 </head>
 <!-- FUENTE DE LETRA PARA EL POPUP DE ELIMINAR CUENTA -->
   
@@ -579,6 +86,122 @@ input:focus, select:focus {
   <p>Último inicio: <%= request.getAttribute("ultimo_inicio") %></p>
   <p>Identidad pública: <%= request.getAttribute("identity") %></p>
    -->
+   
+   <!-- MENU DE HABURGUESA -->
+
+    <button id="hamburger" class="menu-toggle" style="display: none;">☰</button>
+  
+    <div id="sidebarWrapper" class="sidebar-wrapper open">
+        <aside class="sidebar">
+          <!-- Botón de cerrar -->
+          <button id="closeMenu" class="menu-close">❌</button>
+          <div class="profile">
+            <img src="<%= imgSrc %>" alt="Avatar" class="avatar-image" />
+            <p style="font-size: 1rem;"><strong>Username:</strong> <%= nombreUsuario %></p>
+          </div>
+          <hr style="width: 18rem;">
+      <nav class="menu">
+      <!-- Seccion Usuarios -->
+      	<a href="<%= request.getContextPath() %>/perfil">
+      	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Editar Perfil">
+		  <!-- Cabeza (círculo) -->
+		  <circle cx="12" cy="7" r="4" />
+		  
+		  <!-- Hombros (curva) -->
+		  <path d="M5 21c0-4 14-4 14 0" />
+		
+		  <!-- Tuerca (engranaje) -->
+		  <g transform="translate(18, 10) scale(0.6)" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round">
+		    <circle cx="0" cy="0" r="4" />
+		    <!-- Dientes -->
+		    <line x1="0" y1="-6" x2="0" y2="-4" />
+		    <line x1="0" y1="6" x2="0" y2="4" />
+		    <line x1="-6" y1="0" x2="-4" y2="0" />
+		    <line x1="6" y1="0" x2="4" y2="0" />
+		    <line x1="-4.2" y1="-4.2" x2="-3" y2="-3" />
+		    <line x1="4.2" y1="4.2" x2="3" y2="3" />
+		    <line x1="-4.2" y1="4.2" x2="-3" y2="3" />
+		    <line x1="4.2" y1="-4.2" x2="3" y2="-3" />
+		    <!-- Círculo interior -->
+		    <circle cx="0" cy="0" r="1.5" fill="currentColor" />
+		  </g>
+		</svg>
+      	Ajustes Cuenta
+      	</a>
+        <a href="<%= request.getContextPath() %>/stats">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" role="img" aria-label="Dashboard Icon">
+		  <!-- Contorno general -->
+		  <rect x="2" y="3" width="20" height="18" rx="2" ry="2" />
+		  
+		  <!-- Barra 1 (más baja) -->
+		  <rect x="6" y="16" width="3" height="5" />
+		  <!-- Barra 2 (media) -->
+		  <rect x="11" y="12" width="3" height="9" />
+		  <!-- Barra 3 (más alta) -->
+		  <rect x="16" y="8" width="3" height="13" />
+		</svg> 
+        Dashboard
+        </a>
+        <a href="<%= request.getContextPath() %>/machines.jsp" style="color: #b600ff; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
+		 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 32 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" role="img" aria-label="Terminal Icon">
+		  <!-- Contorno de la terminal -->
+		  <rect x="1" y="1" width="30" height="22" rx="2" ry="2"/>
+		  
+		  <!-- Línea de prompt -->
+		  <polyline points="6 12 10 16 6 20" />
+		  
+		  <!-- Línea horizontal que representa texto -->
+		  <line x1="14" y1="16" x2="26" y2="16" />
+		</svg>
+		  Machines
+		</a>
+		
+		<a href="#" style="color: #b600ff; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
+		  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" viewBox="0 0 24 24" role="img" aria-label="Ranking icon">
+		    <path d="M17 4V2H7v2H2v3c0 2.76 2.24 5 5 5 .68 0 1.32-.14 1.91-.39A6.98 6.98 0 0 0 11 15.9V19H8v2h8v-2h-3v-3.1a6.98 6.98 0 0 0 2.09-4.29c.59.25 1.23.39 1.91.39 2.76 0 5-2.24 5-5V4h-5zM4 7V6h3v2.93c-1.72-.23-3-1.69-3-2.93zm16 0c0 1.24-1.28 2.7-3 2.93V6h3v1z"/>
+		  </svg>
+		  Ranking
+		</a>
+
+        <!--<hr/>  -->
+        <!-- Seccion de Autenticacion -->
+        <!--<a href="#">⚙️ Settings</a>-->
+        
+        <!-- BOTON/FORMULARIO PARA CERRAR SESION DEL USUSARIO ACTUAL POR ID -->
+        <br><br><br>
+        <form action="<%= request.getContextPath() %>/logout" method="get" style="display: inline;">
+		    <button type="submit" style="
+		        font-size: 0.7rem;
+		        background-color: #7e0036; /* morado-rojizo */
+		        border: none;
+		        padding: 6px 10px 6px 8px;
+		        color: #fff;
+		        font-family: 'Press Start 2P', monospace !important;
+		        cursor: pointer;
+		        border-radius: 6px;
+		        display: flex;
+		        align-items: center;
+		        gap: 6px;
+		    ">
+		        <!-- SVG de logout (simple y elegante) -->
+		        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+				  <path d="M16 17l1.41-1.41L13.83 12l3.58-3.59L16 7l-5 5 5 5z"/>
+				  <path d="M19 3H5c-1.1 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
+				</svg>
+		        Cerrar sesión
+		    </button>
+		</form>
+      </nav>
+      <!-- 
+      <div class="theme-toggle">
+        <button id="toggle-theme">Modo Claro 🌞</button>
+      </div>
+       -->
+    </aside>
+</div>
+
+<!-- PAGINA PRINCIPAL -->
+
   <div class="container">
 
     <!-- Tarjeta de bienvenida -->
@@ -770,7 +393,7 @@ input:focus, select:focus {
     <button id="saveLink" class="btn-glow yellow">Guardar</button>
   </div>
 </div>
-
+<script src="<%= request.getContextPath() %>/js/jsEditProfile.jsp"></script>
 <!-- PARA SCRIPT BONITO DE ELIMINAR CUENTA -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
@@ -893,42 +516,6 @@ input:focus, select:focus {
 	  });
 	});
 
-/* ELIMINAR CUENTA */
-
-document.getElementById('deleteBtn').addEventListener('click', function () {
-   Swal.fire({
-       title: '¿Eliminar cuenta?',
-       text: "Esta acción no se puede deshacer.",
-       icon: 'warning',
-       input: 'text',
-       inputPlaceholder: 'Escribe "delete account" para confirmar',
-       inputAttributes: {
-           autocapitalize: 'off',
-           autocorrect: 'off',
-           spellcheck: 'false'
-       },
-       showCancelButton: true,
-       confirmButtonColor: '#e55353',  // rojo vibrante pero elegante
-       cancelButtonColor: '#6c757d',   // gris neutro para cancelar
-       confirmButtonText: 'Sí, eliminar',
-       cancelButtonText: 'Cancelar',
-       background: '#1e1e2f',  // fondo oscuro azulado
-       color: '#f8f9fa',       // texto claro
-       customClass: {
-           popup: 'swal2-dark-popup'
-       },
-       preConfirm: (inputValue) => {
-           if (inputValue !== 'delete account') {
-               Swal.showValidationMessage('La frase no coincide. Intenta de nuevo.');
-           }
-       }
-   }).then((result) => {
-       if (result.isConfirmed) {
-           document.getElementById('deleteForm').submit();
-       }
-   });
-});
-
 /* ACTUALIZAR INFORMACION DEL PERFIL */
 
  document.getElementById("updateProfileBtn").addEventListener("click", function () {
@@ -955,24 +542,6 @@ document.getElementById('deleteBtn').addEventListener('click', function () {
     alert("Error en la conexión con el servidor.");
   });
 });
-
-/* SI NO COINCIDEN LAS CONTRASEÑAS */
- 
- document.getElementById('changePasswordForm').addEventListener('submit', function(e) {
-   const passNueva = document.getElementById('passNueva').value.trim();
-   const passConfirm = document.getElementById('passConfirm').value.trim();
-   if (passNueva !== passConfirm) {
-     e.preventDefault(); // detiene el envío
-     alert('La nueva contraseña y su confirmación no coinciden.');
-   }
- });
-
-/* VALIDACION IMG */
-
- document.getElementById('avatarInput').addEventListener('change', function () {
-     console.log("[DEBUG] Archivo seleccionado: ", this.files[0]);
-     document.getElementById('avatarForm').submit();
- });
 
 /* CAMBIAR A ESTADO PUBLICO */
 
