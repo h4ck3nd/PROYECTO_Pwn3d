@@ -33,7 +33,7 @@ public class MachineDAO {
 
         return eliminado;
     }
-    
+
     public Map<String, Integer> getMachinesCountByDifficulty() {
         Map<String, Integer> counts = new HashMap<>();
         ConexionDDBB db = new ConexionDDBB();
@@ -79,7 +79,7 @@ public class MachineDAO {
 
         return total;
     }
-    
+
     public Map<String, Integer> getHackedMachinesCountByDifficulty(int userId) {
         Map<String, Integer> counts = new HashMap<>();
         ConexionDDBB db = new ConexionDDBB();
@@ -140,7 +140,9 @@ public class MachineDAO {
     }
 
     private String normalizeDifficulty(String diff) {
-        if (diff == null) return "Unknown";
+        if (diff == null) {
+			return "Unknown";
+		}
         switch (diff.trim().toLowerCase()) {
             case "very-easy":
                 return "Very-Easy";
@@ -154,7 +156,7 @@ public class MachineDAO {
                 return diff;
         }
     }
-    
+
     public boolean actualizarMD5(String nombreMaquina, String nuevoMD5) {
         boolean exito = false;
         ConexionDDBB conexionDB = new ConexionDDBB();

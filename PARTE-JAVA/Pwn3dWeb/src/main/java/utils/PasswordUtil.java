@@ -14,7 +14,9 @@ public class PasswordUtil {
             StringBuilder hexString = new StringBuilder();
             for (byte b : hash) {
                 String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1) hexString.append('0');
+                if (hex.length() == 1) {
+					hexString.append('0');
+				}
                 hexString.append(hex);
             }
             return hexString.toString();
@@ -25,7 +27,9 @@ public class PasswordUtil {
 
     // Verificar que el password plano coincide con el hash SHA-256 almacenado
     public static boolean verifyPasswordSHA256(String passwordPlain, String hashedPassword) {
-        if (passwordPlain == null || hashedPassword == null) return false;
+        if (passwordPlain == null || hashedPassword == null) {
+			return false;
+		}
         String hashedInput = hashPasswordSHA256(passwordPlain);
         return hashedInput.equalsIgnoreCase(hashedPassword);
     }

@@ -1,16 +1,21 @@
 package controller;
 
-import dao.ImgProfileDAO;
-import model.ImgProfile;
-import utils.JWTUtil;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Paths;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+import dao.ImgProfileDAO;
+import model.ImgProfile;
+import utils.JWTUtil;
 
 @WebServlet("/subirAvatar")
 @MultipartConfig(

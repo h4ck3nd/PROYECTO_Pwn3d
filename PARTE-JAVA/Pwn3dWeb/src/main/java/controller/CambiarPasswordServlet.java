@@ -1,14 +1,18 @@
 package controller;
 
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import dao.UserDAO;
 import model.User;
 import utils.JWTUtil;
 import utils.PasswordUtil;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
-import java.io.IOException;
 
 @WebServlet("/cambiarPassword")
 public class CambiarPasswordServlet extends HttpServlet {

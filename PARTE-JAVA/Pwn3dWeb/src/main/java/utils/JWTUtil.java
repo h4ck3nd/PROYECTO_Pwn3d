@@ -89,7 +89,7 @@ public class JWTUtil {
                 .getBody()
                 .get("rol");
     }
-    
+
     public static Map<String, Object> getAllClaims(String token) {
         try {
             Claims claims = Jwts.parser()
@@ -102,7 +102,7 @@ public class JWTUtil {
             return null;
         }
     }
-    
+
     public static String getTokenIdentity(String token) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");

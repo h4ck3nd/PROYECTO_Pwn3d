@@ -1,10 +1,14 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import conexionDDBB.ConexionDDBB;
 import model.EditProfile;
-
-import java.sql.*;
-import java.util.*;
 
 public class EditProfileDAO {
     private Connection con;
@@ -33,7 +37,7 @@ public class EditProfileDAO {
         }
         return false;
     }
-    
+
     public boolean deleteLink(int id, int userId) {
         String sql = "DELETE FROM editProfile WHERE id = ? AND user_id = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -75,7 +79,7 @@ public class EditProfileDAO {
             e.printStackTrace();
         }
     }
-    
+
     public boolean updateEstado(int id, int userId, String nuevoEstado) {
         String sql = "UPDATE editProfile SET estado = ? WHERE id = ? AND user_id = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -88,7 +92,7 @@ public class EditProfileDAO {
             return false;
         }
     }
-    
+
     public boolean updateAllEstadosByUserId(int userId, String nuevoEstado) {
         String sql = "UPDATE editProfile SET estado = ? WHERE user_id = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {

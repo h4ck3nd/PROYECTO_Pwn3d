@@ -1,14 +1,18 @@
 package controller;
 
-import dao.MachineDAO;
-import utils.JWTUtil;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import dao.MachineDAO;
+import utils.JWTUtil;
 
 @WebServlet("/machines-stats-principal")
 public class MachineStatsPrincipalServlet extends HttpServlet {
@@ -60,7 +64,9 @@ public class MachineStatsPrincipalServlet extends HttpServlet {
         json.append("\"countsByDifficulty\":{");
         boolean first = true;
         for (Map.Entry<String, Integer> entry : countsByDifficulty.entrySet()) {
-            if (!first) json.append(",");
+            if (!first) {
+				json.append(",");
+			}
             json.append("\"").append(entry.getKey()).append("\":").append(entry.getValue());
             first = false;
         }
@@ -70,7 +76,9 @@ public class MachineStatsPrincipalServlet extends HttpServlet {
         json.append("\"hackedByDifficulty\":{");
         first = true;
         for (Map.Entry<String, Integer> entry : hackedByDifficulty.entrySet()) {
-            if (!first) json.append(",");
+            if (!first) {
+				json.append(",");
+			}
             json.append("\"").append(entry.getKey()).append("\":").append(entry.getValue());
             first = false;
         }

@@ -1,12 +1,15 @@
 package controller;
 
-import dao.MachineDAO;
+import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
-import java.io.IOException;
-import java.util.Map;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import dao.MachineDAO;
 
 @WebServlet("/machines-stats")
 public class MachineStatsServlet extends HttpServlet {

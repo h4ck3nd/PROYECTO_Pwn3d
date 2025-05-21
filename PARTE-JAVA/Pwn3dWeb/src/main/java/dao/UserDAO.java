@@ -1,5 +1,6 @@
 package dao;
 
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +9,7 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 import conexionDDBB.ConexionDDBB;
+import io.jsonwebtoken.io.IOException;
 import model.User;
 
 public class UserDAO {
@@ -23,12 +25,21 @@ public class UserDAO {
     public UserDAO(Connection con) {
         this.con = con;
     }
-
-    public boolean registerUser(User user) {
+    
+    // En un archivo nuevo o dentro de UserDAO.java (si es estático)
+    public enum RegisterResult {
+        SUCCESS,
+        DUPLICATE_USERNAME,
+        IO_ERROR,
+        SQL_ERROR
+    }
+    
+    public RegisterResult registerUser(User user) throws FileNotFoundException {
         String codeSecure = UUID.randomUUID().toString();
         user.setCodeSecure(codeSecure);
 
         String sql = "INSERT INTO users (nombre, apellido, email, usuario, password, code_secure) VALUES (?, ?, ?, ?, ?, ?)";
+
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
             stmt.setString(1, user.getNombre());
             stmt.setString(2, user.getApellido());
@@ -39,18 +50,33 @@ public class UserDAO {
 
             int rows = stmt.executeUpdate();
             if (rows > 0) {
-                // Crear archivo .txt con el código
                 String fileName = user.getUsuario() + "_codigo_seguro.txt";
                 try (PrintWriter writer = new PrintWriter(fileName)) {
                     writer.println("Tu código seguro para recuperar la contraseña:");
                     writer.println(codeSecure);
                 }
-                return true;
+                return RegisterResult.SUCCESS;
             }
-        } catch (SQLException | java.io.IOException e) {
+
+        } catch (org.postgresql.util.PSQLException e) {
+            if ("23505".equals(e.getSQLState())) {
+                if ("users_usuario_key".equals(e.getServerErrorMessage().getConstraint())) {
+                    return RegisterResult.DUPLICATE_USERNAME;
+                }
+            }
             e.printStackTrace();
+            return RegisterResult.SQL_ERROR;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return RegisterResult.IO_ERROR;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return RegisterResult.SQL_ERROR;
         }
-        return false;
+
+        return RegisterResult.SQL_ERROR;
     }
 
     public User getUserByCredentials(String usuario, String passwordHash) {
@@ -219,7 +245,7 @@ public class UserDAO {
         }
         return null;
     }
-    
+
     public boolean updateUserProfile(int userId, String nombre, String apellido, String email, String newPasswordHash) {
         String sql = newPasswordHash == null ?
             "UPDATE users SET nombre = ?, apellido = ?, email = ? WHERE id = ?" :
@@ -242,7 +268,7 @@ public class UserDAO {
             return false;
         }
     }
-    
+
     public boolean updatePassword(int userId, String newHashedPassword) {
         String sql = "UPDATE users SET password = ? WHERE id = ?";
         try (PreparedStatement stmt = con.prepareStatement(sql)) {
@@ -254,7 +280,7 @@ public class UserDAO {
             return false;
         }
     }
-    
+
     private User mapResultSetToUserWithPassword(ResultSet rs) throws SQLException {
         User user = new User();
         user.setId(rs.getInt("id"));

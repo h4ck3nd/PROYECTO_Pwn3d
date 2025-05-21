@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.UserDAO;
+import dao.UserDAO.RegisterResult;
 import model.User;
 
 @WebServlet("/register")
@@ -40,18 +41,31 @@ public class RegisterServlet extends HttpServlet {
         user.setPassword(passwordHash);
 
         UserDAO dao = new UserDAO();
-        if (dao.registerUser(user)) {
-            // Guardamos el código seguro en sesión para que register.jsp lo pueda usar
-            HttpSession session = request.getSession();
-            session.setAttribute("loginExit", "Registro Exitoso y Codigo descargado con Exito.");
-            session.setAttribute("codigoSeguro", user.getCodeSecure()); // <-- código seguro aquí
+        RegisterResult result = dao.registerUser(user);
+        HttpSession session = request.getSession();
 
-            // Redirigimos a register.jsp para que haga la descarga y muestre mensaje
-            response.sendRedirect("login-register/register.jsp");
-        } else {
-            HttpSession session = request.getSession();
-            session.setAttribute("loginError", "Parametros vacios o mal formados en el registro.");
-            response.sendRedirect("login-register/register.jsp");
+        switch (result) {
+            case SUCCESS:
+                session.setAttribute("loginExit", "Registro Exitoso y Código descargado con Éxito.");
+                session.setAttribute("codigoSeguro", user.getCodeSecure());
+                response.sendRedirect("login-register/register.jsp");
+                break;
+
+            case DUPLICATE_USERNAME:
+                session.setAttribute("loginError", "Este nombre de usuario ya está en uso.");
+                response.sendRedirect("login-register/register.jsp");
+                break;
+
+            case IO_ERROR:
+                session.setAttribute("loginError", "No se pudo generar el archivo del código seguro.");
+                response.sendRedirect("login-register/register.jsp");
+                break;
+
+            case SQL_ERROR:
+            default:
+                session.setAttribute("loginError", "Error inesperado al registrar el usuario.");
+                response.sendRedirect("login-register/register.jsp");
+                break;
         }
     }
 }

@@ -1,15 +1,18 @@
 package controller;
 
-import dao.UserDAO;
-import model.User;
-import utils.JWTUtil;
+import java.io.IOException;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import java.io.IOException;
-import java.util.Date;
+import dao.UserDAO;
+import model.User;
+import utils.JWTUtil;
 
 @WebServlet("/editarPerfil")
 public class EditarPerfilServlet extends HttpServlet {
