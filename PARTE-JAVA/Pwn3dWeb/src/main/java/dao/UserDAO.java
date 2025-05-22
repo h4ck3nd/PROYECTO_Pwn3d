@@ -25,7 +25,7 @@ public class UserDAO {
     public UserDAO(Connection con) {
         this.con = con;
     }
-    
+
     // En un archivo nuevo o dentro de UserDAO.java (si es estático)
     public enum RegisterResult {
         SUCCESS,
@@ -33,7 +33,7 @@ public class UserDAO {
         IO_ERROR,
         SQL_ERROR
     }
-    
+
     public RegisterResult registerUser(User user) throws FileNotFoundException {
         String codeSecure = UUID.randomUUID().toString();
         user.setCodeSecure(codeSecure);
@@ -309,6 +309,15 @@ public class UserDAO {
             e.printStackTrace();
         }
         return null;
+    }
+    
+    public void addPointsToUser(int userId, int points) throws SQLException {
+        String sql = "UPDATE users SET puntos = puntos + ? WHERE id = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, points);
+            ps.setInt(2, userId);
+            ps.executeUpdate();
+        }
     }
 
 }

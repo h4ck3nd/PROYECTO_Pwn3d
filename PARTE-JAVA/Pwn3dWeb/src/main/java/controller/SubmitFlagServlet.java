@@ -106,8 +106,15 @@ public class SubmitFlagServlet extends HttpServlet {
 	        UserDAO userDAO = new UserDAO(conn);
 	        userDAO.incrementFlagCount(userId, tipoFlag);
 
-	        response.setStatus(HttpServletResponse.SC_OK);
-	        response.getWriter().write("{\"message\":\"Flag validada con éxito.\"}");
+		     // Obtener dificultad y calcular puntos
+		     String dificultad = getDificultadFromMachine(vmName, conn);
+		     int puntos = calcularPuntos(dificultad, tipoFlag);
+	
+		     // Sumar puntos al usuario
+		     userDAO.addPointsToUser(userId, puntos);
+	
+		     response.setStatus(HttpServletResponse.SC_OK);
+		     response.getWriter().write("{\"message\":\"Flag validada con éxito. Se han sumado " + puntos + " puntos.\"}");
 
 	    } catch (Exception e) {
 	        e.printStackTrace();  // Loguear error para debug
@@ -142,5 +149,35 @@ public class SubmitFlagServlet extends HttpServlet {
                 throw new Exception("Máquina no encontrada");
             }
         }
+    }
+    
+    private String getDificultadFromMachine(String vmName, Connection conn) throws Exception {
+        String sql = "SELECT difficulty FROM machines WHERE name_machine = ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, vmName);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("difficulty").toLowerCase();
+            } else {
+                throw new Exception("Máquina no encontrada para dificultad");
+            }
+        }
+    }
+
+    private int calcularPuntos(String dificultad, String tipoFlag) {
+        dificultad = dificultad.trim().toLowerCase();
+
+        int total = switch (dificultad) {
+            case "very-easy" -> 10;
+            case "easy" -> 14;
+            case "medium" -> 20;
+            case "hard" -> 30;
+            default -> {
+                System.out.println("Dificultad desconocida: " + dificultad);
+                yield 0;
+            }
+        };
+
+        return total / 2;
     }
 }

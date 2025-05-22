@@ -1,13 +1,16 @@
 package controller;
 
-import dao.StatsDAO;
-import conexionDDBB.ConexionDDBB;
+import java.io.IOException;
+import java.sql.Connection;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
-import java.io.IOException;
-import java.sql.Connection;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import conexionDDBB.ConexionDDBB;
+import dao.StatsDAO;
 
 @WebServlet("/stats")
 public class StatsServlet extends HttpServlet {

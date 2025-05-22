@@ -26,7 +26,7 @@ public class Flag {
         this.firstFlagUser = firstFlagUser;
         this.firstFlagRoot = firstFlagRoot;
     }
-    
+
     public String getImgSrc() {
         return imgSrc;
     }
@@ -34,7 +34,7 @@ public class Flag {
     public void setImgSrc(String imgSrc) {
         this.imgSrc = imgSrc;
     }
-    
+
     public Timestamp getCreatedAt() {
         return createdAt;
     }
@@ -42,7 +42,7 @@ public class Flag {
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
-    
+
     // Constructor vacío
     public Flag() {
         // Requerido para frameworks o instanciación manual
