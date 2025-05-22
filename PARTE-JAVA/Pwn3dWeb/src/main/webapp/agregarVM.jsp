@@ -32,7 +32,7 @@
 
     // Si no está autorizado, redirigir
     if (!allowed) {
-        response.sendRedirect(request.getContextPath() + "/index.jsp");
+        response.sendRedirect(request.getContextPath() + "/stats");
         return; // Termina la ejecución del JSP
     }
 %>
@@ -276,6 +276,9 @@
         <a href="<%= request.getContextPath() %>/machines.jsp">Máquinas</a>
         <a href="<%= request.getContextPath() %>/deletedVM.jsp">Eliminar VM</a>
         <a href="<%= request.getContextPath() %>/addWriteupsAdmin.jsp">Agegar Writeups</a>
+        <a href="<%= request.getContextPath() %>/agregarVM.jsp">Agregar VM</a>
+        <a href="<%= request.getContextPath() %>/users.jsp">Usuarios</a>
+        <a href="<%= request.getContextPath() %>/adminDB.jsp">Administrar DDBB</a>
         <a href="#">Contacto</a>
     </nav>
 </header>
