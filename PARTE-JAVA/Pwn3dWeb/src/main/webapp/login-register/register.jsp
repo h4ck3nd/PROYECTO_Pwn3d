@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="icon" href="<%= request.getContextPath() %>/img/logo-flag-white.ico">
   <title>Pwned! - Registro</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="<%= request.getContextPath() %>/css/cssRegister.jsp">
 </head>
 <body>

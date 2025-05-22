@@ -16,6 +16,7 @@
 <link rel="canonical" href="<%= request.getContextPath() %>/machines.jsp">
 <title>Pwn3d!</title>
 <script async defer src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!--<link rel="stylesheet" href="<%= request.getContextPath() %>/css/style_machines134.css">-->
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/cssMachines.jsp">
 <style>
@@ -1114,15 +1115,17 @@
 	  // Mostrar el formulario con datos correctos
 		const showFlagForm = (type, vmname) => {
 		  const body = document.querySelector('body');
-		  const modal = document.querySelector('.form-flag');
+		  const modalSection = document.querySelector('.form-flag');      // padre oculto con display:none
+		  const modal = document.querySelector('.form-container');
 		  const span = modal.querySelector('.close-form-flag');
 		  const title = modal.querySelector('.form-title h1');
 		  const vmNameInput = document.getElementById('vmName');
 		  const userRadio = document.getElementById('user');
 		  const rootRadio = document.getElementById('root');
 		
-		  if (body && modal && span && title && vmNameInput && userRadio && rootRadio) {
+		  if (body && modalSection && modal && span && title && vmNameInput && userRadio && rootRadio) {
 		    body.style.overflow = 'hidden';
+		    modalSection.style.display = 'flex';  // <--- Aquí debe ser flex para activar el flexbox y centrar
 		    modal.style.display = 'flex';
 		    vmNameInput.value = vmname;
 		    title.textContent = `🏴 Enviar ${type || 'flag'} para ${vmname}`;
@@ -1134,14 +1137,13 @@
 		      rootRadio.checked = true;
 		      userRadio.checked = false;
 		    } else {
-		      // Ninguno seleccionado por defecto, que el usuario elija
 		      userRadio.checked = false;
 		      rootRadio.checked = false;
 		      title.textContent = `🏴 Enviar flag para ${vmname}`;
 		    }
 		
 		    span.onclick = function () {
-		      modal.style.display = 'none';
+		      modalSection.style.display = 'none';
 		      body.style.overflow = 'visible';
 		    };
 		  } else {
@@ -1152,12 +1154,14 @@
 		// Envío del formulario
 		document.getElementById('flagForm').addEventListener('submit', async function(event) {
 		  event.preventDefault();
-		
+
 		  const form = event.target;
-		
+		  const modal = document.querySelector('.form-container');  // Agregado para cerrar modal
+		  const body = document.querySelector('body');         // Agregado para restablecer scroll
+
 		  // Construir URLSearchParams para enviar como application/x-www-form-urlencoded
 		  const formData = new URLSearchParams(new FormData(form));
-		
+
 		  try {
 		    const response = await fetch(form.action, {
 		      method: form.method,
@@ -1166,17 +1170,43 @@
 		      },
 		      body: formData.toString(),
 		    });
-		
+
 		    const result = await response.json();
-		
+
 		    if (response.ok) {
-		      alert(result.message);
+		      // Cerrar modal y permitir scroll antes de mostrar popup
+		      const modalSection = document.querySelector('.form-flag');
+
+				if (modalSection) {
+				  modalSection.style.display = 'none';
+				}
+				if (body) {
+				  body.style.overflow = 'visible';
+				}
+
+		      Swal.fire({
+		        icon: 'success',
+		        title: '¡Éxito!',
+		        text: result.message,
+		        timer: 3000,
+		        showConfirmButton: false
+		      });
 		      form.reset();
+
 		    } else {
-		      alert(result.error || result.message);
+		      Swal.fire({
+		        icon: 'error',
+		        title: 'Error',
+		        text: result.error || result.message
+		      });
 		    }
+
 		  } catch (error) {
-		    alert("Error de red o del servidor.");
+		    Swal.fire({
+		      icon: 'error',
+		      title: 'Error',
+		      text: "Error de red o del servidor."
+		    });
 		  }
 		});
 			  

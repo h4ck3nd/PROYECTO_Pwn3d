@@ -1,5 +1,5 @@
 <%@ page contentType="text/css" %>
-<%
+<%	
     String cssPath = "/css/style_login.css"; // RUTA RELATIVA al servlet container
     RequestDispatcher rd = request.getRequestDispatcher(cssPath);
     if (rd != null) {

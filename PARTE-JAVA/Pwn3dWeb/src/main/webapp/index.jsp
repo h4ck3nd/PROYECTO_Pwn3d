@@ -58,7 +58,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link rel="icon" href="<%= request.getContextPath() %>/img/logo-flag-white.ico">
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <title>Dashboard - Pwn3d!</title>
   <link rel="stylesheet" href="<%= request.getContextPath() %>/css/cssIndex.jsp">
   
@@ -188,7 +187,7 @@
           <button class="btn schedule">Schedule</button>
         </div>
       </header>
-
+	  <img src="<%= request.getContextPath() %>/img/logo-flag-white.png" alt="logo-pwn3d!" class="logo-pwn3d" />
       <section class="stats">
 		  <div class="stat">
 		    <h3>VMs</h3>
@@ -203,7 +202,7 @@
 		    <p><%= request.getAttribute("totalWriteups") != null ? request.getAttribute("totalWriteups") : "..." %></p>
 		  </div>
 		</section>
-		
+		<br>
 		<h2>Logs<span class="dot">.</span></h2>
 		<br>
         <div id="logs-container"></div>

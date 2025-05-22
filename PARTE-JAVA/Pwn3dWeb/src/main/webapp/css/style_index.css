@@ -37,6 +37,14 @@
   --color-root: #5a2a7c;
   --color-user: #000fff;
 }
+
+@font-face {
+  font-family: 'Press Start 2P';
+  src: url('../fonts/PressStart2P-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
     /* Reset básico */
     * {
       margin: 0;
@@ -169,6 +177,7 @@ body::-webkit-scrollbar-track {
       flex: 1;
       padding: 40px;
       margin-left: 340px;
+      margin-right: 140px;
     }
 
     /* En pantallas pequeñas, el contenido debe ajustarse */
@@ -225,12 +234,13 @@ body::-webkit-scrollbar-track {
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      margin-bottom: 40px;
+      line-height: 3rem;
     }
 
     .title {
       font-size: 2.5rem;
       font-weight: 700;
+      margin-top: -12rem;
     }
 
     .dot {
@@ -372,4 +382,12 @@ body::-webkit-scrollbar-track {
 .logs::-webkit-scrollbar-track {
     background: #222222; /* Fondo de la barra de desplazamiento */
     border-radius: 10px;
+}
+
+.logo-pwn3d {
+	width: 20%;
+	height: 25%;
+	opacity: 0.3;
+	margin-bottom: 3rem;
+	margin-top: -10rem;
 }
