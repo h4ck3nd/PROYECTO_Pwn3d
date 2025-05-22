@@ -15,6 +15,8 @@ public class User {
     private int flagsRoot;
     private java.sql.Timestamp ultimoInicio;
     private String codeSecure;
+    private int puntos;
+    private String pais;
 
 	public User(int id, String nombre, String apellido, String usuario, String email, String password, String rol,
 			String cookie, int flagsUser, int flagsRoot, Timestamp ultimoInicio) {
@@ -107,5 +109,17 @@ public class User {
 
 	public void setCodeSecure(String codeSecure) {
 	    this.codeSecure = codeSecure;
+	}
+	public int getPuntos() {
+		return puntos;
+	}
+	public void setPuntos(int puntos) {
+		this.puntos = puntos;
+	}
+	public String getPais() {
+		return pais;
+	}
+	public void setPais(String pais) {
+		this.pais = pais;
 	}
 }

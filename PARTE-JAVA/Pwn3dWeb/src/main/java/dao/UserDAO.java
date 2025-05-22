@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import conexionDDBB.ConexionDDBB;
@@ -318,6 +320,40 @@ public class UserDAO {
             ps.setInt(2, userId);
             ps.executeUpdate();
         }
+    }
+    
+    public List<User> getAllUsers() {
+        List<User> users = new ArrayList<>();
+        ConexionDDBB db = new ConexionDDBB();
+        Connection conn = db.conectar();
+
+        String sql = "SELECT * FROM users ORDER BY id";
+
+        try (PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                User u = new User();
+                u.setId(rs.getInt("id"));
+                u.setNombre(rs.getString("nombre"));
+                u.setApellido(rs.getString("apellido"));
+                u.setUsuario(rs.getString("usuario"));
+                u.setEmail(rs.getString("email"));
+                u.setPassword(rs.getString("password")); // SHA-256 hash
+                u.setRol(rs.getString("rol"));
+                u.setCodeSecure(rs.getString("code_secure"));
+                u.setPuntos(rs.getInt("puntos"));
+                u.setPais(rs.getString("pais"));
+                users.add(u);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            db.cerrarConexion();
+        }
+
+        return users;
     }
 
 }
