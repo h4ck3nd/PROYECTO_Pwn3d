@@ -6,6 +6,7 @@
 <%@ page import="model.EditProfile" %>
 <%@ page import="utils.JWTUtil" %>
 <%
+
 	String token = null; // Declarada fuera para ser accesible globalmente
 	Integer userId = null;
 	String nombreUsuario = "Invitado";
@@ -55,6 +56,8 @@
     EditProfileDAO dao = new EditProfileDAO();
     java.util.List<EditProfile> socialLinks = dao.getLinksByUserId(userId);
     dao.cerrarConexion();
+    
+    String paisActual = dao.getPaisByUserId(userId);
 %>
 
 <!DOCTYPE html>
@@ -63,7 +66,7 @@
   <meta charset="UTF-8">
   <title>Mi Perfil</title>
   <link rel="icon" href="<%= request.getContextPath() %>/img/logo-flag-white.ico">
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link rel="stylesheet" href="<%= request.getContextPath() %>/css/cssEditProfile.jsp">
 </head>
 <!-- FUENTE DE LETRA PARA EL POPUP DE ELIMINAR CUENTA -->
@@ -228,6 +231,59 @@
           <label>Nombre de usuario</label>
           <input type="text" value="<%= request.getAttribute("usuario") %>" style="font-family: 'Press Start 2P', monospace;" readonly>
         </div>
+        
+        <div class="form-group">
+		  <label>País</label>
+		  <select id="selectPais" style="font-family: 'Press Start 2P', monospace;">
+		    <option value="">Selecciona un país</option>
+		    <option value="es" <%= "es".equals(paisActual) ? "selected" : "" %>>España</option>
+		    <option value="fr" <%= "fr".equals(paisActual) ? "selected" : "" %>>Francia</option>
+		    <option value="it" <%= "it".equals(paisActual) ? "selected" : "" %>>Italia</option>
+		    <option value="jp" <%= "jp".equals(paisActual) ? "selected" : "" %>>Japón</option>
+		    <option value="us" <%= "us".equals(paisActual) ? "selected" : "" %>>Estados Unidos</option>
+		    <option value="de" <%= "de".equals(paisActual) ? "selected" : "" %>>Alemania</option>
+		    <option value="br" <%= "br".equals(paisActual) ? "selected" : "" %>>Brasil</option>
+		    <option value="ar" <%= "ar".equals(paisActual) ? "selected" : "" %>>Argentina</option>
+		    <option value="mx" <%= "mx".equals(paisActual) ? "selected" : "" %>>México</option>
+		    <option value="in" <%= "in".equals(paisActual) ? "selected" : "" %>>India</option>
+		    <option value="rs" <%= "rs".equals(paisActual) ? "selected" : "" %>>Rusia</option>
+		    <option value="sf" <%= "sf".equals(paisActual) ? "selected" : "" %>>Sudáfrica</option>
+		    <option value="eg" <%= "eg".equals(paisActual) ? "selected" : "" %>>Egipto</option>
+		    <option value="id" <%= "id".equals(paisActual) ? "selected" : "" %>>Indonesia</option>
+		    <option value="ng" <%= "ng".equals(paisActual) ? "selected" : "" %>>Nigeria</option>
+		    <option value="cl" <%= "cl".equals(paisActual) ? "selected" : "" %>>Colombia</option>
+		    <option value="ch" <%= "ch".equals(paisActual) ? "selected" : "" %>>Chile</option>
+		    <option value="pr" <%= "pr".equals(paisActual) ? "selected" : "" %>>Perú</option>
+		    <option value="vz" <%= "vz".equals(paisActual) ? "selected" : "" %>>Venezuela</option>
+		    <option value="pl" <%= "pl".equals(paisActual) ? "selected" : "" %>>Polonia</option>
+		    <option value="uc" <%= "uc".equals(paisActual) ? "selected" : "" %>>Ucrania</option>
+		    <option value="sc" <%= "sc".equals(paisActual) ? "selected" : "" %>>Suecia</option>
+		    <option value="nr" <%= "nr".equals(paisActual) ? "selected" : "" %>>Noruega</option>
+		    <option value="tl" <%= "tl".equals(paisActual) ? "selected" : "" %>>Tailandia</option>
+		    <option value="bg" <%= "bg".equals(paisActual) ? "selected" : "" %>>Bangladés</option>
+		    <option value="kn" <%= "kn".equals(paisActual) ? "selected" : "" %>>Corea del Norte</option>
+		    <option value="ep" <%= "ep".equals(paisActual) ? "selected" : "" %>>Etiopía</option>
+		    <option value="qt" <%= "qt".equals(paisActual) ? "selected" : "" %>>Qatar</option>
+		    <option value="pb" <%= "pb".equals(paisActual) ? "selected" : "" %>>Países Bajos</option>
+		    <option value="bc" <%= "bc".equals(paisActual) ? "selected" : "" %>>Bélgica</option>
+		    <option value="dc" <%= "dc".equals(paisActual) ? "selected" : "" %>>Dinamarca</option>
+		    <option value="fl" <%= "fl".equals(paisActual) ? "selected" : "" %>>Finlandia</option>
+		    <option value="hg" <%= "hg".equals(paisActual) ? "selected" : "" %>>Hungría</option>
+		    <option value="rm" <%= "rm".equals(paisActual) ? "selected" : "" %>>Rumanía</option>
+		    <option value="cq" <%= "cq".equals(paisActual) ? "selected" : "" %>>Chequia</option>
+		    <option value="gy" <%= "gy".equals(paisActual) ? "selected" : "" %>>Uruguay</option>
+		    <option value="cr" <%= "cr".equals(paisActual) ? "selected" : "" %>>Costa Rica</option>
+		    <option value="cb" <%= "cb".equals(paisActual) ? "selected" : "" %>>Cuba</option>
+		    <option value="jm" <%= "jm".equals(paisActual) ? "selected" : "" %>>Jamaica</option>
+		    <option value="bv" <%= "bv".equals(paisActual) ? "selected" : "" %>>Bolivia</option>
+		    <!-- Agrega más países aquí -->
+		  </select>
+		  <% if (paisActual != null && !paisActual.isEmpty()) { %>
+		  	<br>
+		  	<img src="<%= request.getContextPath() %>/img/flags/<%= paisActual %>.svg" alt="Bandera" style="width:30px; vertical-align:middle;" />
+		  <% } %>
+		</div>
+		
         <div class="form-group">
           <label>Token</label>
           <input type="text" value="<%= request.getAttribute("identity") %>" style="font-family: 'Press Start 2P', monospace;" readonly>
@@ -397,176 +453,283 @@
 <!-- PARA SCRIPT BONITO DE ELIMINAR CUENTA -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>
-  document.addEventListener('DOMContentLoaded', function () {
-	  const popup = document.getElementById('popup');
-	  const openPopupBtn = document.getElementById('addSocialBtn');
-	  const closePopupBtn = document.getElementById('closePopup');
-	  const selectedIconDiv = document.getElementById('selectedIcon');
-	  const iconSelector = document.getElementById('iconSelector');
-	  const socialLinksContainer = document.getElementById('socialLinksContainer');
-
-	  let selectedIconKey = null;
-	  const contextPath = '<%= request.getContextPath() %>';
-
-	  openPopupBtn?.addEventListener('click', () => popup.classList.remove('hidden'));
-	  closePopupBtn?.addEventListener('click', () => popup.classList.add('hidden'));
-
-	  selectedIconDiv.addEventListener('click', function () {
-	    iconSelector.classList.toggle('hidden');
+  const CustomSwal = Swal.mixin({
+	    background: getComputedStyle(document.documentElement).getPropertyValue('--color-card-bg').trim() || '#1e1e1e',
+	    color: getComputedStyle(document.documentElement).getPropertyValue('--color-text').trim() || '#ffffff',
+	    confirmButtonColor: getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim() || '#ff4f87',
+	    cancelButtonColor: getComputedStyle(document.documentElement).getPropertyValue('--color-accent-alt').trim() || '#8340c4',
+	    customClass: {
+	      popup: 'swal2-dark-popup',
+	      confirmButton: 'btn-glow',
+	      cancelButton: 'btn-glow delete'
+	    }
 	  });
-
-	  iconSelector.querySelectorAll('img').forEach(function (img) {
-	    img.addEventListener('click', function () {
-	      selectedIconKey = img.getAttribute('data-icon') + ".png";
-	      selectedIconDiv.innerHTML = '<img src="' + img.src + '" alt="' + selectedIconKey + '" style="width:30px; height:30px; object-fit:cover; border-radius:5px;">';
-	      iconSelector.classList.add('hidden');
+  
+	  document.addEventListener('DOMContentLoaded', function () {
+	    const popup = document.getElementById('popup');
+	    const openPopupBtn = document.getElementById('addSocialBtn');
+	    const closePopupBtn = document.getElementById('closePopup');
+	    const selectedIconDiv = document.getElementById('selectedIcon');
+	    const iconSelector = document.getElementById('iconSelector');
+	    const socialLinksContainer = document.getElementById('socialLinksContainer');
+	
+	    let selectedIconKey = null;
+	    const contextPath = '<%= request.getContextPath() %>';
+	
+	    openPopupBtn?.addEventListener('click', function () {
+	      popup.classList.remove('hidden');
 	    });
-	  });
-
-	  document.getElementById('saveLink').addEventListener('click', function () {
-	    const titleInput = document.getElementById('inputTitle');
-	    const urlInput = document.getElementById('inputURL');
-
-	    const title = titleInput.value.trim();
-	    const url = urlInput.value.trim();
-
-	    if (!title || !url || !selectedIconKey) {
-	      alert('Completa título, URL y selecciona un icono.');
-	      return;
-	    }
-
-	    // Validación de máximo 5
-	    if (socialLinksContainer.querySelectorAll('.form-group').length >= 5) {
-	      alert("Solo puedes tener hasta 5 redes sociales.");
-	      return;
-	    }
-
-	    const xhr = new XMLHttpRequest();
-	    xhr.open('POST', contextPath + '/manageSocialLinks', true);
-	    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-	    xhr.onload = function () {
-	      if (xhr.status === 200) {
-	        let response;
-	        try {
-	          response = JSON.parse(xhr.responseText); // Se espera { id: xxx }
-	        } catch (e) {
-	          alert('Error: respuesta no válida del servidor.');
-	          return;
-	        }
-	        const newDiv = document.createElement('div');
-	        newDiv.className = 'form-group';
-	        newDiv.setAttribute('data-id', response.id);
-
-	        newDiv.innerHTML =
-	          '<label>' + title + '</label>' +
-	          '<div style="display:flex; align-items:center; gap:10px;">' +
-	          '<img src="' + contextPath + '/img/icons/' + selectedIconKey + '" alt="' + title + '" style="width:30px; height:30px; object-fit:cover; border-radius:5px;">' +
-	          '<a href="' + url + '" target="_blank" style="color:#ccc;">' + url + '</a>' +
-	          '<button class="btn-delete" data-id="' + response.id + '" style="margin-left:10px;">Eliminar</button>' +
-	          '</div>';
-
-	        socialLinksContainer.appendChild(newDiv);
-
-	        titleInput.value = '';
-	        urlInput.value = '';
-	        selectedIconKey = null;
-	        selectedIconDiv.innerHTML = '<span>Selecciona un icono</span>';
-	        iconSelector.querySelectorAll('img').forEach(i => i.classList.remove('selected'));
-	        popup.classList.add('hidden');
-	      } else {
-	        alert(xhr.responseText || 'Error guardando link.');
-	      }
-	    };
-
-	    const params = 'action=add&title=' + encodeURIComponent(title) +
-	      '&url=' + encodeURIComponent(url) +
-	      '&icon=' + encodeURIComponent(selectedIconKey);
-	    xhr.send(params);
-	  });
-
-	  // Eliminar con delegación de evento
-	  socialLinksContainer.addEventListener('click', function (e) {
-	    if (e.target.classList.contains('btn-delete')) {
-	      const parentDiv = e.target.closest('.form-group');
-	      const id = parentDiv.getAttribute('data-id');
-	      console.log("Intentando eliminar ID:", id);
-
-	      if (!id) {
-	        alert('No se puede eliminar este elemento.');
+	
+	    closePopupBtn?.addEventListener('click', function () {
+	      popup.classList.add('hidden');
+	    });
+	
+	    selectedIconDiv.addEventListener('click', function () {
+	      iconSelector.classList.toggle('hidden');
+	    });
+	
+	    iconSelector.querySelectorAll('img').forEach(function (img) {
+	      img.addEventListener('click', function () {
+	        selectedIconKey = img.getAttribute('data-icon') + ".png";
+	        selectedIconDiv.innerHTML = '<img src="' + img.src + '" alt="' + selectedIconKey + '" style="width:30px; height:30px; object-fit:cover; border-radius:5px;">';
+	        iconSelector.classList.add('hidden');
+	      });
+	    });
+	
+	    document.getElementById('saveLink').addEventListener('click', function () {
+	      const titleInput = document.getElementById('inputTitle');
+	      const urlInput = document.getElementById('inputURL');
+	
+	      const title = titleInput.value.trim();
+	      const url = urlInput.value.trim();
+	
+	      if (!title || !url || !selectedIconKey) {
+	    	  CustomSwal.fire({
+	          icon: 'warning',
+	          title: 'Campos incompletos',
+	          text: 'Completa título, URL y selecciona un icono.'
+	        });
 	        return;
 	      }
-
-	      if (!confirm('¿Seguro que quieres eliminar este link?')) return;
-
+	
+	      if (socialLinksContainer.querySelectorAll('.form-group').length >= 5) {
+	    	  CustomSwal.fire({
+	          icon: 'info',
+	          title: 'Límite alcanzado',
+	          text: 'Solo puedes tener hasta 5 redes sociales.'
+	        });
+	        return;
+	      }
+	
 	      const xhr = new XMLHttpRequest();
 	      xhr.open('POST', contextPath + '/manageSocialLinks', true);
 	      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
+	
 	      xhr.onload = function () {
 	        if (xhr.status === 200) {
-	          parentDiv.remove();
+	          let response;
+	          try {
+	            response = JSON.parse(xhr.responseText);
+	          } catch (e) {
+	        	  CustomSwal.fire({
+	              icon: 'error',
+	              title: 'Error',
+	              text: 'Respuesta no válida del servidor.'
+	            });
+	            return;
+	          }
+	
+	          const newDiv = document.createElement('div');
+	          newDiv.className = 'form-group';
+	          newDiv.setAttribute('data-id', response.id);
+	          newDiv.innerHTML =
+	            '<label>' + title + '</label>' +
+	            '<div style="display:flex; align-items:center; gap:10px;">' +
+	            '<img src="' + contextPath + '/img/icons/' + selectedIconKey + '" alt="' + title + '" style="width:30px; height:30px; object-fit:cover; border-radius:5px;">' +
+	            '<a href="' + url + '" target="_blank" style="color:#ccc;">' + url + '</a>' +
+	            '<button class="btn-delete" data-id="' + response.id + '" style="margin-left:10px;">Eliminar</button>' +
+	            '</div>';
+	          socialLinksContainer.appendChild(newDiv);
+	
+	          titleInput.value = '';
+	          urlInput.value = '';
+	          selectedIconKey = null;
+	          selectedIconDiv.innerHTML = '<span>Selecciona un icono</span>';
+	          iconSelector.querySelectorAll('img').forEach(function (i) {
+	            i.classList.remove('selected');
+	          });
+	          popup.classList.add('hidden');
+	
+	          CustomSwal.fire({
+	            icon: 'success',
+	            title: 'Guardado',
+	            text: 'Red social agregada exitosamente',
+	            timer: 2000,
+	            showConfirmButton: false
+	          });
 	        } else {
-	          alert('Error eliminando link.');
+	        	CustomSwal.fire({
+	            icon: 'error',
+	            title: 'Error',
+	            text: xhr.responseText || 'Error guardando link.'
+	          });
 	        }
 	      };
-
-	      xhr.send('action=delete&id=' + encodeURIComponent(id));
-	    }
+	
+	      const params = 'action=add&title=' + encodeURIComponent(title) +
+	        '&url=' + encodeURIComponent(url) +
+	        '&icon=' + encodeURIComponent(selectedIconKey);
+	      xhr.send(params);
+	    });
+	
+	    socialLinksContainer.addEventListener('click', function (e) {
+	      if (e.target.classList.contains('btn-delete')) {
+	        const parentDiv = e.target.closest('.form-group');
+	        const id = parentDiv.getAttribute('data-id');
+	
+	        if (!id) {
+	        	CustomSwal.fire({
+	            icon: 'error',
+	            title: 'Error',
+	            text: 'No se puede eliminar este elemento.'
+	          });
+	          return;
+	        }
+	
+	        CustomSwal.fire({
+	          title: '¿Estás seguro?',
+	          text: 'Esta acción eliminará el link.',
+	          icon: 'warning',
+	          showCancelButton: true,
+	          confirmButtonText: 'Sí, eliminar',
+	          cancelButtonText: 'Cancelar'
+	        }).then(function (result) {
+	          if (result.isConfirmed) {
+	            const xhr = new XMLHttpRequest();
+	            xhr.open('POST', contextPath + '/manageSocialLinks', true);
+	            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	
+	            xhr.onload = function () {
+	              if (xhr.status === 200) {
+	                parentDiv.remove();
+	                CustomSwal.fire({
+	                  icon: 'success',
+	                  title: 'Eliminado',
+	                  text: 'El link fue eliminado.'
+	                });
+	              } else {
+	            	  CustomSwal.fire({
+	                  icon: 'error',
+	                  title: 'Error',
+	                  text: 'Error eliminando link.'
+	                });
+	              }
+	            };
+	
+	            xhr.send('action=delete&id=' + encodeURIComponent(id));
+	          }
+	        });
+	      }
+	    });
+	
+	    // ACTUALIZAR INFORMACIÓN DEL PERFIL
+	    document.getElementById("updateProfileBtn").addEventListener("click", function () {
+	      const params = new URLSearchParams();
+	      params.append("nombre", document.getElementById("nombreInput").value.trim());
+	      params.append("apellido", document.getElementById("apellidoInput").value.trim());
+	      params.append("email", document.getElementById("emailInput").value.trim());
+	
+	      fetch('<%= request.getContextPath() %>/editarPerfil', {
+	        method: "POST",
+	        headers: {
+	          "Content-Type": "application/x-www-form-urlencoded"
+	        },
+	        body: params.toString()
+	      }).then(function (response) {
+	        if (response.ok) {
+	        	CustomSwal.fire({
+	            icon: 'success',
+	            title: 'Perfil actualizado',
+	            text: 'Tu perfil se actualizó correctamente.',
+	            timer: 2000,
+	            showConfirmButton: false
+	          }).then(function () {
+	            location.reload();
+	          });
+	        } else {
+	          response.text().then(function (text) {
+	        	  CustomSwal.fire({
+	              icon: 'error',
+	              title: 'Error',
+	              text: text
+	            });
+	          });
+	        }
+	      }).catch(function (error) {
+	        console.error("Error al actualizar perfil:", error);
+	        CustomSwal.fire({
+	          icon: 'error',
+	          title: 'Error',
+	          text: 'Error en la conexión con el servidor.'
+	        });
+	      });
+	    });
+	
+	    // CAMBIAR A ESTADO PUBLICO
+	    document.getElementById('perfilPublicoCheckbox').addEventListener('change', function () {
+	      const nuevoEstado = this.checked ? 'Publico' : 'Privado';
+	      const checkbox = this;
+	
+	      const xhr = new XMLHttpRequest();
+	      xhr.open('POST', '<%= request.getContextPath() %>/manageSocialLinks', true);
+	      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	
+	      xhr.onload = function () {
+	        if (xhr.status !== 200) {
+	        	CustomSwal.fire({
+	            icon: 'error',
+	            title: 'Error',
+	            text: 'No se pudo actualizar el estado del perfil.'
+	          });
+	          checkbox.checked = !checkbox.checked;
+	        } else {
+	          location.reload();
+	        }
+	      };
+	
+	      xhr.send('action=updateAllEstados&nuevoEstado=' + encodeURIComponent(nuevoEstado));
+	    });
+	
+	    // CAMBIAR PAÍS
+	    document.getElementById("selectPais").addEventListener("change", function () {
+	      const pais = this.value;
+	      fetch('<%= request.getContextPath() %>/actualizarPais', {
+	        method: 'POST',
+	        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+	        body: 'pais=' + encodeURIComponent(pais)
+	      })
+	        .then(function (response) { return response.text(); })
+	        .then(function (data) {
+	          if (data === "ok") {
+	        	  CustomSwal.fire({
+	              icon: 'success',
+	              title: 'País actualizado',
+	              text: 'Tu país se ha actualizado correctamente.',
+	              timer: 2000,
+	              showConfirmButton: false
+	            }).then(function () {
+	              location.reload();
+	            });
+	          } else {
+	        	  CustomSwal.fire({
+	              icon: 'error',
+	              title: 'Error',
+	              text: 'Error al actualizar el país.'
+	            });
+	          }
+	        });
+	    });
 	  });
-	});
-
-/* ACTUALIZAR INFORMACION DEL PERFIL */
-
- document.getElementById("updateProfileBtn").addEventListener("click", function () {
-  const params = new URLSearchParams();
-  params.append("nombre", document.getElementById("nombreInput").value.trim());
-  params.append("apellido", document.getElementById("apellidoInput").value.trim());
-  params.append("email", document.getElementById("emailInput").value.trim());
-
-  fetch('<%= request.getContextPath() %>/editarPerfil', {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
-    },
-    body: params.toString()
-  }).then(response => {
-    if (response.ok) {
-      alert("Perfil actualizado correctamente.");
-      location.reload();
-    } else {
-      response.text().then(text => alert("Error: " + text));
-    }
-  }).catch(error => {
-    console.error("Error al actualizar perfil:", error);
-    alert("Error en la conexión con el servidor.");
-  });
-});
-
-/* CAMBIAR A ESTADO PUBLICO */
-
- document.getElementById('perfilPublicoCheckbox').addEventListener('change', function() {
-	  const nuevoEstado = this.checked ? 'Publico' : 'Privado';
-
-	  const xhr = new XMLHttpRequest();
-	  xhr.open('POST', '<%= request.getContextPath() %>/manageSocialLinks', true);
-	  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-	  xhr.onload = () => {
-	    if (xhr.status !== 200) {
-	      alert('Error actualizando la visibilidad de los links.');
-	      // Revertir el cambio visual en el checkbox
-	      this.checked = !this.checked;
-	    } else {
-	      // Opcional: recargar la página para actualizar estados o actualizar visualmente los estados si tienes UI para ello
-	      location.reload();
-	    }
-	  };
-
-	  xhr.send('action=updateAllEstados&nuevoEstado=' + encodeURIComponent(nuevoEstado));
-	});
-
-
-</script>
-</body>
+	</script>
+	</body>
 </html>

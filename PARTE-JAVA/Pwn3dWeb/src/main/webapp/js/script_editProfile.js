@@ -36,14 +36,20 @@ document.getElementById('deleteBtn').addEventListener('click', function () {
 
 /* SI NO COINCIDEN LAS CONTRASEÑAS */
  
- document.getElementById('changePasswordForm').addEventListener('submit', function(e) {
-   const passNueva = document.getElementById('passNueva').value.trim();
-   const passConfirm = document.getElementById('passConfirm').value.trim();
-   if (passNueva !== passConfirm) {
-     e.preventDefault(); // detiene el envío
-     alert('La nueva contraseña y su confirmación no coinciden.');
-   }
- });
+document.getElementById('changePasswordForm').addEventListener('submit', function(e) {
+  const passNueva = document.getElementById('passNueva').value.trim();
+  const passConfirm = document.getElementById('passConfirm').value.trim();
+
+  if (passNueva !== passConfirm) {
+    e.preventDefault(); // detiene el envío
+
+    CustomSwal.fire({
+      icon: 'warning',
+      title: 'Error',
+      text: 'La nueva contraseña y su confirmación no coinciden.'
+    });
+  }
+});
 
 /* VALIDACION IMG */
 

@@ -684,3 +684,8 @@ input:focus, select:focus {
   .btn-delete:hover {
     background-color: #c0392b;
   }
+  
+  .swal2-dark-popup {
+  font-family: 'Press Start 2P', monospace !important;
+  line-height: 3rem !important;
+}
