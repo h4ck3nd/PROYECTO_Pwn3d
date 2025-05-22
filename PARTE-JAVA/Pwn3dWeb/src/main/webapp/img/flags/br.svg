@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="504" viewBox="0 0 720 504">
+  <rect width="720" height="504" fill="#009B3A"/>
+  <polygon points="360,72 648,252 360,432 72,252" fill="#FFDF00"/>
+  <circle cx="360" cy="252" r="100" fill="#002776"/>
+  <path d="M260,230 a100,30 0 1,1 200,0" fill="none" stroke="#fff" stroke-width="10"/>
+  <text x="280" y="250" font-size="20" fill="white" transform="rotate(-20,360,252)">ORDEM E PROGRESSO</text>
+</svg>

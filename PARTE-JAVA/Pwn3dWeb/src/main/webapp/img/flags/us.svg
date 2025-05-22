@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1235" height="650" viewBox="0 0 1235 650">
+  <rect width="1235" height="650" fill="#B22234"/>
+  <g fill="#FFFFFF">
+    <rect y="50" width="1235" height="50"/>
+    <rect y="150" width="1235" height="50"/>
+    <rect y="250" width="1235" height="50"/>
+    <rect y="350" width="1235" height="50"/>
+    <rect y="450" width="1235" height="50"/>
+    <rect y="550" width="1235" height="50"/>
+  </g>
+  <rect width="494" height="350" fill="#3C3B6E"/>
+  <!-- Simplified 50 stars pattern -->
+  <g fill="#FFFFFF">
+    <!-- Star rows -->
+    <g transform="scale(0.9)">
+      <!-- Add simplified stars here -->
+      <circle cx="45" cy="35" r="10"/>
+      <circle cx="135" cy="35" r="10"/>
+      <!-- Repeat pattern as needed -->
+    </g>
+  </g>
+</svg>
