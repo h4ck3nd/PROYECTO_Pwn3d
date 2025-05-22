@@ -7,6 +7,16 @@ public class EditProfile {
     private String titleSocial;
     private String urlSocial;
     private String estado;
+    private String pais;
+
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+
 
     // Getters y setters
     public int getId() { return id; }

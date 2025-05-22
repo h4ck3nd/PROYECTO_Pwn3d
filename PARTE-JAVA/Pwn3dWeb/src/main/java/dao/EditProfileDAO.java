@@ -105,5 +105,35 @@ public class EditProfileDAO {
             return false;
         }
     }
-
+    
+    public String getPaisByUserId(int userId) {
+        String pais = null;
+        String query = "SELECT pais FROM users WHERE id = ?";
+        try (Connection con = new ConexionDDBB().conectar();
+             PreparedStatement stmt = con.prepareStatement(query)) {
+            stmt.setInt(1, userId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    pais = rs.getString("pais");
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return pais;
+    }
+    
+    public boolean actualizarPais(int userId, String pais) {
+        String query = "UPDATE users SET pais = ? WHERE id = ?";
+        try (Connection con = new ConexionDDBB().conectar();
+             PreparedStatement stmt = con.prepareStatement(query)) {
+            stmt.setString(1, pais);
+            stmt.setInt(2, userId);
+            int filas = stmt.executeUpdate();
+            return filas > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
