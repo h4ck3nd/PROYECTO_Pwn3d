@@ -293,3 +293,37 @@ function showCard(name, os, difficulty, creator, release, id) {
 
 	  type();
 	});
+	
+	/* LOGICA DEL MENU HAMBURGUESA */
+	
+	const hamburger = document.getElementById("hamburger");
+	const closeBtn = document.getElementById("closeMenu");
+	const sidebarWrapper = document.getElementById("sidebarWrapper");
+
+	function openMenu() {
+	  sidebarWrapper.classList.remove("closed");
+	  sidebarWrapper.classList.add("open");
+	  document.body.classList.remove("sidebar-closed"); // <-- elimina clase del body
+
+	  hamburger.style.display = "none";
+	  closeBtn.style.display = "block";
+	}
+
+	function closeMenu() {
+	  sidebarWrapper.classList.remove("open");
+	  sidebarWrapper.classList.add("closed");
+	  document.body.classList.add("sidebar-closed"); // <-- añade clase al body
+
+	  hamburger.style.display = "block";
+	  closeBtn.style.display = "none";
+	}
+
+	// Eventos
+	hamburger.addEventListener("click", openMenu);
+	closeBtn.addEventListener("click", closeMenu);
+
+	// Inicialización
+	document.addEventListener("DOMContentLoaded", () => {
+	  openMenu(); // Sidebar visible por defecto
+	});
+

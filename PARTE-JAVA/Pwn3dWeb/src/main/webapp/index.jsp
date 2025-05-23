@@ -176,6 +176,9 @@
        -->
     </aside>
 </div>
+
+<!-- CONTENIDO PRINCIPAL -->
+
     <main class="main-content">
       <header class="hero">
         <h1 class="title">Pwn3d!<span class="dot">.</span></h1>

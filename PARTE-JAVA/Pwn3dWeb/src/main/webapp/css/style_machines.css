@@ -114,6 +114,15 @@
   --retro-accent-light: #c084fc;
   --retro-text: #e0e0e0;
   --retro-border: #5e17eb;
+  --color-background: #2c2b30;
+  --color-sidebar-bg: #333333;
+  --color-text-aside: #fff;
+  --color-text: #fff;
+  --color-hover-bg: #2a2a2a;
+  --color-card-bg: #1a1a1a;
+  --color-shadow: rgba(0, 0, 0, 0.3);
+  --color-border: #333;
+  --color-gray-dark: #444;
 }
 
 .light-theme {
@@ -3424,7 +3433,6 @@ header {
   justify-content: center;
   gap: 30px;
   flex-wrap: wrap;
-  max-width: 1000px;
   margin: 0 auto;
 }
 
@@ -3551,3 +3559,199 @@ header {
 .swal2-container {
   z-index: 10000 !important;
 }
+
+/* MENU HAMBURGUESA */
+
+/* Contenido del menú */
+    .sidebar {
+      position: relative;
+      height: 100%;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .sidebar a {
+      color: var(--color-text-aside) !important;
+      text-decoration: none;
+      padding: 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: color 0.2s ease;
+    }
+
+    .sidebar a:hover {
+      color: var(--color-accent);
+    }
+
+    /* Botón de cerrar dentro del menú */
+    .menu-close {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 1.0rem;
+      background: none;
+      color: var(--color-text);
+      border: none;
+      cursor: pointer;
+      z-index: 2001;
+      display: none;
+    }
+
+    /* Mostrar botón de cerrar solo cuando el menú está abierto */
+    .sidebar-wrapper.open .menu-close {
+      display: block;
+    }
+
+    /* Botón de hamburguesa (☰) */
+    .menu-toggle {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      font-size: 2rem !important;
+      background: none;
+      color: var(--color-text);
+      border: none;
+      cursor: pointer;
+      z-index: 2000;
+      display: none;
+    }
+
+    /* Mostrar hamburguesa solo cuando el menú está cerrado */
+    .sidebar-wrapper.closed + .menu-toggle {
+      display: block;
+    }
+
+    /* Menú lateral */
+    .sidebar-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 340px;
+      height: 100vh;
+      background-color: var(--color-sidebar-bg);
+      overflow-y: auto;
+      z-index: 1000;
+      transition: transform 0.3s ease;
+      align-items: center;
+      text-align: center;
+      align-content: center;
+    }
+
+    /* Menú abierto */
+    .sidebar-wrapper.open {
+      transform: translateX(0);
+    }
+
+    /* Menú cerrado */
+    .sidebar-wrapper.closed {
+      transform: translateX(-100%);
+    }
+
+   /* Estilo general para sidebar cerrado (pantallas grandes) */
+body.sidebar-closed .main-content,
+body.sidebar-closed .header-container,
+body.sidebar-closed .container-img-machines {
+  margin-left: 10rem;
+  margin-right: 10rem;
+}
+
+/* Estilo general para sidebar abierto (pantallas grandes) */
+.main-content {
+  flex: 1;
+  padding: 40px;
+  margin-left: 320px;
+  margin-right: 240px;
+}
+
+.header-container {
+  flex: 1;
+  margin-left: 320px;
+  margin-right: 0px;
+}
+
+.container-img-machines {
+  flex: 1;
+  margin-left: 520px;
+  margin-right: 220px;
+
+}
+
+/* 🧠 Media query: ajustar en pantallas medianas o pequeñas */
+@media (max-width: 1024px) {
+  body.sidebar-closed .main-content,
+  body.sidebar-closed .header-container,
+  body.sidebar-closed .container-img-machines,
+  .main-content,
+  .header-container,
+  .container-img-machines {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    padding: 20px;
+  }
+}
+
+/* 🧠 Aún más pequeño, tipo móvil */
+@media (max-width: 600px) {
+  body.sidebar-closed .main-content,
+  body.sidebar-closed .header-container,
+  body.sidebar-closed .container-img-machines,
+  .main-content,
+  .header-container,
+  .container-img-machines {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding: 15px;
+  }
+}
+
+    /* En pantallas pequeñas, el contenido debe ajustarse */
+    @media (max-width: 768px) {
+      .main-content {
+        margin-left: 0;
+        padding: 60px 20px 20px;
+      }
+    }
+
+    .profile {
+      text-align: center;
+    }
+
+    .profile img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    .avatar {
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+    }
+
+    .username {
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 0.95rem;
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 80px;
+    }
+
+    .menu a {
+      color: var(--color-text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s ease;
+    }
+
+    .menu a:hover {
+      color: var(--color-text);
+    }
