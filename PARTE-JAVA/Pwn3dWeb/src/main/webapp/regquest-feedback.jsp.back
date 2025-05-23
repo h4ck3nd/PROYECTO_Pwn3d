@@ -388,8 +388,8 @@ body.sidebar-closed .content {
   </div>
 
 <nav class="nav-bar">
-  <a href="request.html">Request</a>
-  <a href="feedback.html" class="active">Feedback</a>
+  <a href="request.html" class="active">Request</a>
+  <a href="feedback.html">Feedback</a>
   <a href="message.html">Message!</a>
 </nav>
 
