@@ -149,3 +149,37 @@ CREATE TABLE editProfile (
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
+-- TABLA DE REQUESTS (JUNTO CON MESSAGES)
+
+DROP TABLE IF EXISTS requests;
+CREATE TABLE requests (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    message TEXT NOT NULL,
+    estado VARCHAR(20) DEFAULT 'En progreso',
+    time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+ALTER TABLE requests ADD COLUMN loves INTEGER DEFAULT 0;
+
+-- TABLA DE FEEDBACKS (JUNTO CON MESSAGES)
+
+DROP TABLE IF EXISTS feedbacks;
+CREATE TABLE feedbacks (
+  id SERIAL PRIMARY KEY,
+  user_id INT NOT NULL,
+  message TEXT NOT NULL,
+  estado VARCHAR(50) DEFAULT 'Por contestar...',
+  time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- TABLA DE ME GUSTAS (REQUESTS)
+
+DROP TABLE IF EXISTS request_loves;
+CREATE TABLE request_loves (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    request_id INTEGER NOT NULL,
+    UNIQUE(user_id, request_id),
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (request_id) REFERENCES requests(id)
+);
