@@ -54,6 +54,6 @@ public class CalcularMD5Servlet extends HttpServlet {
             request.setAttribute("resultado", "Error al procesar el archivo.");
         }
 
-        request.getRequestDispatcher("/agregarVM.jsp").forward(request, response);
+        request.getRequestDispatcher("/paginasDeAdministracioneWeb/agregarVM.jsp").forward(request, response);
     }
 }

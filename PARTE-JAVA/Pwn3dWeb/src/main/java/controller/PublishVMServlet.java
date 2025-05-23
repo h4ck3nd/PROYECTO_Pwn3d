@@ -36,11 +36,11 @@ public class PublishVMServlet extends HttpServlet {
             boolean updated = dao.updateEstadoPublicado(id);
             if (updated) {
                 // Redirigir tras éxito para evitar reenvío formulario
-                response.sendRedirect(request.getContextPath() + "/agregarVM.jsp");
+                response.sendRedirect(request.getContextPath() + "/paginasDeAdministracioneWeb/agregarVM.jsp");
             } else {
                 // Pasar error y reenviar a formulario para que el usuario corrija
                 request.setAttribute("error", "No se encontró la VM con ese ID.");
-                request.getRequestDispatcher("/agregarVM.jsp").forward(request, response);
+                request.getRequestDispatcher("/paginasDeAdministracioneWeb/agregarVM.jsp").forward(request, response);
             }
         } catch (Exception e) {
             e.printStackTrace();

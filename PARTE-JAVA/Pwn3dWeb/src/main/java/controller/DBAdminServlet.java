@@ -19,7 +19,7 @@ public class DBAdminServlet extends HttpServlet {
         String tabla = request.getParameter("tabla");
 
         if (tabla == null || tabla.isEmpty() || accion == null) {
-            response.sendRedirect(request.getContextPath() + "/adminDB.jsp");
+            response.sendRedirect(request.getContextPath() + "/paginasDeAdministracioneWeb/adminDB.jsp");
             return;
         }
 
@@ -62,6 +62,6 @@ public class DBAdminServlet extends HttpServlet {
         }
 
         // Redirigir de vuelta a la gestión de la tabla actual
-        response.sendRedirect(request.getContextPath() + "/adminDB.jsp?tabla=" + tabla);
+        response.sendRedirect(request.getContextPath() + "/paginasDeAdministracioneWeb/adminDB.jsp?tabla=" + tabla);
     }
 }
