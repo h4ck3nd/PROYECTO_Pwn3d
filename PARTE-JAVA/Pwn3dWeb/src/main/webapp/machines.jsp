@@ -504,6 +504,7 @@
 							<th class="first-user">Creador</th>
 							<th class="firts-flags">Primer User/Root</th>
 							<th class="flag">Flag</th>
+							<th id="writeups">Valoración</th>
 							<th id="writeups">Descarga</th>
 						</tr>
 					</thead>
@@ -1158,113 +1159,120 @@
 		            })
 		            .then(function(machine) {
 		                // Construir dinámicamente el contenido HTML con la concatenación de cadenas
-		                row.innerHTML = 
-		                    '<td class="idnum">' +
-		                        '<span id="idnum">' + machine.id + '</span>' +
-		                    '</td>' +
-		                    '<td class="card">' +
-		                        '<button class="card-btn machineBtn" title="Ver Info!" ' +
-		                            'onclick="showCard(\'' + machine.nameMachine + '\', \'' + machine.os + '\', \'' + machine.difficulty + '\', \'' + machine.creator + '\', \'' + machine.date + '\', \'' + machine.id + '\')">' +
-		                            '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
-		                                '<circle cx="12" cy="12" r="10" />' +
-		                                '<line x1="12" y1="8" x2="12" y2="8.01" />' +
-		                                '<line x1="12" y1="10" x2="12" y2="16" />' +
-		                            '</svg>' +
-		                        '</button>' +
-		                    '</td>' +
-		                    '<td id="vm">' +
-		                        '<div class="vm-name-btn level-btn ' + machine.difficulty + '">' +
-		                            '<img class="' + machine.difficulty + '-dots" title="' + machine.os + ' VM" ' +
-		                                'alt="' + machine.os + '" src="<%= request.getContextPath() %>/img/' + machine.imgNameOs + '.svg" width="22" height="22" loading="lazy">' +
-		                            '<span class="vm-name-wrapper" style="display: flex; align-items: center; gap: 0.4rem;">' +
-		                                '<span class="vm-name" style="margin-right: -60px;">' + machine.nameMachine + '</span>' +
-		                                '<span class="vm-size" style="margin-right: 20px; margin-left: auto;">' + machine.size + '</span>' +
-		                            '</span>' +
-		                        '</div>' +
-		                    '</td>' +
-		                    '<td class="tested">' +
-		                        '<img title="Entorno 1" alt="' + machine.enviroment + ' logo" src="<%= request.getContextPath() %>/img/' + machine.enviroment + '.png" width="25" height="25">' +
-		                        '<img title="Entorno 2" alt="' + machine.enviroment2 + ' logo" src="<%= request.getContextPath() %>/img/' + machine.enviroment2 + '.png" width="25" height="25"' +
-		                        ((machine.enviroment2 && machine.enviroment2 !== "null") ? '' : ' hidden') + '>' +
-		                    '</td>' +
-		                    '<td class="md5">' +
-		                        '<span id="md5-hash" title="' + machine.md5 + '">' +
-		                        '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-md5" width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="#FFA500" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
-			                        '<path d="M14 3v4a1 1 0 0 0 1 1h4" />' +
-			                        '<path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />' +
-			                        '<path d="M6.5 16v-2c0 -0.5 0.5 -1 1 -1s1 0.5 1 1v2" />' +
-			                        '<path d="M8.5 16v-2c0 -0.5 0.5 -1 1 -1s1 0.5 1 1v2" />' +
-			                        '<path d="M11.5 16v-3h1c0.6 0 1 0.5 1 1.5s-0.4 1.5 -1 1.5h-1z" />' +
-			                        '<path d="M16.5 13h-2v1.5c0.3 -0.2 0.7 -0.3 1 -0.3 0.6 0 1 0.4 1 1s-0.4 1 -1 1 -1 -0.4 -1 -1" />' +
-			                    '</svg>' +
-		                        '</span>' +
-		                        '<button class="copy-btn" title="Copiar al clipboard!" onclick="copyToClipboard(this)">' +
-		                        '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FFB84D" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
-			                        '<path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />' +
-			                        '<path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />' +
-			                    '</svg>' +
-		                        '</button>' +
-		                        '<div class="tooltip">Copied!</div>' +
-		                    '</td>' +
-		                    '<td class="writeups">' +
-		                        '<button class="writeup-btn" title="Ver writeups" onclick="showWriteups(\'' + machine.nameMachine + '\')">' +
-		                        '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#00ffff" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
-			                        '<path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />' +
-			                        '<path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />' +
-			                        '<line x1="3" y1="6" x2="3" y2="19" />' +
-			                        '<line x1="12" y1="6" x2="12" y2="19" />' +
-			                        '<line x1="21" y1="6" x2="21" y2="19" />' +
-			                    '</svg>' +
-		                        '</button>' +
-		                        '<button class="add-writeup-btn" title="Añadir writeup" onclick="showWriteupForm(\'' + machine.nameMachine + '\')">' +
-		                        '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3498db" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
-			                        '<path d="M14 3v4a1 1 0 0 0 1 1h4" />' +
-			                        '<path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h6l6 6v10a2 2 0 0 1 -2 2z" />' +
-			                        '<path d="M12 17v-6" />' +
-			                        '<path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />' +
-			                    '</svg>' +
-		                        '</button>' +
-		                        '<section id="' + machine.nameMachine + '" class="modal">' +
-			                    '<article class="modal-content">' +
-			                        '<span class="close">&times;</span>' +
-			                        '<p class="writeup-title"></p>' +
-			                        '<div class="writeups-container"></div>' +
-			                    '</article>' +
-			                '</section>' +
-			                '<td class="first-user">' + machine.creator + '</td>' +
-		                    //'<td class="first-user">' + machine.firstUser + '</td>' +
-		                    //'<td class="first-user">' + machine.firstRoot + '</td>' +
-		                    '<td class="first-user">' +
-							  '<button title="Primera Flag User/Root" type="button" class="btn-flag" ' +
-							  'data-first-user="' + machine.firstUser + '" ' +
-							  'data-first-root="' + machine.firstRoot + '" ' +
-							  'onclick="openPopup(this)" ' +
-							  'style="background:none; border:none; padding:0; cursor:pointer;">' +
-							    '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 64 64" fill="none" stroke="#ec0725" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
-							      '<circle cx="32" cy="36" r="20" fill="#222" stroke="#ec0725" stroke-width="3" />' +
-							      '<rect x="28" y="12" width="8" height="6" fill="#ec0725" rx="1" ry="1" />' +
-							      '<line x1="32" y1="36" x2="32" y2="20" stroke="#ec0725" stroke-width="3" />' +
-							      '<line x1="32" y1="28" x2="32" y2="16" stroke="#ec0725" stroke-width="2" />' +
-							      '<path d="M32 16 L44 22 L32 28 Z" fill="#daa04a" stroke="#daa04a" />' +
-							    '</svg>' +
-							  '</button>' +
-							'</td>' +
-		                    '<td class="flag">' +
-		                    	'<button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm(\'\', \'' + machine.nameMachine + '\')">' +
-		                            '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
-		                                '<path d="M5 5v16" />' +
-		                                '<path d="M5 5h14l-3 5l3 5h-14" />' +
-		                            '</svg>' +
-		                        '</button>' +
-		                    '</td>' +
-			                    '<td class="url">' +
-			                    '<a href="' + machine.downloadUrl + '" target="_blank" title="Descargar VM" style="color: white; font-weight: bold;">Download!</a>' +
-			                    // '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#d9534f" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
-			                    //     '<path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />' +
-			                    //     '<path d="M7 11l5 5l5 -5" />' +
-			                    //     '<path d="M12 4l0 12" />' +
-			                    // '</svg>' +
-			                '</td>';
+		            	row.innerHTML = 
+		            	    '<td class="idnum">' +
+		            	        '<span id="idnum">' + machine.id + '</span>' +
+		            	    '</td>' +
+		            	    '<td class="card">' +
+		            	        '<button class="card-btn machineBtn" title="Ver Info!" ' +
+		            	            'onclick="showCard(\'' + machine.nameMachine + '\', \'' + machine.os + '\', \'' + machine.difficulty + '\', \'' + machine.creator + '\', \'' + machine.date + '\', \'' + machine.id + '\')">' +
+		            	            '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+		            	                '<circle cx="12" cy="12" r="10" />' +
+		            	                '<line x1="12" y1="8" x2="12" y2="8.01" />' +
+		            	                '<line x1="12" y1="10" x2="12" y2="16" />' +
+		            	            '</svg>' +
+		            	        '</button>' +
+		            	    '</td>' +
+		            	    '<td id="vm">' +
+		            	        '<div class="vm-name-btn level-btn ' + machine.difficulty + '">' +
+		            	            '<img class="' + machine.difficulty + '-dots" title="' + machine.os + ' VM" ' +
+		            	                'alt="' + machine.os + '" src="<%= request.getContextPath() %>/img/' + machine.imgNameOs + '.svg" width="22" height="22" loading="lazy">' +
+		            	            '<span class="vm-name-wrapper" style="display: flex; align-items: center; gap: 0.4rem;">' +
+		            	                '<span class="vm-name" style="margin-right: -60px;">' + machine.nameMachine + '</span>' +
+		            	                '<span class="vm-size" style="margin-right: 20px; margin-left: auto;">' + machine.size + '</span>' +
+		            	            '</span>' +
+		            	        '</div>' +
+		            	    '</td>' +
+		            	    '<td class="tested">' +
+		            	        '<img title="Entorno 1" alt="' + machine.enviroment + ' logo" src="<%= request.getContextPath() %>/img/' + machine.enviroment + '.png" width="25" height="25">' +
+		            	        '<img title="Entorno 2" alt="' + machine.enviroment2 + ' logo" src="<%= request.getContextPath() %>/img/' + machine.enviroment2 + '.png" width="25" height="25"' +
+		            	        ((machine.enviroment2 && machine.enviroment2 !== "null") ? '' : ' hidden') + '>' +
+		            	    '</td>' +
+		            	    '<td class="md5">' +
+		            	        '<span id="md5-hash" title="' + machine.md5 + '">' +
+		            	        '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-md5" width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="#FFA500" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+		            	            '<path d="M14 3v4a1 1 0 0 0 1 1h4" />' +
+		            	            '<path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />' +
+		            	            '<path d="M6.5 16v-2c0 -0.5 0.5 -1 1 -1s1 0.5 1 1v2" />' +
+		            	            '<path d="M8.5 16v-2c0 -0.5 0.5 -1 1 -1s1 0.5 1 1v2" />' +
+		            	            '<path d="M11.5 16v-3h1c0.6 0 1 0.5 1 1.5s-0.4 1.5 -1 1.5h-1z" />' +
+		            	            '<path d="M16.5 13h-2v1.5c0.3 -0.2 0.7 -0.3 1 -0.3 0.6 0 1 0.4 1 1s-0.4 1 -1 1 -1 -0.4 -1 -1" />' +
+		            	        '</svg>' +
+		            	        '</span>' +
+		            	        '<button class="copy-btn" title="Copiar al clipboard!" onclick="copyToClipboard(this)">' +
+		            	        '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FFB84D" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+		            	            '<path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />' +
+		            	            '<path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />' +
+		            	        '</svg>' +
+		            	        '</button>' +
+		            	        '<div class="tooltip">Copied!</div>' +
+		            	    '</td>' +
+		            	    '<td class="writeups">' +
+		            	        '<button class="writeup-btn" title="Ver writeups" onclick="showWriteups(\'' + machine.nameMachine + '\')">' +
+		            	        '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#00ffff" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+		            	            '<path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />' +
+		            	            '<path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />' +
+		            	            '<line x1="3" y1="6" x2="3" y2="19" />' +
+		            	            '<line x1="12" y1="6" x2="12" y2="19" />' +
+		            	            '<line x1="21" y1="6" x2="21" y2="19" />' +
+		            	        '</svg>' +
+		            	        '</button>' +
+		            	        '<button class="add-writeup-btn" title="Añadir writeup" onclick="showWriteupForm(\'' + machine.nameMachine + '\')">' +
+		            	        '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3498db" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+		            	            '<path d="M14 3v4a1 1 0 0 0 1 1h4" />' +
+		            	            '<path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h6l6 6v10a2 2 0 0 1 -2 2z" />' +
+		            	            '<path d="M12 17v-6" />' +
+		            	            '<path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />' +
+		            	        '</svg>' +
+		            	        '</button>' +
+		            	        '<section id="' + machine.nameMachine + '" class="modal">' +
+		            	        '<article class="modal-content">' +
+		            	            '<span class="close">&times;</span>' +
+		            	            '<p class="writeup-title"></p>' +
+		            	            '<div class="writeups-container"></div>' +
+		            	        '</article>' +
+		            	        '</section>' +
+		            	    '</td>' +
+		            	    '<td class="first-user">' + machine.creator + '</td>' +
+		            	    '<td class="first-user">' +
+		            	        '<button title="Primera Flag User/Root" type="button" class="btn-flag" ' +
+		            	        'data-first-user="' + machine.firstUser + '" ' +
+		            	        'data-first-root="' + machine.firstRoot + '" ' +
+		            	        'onclick="openPopup(this)" ' +
+		            	        'style="background:none; border:none; padding:0; cursor:pointer;">' +
+		            	            '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 64 64" fill="none" stroke="#ec0725" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+		            	              '<circle cx="32" cy="36" r="20" fill="#222" stroke="#ec0725" stroke-width="3" />' +
+		            	              '<rect x="28" y="12" width="8" height="6" fill="#ec0725" rx="1" ry="1" />' +
+		            	              '<line x1="32" y1="36" x2="32" y2="20" stroke="#ec0725" stroke-width="3" />' +
+		            	              '<line x1="32" y1="28" x2="32" y2="16" stroke="#ec0725" stroke-width="2" />' +
+		            	              '<path d="M32 16 L44 22 L32 28 Z" fill="#daa04a" stroke="#daa04a" />' +
+		            	            '</svg>' +
+		            	        '</button>' +
+		            	    '</td>' +
+		            	    '<td class="flag">' +
+		            	        '<button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm(\'\', \'' + machine.nameMachine + '\')">' +
+		            	            '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+		            	                '<path d="M5 5v16" />' +
+		            	                '<path d="M5 5h14l-3 5l3 5h-14" />' +
+		            	            '</svg>' +
+		            	        '</button>' +
+		            	    '</td>' +
+		            	    '<td class="rating">' +
+		            	        '<span title="Valoración">' +
+		            	            (function () {
+		            	                let stars = '';
+		            	                for (let i = 0; i < 5; i++) {
+		            	                    stars += '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="' + (i < machine.rating ? '#ffc107' : 'none') + '" stroke="#ffc107" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
+		            	                                 '<path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />' +
+		            	                             '</svg>';
+		            	                }
+		            	                return stars;
+		            	            })() +
+		            	        '</span>' +
+		            	    '</td>' +
+		            	    '<td class="url">' +
+		            	        '<a href="' + machine.downloadUrl + '" target="_blank" title="Descargar VM" style="color: white; font-weight: bold;">Download!</a>' +
+		            	    '</td>';
 		            })
 		            .catch(function(err) {
 		                console.error("Error al cargar máquina ID", machineId, err);
