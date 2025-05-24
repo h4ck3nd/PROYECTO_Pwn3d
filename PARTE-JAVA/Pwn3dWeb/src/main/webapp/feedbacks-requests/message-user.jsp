@@ -56,7 +56,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Feedback - Morado</title>
+  <title>Mensaje - Pwn3d!</title>
+  <link rel="icon" href="<%= request.getContextPath() %>/img/logo-flag-white.ico">
   <!-- Bootstrap CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
@@ -477,7 +478,7 @@ textarea, select, button.send-btn {
 		  FeedBack
 		</a>
 		
-		<a href="#" style="color: #b600ff; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
+		<a href="<%= request.getContextPath() %>/ranking.jsp" style="color: #b600ff; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
 		  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" viewBox="0 0 24 24" role="img" aria-label="Ranking icon">
 		    <path d="M17 4V2H7v2H2v3c0 2.76 2.24 5 5 5 .68 0 1.32-.14 1.91-.39A6.98 6.98 0 0 0 11 15.9V19H8v2h8v-2h-3v-3.1a6.98 6.98 0 0 0 2.09-4.29c.59.25 1.23.39 1.91.39 2.76 0 5-2.24 5-5V4h-5zM4 7V6h3v2.93c-1.72-.23-3-1.69-3-2.93zm16 0c0 1.24-1.28 2.7-3 2.93V6h3v1z"/>
 		  </svg>
