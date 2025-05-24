@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import conexionDDBB.ConexionDDBB;
+import dao.StarsDAO;
 import model.Machine;
 
 @WebServlet("/machineDetails")
@@ -129,8 +130,13 @@ public class MachineDetailsServlet extends HttpServlet {
 
             conexionDDBB.cerrarConexion();
             System.out.println("🔒 Conexión cerrada.");
-
+            
+            double averageRating = 0.0;
+            
             if (machine != null) {
+            	StarsDAO starsDAO = new StarsDAO();
+                averageRating = starsDAO.getAverageRating(machine.getNameMachine());
+                starsDAO.cerrarConexion(); // No olvides cerrar la conexión del DAO
                 response.setContentType("application/json");
                 response.setCharacterEncoding("UTF-8");
                 PrintWriter out = response.getWriter();
@@ -156,7 +162,8 @@ public class MachineDetailsServlet extends HttpServlet {
                         + "\"flagsUserCount\":" + flagsUserCount + ","
                         + "\"flagsRootCount\":" + flagsRootCount + ","
                         + "\"userFlag\":\"" + machine.getUserFlag() + "\","
-                        + "\"rootFlag\":\"" + machine.getRootFlag() + "\""
+                        + "\"rootFlag\":\"" + machine.getRootFlag() + "\","
+                        + "\"averageRating\":" + averageRating
                         + "}";
 
                 out.print(jsonResponse);

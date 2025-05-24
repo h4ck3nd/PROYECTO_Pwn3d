@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.json.JSONObject;
+
 import conexionDDBB.ConexionDDBB;
 
 public class MachineDAO {
@@ -178,6 +180,34 @@ public class MachineDAO {
         }
 
         return exito;
+    }
+    
+    public JSONObject getMachineDetails(int id) {
+        JSONObject json = new JSONObject();
+        ConexionDDBB db = new ConexionDDBB();
+        Connection con = db.conectar();
+
+        try {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM machines WHERE id = ?");
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                json.put("id", rs.getInt("id"));
+                json.put("nameMachine", rs.getString("name_machine"));
+                // ...otros campos que quieras incluir
+                StarsDAO starsDAO = new StarsDAO();
+                double average = starsDAO.getAverageRating(rs.getString("name_machine"));
+                json.put("averageRating", average);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            db.cerrarConexion();
+        }
+
+        return json;
     }
 
 }
