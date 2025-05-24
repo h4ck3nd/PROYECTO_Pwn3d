@@ -1,5 +1,9 @@
 :root {
     --color-background-dark: #11041c;
+    --color-sidebar-bg: #2c2c3a;
+  --shadow-color: rgba(0, 0, 0, 0.6);
+  /*--color-sidebar-bg: #333333;*/ /* COLOR DE FONDO DE LA HAMBURGUESA */
+    /*--color-background-dark: #2c2b30;*/ /* FONDO CON TONO MAS CLARO */
     --color-background-light: #ffffff;
     --color-text-dark: #ffffff;
     --color-text-light: #141414;
@@ -3631,7 +3635,8 @@ header {
       left: 0;
       width: 340px;
       height: 100vh;
-      background-color: var(--color-sidebar-bg);
+      background-color: #2c2c3a !important;
+      box-shadow: 4px 0 10px var(--shadow-color);
       overflow-y: auto;
       z-index: 1000;
       transition: transform 0.3s ease;
@@ -3755,3 +3760,33 @@ body.sidebar-closed .container-img-machines {
     .menu a:hover {
       color: var(--color-text);
     }
+
+    /* ESTILO DE LAS ESTRELLAS DE VALORACION */
+    
+    td.rating {
+  padding: 0;
+  vertical-align: middle;
+}
+
+.star-rating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  cursor: pointer;
+}
+	.star-rating svg {
+	  width: 14px;
+  height: 14px;
+  display: block;
+	  margin-right: 6px;
+	}
+	
+	.swal2-range {
+		background: #141414 !important;
+	}
+	
+	.swal2-range output {
+		color: #7800dd !important;
+	}
+	    

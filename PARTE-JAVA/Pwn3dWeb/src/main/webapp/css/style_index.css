@@ -1,7 +1,8 @@
 :root {
   /* Oscuro por defecto */
   --color-background: #2c2b30;
-  --color-sidebar-bg: #333333;
+  --color-sidebar-bg: #2c2c3a;
+  --shadow-color: rgba(0, 0, 0, 0.6);
   --color-text-aside: #fff;
   --color-text: #fff;
   --color-text-muted: #6a0dad;
@@ -150,6 +151,7 @@ body::-webkit-scrollbar-track {
       width: 340px;
       height: 100vh;
       background-color: var(--color-sidebar-bg);
+      box-shadow: 4px 0 10px var(--shadow-color);
       overflow-y: auto;
       z-index: 1000;
       transition: transform 0.3s ease;

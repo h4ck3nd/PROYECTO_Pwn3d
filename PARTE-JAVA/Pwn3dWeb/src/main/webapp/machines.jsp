@@ -157,6 +157,19 @@
 		  Machines
 		</a>
 		
+		<a href="<%= request.getContextPath() %>/feedbacks-requests/request.jsp" style="color: #b600ff; text-decoration:none; display:inline-flex; align-items:center; gap:8px; font-size: 1.3rem !important;">
+		  <svg xmlns="http://www.w3.org/2000/svg" 
+		     width="30" height="30" viewBox="0 0 24 24" 
+		     fill="none" stroke="currentColor" stroke-width="1.8" 
+		     stroke-linecap="round" stroke-linejoin="round">
+		  <!-- Bocadillo de diálogo -->
+		  <path d="M19 13a2 2 0 0 1-2 2H8l-3 3V6a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2z"></path>
+		  <!-- Check mark para feedback -->
+		  <polyline points="8 11 11 14 18 7"></polyline>
+		</svg>
+		  FeedBack
+		</a>
+		
 		<a href="#" style="color: #b600ff; text-decoration:none; display:inline-flex; align-items:center; gap:8px; font-size: 1.3rem !important;">
 		  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" viewBox="0 0 24 24" role="img" aria-label="Ranking icon">
 		    <path d="M17 4V2H7v2H2v3c0 2.76 2.24 5 5 5 .68 0 1.32-.14 1.91-.39A6.98 6.98 0 0 0 11 15.9V19H8v2h8v-2h-3v-3.1a6.98 6.98 0 0 0 2.09-4.29c.59.25 1.23.39 1.91.39 2.76 0 5-2.24 5-5V4h-5zM4 7V6h3v2.93c-1.72-.23-3-1.69-3-2.93zm16 0c0 1.24-1.28 2.7-3 2.93V6h3v1z"/>
@@ -1258,18 +1271,23 @@
 		            	        '</button>' +
 		            	    '</td>' +
 		            	    '<td class="rating">' +
-		            	        '<span title="Valoración">' +
-		            	            (function () {
-		            	                let stars = '';
-		            	                for (let i = 0; i < 5; i++) {
-		            	                    stars += '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="' + (i < machine.rating ? '#ffc107' : 'none') + '" stroke="#ffc107" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
-		            	                                 '<path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />' +
-		            	                             '</svg>';
-		            	                }
-		            	                return stars;
-		            	            })() +
-		            	        '</span>' +
-		            	    '</td>' +
+		            	    '<span class="star-rating" title="Valoración" ' +
+		            	      'data-vm-name="' + machine.nameMachine + '" ' +
+		            	      'data-already-voted="' + machine.alreadyVoted + '">' +
+		            	      (function () {
+		            	        let stars = '';
+		            	        let average = Math.round(machine.averageRating || 0);  // ← usa el nuevo campo
+		            	        for (let i = 0; i < 5; i++) {
+		            	        	stars += '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" ' +
+				            	            'fill="' + (i < average ? '#ffc107' : 'none') + '" ' +
+				            	            'stroke="#ffc107" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
+				            	            '<path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 ' +
+				            	            '9.19 8.63 2 9.24l5.46 4.73L5.82 21z" /></svg>';
+		            	        }
+		            	        return stars;
+		            	      })() +
+		            	    '</span>' +
+		            	  '</td>' +
 		            	    '<td class="url">' +
 		            	        '<a href="' + machine.downloadUrl + '" target="_blank" title="Descargar VM" style="color: white; font-weight: bold;">Download!</a>' +
 		            	    '</td>';
@@ -1281,6 +1299,67 @@
 		    });
 		});
 		
+	  /* SISTEMA DE PUNTUACION DE ESTRELLAS */
+	  
+	  document.addEventListener("click", function (e) {
+		  if (e.target.closest(".star-rating")) {
+		    const container = e.target.closest(".star-rating");
+		    const vmName = container.dataset.vmName;
+		    const alreadyVoted = container.dataset.alreadyVoted === "true";
+		
+		    if (alreadyVoted) {
+		      Swal.fire('Ya has valorado esta máquina.', '', 'info');
+		      return;
+		    }
+		
+		    Swal.fire({
+		      title: '¿Cuántas estrellas le das?',
+		      icon: 'question',
+		      input: 'range',
+		      inputAttributes: {
+		        min: 1,
+		        max: 5,
+		        step: 1
+		      },
+		      inputValue: 3,
+		      showCancelButton: true,
+		      confirmButtonText: 'Enviar valoración'
+		    }).then((result) => {
+		      if (result.isConfirmed) {
+		        fetch('<%= request.getContextPath() %>/star-rating', {
+		          method: 'POST',
+		          headers: {
+		            'Content-Type': 'application/x-www-form-urlencoded'
+		          },
+		          body: 'vm_name=' + encodeURIComponent(vmName) + '&rating=' + parseInt(result.value)
+		        })
+		        .then(res => res.json())
+		        .then(data => {
+		          if (data.success) {
+		            Swal.fire('¡Gracias por votar!', '', 'success');
+		            container.dataset.alreadyVoted = "true";
+		            updateStarDisplay(container, data.average);
+		          } else {
+		            Swal.fire(data.message, '', 'error');
+		          }
+		        });
+		      }
+		    });
+		  }
+		});
+
+		function updateStarDisplay(container, average) {
+		  let stars = '';
+		  for (let i = 0; i < 5; i++) {
+			  stars += '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" ' +
+				         'fill="' + (i < average ? '#ffc107' : 'none') + '" ' +
+				         'stroke="#ffc107" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
+				         '<path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 ' +
+				         '9.19 8.63 2 9.24l5.46 4.73L5.82 21z" /></svg>';
+		  }
+		  container.innerHTML = stars;
+		}
+	  
 	  /* SUMBIT FLAGS (SUBMIT FLAGS (SHOW FORM)) */
 	  
 	  // Mostrar el formulario con datos correctos

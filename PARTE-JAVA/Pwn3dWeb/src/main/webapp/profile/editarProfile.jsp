@@ -159,6 +159,19 @@
 		  Machines
 		</a>
 		
+		<a href="<%= request.getContextPath() %>/feedbacks-requests/request.jsp" style="color: #b600ff; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
+		  <svg xmlns="http://www.w3.org/2000/svg" 
+		     width="30" height="30" viewBox="0 0 24 24" 
+		     fill="none" stroke="currentColor" stroke-width="1.8" 
+		     stroke-linecap="round" stroke-linejoin="round">
+		  <!-- Bocadillo de diálogo -->
+		  <path d="M19 13a2 2 0 0 1-2 2H8l-3 3V6a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2z"></path>
+		  <!-- Check mark para feedback -->
+		  <polyline points="8 11 11 14 18 7"></polyline>
+		</svg>
+		  FeedBack
+		</a>
+		
 		<a href="#" style="color: #b600ff; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
 		  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" viewBox="0 0 24 24" role="img" aria-label="Ranking icon">
 		    <path d="M17 4V2H7v2H2v3c0 2.76 2.24 5 5 5 .68 0 1.32-.14 1.91-.39A6.98 6.98 0 0 0 11 15.9V19H8v2h8v-2h-3v-3.1a6.98 6.98 0 0 0 2.09-4.29c.59.25 1.23.39 1.91.39 2.76 0 5-2.24 5-5V4h-5zM4 7V6h3v2.93c-1.72-.23-3-1.69-3-2.93zm16 0c0 1.24-1.28 2.7-3 2.93V6h3v1z"/>
