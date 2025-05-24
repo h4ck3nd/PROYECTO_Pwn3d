@@ -183,3 +183,15 @@ CREATE TABLE request_loves (
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (request_id) REFERENCES requests(id)
 );
+
+-- TABLA PARA LAS ESTRELLAS DE LAS MAQUINAS
+
+DROP TABLE IF EXISTS stars_machines;
+CREATE TABLE stars_machines (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    vm_name VARCHAR(255) NOT NULL,
+    number_stars INTEGER CHECK (number_stars >= 1 AND number_stars <= 5),
+    time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(user_id, vm_name)
+);
