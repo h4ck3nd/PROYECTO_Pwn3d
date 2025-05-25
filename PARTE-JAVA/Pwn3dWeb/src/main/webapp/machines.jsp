@@ -73,7 +73,7 @@
     #loader {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 1);
+      background: rgba(42, 14, 56, 1);
       color: white;
       display: flex;
       justify-content: center;
@@ -218,70 +218,72 @@
 
 <!-- CONTENIDO DE LA PAGINA PRINCIPAL -->
 
-	<header>
-	    <section class="header-container">
+		<section class="header-container">
 		
-			<!-- BOTÓN AGRUPADO -->
-			
-		    <div class="header-controls">
-		    
-		    <!-- LOGO -->
-	        
-	        <article class="pwned-header">
-	            <!-- <img class="logo" alt="Pwn3d! website logo" src="<%= request.getContextPath() %>/img/banner.png"> -->
-  				<img src="<%= request.getContextPath() %>/img/logo-flag-white.png" alt="Pwned Icon" class="pwned-icon" />
-	            <h2 class="pwned-title"></h2>
-	        </article>
-	        
-	        <div class="header-controls">
-	        
-		      <!-- BOTÓN MODO CLARO/OSCURO -->
-		      
-		      <button title="Alternar entre Claro/Oscuro" id="toggle-theme" class="toggle-button" aria-label="Toggle theme" style="display: none;">
-		        <svg viewBox="0 0 100 100" class="theme-icon">
-		          <circle cx="50" cy="50" r="40" class="circle-bg" />
-		          <path d="M50,10 A40,40 0 1,1 49.9,10 Z" class="half" />
-		        </svg>
-		      </button>
-		      
-		      <!-- BOTÓN ADMIN (VALIDACION ROL = admin) -->
-		      
-			    <%
-				    // Obtener la cookie 'token' del request
-				    Cookie[] cookies = request.getCookies();
-				    if (cookies != null) {
-				        for (Cookie cookie : cookies) {
-				            if ("token".equals(cookie.getName())) {
-				                token = cookie.getValue();
-				                break;
-				            }
-				        }
-				    }
+				<!-- BOTÓN AGRUPADO -->
 				
-				    String role = null;
-				    if (token != null && JWTUtil.validateToken(token)) {
-				        try {
-				            role = JWTUtil.getRoleFromToken(token);
-				        } catch (Exception e) {
-				            role = null;
-				            // Opcional: imprimir error para debug
-				            e.printStackTrace();
-				        }
-				    }
-				%>
-				
-				<!-- Mostrar botón solo si rol es admin -->
-				<% if ("admin".equals(role)) { %>
-				    <button 
-				      type="button" 
-				      class="admin-btn" 
-				      onclick="window.location.href='<%= request.getContextPath() %>/paginasDeAdministracioneWeb/agregarVM.jsp'">
-				      Agregar VM
-				    </button>
-				<% } %>
-			</div>
+			   <!--  <div class="header-controls">
+			    
+			    [!-- LOGO --]
+		        
+		        <article class="pwned-header">
+	  				<img src="<%= request.getContextPath() %>/img/logo-flag-white.png" alt="Pwned Icon" class="pwned-icon" />
+		            <h2 class="pwned-title"></h2>
+		        </article>
+		        -->
+		        <div class="header-controls">
+		        
+			      <!-- BOTÓN MODO CLARO/OSCURO -->
+			      
+			      <button title="Alternar entre Claro/Oscuro" id="toggle-theme" class="toggle-button" aria-label="Toggle theme" style="display: none;">
+			        <svg viewBox="0 0 100 100" class="theme-icon">
+			          <circle cx="50" cy="50" r="40" class="circle-bg" />
+			          <path d="M50,10 A40,40 0 1,1 49.9,10 Z" class="half" />
+			        </svg>
+			      </button>
+			      
+			      <!-- BOTÓN ADMIN (VALIDACION ROL = admin) -->
+			       
+				    <%
+					    // Obtener la cookie 'token' del request
+					    Cookie[] cookies = request.getCookies();
+					    if (cookies != null) {
+					        for (Cookie cookie : cookies) {
+					            if ("token".equals(cookie.getName())) {
+					                token = cookie.getValue();
+					                break;
+					            }
+					        }
+					    }
+					
+					    String role = null;
+					    if (token != null && JWTUtil.validateToken(token)) {
+					        try {
+					            role = JWTUtil.getRoleFromToken(token);
+					        } catch (Exception e) {
+					            role = null;
+					            // Opcional: imprimir error para debug
+					            e.printStackTrace();
+					        }
+					    }
+					%>
+					
+					<!-- Mostrar botón solo si rol es admin -->
+					
+					<% if ("admin".equals(role)) { %>
+					    <button 
+					      type="button" 
+					      class="admin-btn" 
+					      onclick="window.location.href='<%= request.getContextPath() %>/paginasDeAdministracioneWeb/agregarVM.jsp'">
+					      Agregar VM
+					    </button>
+					<% } %>
+				</div>
+			</section>
 			
-			<!-- SECCION PARA ENVIAR VM -->
+			<br>
+			
+		<!-- SECCION PARA ENVIAR VM -->
 			
 			<section class="form-vm">
 			  <div class="wizard-vm-container">
@@ -381,9 +383,7 @@
 			    </div>
 			  </div>
 			</section>
-			</section>
-		</header>
-		<br>
+		
 		<!-- IMAGEN DE LA PAGINA DE MAQUINAS PRINCIPAL -->
 		
 		<div id="machinesStatsContainer"></div>
@@ -1251,6 +1251,8 @@
 		            	        '<button title="Primera Flag User/Root" type="button" class="btn-flag" ' +
 		            	        'data-first-user="' + machine.firstUser + '" ' +
 		            	        'data-first-root="' + machine.firstRoot + '" ' +
+		            	        'data-first-user-date="' + machine.firstUserDate + '" ' +
+		            	        'data-first-root-date="' + machine.firstRootDate + '" ' +
 		            	        'onclick="openPopup(this)" ' +
 		            	        'style="background:none; border:none; padding:0; cursor:pointer;">' +
 		            	            '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 64 64" fill="none" stroke="#ec0725" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
@@ -1554,88 +1556,105 @@
 	  
 	  /* POPUP FIRST FLAGS */
 	  
-	  function openPopup(button) {
+	  // Función para formatear fechas
+		function formatDate(dateStr) {
+		  if (!dateStr) return '';
+		  const date = new Date(dateStr);
+		  const options = { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+		  return date.toLocaleString('es-ES', options);
+		}
+		
+		// POPUP FIRST FLAGS
+		function openPopup(button) {
 		  const firstUser = button.getAttribute('data-first-user') || 'N/A';
 		  const firstRoot = button.getAttribute('data-first-root') || 'N/A';
+		  const firstUserDate = button.getAttribute('data-first-user-date') || '';
+		  const firstRootDate = button.getAttribute('data-first-root-date') || '';
 		
 		  const popup = document.createElement('div');
 		  popup.id = 'flagPopupDynamic';
 		  popup.style.cssText =
-		    'display:flex;' +
-		    'position:fixed;top:0;left:0;width:100vw;height:100vh;' +
-		    'background:linear-gradient(135deg, rgba(0,0,0,0.85), rgba(20,20,20,0.9));' +
-		    'justify-content:center;align-items:center;' +
-		    'z-index:9999;' +
-		    'line-height: 2.3rem;' +
-		    'animation:fadeIn 0.4s ease forwards;';
+		    'display: flex;' +
+		    'position: fixed;' +
+		    'top: 0; left: 0;' +
+		    'width: 100vw; height: 100vh;' +
+		    'background: rgba(10, 5, 20, 0.92);' +
+		    'backdrop-filter: blur(6px);' +
+		    'justify-content: center;' +
+		    'align-items: center;' +
+		    'z-index: 9999;' +
+		    'animation: fadeIn 0.4s ease forwards;';
 		
 		  popup.innerHTML =
 		    '<div style="' +
-		      'background:#121212;' +
-		      'color:#f0f0f0;' +
-		      'padding:40px 35px;' +
-		      'border-radius:20px;' +
-		      'max-width:400px;width:90vw;' +
-		      'box-shadow:0 15px 40px rgba(0,0,0,0.8);' +
-		      'border:2px solid rgba(255,255,255,0.05);' +
-		      'backdrop-filter: blur(8px);' +
-		      'text-align:center;' +
-		      'position:relative;' +
-		      'font-family:Poppins,Segoe UI,Tahoma,sans-serif;' +
+		      'background: linear-gradient(135deg, #1f103f, #2c145b);' +
+		      'color: #f0f0f0;' +
+		      'padding: 40px 35px;' +
+		      'border-radius: 20px;' +
+		      'width: 90vw;' +
+		      'max-width: 450px;' +
+		      'box-shadow: 0 25px 60px rgba(0,0,0,0.85);' +
+		      'position: relative;' +
+		      "font-family: 'Poppins', 'Segoe UI', sans-serif;" +
 		    '">' +
-		      '<button id="closePopupBtn" aria-label="Cerrar popup" style="' +
-		        'position:absolute;top:14px;right:14px;' +
-		        'background:#ec0725;border:none;' +
-		        'color:#fff;font-size:22px;' +
-		        'width:36px;height:36px;' +
-		        'border-radius:50%;cursor:pointer;' +
-		        'transition:all 0.3s ease;' +
-		        'box-shadow:0 4px 10px rgba(0,0,0,0.5);' +
+		      '<button type="button" id="closePopupBtn" aria-label="Cerrar popup" style="' +
+		        'position: absolute;' +
+		        'top: 16px;' +
+		        'right: 16px;' +
+		        'background: none;' +
+		        'border: none;' +
+		        'color: #ffffff;' +
+		        'font-size: 28px;' +
+		        'font-weight: bold;' +
+		        'cursor: pointer;' +
+		        'transition: color 0.3s ease, transform 0.2s ease;' +
 		      '">×</button>' +
-		      '<div style="margin-bottom:20px;">' +
-		        '<div style="font-size:2.2rem; color:#f5a623; font-weight:800;">Primeras Flags</div>' +
-		        '<p style="font-size:1.05rem; margin-top:10px; color:#ccc;">¡Los más rápidos en capturar User y Root!</p>' +
+		
+		      '<h2 style="font-size: 2.1rem; font-weight: 700; color: #a78bfa; margin-bottom: 10px;">🚩 Primeras Flags</h2>' +
+		      '<p style="font-size: 1rem; color: #d0cde1; margin-bottom: 30px; line-height: 2rem;">¡Los más rápidos en capturar User y Root!</p>' +
+		
+		      '<div style="margin-bottom: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; line-height: 2rem;">' +
+		        '<div style="font-size: 1rem; color: #aaa;">👤 <strong style="color:#80ffea;">First User:</strong></div>' +
+		        '<div style="font-size: 1.35rem; font-weight: 600; color: #ffffff; margin-top: 5px;">' + firstUser + '</div>' +
+		        '<div style="font-size: 0.9rem; color: #b3b3b3; margin-top: 6px;">🗓️ ' + formatDate(firstUserDate) + '</div>' +
 		      '</div>' +
-		      '<div style="margin:15px 0;">' +
-		        '<span style="font-size:1rem; color:#aaa;">👤 <strong style="color:#60d394;">First User:</strong></span><br>' +
-		        '<span style="font-size:1.1rem; font-weight:600; color:#fff;">' + firstUser + '</span>' +
-		      '</div>' +
-		      '<div style="margin:15px 0;">' +
-		        '<span style="font-size:1rem; color:#aaa;">👑 <strong style="color:#ee6055;">First Root:</strong></span><br>' +
-		        '<span style="font-size:1.1rem; font-weight:600; color:#fff;">' + firstRoot + '</span>' +
+		
+		      '<div style="margin-bottom: 10px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; line-height: 2rem;">' +
+		        '<div style="font-size: 1rem; color: #aaa;">👑 <strong style="color:#ff7eb9;">First Root:</strong></div>' +
+		        '<div style="font-size: 1.35rem; font-weight: 600; color: #ffffff; margin-top: 5px;">' + firstRoot + '</div>' +
+		        '<div style="font-size: 0.9rem; color: #b3b3b3; margin-top: 6px;">🗓️ ' + formatDate(firstRootDate) + '</div>' +
 		      '</div>' +
 		    '</div>';
 		
 		  document.body.appendChild(popup);
 		
 		  const closeBtn = document.getElementById('closePopupBtn');
-		  closeBtn.onmouseenter = function () {
-		    closeBtn.style.backgroundColor = '#a9041b';
-		    closeBtn.style.transform = 'scale(1.1)';
+		  closeBtn.onmouseenter = function() {
+		    closeBtn.style.color = '#ff4d6d';
+		    closeBtn.style.transform = 'scale(1.2)';
 		  };
-		  closeBtn.onmouseleave = function () {
-		    closeBtn.style.backgroundColor = '#ec0725';
+		  closeBtn.onmouseleave = function() {
+		    closeBtn.style.color = '#ffffff';
 		    closeBtn.style.transform = 'scale(1)';
 		  };
-		  closeBtn.onclick = function () {
+		  closeBtn.onclick = function() {
 		    document.body.removeChild(popup);
 		  };
 		
-		  popup.onclick = function (e) {
-		    if (e.target === popup) {
-		      document.body.removeChild(popup);
-		    }
+		  popup.onclick = function(e) {
+		    if (e.target === popup) document.body.removeChild(popup);
 		  };
 		
 		  const styleSheet = document.createElement('style');
 		  styleSheet.type = 'text/css';
 		  styleSheet.innerText =
 		    '@keyframes fadeIn {' +
-		    '  from { opacity: 0; transform: scale(0.95); }' +
-		    '  to { opacity: 1; transform: scale(1); }' +
+		      'from { opacity: 0; transform: scale(0.9); }' +
+		      'to { opacity: 1; transform: scale(1); }' +
 		    '}';
 		  document.head.appendChild(styleSheet);
 		}
+
 	  
 	  /* POPUP INFO MACHINE [+] (SHOW) */
 	  
@@ -1665,7 +1684,15 @@
 		      '<h2>Información detallada de la máquina</h2>' +
 		
 		      '<p class="machine-name">' + (machine.nameMachine || 'Nombre no disponible') + '</p>' +
-		
+		      '<br>' +
+		   	  // Descripción
+		      '<div class="info-row" style="margin-bottom: 10px;">' +
+		        '<h3>DESCRIPCIÓN: </h3>' +
+		        '<p>' + (machine.description && machine.description.trim() !== '' 
+		                  ? machine.description 
+		                  : 'No hay descripción para esta máquina.') + '</p>' +
+		      '</div>' +
+				'<br>' +
 		      // MD5 hash con icono
 		      '<div class="info-row">' +
 		        '<span id="md5-hash" title="' + (machine.md5 || '') + '" aria-label="MD5 hash">' +
@@ -1740,15 +1767,15 @@
 			    '</div>' +
 			  '</section>' +
 			  '<br>' +
-		      // Logs recientes
-		      '<section>' +
-		        '<h3>Logs recientes</h3>' +
-		        '<div class="logs" tabindex="0" aria-label="Logs recientes">' +
-		          (machine.logs && machine.logs.length > 0
-		            ? machine.logs.map(log => '<p style="margin:0 0 6px 0;">' + log + '</p>').join('')
-		            : '<p>No hay logs disponibles.</p>') +
-		        '</div>' +
-		      '</section>' +
+				// Logs recientes
+			  '<section>' +
+			    '<h3>Logs recientes</h3>' +
+			    '<div class="logs" tabindex="0" aria-label="Lista de logs recientes">' +
+			      (machine.logs && machine.logs.length > 0
+			        ? machine.logs.map(log => '<p style="margin:0 0 6px 0;">' + log + '</p>').join('')
+			        : '<p>No hay logs disponibles.</p>') +
+			    '</div>' +
+			  '</section>' +
 		
 		    '</div>';
 		
@@ -1799,9 +1826,9 @@
 		      var html = '';
 		
 		      // Badge total máquinas
-		      html += '<span class="badge badge-vms">' +
+		      /*html += '<span class="badge badge-vms">' +
 	           data.totalMachines + ' VMs' +
-	        '</span>';
+	        '</span>';*/
 		
 		      // Recorrer dificultades
 		      for (var difficulty in data.countsByDifficulty) {
@@ -1925,7 +1952,7 @@
 		 window.addEventListener('load', function() {
 	      setTimeout(function() {
 	        document.getElementById('loader').style.display = 'none';
-	      }, 1000); // 1 segundo para simular carga
+	      }, 2000); // 2 segundos para simular carga
 	    });
 	</script>
 </body>

@@ -275,6 +275,7 @@ function showCard(name, os, difficulty, creator, release, id) {
 	
 	/* ESCRITURA DE TEXTO */
 	
+	/*
 	document.addEventListener('DOMContentLoaded', () => {
 	  const titleEl = document.querySelector('.pwned-title');
 	  const text = 'PWNED!';
@@ -293,6 +294,7 @@ function showCard(name, os, difficulty, creator, release, id) {
 
 	  type();
 	});
+	*/
 	
 	/* LOGICA DEL MENU HAMBURGUESA */
 	

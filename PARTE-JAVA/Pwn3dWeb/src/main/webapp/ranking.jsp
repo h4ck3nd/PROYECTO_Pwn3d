@@ -234,6 +234,7 @@
     .ranking-col.points {
       justify-content: flex-end;
       font-weight: 700;
+      font-size: 0.6rem;
     }
 
     .avatar {
@@ -265,6 +266,7 @@
       color: var(--text-light);
       user-select: none;
       background-color: var(--panel-bg);
+      margin-top: 4.5rem;
     }
 
     .top1-image {
@@ -646,7 +648,7 @@
   <div class="ranking-wrapper">
     <div class="ranking-buttons">
       <button onclick="window.location.href='ranking.jsp?periodo=mes'" style="font-family: 'Press Start 2P', monospace;">Top del Mes</button>
-      <button onclick="window.location.href='ranking.jsp?periodo=ano'"style="font-family: 'Press Start 2P', monospace;">Top del Año</button>
+      <button onclick="window.location.href='ranking.jsp?periodo=ano'" style="font-family: 'Press Start 2P', monospace;">Top del Año</button>
     </div>
 
     <div class="ranking-flex">
@@ -658,10 +660,21 @@
           <div>Hacker</div>
           <div style="text-align:right;">Puntos</div>
         </div>
+
         <%
           int pos = 1;
           User topUser = null;
+          User currentUser = null;
+          int posicionUsuario = -1;
+          ImgProfile imgUsuario = null;
+
           for (User u : ranking) {
+            if (u.getId() == userId) {
+              currentUser = u;
+              posicionUsuario = pos;
+              imgUsuario = imgDao.getImgProfileByUserId(u.getId());
+            }
+
             ImgProfile img = imgDao.getImgProfileByUserId(u.getId());
             String imgPath = (img != null) ? request.getContextPath() + "/" + img.getPathImg() : request.getContextPath() + "/imgProfile/default.png";
             String flagPath = (u.getPais() != null) ? request.getContextPath() + "/img/flags/" + u.getPais().toLowerCase() + ".svg" : null;
@@ -687,6 +700,29 @@
           }
           imgDao.cerrarConexion();
         %>
+
+        <%-- Mostrar siempre al usuario actual al final --%>
+        <% if (currentUser != null) {
+              String imgPathUser = (imgUsuario != null && imgUsuario.getPathImg() != null)
+                      ? request.getContextPath() + "/" + imgUsuario.getPathImg()
+                      : request.getContextPath() + "/imgProfile/default.png";
+              String flagPathUser = (currentUser.getPais() != null)
+                      ? request.getContextPath() + "/img/flags/" + currentUser.getPais().toLowerCase() + ".svg"
+                      : null;
+        %>
+        <hr style="border: 1px solid var(--border-color); margin: 18px auto; width: 90%;">
+        <div class="ranking-row" style="border-left: 6px solid #8e7cc3;">
+          <div class="ranking-col">#<%= posicionUsuario %></div>
+          <div class="ranking-col-hackers">
+            <img src="<%= imgPathUser %>" class="avatar" alt="avatar"/>
+            <span><%= currentUser.getNombre() %> @<%= currentUser.getUsuario() %></span>
+            <% if (flagPathUser != null) { %>
+              <img src="<%= flagPathUser %>" class="flag-icon" alt="flag" />
+            <% } %>
+          </div>
+          <div class="ranking-col points" style="text-align:right;"><%= currentUser.getPuntos() %> pts</div>
+        </div>
+        <% } %>
       </div>
 
       <!-- Panel TOP 1 -->
@@ -713,7 +749,7 @@
       <% } %>
     </div>
   </div>
-  </main>
+</main>
   
   <script>
 	  const hamburger = document.getElementById("hamburger");

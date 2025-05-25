@@ -1,15 +1,19 @@
 :root {
-    --color-background-dark: #11041c;
+    /*--color-background-dark: #11041c;*/
+     --color-background-dark: #2c2b30; /* FONDO CON TONO MAS CLARO */
     --color-sidebar-bg: #2c2c3a;
   --shadow-color: rgba(0, 0, 0, 0.6);
   /*--color-sidebar-bg: #333333;*/ /* COLOR DE FONDO DE LA HAMBURGUESA */
-    /*--color-background-dark: #2c2b30;*/ /* FONDO CON TONO MAS CLARO */
     --color-background-light: #ffffff;
     --color-text-dark: #ffffff;
     --color-text-light: #141414;
     /*--color-header-footer-bg: #1e1e1e;*/ /* COLORES HEADER, HEADER MAQUINAS Y FOOTER */
-    --color-header-footer-bg: #260045; /* COLORES HEADER, HEADER MAQUINAS Y FOOTER (VERSION MORADA) */
-    --color-header-footer-text: #ffffffa4;
+    /*--color-header-footer-bg: #260045;*/ /* COLORES HEADER, HEADER MAQUINAS Y FOOTER (VERSION MORADA) */
+    --color-header-footer-bg: #4c0171; /* COLORES HEADER, HEADER MAQUINAS Y FOOTER (VERSION MORADA MAS CLARO) */
+    
+    /*--color-header-footer-text: #ffffffa4;*/ /* COLOR DE LAS LETRAS DE LAS MAQUINAS DEL HEADER Y DEL FOOTER */
+    --color-header-footer-text: #dcaef3; /* COLOR DE LAS LETRAS DE LAS MAQUINAS DEL HEADER Y DEL FOOTER (MAS MORADO) */
+    
     --color-link-text: #ffffff;
     --color-link-hover: #86d6fc;
     --color-active-link: #daa04a;
@@ -24,7 +28,8 @@
     --color-accent-info: #ec0725;
     --color-accent-danger: #ec0725;
     /*--color-filter-bg: #2b2b2b;*/ /* FILTRO, BOTON ADMIN Y BARRA DE BUSQUEDA */
-    --color-filter-bg: #280046; /* FILTRO, BOTON ADMIN Y BARRA DE BUSQUEDA (VERSION MORADA) */
+    /* --color-filter-bg: #280046;*/ /* FILTRO, BOTON ADMIN Y BARRA DE BUSQUEDA (VERSION MORADA) */
+    --color-filter-bg: #390056; /* FILTRO, BOTON ADMIN Y BARRA DE BUSQUEDA (VERSION MORADA MAS CLARA) */
   --color-filter-hover-bg: #3a3a3a;
   --color-filter-text: #dddddd;
   --color-filter-shadow: rgba(0, 0, 0, 0.5);
@@ -36,7 +41,8 @@
     --color-form-bg: #1e2125;
     --color-form-border: #cbc7c7;
     /*--color-submit-bg: #2e2e2e;*/ /* BOTON ENVIAR NUEVA VM */
-    --color-submit-bg: #280046; /* BOTON ENVIAR NUEVA VM (VERSION MORADA) */
+    /* --color-submit-bg: #280046;*/ /* BOTON ENVIAR NUEVA VM (VERSION MORADA) */
+    --color-submit-bg: #390056; /* BOTON ENVIAR NUEVA VM (VERSION MORADA MAS CLARO) */
     --color-submit-hover-bg: #444; /* Más claro al pasar el mouse */
     --color-submit-text: #e0e0e0; /* Texto gris claro */
     --color-submit-shadow: rgba(0, 0, 0, 0.4); /* Sombra sutil */
@@ -57,9 +63,16 @@
     --color-card-text: #c8cbcf;
     /*--color-card-bg-light: #1e2125;
     --color-card-hover: rgba(0, 0, 0, 0.5);*/
-    --color-card-bg-light: rgba(46, 22, 74, 0.3);  /* Un tono más suave y oscuro para las filas impares */
+    
+    /*--color-card-bg-light: rgba(46, 22, 74, 0.3); */ /* COLOR DE LAS FILAS IMPARES DE LAS MAQUINAS */
+    /*--color-card-bg-pares: rgba(28, 14, 45, 0.4);*/  /* COLOR DE LAS FILAS PARES DE LAS MAQUINAS */
     /*--color-card-bg-light: #3A1E4A;*/
-    --color-card-hover: rgba(19, 13, 20, 1);  /* Ajuste en el hover con mayor transparencia */
+    /*--color-card-hover: rgba(19, 13, 20, 1); */ /* COLOR DEL HOVER AL PASAR POR LAS MAQUINAS */
+    
+    --color-card-bg-light: rgba(63, 31, 102, 0.3); /* COLOR DE LAS FILAS IMPARES DE LAS MAQUINAS */
+    --color-card-bg-pares: rgba(54, 28, 85, 0.4); /* COLOR DE LAS FILAS PARES DE LAS MAQUINAS */
+    --color-card-hover: rgba(46, 18, 64, 0.7); /* COLOR DEL HOVER AL PASAR POR LAS MAQUINAS */
+    
     --color-card-title: white;
     --color-tooltip-bg: #333;
     --color-tooltip-text: #fff;
@@ -696,9 +709,16 @@ tbody tr:nth-child(odd) {
 }
 */
 
+/* TONO MAS OSCURO PARA LAS FILAS PARES */
+/*
 tbody tr:nth-child(even) {
-    background-color: rgba(28, 14, 45, 0.4)
-;  /* Un tono más oscuro para las filas pares */
+    background-color: rgba(28, 14, 45, 0.4);
+}
+*/
+/* TONO MAS CLARO PARA LAS FILAS PARES */
+
+tbody tr:nth-child(even) {
+    background-color: var(--color-card-bg-pares);
 }
 
 tbody tr:nth-child(odd) {
@@ -1669,6 +1689,7 @@ label {
     align-items: center;
     justify-content: center;
     height: 100%; /* 🔥 Esto es clave */
+    margin-right: -10px;
 }
 
 .logo-section img {

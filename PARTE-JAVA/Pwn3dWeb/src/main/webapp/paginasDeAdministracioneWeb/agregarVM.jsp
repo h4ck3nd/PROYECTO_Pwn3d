@@ -445,7 +445,14 @@
 	        <input type="text" id="root_flag" name="root_flag" placeholder="FLAG{root_flag}">
 	    </div>
 	</div>
-
+	
+	<div class="form-group">
+	    <label for="description">Descripción de la Máquina:</label>
+	    <div class="input-wrapper">
+	        <textarea id="description" name="description" placeholder="Breve descripción técnica o informativa de la máquina..." rows="5" style="width: 100%;" required></textarea>
+	    </div>
+	</div>
+	
     <button type="submit">Enviar</button>
 </form>
 </div>
