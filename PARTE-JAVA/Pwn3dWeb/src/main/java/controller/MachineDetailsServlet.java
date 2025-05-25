@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -59,7 +61,8 @@ public class MachineDetailsServlet extends HttpServlet {
                         rs.getString("img_name_os"),
                         rs.getString("download_url"),
                         rs.getString("user_flag"),
-                        rs.getString("root_flag")
+                        rs.getString("root_flag"),
+                        rs.getString("description")
                 );
                 System.out.println("✅ Máquina encontrada: " + machine.getNameMachine());
             } else {
@@ -81,21 +84,31 @@ public class MachineDetailsServlet extends HttpServlet {
                 }
             }
 
-            // NUEVO: obtener el primer user/root desde tabla flags
             String firstUserName = "";
             String firstRootName = "";
+            String firstUserDate = "";
+            String firstRootDate = "";
 
             if (machine != null) {
-                String flagQuery = "SELECT username, first_flag_user, first_flag_root FROM flags WHERE vm_name = ?";
+                String flagQuery = "SELECT username, first_flag_user, first_flag_root, created_at FROM flags WHERE vm_name = ?";
                 try (PreparedStatement flagStmt = conn.prepareStatement(flagQuery)) {
                     flagStmt.setString(1, machine.getNameMachine());
                     ResultSet flagRs = flagStmt.executeQuery();
+
                     while (flagRs.next()) {
-                        if (flagRs.getBoolean("first_flag_user")) {
-                            firstUserName = flagRs.getString("username");
+                        String username = flagRs.getString("username");
+                        boolean isUser = flagRs.getBoolean("first_flag_user");
+                        boolean isRoot = flagRs.getBoolean("first_flag_root");
+                        String createdAt = flagRs.getString("created_at");
+
+                        if (isUser && firstUserName.isEmpty()) {
+                            firstUserName = username;
+                            firstUserDate = createdAt;
                         }
-                        if (flagRs.getBoolean("first_flag_root")) {
-                            firstRootName = flagRs.getString("username");
+
+                        if (isRoot && firstRootName.isEmpty()) {
+                            firstRootName = username;
+                            firstRootDate = createdAt;
                         }
                     }
                 } catch (SQLException e) {
@@ -127,6 +140,36 @@ public class MachineDetailsServlet extends HttpServlet {
                     e.printStackTrace();
                 }
             }
+            
+         // NUEVO: Obtener logs recientes de flags
+            List<String> logs = new ArrayList<>();
+            String logsQuery = "SELECT u.usuario, f.tipo_flag, f.created_at " +
+                               "FROM flags f JOIN users u ON f.id_user = u.id " +
+                               "WHERE f.vm_name = ? " +
+                               "ORDER BY f.created_at DESC LIMIT 20";
+
+            try (PreparedStatement logStmt = conn.prepareStatement(logsQuery)) {
+                logStmt.setString(1, machine.getNameMachine());
+                ResultSet logRs = logStmt.executeQuery();
+                while (logRs.next()) {
+                    String usuario = logRs.getString("usuario");
+                    String tipo = logRs.getString("tipo_flag");
+                    String fecha = logRs.getString("created_at");
+                    String log = usuario + " validó la flag [" + tipo + "] el " + fecha;
+                    logs.add(log);
+                }
+            } catch (SQLException e) {
+                System.err.println("💥 Error al obtener logs:");
+                e.printStackTrace();
+            }
+
+            // Construir logsJson como array JSON
+            StringBuilder logsJson = new StringBuilder("[");
+            for (int i = 0; i < logs.size(); i++) {
+                logsJson.append("\"").append(logs.get(i).replace("\"", "\\\"")).append("\"");
+                if (i < logs.size() - 1) logsJson.append(",");
+            }
+            logsJson.append("]");
 
             conexionDDBB.cerrarConexion();
             System.out.println("🔒 Conexión cerrada.");
@@ -163,7 +206,11 @@ public class MachineDetailsServlet extends HttpServlet {
                         + "\"flagsRootCount\":" + flagsRootCount + ","
                         + "\"userFlag\":\"" + machine.getUserFlag() + "\","
                         + "\"rootFlag\":\"" + machine.getRootFlag() + "\","
-                        + "\"averageRating\":" + averageRating
+                        + "\"averageRating\":" + averageRating + ","
+                        + "\"firstUserDate\":\"" + firstUserDate + "\","
+                        + "\"firstRootDate\":\"" + firstRootDate + "\","
+                        + "\"logs\":" + logsJson.toString() + ","
+                        + "\"description\":\"" + (machine.getDescription() != null ? machine.getDescription().replace("\"", "\\\"") : "") + "\""
                         + "}";
 
                 out.print(jsonResponse);

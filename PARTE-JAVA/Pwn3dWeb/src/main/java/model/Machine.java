@@ -19,12 +19,13 @@ public class Machine {
     private String downloadUrl;
     private String userFlag;
     private String rootFlag;
-
+    private String description;
+   
     // Constructor
     public Machine(String id, String nameMachine, String size, String os, String enviroment, String enviroment2, String creator,
             String difficultyCard, String difficulty, String date, String md5, String writeupUrl,
             String firstUser, String firstRoot, String imgNameOs, String downloadUrl,
-            String userFlag, String rootFlag) {
+            String userFlag, String rootFlag, String description) {
 	 this.id = id;
 	 this.nameMachine = nameMachine;
 	 this.size = size;
@@ -43,8 +44,14 @@ public class Machine {
 	 this.downloadUrl = downloadUrl;
 	 this.userFlag = userFlag;
 	 this.rootFlag = rootFlag;
+	 this.description = description;
 	}
 
+    // Getter
+    public String getDescription() {
+        return description;
+    }
+    
 	// Getters y setters
 	public String getUserFlag() {
 	 return userFlag;

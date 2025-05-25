@@ -51,9 +51,10 @@ public class MachineServlet extends HttpServlet {
         String downloadUrl = request.getParameter("download_url");
         String userFlag = request.getParameter("user_flag");
         String rootFlag = request.getParameter("root_flag");
+        String description = request.getParameter("description");
 
         // Crear un objeto de la clase Machine
-        Machine machine = new Machine(id, nameMachine, size, os, enviroment, enviroment2, creator, difficultyCard, difficulty, date, md5, writeupUrl, firstUser, firstRoot, imgNameOs, downloadUrl, userFlag, rootFlag);
+        Machine machine = new Machine(id, nameMachine, size, os, enviroment, enviroment2, creator, difficultyCard, difficulty, date, md5, writeupUrl, firstUser, firstRoot, imgNameOs, downloadUrl, userFlag, rootFlag, description);
 
         // Verificar si el id ya existe en la base de datos
         try {
@@ -87,7 +88,7 @@ public class MachineServlet extends HttpServlet {
 
     // Método para insertar la máquina en la base de datos
     private void insertMachine(Machine machine) throws SQLException {
-    	String query = "INSERT INTO machines (id, name_machine, size, os, enviroment, enviroment2, creator, difficulty_card, difficulty, date, md5, writeup_url, first_user, first_root, img_name_os, download_url, user_flag, root_flag) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    	String query = "INSERT INTO machines (id, name_machine, size, os, enviroment, enviroment2, creator, difficulty_card, difficulty, date, md5, writeup_url, first_user, first_root, img_name_os, download_url, user_flag, root_flag, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         // Asumiendo que tienes un PreparedStatement preparado para los valores
         try (PreparedStatement ps = connection.prepareStatement(query)) {
@@ -117,6 +118,8 @@ public class MachineServlet extends HttpServlet {
 
             ps.setString(17, machine.getUserFlag());
             ps.setString(18, machine.getRootFlag());
+            
+            ps.setString(19, machine.getDescription());
 
             // Ejecutar la actualización
             ps.executeUpdate();
