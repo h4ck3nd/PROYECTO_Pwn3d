@@ -23,7 +23,7 @@ CREATE TABLE machines (
 );
 
 ALTER TABLE machines ALTER COLUMN id TYPE VARCHAR(50);
-
+ALTER TABLE machines ADD COLUMN description TEXT NULL;
 
 --INSERTs de ejemplo
 
