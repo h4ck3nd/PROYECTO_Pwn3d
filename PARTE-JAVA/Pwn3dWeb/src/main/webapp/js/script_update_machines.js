@@ -8,11 +8,13 @@ function showCard(name, os, difficulty, creator, release, id) {
         html:
             '<div class="card-container">' +
                 '<div class="logo-section">' +
-                    '<img src="img/card1.png" alt="VulNyx Logo" class="card-logo">' +
+                    '<img src="img/' + name + '.png" alt="Pwn3d! Logo" class="card-logo" style="margin-right: -10px !important;" onerror="this.onerror=null;this.src=\'img/logo-flag-white.ico\';">' +
                 '</div>' +
                 '<div class="info-section">' + 
 				'<div style="display: flex; align-items: center;">' +
-				'<button class="machineBtn" title="Ver más info" style="background:none; border:none; padding:0; cursor:pointer; margin-bottom:1rem; margin-right:10px;" aria-label="Ver más información" data-machine-id="' + id + '" onclick="showMachinePopup(\'' + id + '\')">' +
+				'<div class="info-section">' + 
+				  '<div style="display: flex; align-items: center;">' +
+				  '<button class="machineBtn-details" title="Ver más info" style="background:none; border:none; padding:0; cursor:pointer; margin-bottom:1rem; margin-right:10px;" aria-label="Ver más información" data-machine-id="' + id + '">' +
 				    '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 60 60">' +
 				      '<circle cx="30" cy="30" r="28" fill="none" stroke="#00ff00" stroke-width="3" />' +
 				      '<line x1="30" y1="18" x2="30" y2="42" stroke="#00ff00" stroke-width="4" stroke-linecap="round" />' +

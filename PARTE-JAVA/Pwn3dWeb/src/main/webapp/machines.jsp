@@ -1147,159 +1147,160 @@
 	<!--<script src="<%= request.getContextPath() %>/js/machines23.js"></script>-->
 	<script src="<%= request.getContextPath() %>/js/jsMachines.jsp"></script>
 	<script defer>
-	  const toggleBtn = document.getElementById('toggle-theme');
-	  const body = document.body;
-	
-	  if (localStorage.getItem('theme') === 'light') {
-	    body.classList.add('light-theme');
-	  } else {
-	    body.classList.remove('light-theme');
-	  }
-	
-	  toggleBtn.addEventListener('click', () => {
-	    body.classList.toggle('light-theme');
-	    const isLight = body.classList.contains('light-theme');
-	    localStorage.setItem('theme', isLight ? 'light' : 'dark');
-	  });
-	  
-	  document.addEventListener("DOMContentLoaded", function() {
-		    document.querySelectorAll("tr[data-machine-id]").forEach(function(row) {
-		        var machineId = row.dataset.machineId;
+	const toggleBtn = document.getElementById('toggle-theme');
+	const body = document.body;
 
-		        fetch('<%= request.getContextPath() %>/machineDetails?id=' + machineId)
-		            .then(function(res) {
-		                return res.json();
-		            })
-		            .then(function(machine) {
-		                // Construir dinámicamente el contenido HTML con la concatenación de cadenas
-		            	row.innerHTML = 
-		            	    '<td class="idnum">' +
-		            	        '<span id="idnum">' + machine.id + '</span>' +
-		            	    '</td>' +
-		            	    '<td class="card">' +
-		            	        '<button class="card-btn machineBtn" title="Ver Info!" ' +
-		            	            'onclick="showCard(\'' + machine.nameMachine + '\', \'' + machine.os + '\', \'' + machine.difficulty + '\', \'' + machine.creator + '\', \'' + machine.date + '\', \'' + machine.id + '\')">' +
-		            	            '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
-		            	                '<circle cx="12" cy="12" r="10" />' +
-		            	                '<line x1="12" y1="8" x2="12" y2="8.01" />' +
-		            	                '<line x1="12" y1="10" x2="12" y2="16" />' +
-		            	            '</svg>' +
-		            	        '</button>' +
-		            	    '</td>' +
-		            	    '<td id="vm">' +
-		            	        '<div class="vm-name-btn level-btn ' + machine.difficulty + '">' +
-		            	            '<img class="' + machine.difficulty + '-dots" title="' + machine.os + ' VM" ' +
-		            	                'alt="' + machine.os + '" src="<%= request.getContextPath() %>/img/' + machine.imgNameOs + '.svg" width="22" height="22" loading="lazy">' +
-		            	            '<span class="vm-name-wrapper" style="display: flex; align-items: center; gap: 0.4rem;">' +
-		            	                '<span class="vm-name" style="margin-right: -60px;">' + machine.nameMachine + '</span>' +
-		            	                '<span class="vm-size" style="margin-right: 20px; margin-left: auto;">' + machine.size + '</span>' +
-		            	            '</span>' +
-		            	        '</div>' +
-		            	    '</td>' +
-		            	    '<td class="tested">' +
-		            	        '<img title="Entorno 1" alt="' + machine.enviroment + ' logo" src="<%= request.getContextPath() %>/img/' + machine.enviroment + '.png" width="25" height="25">' +
-		            	        '<img title="Entorno 2" alt="' + machine.enviroment2 + ' logo" src="<%= request.getContextPath() %>/img/' + machine.enviroment2 + '.png" width="25" height="25"' +
-		            	        ((machine.enviroment2 && machine.enviroment2 !== "null") ? '' : ' hidden') + '>' +
-		            	    '</td>' +
-		            	    '<td class="md5">' +
-		            	        '<span id="md5-hash" title="' + machine.md5 + '">' +
-		            	        '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-md5" width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="#FFA500" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
-		            	            '<path d="M14 3v4a1 1 0 0 0 1 1h4" />' +
-		            	            '<path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />' +
-		            	            '<path d="M6.5 16v-2c0 -0.5 0.5 -1 1 -1s1 0.5 1 1v2" />' +
-		            	            '<path d="M8.5 16v-2c0 -0.5 0.5 -1 1 -1s1 0.5 1 1v2" />' +
-		            	            '<path d="M11.5 16v-3h1c0.6 0 1 0.5 1 1.5s-0.4 1.5 -1 1.5h-1z" />' +
-		            	            '<path d="M16.5 13h-2v1.5c0.3 -0.2 0.7 -0.3 1 -0.3 0.6 0 1 0.4 1 1s-0.4 1 -1 1 -1 -0.4 -1 -1" />' +
-		            	        '</svg>' +
-		            	        '</span>' +
-		            	        '<button class="copy-btn" title="Copiar al clipboard!" onclick="copyToClipboard(this)">' +
-		            	        '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FFB84D" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
-		            	            '<path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />' +
-		            	            '<path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />' +
-		            	        '</svg>' +
-		            	        '</button>' +
-		            	        '<div class="tooltip">Copied!</div>' +
-		            	    '</td>' +
-		            	    '<td class="writeups">' +
-		            	        '<button class="writeup-btn" title="Ver writeups" onclick="showWriteups(\'' + machine.nameMachine + '\')">' +
-		            	        '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#00ffff" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
-		            	            '<path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />' +
-		            	            '<path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />' +
-		            	            '<line x1="3" y1="6" x2="3" y2="19" />' +
-		            	            '<line x1="12" y1="6" x2="12" y2="19" />' +
-		            	            '<line x1="21" y1="6" x2="21" y2="19" />' +
-		            	        '</svg>' +
-		            	        '</button>' +
-		            	        '<button class="add-writeup-btn" title="Añadir writeup" onclick="showWriteupForm(\'' + machine.nameMachine + '\')">' +
-		            	        '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3498db" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
-		            	            '<path d="M14 3v4a1 1 0 0 0 1 1h4" />' +
-		            	            '<path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h6l6 6v10a2 2 0 0 1 -2 2z" />' +
-		            	            '<path d="M12 17v-6" />' +
-		            	            '<path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />' +
-		            	        '</svg>' +
-		            	        '</button>' +
-		            	        '<section id="' + machine.nameMachine + '" class="modal">' +
-		            	        '<article class="modal-content">' +
-		            	            '<span class="close">&times;</span>' +
-		            	            '<p class="writeup-title"></p>' +
-		            	            '<div class="writeups-container"></div>' +
-		            	        '</article>' +
-		            	        '</section>' +
-		            	    '</td>' +
-		            	    '<td class="first-user">' + machine.creator + '</td>' +
-		            	    '<td class="first-user">' +
-		            	        '<button title="Primera Flag User/Root" type="button" class="btn-flag" ' +
-		            	        'data-first-user="' + machine.firstUser + '" ' +
-		            	        'data-first-root="' + machine.firstRoot + '" ' +
-		            	        'data-first-user-date="' + machine.firstUserDate + '" ' +
-		            	        'data-first-root-date="' + machine.firstRootDate + '" ' +
-		            	        'onclick="openPopup(this)" ' +
-		            	        'style="background:none; border:none; padding:0; cursor:pointer;">' +
-		            	            '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 64 64" fill="none" stroke="#ec0725" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
-		            	              '<circle cx="32" cy="36" r="20" fill="#222" stroke="#ec0725" stroke-width="3" />' +
-		            	              '<rect x="28" y="12" width="8" height="6" fill="#ec0725" rx="1" ry="1" />' +
-		            	              '<line x1="32" y1="36" x2="32" y2="20" stroke="#ec0725" stroke-width="3" />' +
-		            	              '<line x1="32" y1="28" x2="32" y2="16" stroke="#ec0725" stroke-width="2" />' +
-		            	              '<path d="M32 16 L44 22 L32 28 Z" fill="#daa04a" stroke="#daa04a" />' +
-		            	            '</svg>' +
-		            	        '</button>' +
-		            	    '</td>' +
-		            	    '<td class="flag">' +
-		            	        '<button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm(\'\', \'' + machine.nameMachine + '\')">' +
-		            	            '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
-		            	                '<path d="M5 5v16" />' +
-		            	                '<path d="M5 5h14l-3 5l3 5h-14" />' +
-		            	            '</svg>' +
-		            	        '</button>' +
-		            	    '</td>' +
-		            	    '<td class="rating">' +
-		            	    '<span class="star-rating" title="Valoración" ' +
-		            	      'data-vm-name="' + machine.nameMachine + '" ' +
-		            	      'data-already-voted="' + machine.alreadyVoted + '">' +
-		            	      (function () {
-		            	        let stars = '';
-		            	        let average = Math.round(machine.averageRating || 0);  // ← usa el nuevo campo
-		            	        for (let i = 0; i < 5; i++) {
-		            	        	stars += '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" ' +
-				            	            'fill="' + (i < average ? '#ffc107' : 'none') + '" ' +
-				            	            'stroke="#ffc107" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
-				            	            '<path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 ' +
-				            	            '9.19 8.63 2 9.24l5.46 4.73L5.82 21z" /></svg>';
-		            	        }
-		            	        return stars;
-		            	      })() +
-		            	    '</span>' +
-		            	  '</td>' +
-		            	    '<td class="url">' +
-		            	        '<a href="' + machine.downloadUrl + '" target="_blank" title="Descargar VM" style="color: white; font-weight: bold;">Download!</a>' +
-		            	    '</td>';
-		            })
-		            .catch(function(err) {
-		                console.error("Error al cargar máquina ID", machineId, err);
-		                row.innerHTML = '<td colspan="10">⚠️ Error al cargar la máquina ' + machineId + '</td>';
-		            });
-		    });
-		});
+	if (localStorage.getItem('theme') === 'light') {
+	  body.classList.add('light-theme');
+	} else {
+	  body.classList.remove('light-theme');
+	}
+
+	toggleBtn.addEventListener('click', () => {
+	  body.classList.toggle('light-theme');
+	  const isLight = body.classList.contains('light-theme');
+	  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+	});
+
+	document.addEventListener("DOMContentLoaded", function () {
+	  fetch('<%= request.getContextPath() %>/ultimaMaquina')
+	    .then(response => response.json())
+	    .then(data => {
+	      const ultimoId = data.ultimoId;
+
+	      document.querySelectorAll("tr[data-machine-id]").forEach(function (row) {
+	        const machineId = row.dataset.machineId;
+
+	        fetch('<%= request.getContextPath() %>/machineDetails?id=' + machineId)
+	          .then(res => res.json())
+	          .then(machine => {
+	            const isNew = machine.id == ultimoId;
+	            const newBadge = isNew
+	              ? '<div style="position: absolute; top: 5px; left: 5px; background: red; color: white; font-weight: bold; font-size: 10px; padding: 2px 6px; border-radius: 8px;">NEW</div>'
+	              : '';
+
+	            row.innerHTML =
+	              '<td class="idnum" style="position: relative;">' + newBadge +
+	              '<span id="idnum">' + machine.id + '</span>' +
+	              '</td>' +
+	              '<td class="card">' +
+	                '<button class="card-btn machineBtn" title="Ver Info!" onclick="showCard(\'' + machine.nameMachine + '\', \'' + machine.os + '\', \'' + machine.difficulty + '\', \'' + machine.creator + '\', \'' + machine.date + '\', \'' + machine.id + '\')">' +
+	                  '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3fa8f4" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+	                    '<circle cx="12" cy="12" r="10" />' +
+	                    '<line x1="12" y1="8" x2="12" y2="8.01" />' +
+	                    '<line x1="12" y1="10" x2="12" y2="16" />' +
+	                  '</svg>' +
+	                '</button>' +
+	              '</td>' +
+	              '<td id="vm">' +
+	                '<div class="vm-name-btn level-btn ' + machine.difficulty + '">' +
+	                  '<img class="' + machine.difficulty + '-dots" title="' + machine.os + ' VM" alt="' + machine.os + '" src="<%= request.getContextPath() %>/img/' + machine.imgNameOs + '.svg" width="22" height="22" loading="lazy">' +
+	                  '<span class="vm-name-wrapper" style="display: flex; align-items: center; gap: 0.4rem;">' +
+	                    '<span class="vm-name" style="margin-right: -60px;">' + machine.nameMachine + '</span>' +
+	                    '<span class="vm-size" style="margin-right: 20px; margin-left: auto;">' + machine.size + '</span>' +
+	                  '</span>' +
+	                '</div>' +
+	              '</td>' +
+	              '<td class="tested">' +
+	                '<img title="Entorno 1" alt="' + machine.enviroment + ' logo" src="<%= request.getContextPath() %>/img/' + machine.enviroment + '.png" width="25" height="25">' +
+	                '<img title="Entorno 2" alt="' + machine.enviroment2 + ' logo" src="<%= request.getContextPath() %>/img/' + machine.enviroment2 + '.png" width="25" height="25"' +
+	                ((machine.enviroment2 && machine.enviroment2 !== "null") ? '' : ' hidden') + '>' +
+	              '</td>' +
+	              '<td class="md5">' +
+	                '<span id="md5-hash" title="' + machine.md5 + '">' +
+	                  '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-md5" width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="#FFA500" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+	                    '<path d="M14 3v4a1 1 0 0 0 1 1h4" />' +
+	                    '<path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />' +
+	                    '<path d="M6.5 16v-2c0 -0.5 0.5 -1 1 -1s1 0.5 1 1v2" />' +
+	                    '<path d="M8.5 16v-2c0 -0.5 0.5 -1 1 -1s1 0.5 1 1v2" />' +
+	                    '<path d="M11.5 16v-3h1c0.6 0 1 0.5 1 1.5s-0.4 1.5 -1 1.5h-1z" />' +
+	                    '<path d="M16.5 13h-2v1.5c0.3 -0.2 0.7 -0.3 1 -0.3 0.6 0 1 0.4 1 1s-0.4 1 -1 1 -1 -0.4 -1 -1" />' +
+	                  '</svg>' +
+	                '</span>' +
+	                '<button class="copy-btn" title="Copiar al clipboard!" onclick="copyToClipboard(this)">' +
+	                  '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#FFB84D" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+	                    '<path d="M8 8m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />' +
+	                    '<path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />' +
+	                  '</svg>' +
+	                '</button>' +
+	                '<div class="tooltip">Copied!</div>' +
+	              '</td>' +
+	              '<td class="writeups">' +
+	                '<button class="writeup-btn" title="Ver writeups" onclick="showWriteups(\'' + machine.nameMachine + '\')">' +
+	                  '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-book" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#00ffff" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+	                    '<path d="M3 19a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />' +
+	                    '<path d="M3 6a9 9 0 0 1 9 0a9 9 0 0 1 9 0" />' +
+	                    '<line x1="3" y1="6" x2="3" y2="19" />' +
+	                    '<line x1="12" y1="6" x2="12" y2="19" />' +
+	                    '<line x1="21" y1="6" x2="21" y2="19" />' +
+	                  '</svg>' +
+	                '</button>' +
+	                '<button class="add-writeup-btn" title="Añadir writeup" onclick="showWriteupForm(\'' + machine.nameMachine + '\')">' +
+	                  '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#3498db" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+	                    '<path d="M14 3v4a1 1 0 0 0 1 1h4" />' +
+	                    '<path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h6l6 6v10a2 2 0 0 1 -2 2z" />' +
+	                    '<path d="M12 17v-6" />' +
+	                    '<path d="M9.5 13.5l2.5 -2.5l2.5 2.5" />' +
+	                  '</svg>' +
+	                '</button>' +
+	                '<section id="' + machine.nameMachine + '" class="modal">' +
+	                  '<article class="modal-content">' +
+	                    '<span class="close">&times;</span>' +
+	                    '<p class="writeup-title"></p>' +
+	                    '<div class="writeups-container"></div>' +
+	                  '</article>' +
+	                '</section>' +
+	              '</td>' +
+	              '<td class="first-user">' + machine.creator + '</td>' +
+	              '<td class="first-user">' +
+	                '<button title="Primera Flag User/Root" type="button" class="btn-flag" ' +
+	                'data-first-user="' + machine.firstUser + '" ' +
+	                'data-first-root="' + machine.firstRoot + '" ' +
+	                'data-first-user-date="' + machine.firstUserDate + '" ' +
+	                'data-first-root-date="' + machine.firstRootDate + '" ' +
+	                'onclick="openPopup(this)" style="background:none; border:none; padding:0; cursor:pointer;">' +
+	                  '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 64 64" fill="none" stroke="#ec0725" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+	                    '<circle cx="32" cy="36" r="20" fill="#222" stroke="#ec0725" stroke-width="3" />' +
+	                    '<rect x="28" y="12" width="8" height="6" fill="#ec0725" rx="1" ry="1" />' +
+	                    '<line x1="32" y1="36" x2="32" y2="20" stroke="#ec0725" stroke-width="3" />' +
+	                    '<line x1="32" y1="28" x2="32" y2="16" stroke="#ec0725" stroke-width="2" />' +
+	                    '<path d="M32 16 L44 22 L32 28 Z" fill="#daa04a" stroke="#daa04a" />' +
+	                  '</svg>' +
+	                '</button>' +
+	              '</td>' +
+	              '<td class="flag">' +
+	                '<button class="submit-flag-btn" title="Enviar flag" onclick="showFlagForm(\'\', \'' + machine.nameMachine + '\')">' +
+	                  '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-flag-2" width="22" height="22" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f26e56" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
+	                    '<path d="M5 5v16" />' +
+	                    '<path d="M5 5h14l-3 5l3 5h-14" />' +
+	                  '</svg>' +
+	                '</button>' +
+	              '</td>' +
+	              '<td class="rating">' +
+	                '<span class="star-rating" title="Valoración" data-vm-name="' + machine.nameMachine + '" data-already-voted="' + machine.alreadyVoted + '">' +
+	                  (() => {
+	                    let stars = '';
+	                    let average = Math.round(machine.averageRating || 0);
+	                    for (let i = 0; i < 5; i++) {
+	                      stars += '<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="' + (i < average ? '#ffc107' : 'none') + '" stroke="#ffc107" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' +
+	                        '<path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />' +
+	                        '</svg>';
+	                    }
+	                    return stars;
+	                  })() +
+	                '</span>' +
+	              '</td>' +
+	              '<td class="url">' +
+	                '<a href="' + machine.downloadUrl + '" target="_blank" title="Descargar VM" style="color: white; font-weight: bold;">Download!</a>' +
+	              '</td>';
+	          })
+	          .catch(function (err) {
+	            console.error("Error al cargar máquina ID", machineId, err);
+	            row.innerHTML = '<td colspan="10">⚠️ Error al cargar la máquina ' + machineId + '</td>';
+	          });
+	      });
+	    });
+	});
 		
 	  /* SISTEMA DE PUNTUACION DE ESTRELLAS */
 	  
@@ -1654,162 +1655,17 @@
 		    '}';
 		  document.head.appendChild(styleSheet);
 		}
-
+		
 	  
 	  /* POPUP INFO MACHINE [+] (SHOW) */
 	  
-	  /* Función para abrir el popup con la info de la máquina */
-		function openMachinePopup(machine) {
-		  // Eliminar popup anterior si existe
-		  const existingPopup = document.getElementById('machinePopupDynamic');
-		  if (existingPopup) existingPopup.remove();
-		  
-		  // Barra de progreso
-		  const maxWriteups = 100; // define el máximo para el porcentaje
-		  const writeupsPercent = machine.totalWriteups ? Math.min(100, (machine.totalWriteups / maxWriteups) * 100) : 0;
-		  
-		  // Crear popup principal
-		  const popup = document.createElement('div');
-		  popup.id = 'machinePopupDynamic';
-		  popup.setAttribute('role', 'dialog');
-		  popup.setAttribute('aria-modal', 'true');
-		  popup.tabIndex = -1;
-		
-		  // HTML interno del popup con estructura y clases para CSS externo
-		  popup.innerHTML =
-		    '<div class="popup-container">' +
-		
-		      '<button id="closeMachinePopupBtn" class="close-btn-info" aria-label="Cerrar popup">&times;</button>' +
-		
-		      '<h2>Información detallada de la máquina</h2>' +
-		
-		      '<p class="machine-name">' + (machine.nameMachine || 'Nombre no disponible') + '</p>' +
-		      '<br>' +
-		   	  // Descripción
-		      '<div class="info-row" style="margin-bottom: 10px;">' +
-		        '<h3>DESCRIPCIÓN: </h3>' +
-		        '<p>' + (machine.description && machine.description.trim() !== '' 
-		                  ? machine.description 
-		                  : 'No hay descripción para esta máquina.') + '</p>' +
-		      '</div>' +
-				'<br>' +
-		      // MD5 hash con icono
-		      '<div class="info-row">' +
-		        '<span id="md5-hash" title="' + (machine.md5 || '') + '" aria-label="MD5 hash">' +
-		          '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-file-md5" width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="#FFA500" fill="none" stroke-linecap="round" stroke-linejoin="round">' +
-		            '<path d="M14 3v4a1 1 0 0 0 1 1h4" />' +
-		            '<path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />' +
-		            '<path d="M6.5 16v-2c0 -0.5 0.5 -1 1 -1s1 0.5 1 1v2" />' +
-		            '<path d="M8.5 16v-2c0 -0.5 0.5 -1 1 -1s1 0.5 1 1v2" />' +
-		            '<path d="M11.5 16v-3h1c0.6 0 1 0.5 1 1.5s-0.4 1.5 -1 1.5h-1z" />' +
-		            '<path d="M16.5 13h-2v1.5c0.3 -0.2 0.7 -0.3 1 -0.3 0.6 0 1 0.4 1 1s-0.4 1 -1 1 -1 -0.4 -1 -1" />' +
-		          '</svg>' +
-		        '</span>' +
-		        '<br>' +
-		        '<span>' + 'MD5: ' + '</span>' +
-		        '<span>' + (machine.md5 || 'Sin MD5') + '</span>' +
-		      '</div>' +
-		
-		      // Entornos y SO
-		      '<div class="info-row-1">' +
-				  '<p style="margin:0;">ENTORNOS:</p>' +
-				  '<img title="Entorno 1" alt="' + (machine.enviroment || '') + ' logo" src="' + '<%= request.getContextPath() %>/img/' + (machine.enviroment || '') + '.png" width="25" height="25" />' +
-				
-				  '<img title="Entorno 2" alt="' + (machine.enviroment2 || '') + ' logo" src="' + '<%= request.getContextPath() %>/img/' + (machine.enviroment2 || '') + '.png" width="25" height="25" ' +
-				    ((!machine.enviroment2 || machine.enviroment2 === 'null') ? 'hidden' : '') + ' />' +
-				
-				  '</div>' +  // Cierra div de ENTORNOS
-				
-				  '<div class="info-row-2" style="margin-top: 10px;">' + // Nueva línea para S.O.
-				    '<p style="margin:0;">S.O.:</p>' +
-				    '<img alt="' + (machine.os || '') + '" src="' + '<%= request.getContextPath() %>/img/' + (machine.os || '') + '.svg" width="22" height="22" loading="lazy" style="align-items: center; display: flex; margin-bottom: 5px;" />' +
-				'</div>' +
-		
-		      // Difficulty + Creator + Date
-		      '<div class="level-btn ' + (machine.difficulty || '') + '">' +
-		        '<img class="' + (machine.difficulty || '') + '-dots" title="' + (machine.os || '') + ' VM" alt="VM difficulty dots" src="<%= request.getContextPath() %>/img/' + (machine.imgNameOs || '') + '.svg" width="22" height="22" loading="lazy" />' +
-		        '<span>Creador: ' + (machine.creator || 'Desconocido') + '</span>' +
-		        '<span class="date">Fecha: ' + (machine.date || 'N/A') + '</span>' +
-		      '</div>' +
-		
-		      // Flags y Writeups generales
-		      '<section>' +
-			    '<h3>Flags y Writeups generales</h3>' +
-			    '<ul>' +
-			      '<li><strong>ID:</strong> ' + (machine.id || 'No disponible') + '</li>' +
-			      '<li><strong>Root:</strong> ' + (machine.flagsRootCount !== undefined ? machine.flagsRootCount : 'No disponible') + '</li>' +
-			      '<li><strong>User:</strong> ' + (machine.flagsUserCount !== undefined ? machine.flagsUserCount : 'No disponible') + '</li>' +
-			      '<li><strong>Writeups:</strong> ' + (machine.totalWriteups !== undefined ? machine.totalWriteups : 'No disponible') + '</li>' +
-			    '</ul>' +
-			  '</section>' +
-			  '<br>' +
-			  // Barras de estado
-			  '<section>' +
-			    '<h3>Barras de estado</h3>' +
-			    '<div class="metrics">' +
-			
-			      '<div class="metric">' +
-			        '<p><strong>Flags Users:</strong> ' + (machine.flagsUserCount !== undefined ? machine.flagsUserCount : 'N/A') + '</p>' +
-			        '<div class="bar-bg"><div class="bar-fill cpu" style="width:' + (machine.flagsUserCount || 0) + '%;"></div></div>' +
-			      '</div>' +
-			
-			      '<div class="metric">' +
-			        '<p><strong>Flags Root:</strong> ' + (machine.flagsRootCount !== undefined ? machine.flagsRootCount : 'N/A') + '</p>' +
-			        '<div class="bar-bg"><div class="bar-fill ram" style="width:' + (machine.flagsRootCount || 0) + '%;"></div></div>' +
-			      '</div>' +
-			    
-			      '<div class="metric">' +
-			        '<p><strong>Writeups:</strong> ' + (machine.totalWriteups !== undefined ? machine.totalWriteups : 'N/A') + '</p>' +
-			        // Aquí asumo que writeupsPercent ya lo calculas aparte basado en totalWriteups y algún total general
-			        '<div class="bar-bg"><div class="bar-fill disk" style="width:' + writeupsPercent + '%;"></div></div>' +
-			      '</div>' +
-			
-			    '</div>' +
-			  '</section>' +
-			  '<br>' +
-				// Logs recientes
-			  '<section>' +
-			    '<h3>Logs recientes</h3>' +
-			    '<div class="logs" tabindex="0" aria-label="Lista de logs recientes">' +
-			      (machine.logs && machine.logs.length > 0
-			        ? machine.logs.map(log => '<p style="margin:0 0 6px 0;">' + log + '</p>').join('')
-			        : '<p>No hay logs disponibles.</p>') +
-			    '</div>' +
-			  '</section>' +
-		
-		    '</div>';
-		
-		  document.body.appendChild(popup);
-		
-		  // Eventos cerrar popup
-		  const closeBtn = document.getElementById('closeMachinePopupBtn');
-		  closeBtn.onclick = function () {
-		    popup.remove();
-		  };
-		
-		  // Cerrar popup haciendo click fuera del contenido
-		  popup.onclick = function (e) {
-		    if (e.target === popup) popup.remove();
-		  };
-		}
-		
-		/* Función para obtener datos del servidor y mostrar el popup */
-		function showMachinePopup(machineId) {
-		  console.log('Solicitando info para máquina con ID:', machineId);
-		  fetch('<%= request.getContextPath() %>/machineDetails?id=' + machineId)
-		    .then(response => {
-		      if (!response.ok) throw new Error('Error al obtener datos');
-		      return response.json();
-		    })
-		    .then(data => openMachinePopup(data))
-		    .catch(err => alert('No se pudo cargar la información de la máquina: ' + err.message));
-		}
-		
-		// Asignar evento a los botones con clase machineBtn
-		document.querySelectorAll('.machineBtn').forEach(btn => {
-		  btn.addEventListener('click', () => {
-		    const id = btn.getAttribute('data-machine-id');
-		    showMachinePopup(id);
+	  document.addEventListener('DOMContentLoaded', () => {
+		  document.body.addEventListener('click', function (e) {
+		    const btn = e.target.closest('.machineBtn-details');
+		    if (btn) {
+		      const id = btn.getAttribute('data-machine-id');
+		      window.location.href = '<%= request.getContextPath() %>/machineDetails/mchinesDetails.jsp?id=' + id;
+		    }
 		  });
 		});
 		
