@@ -141,6 +141,41 @@ public class MachineDetailsServlet extends HttpServlet {
                 }
             }
             
+            String firstUserImg = null;
+            String firstRootImg = null;
+
+            if (machine != null) {
+                // Consulta para obtener pathImg para firstUserName
+                if (!firstUserName.isEmpty()) {
+                    String imgQuery = "SELECT ip.pathImg FROM imgProfile ip JOIN users u ON ip.user_id = u.id WHERE u.usuario = ?";
+                    try (PreparedStatement imgStmt = conn.prepareStatement(imgQuery)) {
+                        imgStmt.setString(1, firstUserName);
+                        ResultSet imgRs = imgStmt.executeQuery();
+                        if (imgRs.next()) {
+                            firstUserImg = imgRs.getString("pathImg");
+                        }
+                    } catch (SQLException e) {
+                        System.err.println("💥 Error al obtener imagen de perfil de firstUser:");
+                        e.printStackTrace();
+                    }
+                }
+
+                // Consulta para obtener pathImg para firstRootName
+                if (!firstRootName.isEmpty()) {
+                    String imgQuery = "SELECT ip.pathImg FROM imgProfile ip JOIN users u ON ip.user_id = u.id WHERE u.usuario = ?";
+                    try (PreparedStatement imgStmt = conn.prepareStatement(imgQuery)) {
+                        imgStmt.setString(1, firstRootName);
+                        ResultSet imgRs = imgStmt.executeQuery();
+                        if (imgRs.next()) {
+                            firstRootImg = imgRs.getString("pathImg");
+                        }
+                    } catch (SQLException e) {
+                        System.err.println("💥 Error al obtener imagen de perfil de firstRoot:");
+                        e.printStackTrace();
+                    }
+                }
+            }
+            
          // NUEVO: Obtener logs recientes de flags
             List<String> logs = new ArrayList<>();
             String logsQuery = "SELECT u.usuario, f.tipo_flag, f.created_at " +
@@ -210,6 +245,8 @@ public class MachineDetailsServlet extends HttpServlet {
                         + "\"firstUserDate\":\"" + firstUserDate + "\","
                         + "\"firstRootDate\":\"" + firstRootDate + "\","
                         + "\"logs\":" + logsJson.toString() + ","
+                        + "\"firstUserImg\":\"" + (firstUserImg != null ? firstUserImg : "") + "\","
+                        + "\"firstRootImg\":\"" + (firstRootImg != null ? firstRootImg : "") + "\","
                         + "\"description\":\"" + (machine.getDescription() != null ? machine.getDescription().replace("\"", "\\\"") : "") + "\""
                         + "}";
 

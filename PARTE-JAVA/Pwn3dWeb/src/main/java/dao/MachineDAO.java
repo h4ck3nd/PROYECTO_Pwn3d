@@ -209,5 +209,29 @@ public class MachineDAO {
 
         return json;
     }
+    
+    public String getUltimoId() {
+        String ultimoId = null;
+        ConexionDDBB db = new ConexionDDBB();
+        Connection con = db.conectar();
 
+        try {
+            String sql = "SELECT id FROM machines ORDER BY LENGTH(id)::int DESC, id::int DESC LIMIT 1";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                ultimoId = rs.getString("id");
+            }
+
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            db.cerrarConexion();
+        }
+
+        return ultimoId;
+    }
 }
