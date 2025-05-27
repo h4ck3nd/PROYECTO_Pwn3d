@@ -195,3 +195,18 @@ CREATE TABLE stars_machines (
     time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     UNIQUE(user_id, vm_name)
 );
+
+-- TABLA DE NOTICIAS DE LA PAGINA PRINCIPAL
+
+CREATE TABLE notices (
+    id SERIAL PRIMARY KEY,
+    vm_name VARCHAR(100) NOT NULL,
+    date VARCHAR(50) NOT NULL,
+    creator VARCHAR(100) NOT NULL,
+    second_vm_name VARCHAR(100),
+    second_date VARCHAR(50),
+    second_creator VARCHAR(100),
+    created_notice TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    description_page TEXT,
+    estado VARCHAR(10) NOT NULL
+);
