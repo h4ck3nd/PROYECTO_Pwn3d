@@ -234,4 +234,31 @@ public class MachineDAO {
 
         return ultimoId;
     }
+    
+    public JSONObject getMachineById(String id) {
+        JSONObject json = new JSONObject();
+        ConexionDDBB db = new ConexionDDBB();
+        Connection con = db.conectar();
+
+        try {
+            String sql = "SELECT name_machine, download_url FROM machines WHERE id = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                json.put("nameMachine", rs.getString("name_machine"));
+                json.put("downloadUrl", rs.getString("download_url"));
+            }
+
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            db.cerrarConexion();
+        }
+
+        return json;
+    }
 }
