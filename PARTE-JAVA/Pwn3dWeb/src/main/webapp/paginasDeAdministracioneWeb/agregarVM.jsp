@@ -279,7 +279,8 @@
       <a href="<%= request.getContextPath() %>/paginasDeAdministracioneWeb/addWriteupsAdmin.jsp">Agegar Writeups</a>
       <a href="<%= request.getContextPath() %>/paginasDeAdministracioneWeb/updateEstadoFeedback.jsp">Actualizar FeedBacks</a>
       <a href="<%= request.getContextPath() %>/paginasDeAdministracioneWeb/users.jsp">Usuarios</a>
-        <a href="<%= request.getContextPath() %>/paginasDeAdministracioneWeb/adminDB.jsp">Administrar DDBB</a>
+      <a href="<%= request.getContextPath() %>/paginasDeAdministracioneWeb/adminDB.jsp">Administrar DDBB</a>
+      <a href="<%= request.getContextPath() %>/paginasDeAdministracioneWeb/addNotice.jsp">Añadir Noticia</a>
       <a href="#">Contacto</a>
     </nav>
   </header>
@@ -449,7 +450,7 @@
 	<div class="form-group">
 	    <label for="description">Descripción de la Máquina:</label>
 	    <div class="input-wrapper">
-	        <textarea id="description" name="description" placeholder="Breve descripción técnica o informativa de la máquina..." rows="5" style="width: 100%;" required></textarea>
+	        <textarea id="description" name="description" placeholder="Breve descripción técnica o informativa de la máquina..." rows="5" style="width: 100%;"></textarea>
 	    </div>
 	</div>
 	

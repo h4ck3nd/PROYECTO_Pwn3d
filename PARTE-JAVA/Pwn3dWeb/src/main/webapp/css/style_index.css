@@ -1,6 +1,7 @@
 :root {
   /* Oscuro por defecto */
-  --color-background: #2c2b30;
+  /*--color-background: #2c2b30;*/ /* ANTIGUO COLOR MAS CLARO DEL FONDO */
+  --color-background: #1e1b27;
   --color-sidebar-bg: #2c2c3a;
   --shadow-color: rgba(0, 0, 0, 0.6);
   --color-text-aside: #fff;
@@ -232,18 +233,42 @@ body::-webkit-scrollbar-track {
     }
 
     .hero {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      line-height: 3rem;
-    }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem; /* Mejor que márgenes negativos */
+  padding: 1rem 2rem;
+  margin-bottom: -13rem; 
+}
 
-    .title {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-top: -12rem;
-    }
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;           
+}
+
+.right-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  max-width: 600px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+
+.vm-info,
+#notices-container {
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+  word-wrap: break-word;
+}
+
+
+
 
     .dot {
       color: var(--color-dot);
@@ -390,6 +415,39 @@ body::-webkit-scrollbar-track {
 	width: 20%;
 	height: 25%;
 	opacity: 0.3;
-	margin-bottom: 3rem;
-	margin-top: -10rem;
+	margin: 2rem auto;
 }
+
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+    gap: 1.5rem;
+  }
+
+  .title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .right-content {
+    align-items: center;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .vm-info,
+  #notices-container {
+    text-align: center;
+  }
+
+  .logo-pwn3d {
+    width: 40%;
+    margin-top: -5rem;
+  }
+}
+
+

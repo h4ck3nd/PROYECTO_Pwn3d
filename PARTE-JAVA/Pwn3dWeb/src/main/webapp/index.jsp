@@ -194,15 +194,13 @@
 
     <main class="main-content">
       <header class="hero">
-        <h1 class="title">Pwn3d!<span class="dot">.</span></h1>
-        <div class="vm-info">
-          <h2>Last VM: <span>Pycrt.</span></h2>
-          <button class="btn download">Download</button>
-          <h3>Next Release: <span>14th May 09:00 CET</span></h3>
-          <p>🏠 Homelab by <strong>2020G675</strong></p>
-          <button class="btn schedule">Schedule</button>
-        </div>
-      </header>
+		  <h1 class="title">Pwn3d!<span class="dot">.</span></h1>
+		  <div class="right-content">
+		    <div class="vm-info"></div>
+		    <br>
+		    <div id="notices-container"></div>
+		  </div>
+		</header>
 	  <img src="<%= request.getContextPath() %>/img/logo-flag-white.png" alt="logo-pwn3d!" class="logo-pwn3d" />
       <section class="stats">
 		  <div class="stat">
@@ -218,6 +216,11 @@
 		    <p><%= request.getAttribute("totalWriteups") != null ? request.getAttribute("totalWriteups") : "..." %></p>
 		  </div>
 		</section>
+		
+		<p>Bienvenido a nuestra comunidad dedicada a los CTFs y al hacking ético.</p>
+		<p>Aquí podrás enviar tus máquinas virtuales y writeups para compartir conocimiento.</p>
+		<p>Estamos en constante mejora, fomentando el aprendizaje y la colaboración entre todos.</p>
+		
 		<br>
 		<h2>Logs<span class="dot">.</span></h2>
 		<br>
@@ -236,6 +239,155 @@
 	        console.error('Error cargando logs:', error);
 	        document.getElementById('logs-container').innerHTML = '<p>Error cargando logs.</p>';
 	      });
+	 	
+	    /* CARGAR ULTIMA MAQUINA SUBIDA */
+	    
+	    document.addEventListener("DOMContentLoaded", function () {
+	      fetch('<%= request.getContextPath() %>/ultimaMaquinaIndex')
+	        .then(function(response) {
+	          return response.json();
+	        })
+	        .then(function(data) {
+	          var nameMachine = data.nameMachine;
+	          var downloadUrl = data.downloadUrl;
+
+	          var vmInfo = document.querySelector('.vm-info');
+	          if (vmInfo && nameMachine && downloadUrl) {
+	            vmInfo.innerHTML =
+	              '<h2>Nueva VM: <span>' + nameMachine + '</span></h2>' +
+	              '<a href="' + downloadUrl + '" target="_blank" class="btn download">Download</a>';
+	          } else {
+	            console.warn('Datos incompletos recibidos para la última máquina:', data);
+	          }
+	        })
+	        .catch(function(error) {
+	          console.error('Error al obtener la última máquina:', error);
+	        });
+	    });
+	    
+	    /* AUTO AJUSTE DE IMAGEN */
+
+	    function isVisible(elem) {
+	      return elem && elem.offsetParent !== null && window.getComputedStyle(elem).display !== 'none' && elem.offsetHeight > 0 && elem.offsetWidth > 0;
+	    }
+
+	    function ajustarLogoPorVisibilidad() {
+	      const logo = document.querySelector('.logo-pwn3d');
+	      if (!logo) return;
+
+	      const info1 = document.querySelector('.info1');
+	      const sinInfo = document.querySelector('.sinInfo');
+	      const info2 = document.querySelector('.info2');
+			
+	      if (isVisible(info2)) {           // Prioridad 1: info2
+	    	    logo.style.marginTop = '-15rem';
+	    	  } else if (isVisible(info1)) {    // Prioridad 2: info1
+	    	    logo.style.marginTop = '-5rem';
+	    	  } else if (isVisible(sinInfo)) {  // Prioridad 3: sinInfo
+	    	    logo.style.marginTop = '8rem';
+	    	  } else {
+	    	    logo.style.marginTop = '10rem'; // Margen por defecto
+	    	  }
+	    }
+		
+	    function ajustarLogoEnPantallaPequena() {
+	    	  const logo = document.querySelector('.logo-pwn3d');
+	    	  if (!logo) return;
+
+	    	  const isSmallScreen = window.matchMedia("(max-width: 768px)").matches;
+
+	    	  if (isSmallScreen) {
+	    	    logo.style.marginTop = '0'; // Ajuste fijo para móvil, puedes cambiar el valor
+	    	  }
+	    	}
+	    
+	    /* VISUALIZACION DE LAS NOTICIAS NUEVAS */
+
+	    document.addEventListener("DOMContentLoaded", function () {
+	      fetch("<%= request.getContextPath() %>/getNotices")
+	        .then(response => response.json())
+	        .then(data => {
+	          const container = document.getElementById("notices-container");
+	          container.innerHTML = "";
+
+	          if (data.length === 0) {
+	            container.innerHTML = '<p class="sinInfo">No hay noticias por el momento</p>';
+	            ajustarLogoPorVisibilidad();
+	            return;
+	          }
+
+	          data.forEach(function(noticia) {
+	        	  container.innerHTML += 
+	        	    '<h3>NOTICIAS: </h3><br>' + 
+	        	    (noticia.description_page ? '<p class="info1"><em>' + noticia.description_page + '</em></p><br>' : '') +
+	        	    '<span>' + noticia.date + '</span><br>' +
+
+	        	    // SVG DEL LOGO DE LA MAQUINA
+	        	    '<p>' +
+	        	      '<svg width="20" height="20" viewBox="0 0 250 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Logo Windows estilo hacker azul sin fondo" style="vertical-align: middle; margin-right: 6px; fill: none; stroke: none;">' +
+	        	        '<defs>' +
+	        	          '<linearGradient id="neonBlue" x1="0" y1="0" x2="1" y2="1">' +
+	        	            '<stop offset="0%" stop-color="#00A4EF"/>' +
+	        	            '<stop offset="100%" stop-color="#004A99"/>' +
+	        	          '</linearGradient>' +
+	        	          '<filter id="pixelate" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">' +
+	        	            '<feMorphology operator="dilate" radius="1" />' +
+	        	            '<feDisplacementMap in="SourceGraphic" scale="4" xChannelSelector="R" yChannelSelector="G"/>' +
+	        	          '</filter>' +
+	        	          '<style>' +
+	        	            '.code-line { fill: none; stroke: #00A4EF; stroke-width: 1.5; stroke-dasharray: 4 6; opacity: 0.7; }' +
+	        	            '.warning-circle { fill: #FF3300; stroke: #FF0000; stroke-width: 2; }' +
+	        	            '.warning-text { font-family: \'Courier New\', monospace; font-weight: bold; font-size: 20px; fill: white; pointer-events: none; }' +
+	        	          '</style>' +
+	        	        '</defs>' +
+
+	        	        '<rect x="40" y="40" width="70" height="70" fill="url(#neonBlue)" filter="url(#pixelate)" rx="6" ry="6" />' +
+	        	        '<rect x="140" y="40" width="70" height="70" fill="url(#neonBlue)" filter="url(#pixelate)" rx="6" ry="6" />' +
+	        	        '<rect x="40" y="140" width="70" height="70" fill="url(#neonBlue)" filter="url(#pixelate)" rx="6" ry="6" />' +
+	        	        '<rect x="140" y="140" width="70" height="70" fill="url(#neonBlue)" filter="url(#pixelate)" rx="6" ry="6" />' +
+
+	        	        '<line x1="20" y1="30" x2="230" y2="30" class="code-line"/>' +
+	        	        '<line x1="20" y1="80" x2="230" y2="80" class="code-line"/>' +
+	        	        '<line x1="20" y1="120" x2="230" y2="120" class="code-line"/>' +
+	        	        '<line x1="20" y1="170" x2="230" y2="170" class="code-line"/>' +
+	        	        '<line x1="20" y1="210" x2="230" y2="210" class="code-line"/>' +
+
+	        	        '<circle cx="200" cy="200" r="25" class="warning-circle" />' +
+	        	        '<text x="200" y="210" class="warning-text" text-anchor="middle" dominant-baseline="middle">!</text>' +
+	        	      '</svg>' +
+	        	      ' ' + noticia.vm_name + ' by <strong>' + noticia.creator + '</strong>' +
+	        	    '</p>' +
+	        	    '<button class="btn schedule">Ver</button>';
+
+	        	  if (noticia.second_vm_name) {
+	        	    container.innerHTML +=
+	        	      '<br><br><hr><br>' +
+	        	      '<h4 class="info2">SEGUNDA MAQUINA: </h4>' +
+	        	      '<span>' + noticia.second_date + '</span><br>' +
+	        	      '<p>LOGO ' + noticia.second_vm_name + ' by <strong>' + noticia.second_creator + '</strong></p>' +
+	        	      '<button class="btn schedule">Ver</button>';
+	        	  }
+	        	});
+	          
+	          ajustarLogoPorVisibilidad();
+	        })
+	        .catch(err => {
+	          console.error("Error cargando noticias:", err);
+	        });
+	    });
+
+	    const container = document.getElementById('notices-container');
+
+	    if (container) {
+	      const observer = new MutationObserver(() => {
+	        ajustarLogoPorVisibilidad();
+	      });
+
+	      observer.observe(container, { childList: true, subtree: true });
+	    }
+
+
+
     </script>
 </body>
 </html>

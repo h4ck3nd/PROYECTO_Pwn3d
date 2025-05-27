@@ -72,7 +72,7 @@
     @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
     :root {
-      --bg-dark: #2c2b30;
+      --bg-dark: #1e1b27;
       --panel-bg: #222034;
       --accent-purple: #8e7cc3;
       --text-light: #d7d3e0;

@@ -69,7 +69,7 @@
 	}
 	
     :root {
-      --bg-color: #2c2b30;
+      --bg-color: #1e1b27;
       /*--bg-color: #1e1c26;*/ /* FONDO UN POCO MAS OSCURO */
       --sidebar-color: #2a2734;
       --text-color: #bfb3ff;

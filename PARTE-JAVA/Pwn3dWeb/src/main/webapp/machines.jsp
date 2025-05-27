@@ -879,6 +879,16 @@
 						      </div>
 						    </div>
 						</tr>
+						<tr class="row" data-machine-id="36">
+						    <td colspan="36">
+						    <div class="loading-container">
+						      <div class="liquid-loader dark">
+						        <span>Cargando la máquina GhostCTF...</span>
+						        <div class="liquid"></div>
+						        <div class="wave"></div>
+						      </div>
+						    </div>
+						</tr>
 					</tbody>
 				</table>
 				<p id="search-message" style="display:none;">

@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -18,8 +19,8 @@
 		</a>
       <div>
         <a href="#intro" class="nav-link d-inline">Inicio</a>
-        <a href="#que-es" class="nav-link d-inline">¿Qué es?</a>
-        <a href="#funciona" class="nav-link d-inline">Cómo funciona</a>
+        <a href="#que-es" class="nav-link d-inline">Â¿QuÃ© es?</a>
+        <a href="#funciona" class="nav-link d-inline">CÃ³mo funciona</a>
         <a href="#registro" class="nav-link d-inline">Comenzar</a>
       </div>
     </div>
@@ -27,53 +28,53 @@
 
   <!-- Hero Intro -->
   <section class="hero" id="intro">
-    <h1>¡Bienvenido a Pwn3d!</h1>
-    <p class="mt-4">Tu plataforma de <span style="color: #d35eff;">hacking ético</span> y retos estilo <strong>CTF</strong>.</p>
+    <h1>Â¡Bienvenido a Pwn3d!</h1>
+    <p class="mt-4">Tu plataforma de <span style="color: #d35eff;">hacking Ã©tico</span> y retos estilo <strong>CTF</strong>.</p>
     <p>Descubre, aprende y entrena tus habilidades como profesional de ciberseguridad.</p>
-    <a href="#registro" class="btn btn-purple mt-4">¡Empezar!</a>
+    <a href="#registro" class="btn btn-purple mt-4">Â¡Empezar!</a>
   </section>
 
-  <!-- ¿Qué es el Hacking Ético y CTF? -->
+  <!-- Â¿QuÃ© es el Hacking Ã‰tico y CTF? -->
   <section id="que-es" class="container section text-center">
   	<h2>
-	  <span class="typewriter-text">¿Qué es el Hacking Ético?</span><span class="cursor">_</span>
+	  <span class="typewriter-text">Â¿QuÃ© es el Hacking Ã‰tico?</span><span class="cursor">_</span>
 	</h2>
-    <p class="mt-3">El hacking ético es el uso legal de técnicas de hacking para evaluar y asegurar sistemas. Se utiliza en pruebas de penetración para proteger empresas de ciberataques reales.</p>
+    <p class="mt-3">El hacking Ã©tico es el uso legal de tÃ©cnicas de hacking para evaluar y asegurar sistemas. Se utiliza en pruebas de penetraciÃ³n para proteger empresas de ciberataques reales.</p>
 	<br>
 	<h2>
-	  <span class="typewriter-text">¿Qué es un CTF?</span><span class="cursor">_</span>
+	  <span class="typewriter-text">Â¿QuÃ© es un CTF?</span><span class="cursor">_</span>
 	</h2>
     <p class="mt-3">"Capture The Flag" es una modalidad de entrenamiento gamificado en ciberseguridad donde el objetivo es encontrar "banderas" escondidas en entornos simulados.</p>
-    <p>Perfecto tanto para principiantes como para expertos que quieren mejorar su lógica, creatividad y conocimiento técnico.</p>
+    <p>Perfecto tanto para principiantes como para expertos que quieren mejorar su lÃ³gica, creatividad y conocimiento tÃ©cnico.</p>
   </section>
 
-  <!-- ¿Cómo funciona? -->
+  <!-- Â¿CÃ³mo funciona? -->
   <section id="funciona" class="container section text-center">
   	<h2>
-	  <span class="typewriter-text">¿Cómo funciona Pwn3d!?</span><span class="cursor">_</span>
+	  <span class="typewriter-text">Â¿CÃ³mo funciona Pwn3d!?</span><span class="cursor">_</span>
 	</h2>
-    <p class="mt-3 mb-5">Una vez registrado, tendrás acceso total a la plataforma. ¡Empieza a hackear sin riesgos y de forma legal!</p>
+    <p class="mt-3 mb-5">Una vez registrado, tendrÃ¡s acceso total a la plataforma. Â¡Empieza a hackear sin riesgos y de forma legal!</p>
 
     <div class="row text-center">
       <div class="col-md-4 mb-4">
         <div class="card card-dark p-4">
           <i class="fas fa-user-gear"></i>
           <h4 class="mt-3">Personaliza tu perfil</h4>
-          <p>Haz que tu presencia destaque en la comunidad. Añade bio, redes y foto de perfil estilo hacker retro.</p>
+          <p>Haz que tu presencia destaque en la comunidad. AÃ±ade bio, redes y foto de perfil estilo hacker retro.</p>
         </div>
       </div>
       <div class="col-md-4 mb-4">
         <div class="card card-dark p-4">
           <i class="fas fa-flag-checkered"></i>
           <h4 class="mt-3">Completa retos CTF</h4>
-          <p>Accede a máquinas virtuales vulnerables, resuelve desafíos prácticos y captura banderas ocultas (flags).</p>
+          <p>Accede a mÃ¡quinas virtuales vulnerables, resuelve desafÃ­os prÃ¡cticos y captura banderas ocultas (flags).</p>
         </div>
       </div>
       <div class="col-md-4 mb-4">
         <div class="card card-dark p-4">
           <i class="fas fa-trophy"></i>
           <h4 class="mt-3">Sube en el ranking</h4>
-          <p>Compite con otros usuarios, gana puntos, desbloquea logros y demuestra tu progreso como hacker ético.</p>
+          <p>Compite con otros usuarios, gana puntos, desbloquea logros y demuestra tu progreso como hacker Ã©tico.</p>
         </div>
       </div>
     </div>
@@ -100,19 +101,19 @@
   <!-- Registro -->
   <section id="registro" class="container section text-center">
   	<h2>
-	  <span class="typewriter-text">¿Listo para comenzar?</span><span class="cursor">_</span>
+	  <span class="typewriter-text">Â¿Listo para comenzar?</span><span class="cursor">_</span>
 	</h2>
-    <p class="mt-3">Regístrate gratuitamente y accede al contenido exclusivo, retos únicos y un entorno gamificado para aprender hacking de forma divertida y legal.</p>
+    <p class="mt-3">RegÃ­strate gratuitamente y accede al contenido exclusivo, retos Ãºnicos y un entorno gamificado para aprender hacking de forma divertida y legal.</p>
     <a href="<%= request.getContextPath() %>/login-register/register.jsp" class="btn btn-purple mt-3 me-2">Registrarse</a>
-    <a href="<%= request.getContextPath() %>/login-register/login.jsp" class="btn btn-outline-light mt-3">Iniciar sesión</a>
+    <a href="<%= request.getContextPath() %>/login-register/login.jsp" class="btn btn-outline-light mt-3">Iniciar sesiÃ³n</a>
   </section>
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2025 Pwn3d! · Hecho por entusiastas del hacking. Respeta la ley, aprende, mejora.</p>
+    <p>&copy; 2025 Pwn3d! Â· Hecho por entusiastas del hacking. Respeta la ley, aprende, mejora.</p>
   </footer>
 
-  <!-- Modal para imágenes ampliadas -->
+  <!-- Modal para imÃ¡genes ampliadas -->
   <div class="modal fade" id="imgModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xl">
       <div class="modal-content bg-dark border border-purple">

@@ -120,7 +120,7 @@
     }
 
     body {
-      background-color: #2c2b30;
+      background-color: #1e1b27;
       /*background-color: #1c1c24;*/ /* FONDO UN POCO MAS OSCURO */
       color: #ffffff;
       font-family: 'Press Start 2P', cursive;
