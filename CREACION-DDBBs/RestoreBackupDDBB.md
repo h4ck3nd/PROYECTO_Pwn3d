@@ -4,7 +4,7 @@ Este documento explica cómo realizar un **Restore** de un archivo `.backup` en 
 
 ## 📌 Requisitos previos
 
-- Tener instalado PostgreSQL 17 en tu sistema. [Descargar Instalador para PostgreSQL 17]()
+- Tener instalado PostgreSQL 17 en tu sistema. [Descargar Instalador para PostgreSQL 17](https://drive.google.com/file/d/1vT9p-JnP-QtLzmNnrDaolxa65-m8FZTe/view?usp=sharing)
 - Disponer del archivo `.backup` generado previamente desde PostgreSQL.
 - Tener acceso a PgAdmin 4.
 
