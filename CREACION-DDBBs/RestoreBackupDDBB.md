@@ -38,11 +38,11 @@ Esto es necesario para que PgAdmin 4 use las utilidades (como `pg_restore`) corr
    SELECT version();
    ```
    
-Verifica que la salida indique algo como:
+   Verifica que la salida indique algo como:
 
-```csharp
-PostgreSQL 17.x on x86_64-pc-windows, compiled by ...
-```
+   ```csharp
+   PostgreSQL 17.x on x86_64-pc-windows, compiled by ...
+   ```
 
 Esto confirma que estás utilizando la versión correcta del binario.
 
