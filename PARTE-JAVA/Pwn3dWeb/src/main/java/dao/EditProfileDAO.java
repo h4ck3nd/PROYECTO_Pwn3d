@@ -105,7 +105,7 @@ public class EditProfileDAO {
             return false;
         }
     }
-    
+
     public String getPaisByUserId(int userId) {
         String pais = null;
         String query = "SELECT pais FROM users WHERE id = ?";
@@ -122,7 +122,7 @@ public class EditProfileDAO {
         }
         return pais;
     }
-    
+
     public boolean actualizarPais(int userId, String pais) {
         String query = "UPDATE users SET pais = ? WHERE id = ?";
         try (Connection con = new ConexionDDBB().conectar();

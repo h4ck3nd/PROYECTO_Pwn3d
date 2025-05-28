@@ -1,17 +1,30 @@
 package dao;
 
-import conexionDDBB.ConexionDDBB;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.sql.Types;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import conexionDDBB.ConexionDDBB;
 
 public class DBAdminDAO {
-    
+
     // Normaliza el string timestamp para que pueda ser parseado
     private String normalizarTimestamp(String val) {
-        if (val == null || val.isEmpty()) return null;
+        if (val == null || val.isEmpty()) {
+			return null;
+		}
 
         val = val.replace('T', ' ');
 
@@ -33,7 +46,7 @@ public class DBAdminDAO {
         }
         return val;
     }
-    
+
     // Formateador para LocalDateTime con fracciones opcionales
     private static final DateTimeFormatter FORMATTER =
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss[.n]");
@@ -157,7 +170,9 @@ public class DBAdminDAO {
     }
 
     public void eliminar(String tabla, String columnaClave, String valorClave) {
-        if ("laboratorios".equalsIgnoreCase(tabla)) columnaClave = "lab_id";
+        if ("laboratorios".equalsIgnoreCase(tabla)) {
+			columnaClave = "lab_id";
+		}
 
         String sql = "DELETE FROM " + tabla + " WHERE " + columnaClave + " = ?";
         try (Connection conn = new ConexionDDBB().conectar();
@@ -195,7 +210,9 @@ public class DBAdminDAO {
 
     public void actualizar(String tabla, Map<String, String> valores, String valorClave) {
         String columnaClave = "id";
-        if ("laboratorios".equalsIgnoreCase(tabla)) columnaClave = "lab_id";
+        if ("laboratorios".equalsIgnoreCase(tabla)) {
+			columnaClave = "lab_id";
+		}
 
         StringBuilder sql = new StringBuilder("UPDATE ").append(tabla).append(" SET ");
         for (String col : valores.keySet()) {

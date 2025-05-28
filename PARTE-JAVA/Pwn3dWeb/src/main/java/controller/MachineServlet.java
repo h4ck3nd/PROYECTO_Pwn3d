@@ -118,7 +118,7 @@ public class MachineServlet extends HttpServlet {
 
             ps.setString(17, machine.getUserFlag());
             ps.setString(18, machine.getRootFlag());
-            
+
             ps.setString(19, machine.getDescription());
 
             // Ejecutar la actualización

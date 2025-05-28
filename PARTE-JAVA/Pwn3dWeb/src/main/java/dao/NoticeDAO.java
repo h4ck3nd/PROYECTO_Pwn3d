@@ -1,12 +1,15 @@
 package dao;
 
-import conexionDDBB.ConexionDDBB;
-import model.Notice;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.sql.*;
+import conexionDDBB.ConexionDDBB;
+import model.Notice;
 
 public class NoticeDAO {
     public JSONArray getActiveNotices() {
@@ -37,7 +40,7 @@ public class NoticeDAO {
         }
         return notices;
     }
-    
+
     public void addNotice(Notice notice) throws SQLException {
         Connection conn = null;
         PreparedStatement updateStmt = null;
@@ -74,9 +77,15 @@ public class NoticeDAO {
             }
             throw e;
         } finally {
-            if (updateStmt != null) updateStmt.close();
-            if (insertStmt != null) insertStmt.close();
-            if (conn != null) conn.close();
+            if (updateStmt != null) {
+				updateStmt.close();
+			}
+            if (insertStmt != null) {
+				insertStmt.close();
+			}
+            if (conn != null) {
+				conn.close();
+			}
         }
     }
 }

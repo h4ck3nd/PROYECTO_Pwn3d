@@ -1,12 +1,16 @@
 package controller;
 
-import dao.StarsDAO;
-import utils.JWTUtil;
-import javax.servlet.*;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import dao.StarsDAO;
+import utils.JWTUtil;
 
 @WebServlet("/star-rating")
 public class StarRatingServlet extends HttpServlet {

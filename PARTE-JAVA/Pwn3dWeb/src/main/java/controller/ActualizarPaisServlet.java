@@ -12,7 +12,8 @@ import utils.JWTUtil;
 
 @WebServlet("/actualizarPais")
 public class ActualizarPaisServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, java.io.IOException {
+    @Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, java.io.IOException {
         String pais = request.getParameter("pais");
         String token = null;
 

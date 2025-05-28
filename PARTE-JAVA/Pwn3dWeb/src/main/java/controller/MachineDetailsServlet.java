@@ -140,7 +140,7 @@ public class MachineDetailsServlet extends HttpServlet {
                     e.printStackTrace();
                 }
             }
-            
+
             String firstUserImg = null;
             String firstRootImg = null;
 
@@ -175,7 +175,7 @@ public class MachineDetailsServlet extends HttpServlet {
                     }
                 }
             }
-            
+
          // NUEVO: Obtener logs recientes de flags
             List<String> logs = new ArrayList<>();
             String logsQuery = "SELECT u.usuario, f.tipo_flag, f.created_at " +
@@ -202,15 +202,17 @@ public class MachineDetailsServlet extends HttpServlet {
             StringBuilder logsJson = new StringBuilder("[");
             for (int i = 0; i < logs.size(); i++) {
                 logsJson.append("\"").append(logs.get(i).replace("\"", "\\\"")).append("\"");
-                if (i < logs.size() - 1) logsJson.append(",");
+                if (i < logs.size() - 1) {
+					logsJson.append(",");
+				}
             }
             logsJson.append("]");
 
             conexionDDBB.cerrarConexion();
             System.out.println("🔒 Conexión cerrada.");
-            
+
             double averageRating = 0.0;
-            
+
             if (machine != null) {
             	StarsDAO starsDAO = new StarsDAO();
                 averageRating = starsDAO.getAverageRating(machine.getNameMachine());

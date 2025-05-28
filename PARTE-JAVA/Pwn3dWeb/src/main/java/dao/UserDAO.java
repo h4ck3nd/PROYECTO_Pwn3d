@@ -312,7 +312,7 @@ public class UserDAO {
         }
         return null;
     }
-    
+
     public void addPointsToUser(int userId, int points) throws SQLException {
         String sql = "UPDATE users SET puntos = puntos + ? WHERE id = ?";
         try (PreparedStatement ps = con.prepareStatement(sql)) {
@@ -321,7 +321,7 @@ public class UserDAO {
             ps.executeUpdate();
         }
     }
-    
+
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
         ConexionDDBB db = new ConexionDDBB();

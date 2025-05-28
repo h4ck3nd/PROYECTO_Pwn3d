@@ -1,14 +1,16 @@
 package controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
-
-import dao.MachineDAO;
-import model.Machine;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
+
+import dao.MachineDAO;
 
 @WebServlet("/ultimaMaquinaIndex")
 public class UltimaMaquinaIndexServlet extends HttpServlet {
@@ -17,8 +19,9 @@ public class UltimaMaquinaIndexServlet extends HttpServlet {
     public UltimaMaquinaIndexServlet() {
         super();
     }
-    
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+
+    @Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
             MachineDAO dao = new MachineDAO();

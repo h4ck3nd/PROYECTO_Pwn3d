@@ -20,7 +20,7 @@ public class Machine {
     private String userFlag;
     private String rootFlag;
     private String description;
-   
+
     // Constructor
     public Machine(String id, String nameMachine, String size, String os, String enviroment, String enviroment2, String creator,
             String difficultyCard, String difficulty, String date, String md5, String writeupUrl,
@@ -51,7 +51,7 @@ public class Machine {
     public String getDescription() {
         return description;
     }
-    
+
 	// Getters y setters
 	public String getUserFlag() {
 	 return userFlag;

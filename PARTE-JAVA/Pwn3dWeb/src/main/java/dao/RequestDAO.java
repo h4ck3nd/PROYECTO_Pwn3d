@@ -1,7 +1,12 @@
 package dao;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import conexionDDBB.ConexionDDBB;
 import model.Request;
 
@@ -47,12 +52,14 @@ public class RequestDAO {
 
     public void cerrarConexion() {
         try {
-            if (conn != null) conn.close();
+            if (conn != null) {
+				conn.close();
+			}
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    
+
     public List<Request> getAll() {
         List<Request> list = new ArrayList<>();
         try {
@@ -78,7 +85,7 @@ public class RequestDAO {
         }
         return list;
     }
-    
+
     public boolean updateEstado(int requestId, String nuevoEstado) {
         String sql = "UPDATE requests SET estado = ? WHERE id = ?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -90,7 +97,7 @@ public class RequestDAO {
             return false;
         }
     }
-    
+
  // Modificado getAll para traer también el count loves y si el usuario ha dado love
     public List<Request> getAllWithLoves(int currentUserId) {
         List<Request> list = new ArrayList<>();

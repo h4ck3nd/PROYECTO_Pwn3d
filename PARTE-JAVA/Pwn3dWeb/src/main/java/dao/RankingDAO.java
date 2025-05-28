@@ -1,10 +1,14 @@
 package dao;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import conexionDDBB.ConexionDDBB;
 import model.User;
-import model.ImgProfile;
 
 public class RankingDAO {
     private Connection conexion;
@@ -46,7 +50,9 @@ public class RankingDAO {
 
     public void cerrarConexion() {
         try {
-            if (conexion != null) conexion.close();
+            if (conexion != null) {
+				conexion.close();
+			}
         } catch (SQLException e) {
             e.printStackTrace();
         }

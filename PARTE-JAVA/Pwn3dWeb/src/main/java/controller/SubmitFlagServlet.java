@@ -109,10 +109,10 @@ public class SubmitFlagServlet extends HttpServlet {
 		     // Obtener dificultad y calcular puntos
 		     String dificultad = getDificultadFromMachine(vmName, conn);
 		     int puntos = calcularPuntos(dificultad, tipoFlag);
-	
+
 		     // Sumar puntos al usuario
 		     userDAO.addPointsToUser(userId, puntos);
-	
+
 		     response.setStatus(HttpServletResponse.SC_OK);
 		     response.getWriter().write("{\"message\":\"Flag validada con éxito. Se han sumado " + puntos + " puntos.\"}");
 
@@ -150,7 +150,7 @@ public class SubmitFlagServlet extends HttpServlet {
             }
         }
     }
-    
+
     private String getDificultadFromMachine(String vmName, Connection conn) throws Exception {
         String sql = "SELECT difficulty FROM machines WHERE name_machine = ?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {

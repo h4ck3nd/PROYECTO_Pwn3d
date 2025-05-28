@@ -1,7 +1,11 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import conexionDDBB.ConexionDDBB;
-import java.sql.*;
 
 public class StarsDAO {
     private Connection conexion;
@@ -54,7 +58,9 @@ public class StarsDAO {
 
     public void cerrarConexion() {
         try {
-            if (conexion != null && !conexion.isClosed()) conexion.close();
+            if (conexion != null && !conexion.isClosed()) {
+				conexion.close();
+			}
         } catch (SQLException e) {
             e.printStackTrace();
         }

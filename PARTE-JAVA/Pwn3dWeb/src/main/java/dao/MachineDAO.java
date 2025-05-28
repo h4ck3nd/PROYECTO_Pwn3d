@@ -181,7 +181,7 @@ public class MachineDAO {
 
         return exito;
     }
-    
+
     public JSONObject getMachineDetails(int id) {
         JSONObject json = new JSONObject();
         ConexionDDBB db = new ConexionDDBB();
@@ -209,7 +209,7 @@ public class MachineDAO {
 
         return json;
     }
-    
+
     public String getUltimoId() {
         String ultimoId = null;
         ConexionDDBB db = new ConexionDDBB();
@@ -234,7 +234,7 @@ public class MachineDAO {
 
         return ultimoId;
     }
-    
+
     public JSONObject getMachineById(String id) {
         JSONObject json = new JSONObject();
         ConexionDDBB db = new ConexionDDBB();

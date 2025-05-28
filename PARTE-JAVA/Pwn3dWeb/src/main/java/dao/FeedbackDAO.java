@@ -1,15 +1,15 @@
 package dao;
 
-import conexionDDBB.ConexionDDBB;
-import model.Feedback;
-import model.FeedbackResponse;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import conexionDDBB.ConexionDDBB;
+import model.Feedback;
+import model.FeedbackResponse;
 
 public class FeedbackDAO {
     private Connection conexion;
@@ -39,7 +39,7 @@ public class FeedbackDAO {
             e.printStackTrace();
         }
     }
-    
+
     // Ejemplo pseudocódigo en Java para recuperar feedback + usuario + img
     public List<FeedbackResponse> listarFeedbacksConUsuarioYAvatar() throws SQLException {
         List<FeedbackResponse> list = new ArrayList<>();

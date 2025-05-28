@@ -3,8 +3,8 @@ package controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Pattern;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +26,7 @@ public class RegisterServlet extends HttpServlet {
     static {
         // Palabras ofensivas básicas (en español) para bloqueo en nombres de usuario
         PATRONES_PROHIBIDOS.add(Pattern.compile(".*(puto|puta|pendejo|pendeja|gilipollas|idiota|imbecil|mierda|cabrón|cabron|cabrone|culo|chingar|chingado|verga|coño|zorra|maricón|maricon|joto|tarado|tarada|bobo|tonto|estupido|estúpido|subnormal|baboso|idiota|retardado|hijo de puta|hijueputa|hijueputas|malparido|malparida|maldito|cojones|cagón|chinga|putas|puta madre|madre de puta|polla|pelotudo|pelotuda|chupapollas|culero|mierda).*", Pattern.CASE_INSENSITIVE));
-        
+
         // Ejemplos combinados o con palabras intercaladas
         PATRONES_PROHIBIDOS.add(Pattern.compile(".*(puto|puta).*", Pattern.CASE_INSENSITIVE));
         // Agrega más patrones o palabras compuestas según convenga
@@ -34,7 +34,9 @@ public class RegisterServlet extends HttpServlet {
 
     // Método que valida si el usuario contiene patrones prohibidos
     private boolean contienePatronProhibido(String usuario) {
-        if (usuario == null) return false;
+        if (usuario == null) {
+			return false;
+		}
         for (Pattern p : PATRONES_PROHIBIDOS) {
             Matcher matcher = p.matcher(usuario);
             if (matcher.matches()) {
