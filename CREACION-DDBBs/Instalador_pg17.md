@@ -1,1 +1,0 @@
-URL = [Download PostgreSQL17](https://drive.google.com/file/d/1vT9p-JnP-QtLzmNnrDaolxa65-m8FZTe/view?usp=sharing)
