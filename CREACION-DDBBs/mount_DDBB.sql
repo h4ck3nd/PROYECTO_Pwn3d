@@ -210,3 +210,22 @@ CREATE TABLE notices (
     description_page TEXT,
     estado VARCHAR(10) NOT NULL
 );
+
+-- TABLA AÑADIR INFORMACION DE LA MAQUINA DE LAS NOTICIAS
+
+CREATE TABLE info_notices_machines (
+    id SERIAL PRIMARY KEY,
+    description TEXT,
+    vm_name VARCHAR(100) NOT NULL,
+    date TEXT NOT NULL,
+    time_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    estado VARCHAR(20) CHECK (estado IN ('publico', 'privado')) NOT NULL,
+    os VARCHAR(50),
+    difficulty VARCHAR(50)
+);
+ALTER TABLE info_notices_machines
+ADD COLUMN environment VARCHAR(100);
+ALTER TABLE info_notices_machines
+ADD COLUMN second_environment VARCHAR(100);
+ALTER TABLE info_notices_machines
+ADD COLUMN path_info_notice TEXT;
