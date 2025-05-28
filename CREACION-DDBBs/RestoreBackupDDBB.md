@@ -17,7 +17,9 @@ Esto es necesario para que PgAdmin 4 use las utilidades (como `pg_restore`) corr
 1. Abre **PgAdmin 4**.
 2. Ve a la barra de menú:  
    `File` → `Preferences` → `Paths` → `Binary Paths`.
-   
+
+   ![image](https://github.com/user-attachments/assets/bdd4cdbc-5bb8-4e3b-a382-8d43f041d852)
+
    ![image](https://github.com/user-attachments/assets/e5d50243-5bff-4333-a06b-9e3933cc190d)
    
 4. En la sección **PostgreSQL Binary Paths**:
