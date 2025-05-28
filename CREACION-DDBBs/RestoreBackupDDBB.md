@@ -17,7 +17,8 @@ Esto es necesario para que PgAdmin 4 use las utilidades (como `pg_restore`) corr
 1. Abre **PgAdmin 4**.
 2. Ve a la barra de menú:  
    `File` → `Preferences` → `Paths` → `Binary Paths`.
-3. En la sección **PostgreSQL Binary Paths**:
+   ![image](https://github.com/user-attachments/assets/e5d50243-5bff-4333-a06b-9e3933cc190d)
+4. En la sección **PostgreSQL Binary Paths**:
    - Haz clic en el ícono de agregar (➕) si no aparece la versión 17.
    - Establece la ruta del binario. Por defecto, si instalaste PostgreSQL en Windows, la ruta suele ser:
      ```
