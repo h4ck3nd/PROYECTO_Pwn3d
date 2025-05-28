@@ -60,6 +60,7 @@
   <link rel="icon" href="<%= request.getContextPath() %>/img/logo-flag-white.ico">
   <title>Dashboard - Pwn3d!</title>
   <link rel="stylesheet" href="<%= request.getContextPath() %>/css/cssIndex.jsp">
+  <link rel="stylesheet" href="<%= request.getContextPath() %>/css/dynamicFonts.jsp" />
   
 </head>
 <body>
@@ -227,6 +228,11 @@
         <div id="logs-container"></div>
         
     </main>
+    
+    <script>
+	  const contextPath = '<%= request.getContextPath() %>';
+	</script>
+    
     <script src="<%= request.getContextPath() %>/js/jsIndex.jsp"></script>
     <script>
 	 	// Cargar logs desde el servlet JSON y añadirlo al DOM
@@ -357,7 +363,7 @@
 	        	      '</svg>' +
 	        	      ' ' + noticia.vm_name + ' by <strong>' + noticia.creator + '</strong>' +
 	        	    '</p>' +
-	        	    '<button class="btn schedule">Ver</button>';
+	        	    '<button onclick="window.location.href=\'' + contextPath + '/infoNoticias.jsp\'" class="btn download">Ver</button>';
 
 	        	  if (noticia.second_vm_name) {
 	        	    container.innerHTML +=
@@ -365,7 +371,7 @@
 	        	      '<h4 class="info2">SEGUNDA MAQUINA: </h4>' +
 	        	      '<span>' + noticia.second_date + '</span><br>' +
 	        	      '<p>LOGO ' + noticia.second_vm_name + ' by <strong>' + noticia.second_creator + '</strong></p>' +
-	        	      '<button class="btn schedule">Ver</button>';
+	        	      '<button onclick="window.location.href=\'' + contextPath + '/infoNoticias.jsp\'" class="btn download">Ver</button>';
 	        	  }
 	        	});
 	          

@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Detalles de la Máquina</title>
+  <link rel="stylesheet" href="<%= request.getContextPath() %>/css/dynamicFonts.jsp" />
   <style>
   /* Fuente retro clásica */
 @font-face {

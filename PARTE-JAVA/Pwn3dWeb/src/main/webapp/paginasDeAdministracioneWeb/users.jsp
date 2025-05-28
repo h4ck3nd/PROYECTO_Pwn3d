@@ -118,6 +118,7 @@
       <a href="<%= request.getContextPath() %>/paginasDeAdministracioneWeb/users.jsp">Usuarios</a>
       <a href="<%= request.getContextPath() %>/paginasDeAdministracioneWeb/adminDB.jsp">Administrar DDBB</a>
       <a href="<%= request.getContextPath() %>/paginasDeAdministracioneWeb/addNotice.jsp">Añadir Noticia</a>
+      <a href="<%= request.getContextPath() %>/paginasDeAdministracioneWeb/addInfoNotice.jsp">Añadir Info Noticias</a>
       <a href="#">Contacto</a>
     </nav>
   </header>

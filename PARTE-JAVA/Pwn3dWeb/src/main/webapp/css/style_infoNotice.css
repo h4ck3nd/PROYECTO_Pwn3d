@@ -1,0 +1,110 @@
+
+
+    body {
+        background-color: #0d1117;
+        color: #c9d1d9;
+        font-family: 'Press Start 2P', monospace !important;
+        padding: 3rem 2rem;
+        margin: 0;
+    }
+
+    h1 {
+        color: #c792ea;
+        text-align: center;
+        margin-bottom: 2rem;
+        text-shadow: 0 0 8px rgba(199,146,234,0.6);
+    }
+
+    .notice {
+        background: #1e1e2f;
+        padding: 2rem;
+        margin: 2rem auto;
+        border-left: 6px solid #c792ea;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(199,146,234,0.3);
+        max-width: 900px;
+        transition: transform 0.2s ease;
+    }
+
+    .notice:hover {
+        transform: scale(1.02);
+    }
+
+    .notice h3 {
+        font-size: 1.1rem;
+        color: #82aaff;
+        margin-bottom: 1rem;
+        text-shadow: 0 0 4px #82aaff55;
+    }
+
+    .notice p {
+        line-height: 1.6;
+        font-size: 0.85rem;
+        color: #b2bcd1;
+        margin-bottom: 0.7rem;
+    }
+
+    .meta {
+        font-size: 0.75rem;
+        color: #9aa5ce;
+        border-top: 1px solid #2c2f40;
+        padding-top: 0.8rem;
+        margin-top: 1rem;
+    }
+
+    .tag {
+        background: #c792ea33;
+        padding: 0.2rem 0.6rem;
+        border-radius: 5px;
+        color: #c792ea;
+        font-size: 0.65rem;
+        margin-left: 0.5rem;
+    }
+
+    .date-badge {
+        background: #82aaff33;
+        padding: 0.2rem 0.6rem;
+        border-radius: 5px;
+        color: #82aaff;
+        font-size: 0.65rem;
+    }
+
+    .container {
+        max-width: 960px;
+        margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+        .notice {
+            padding: 1.2rem;
+        }
+        .notice h3 {
+            font-size: 0.9rem;
+        }
+        .notice p {
+            font-size: 0.75rem;
+        }
+    }
+    .btn.exit {
+	    background: linear-gradient(135deg, #6e40e1, #9b59b6);
+	    border: none;
+	    color: #e0d7f5;
+	    padding: 0.6rem 1.4rem;
+	    font-weight: 600;
+	    font-size: 1rem;
+	    border-radius: 8px;
+	    cursor: pointer;
+	    box-shadow: 0 4px 10px rgba(110, 64, 225, 0.6);
+	    transition: background 0.3s ease, box-shadow 0.3s ease;
+	    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	  }
+	
+	  .btn.exit:hover {
+	    background: linear-gradient(135deg, #9b59b6, #6e40e1);
+	    box-shadow: 0 6px 15px rgba(155, 89, 182, 0.8);
+	  }
+	
+	  .btn.exit:active {
+	    background: #5b2dbd;
+	    box-shadow: 0 2px 5px rgba(91, 45, 189, 0.9);
+	  }

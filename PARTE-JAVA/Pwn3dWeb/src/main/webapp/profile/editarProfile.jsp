@@ -68,6 +68,7 @@
   <link rel="icon" href="<%= request.getContextPath() %>/img/logo-flag-white.ico">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link rel="stylesheet" href="<%= request.getContextPath() %>/css/cssEditProfile.jsp">
+  <link rel="stylesheet" href="<%= request.getContextPath() %>/css/dynamicFonts.jsp" />
 </head>
 <!-- FUENTE DE LETRA PARA EL POPUP DE ELIMINAR CUENTA -->
   

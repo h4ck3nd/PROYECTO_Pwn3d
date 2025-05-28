@@ -62,6 +62,7 @@
             align-items: center;
             justify-content: space-between;
             border-bottom: 2px solid #00ffea;
+            font-size: 0.85rem;
         }
         header .logo {
             font-weight: 700;
@@ -178,6 +179,7 @@
       <a href="<%= request.getContextPath() %>/paginasDeAdministracioneWeb/users.jsp">Usuarios</a>
       <a href="<%= request.getContextPath() %>/paginasDeAdministracioneWeb/adminDB.jsp">Administrar DDBB</a>
       <a href="<%= request.getContextPath() %>/paginasDeAdministracioneWeb/addNotice.jsp">Añadir Noticia</a>
+      <a href="<%= request.getContextPath() %>/paginasDeAdministracioneWeb/addInfoNotice.jsp">Añadir Info Noticias</a>
       <a href="#">Contacto</a>
     </nav>
 </header>

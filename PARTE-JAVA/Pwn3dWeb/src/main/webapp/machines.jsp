@@ -69,6 +69,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!--<link rel="stylesheet" href="<%= request.getContextPath() %>/css/style_machines134.css">-->
 <link rel="stylesheet" href="<%= request.getContextPath() %>/css/cssMachines.jsp">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/css/dynamicFonts.jsp" />
 <style>
     #loader {
       position: fixed;

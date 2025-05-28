@@ -17,6 +17,7 @@
   <link rel="icon" href="<%= request.getContextPath() %>/img/logo-flag-white.ico">
   <title>Pwned! - Login</title>
   <link rel="stylesheet" href="<%= request.getContextPath() %>/css/cssLogin.jsp">
+  <link rel="stylesheet" href="<%= request.getContextPath() %>/css/dynamicFonts.jsp" />
 </head>
 <body>
   <div class="container">

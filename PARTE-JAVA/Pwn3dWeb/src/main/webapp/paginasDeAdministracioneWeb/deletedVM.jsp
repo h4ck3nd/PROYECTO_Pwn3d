@@ -89,6 +89,7 @@
         align-items: center;
         box-shadow: 0 2px 8px rgba(0, 255, 0, 0.3);
         z-index: 1000;
+        font-size: 0.85rem;
     }
 
     .navbar .logo {
@@ -277,6 +278,7 @@
       <a href="<%= request.getContextPath() %>/paginasDeAdministracioneWeb/users.jsp">Usuarios</a>
       <a href="<%= request.getContextPath() %>/paginasDeAdministracioneWeb/adminDB.jsp">Administrar DDBB</a>
       <a href="<%= request.getContextPath() %>/paginasDeAdministracioneWeb/addNotice.jsp">Añadir Noticia</a>
+      <a href="<%= request.getContextPath() %>/paginasDeAdministracioneWeb/addInfoNotice.jsp">Añadir Info Noticias</a>
       <a href="#">Contacto</a>
     </nav>
   </header>
