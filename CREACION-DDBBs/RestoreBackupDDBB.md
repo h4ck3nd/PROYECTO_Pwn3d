@@ -28,8 +28,15 @@ Esto es necesario para que PgAdmin 4 use las utilidades (como `pg_restore`) corr
      ```
      C:\Program Files\PostgreSQL\17\bin
      ```
+     ![image](https://github.com/user-attachments/assets/a06a6d2b-eee8-4c99-a9bf-d4f5a46b36b0)
+
    - Marca la casilla `Set as default`.
+     
+     ![image](https://github.com/user-attachments/assets/952e225e-5c9b-4dbb-b63d-6ea5335cba34)
+
    - Haz clic en **Save** para guardar la configuración.
+   
+   ![image](https://github.com/user-attachments/assets/b3bd3b24-1b92-4da3-80ea-5aac3276a6b0)
 
 ---
 
