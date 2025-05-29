@@ -91,6 +91,8 @@ CREATE TABLE writeups_public (
 );
 ALTER TABLE writeups_public
 ADD COLUMN content_type VARCHAR(20) NOT NULL DEFAULT 'text';
+ALTER TABLE writeups_public
+ADD COLUMN language VARCHAR(20) NOT NULL DEFAULT 'desconocido';
 
 -- TABLA PARA EL ENVIO DE NUEVAS VMs
 
