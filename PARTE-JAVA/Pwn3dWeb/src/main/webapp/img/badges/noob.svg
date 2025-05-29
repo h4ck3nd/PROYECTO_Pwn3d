@@ -1,0 +1,28 @@
+<svg width="48" height="48" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fondo con gradiente morado -->
+  <defs>
+    <radialGradient id="gradNoob" cx="0.5" cy="0.5" r="0.7" fx="0.3" fy="0.3">
+      <stop offset="0%" stop-color="#9b59b6"/>
+      <stop offset="100%" stop-color="#6e40e1"/>
+    </radialGradient>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#7f5af0" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- Círculo principal con sombra -->
+  <circle cx="32" cy="32" r="28" fill="url(#gradNoob)" filter="url(#shadow)" />
+
+  <!-- Trofeo estilizado -->
+  <path d="M44 44H20c-1 0-2-1-2-2v-8c0-6 4-10 14-10s14 4 14 10v8c0 1-1 2-2 2z" fill="#d1c4e9" stroke="#7f5af0" stroke-width="2"/>
+  
+  <!-- Base del trofeo -->
+  <rect x="26" y="44" width="12" height="6" fill="#b48bf2" stroke="#7f5af0" stroke-width="1.5" rx="1" ry="1"/>
+  
+  <!-- Manijas del trofeo -->
+  <path d="M18 38c-1 0-2-1-2-2v-4h4v4c0 1-1 2-2 2zM46 38c1 0 2-1 2-2v-4h-4v4c0 1 1 2 2 2z" fill="#b48bf2" stroke="#7f5af0" stroke-width="1.5"/>
+
+  <!-- Estrella arriba (símbolo de logro) -->
+  <polygon points="32,14 35,24 46,24 37,30 40,40 32,34 24,40 27,30 18,24 29,24" fill="#e0d7f5" stroke="#7f5af0" stroke-width="1.2" />
+
+</svg>

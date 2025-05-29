@@ -1,0 +1,31 @@
+<svg width="48" height="48" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gradiente de fondo -->
+  <defs>
+    <radialGradient id="gradEscritor" cx="0.5" cy="0.5" r="0.7">
+      <stop offset="0%" stop-color="#d3bfff"/>
+      <stop offset="100%" stop-color="#7f5af0"/>
+    </radialGradient>
+    <filter id="glowEscritor" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#b48bf2" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+
+  <!-- Fondo circular -->
+  <circle cx="32" cy="32" r="28" fill="url(#gradEscritor)" filter="url(#glowEscritor)" />
+
+  <!-- Hoja de papel -->
+  <rect x="20" y="18" width="24" height="28" rx="2" fill="#f8f6ff" stroke="#c7b7f7" stroke-width="1.5"/>
+  <line x1="24" y1="24" x2="40" y2="24" stroke="#7f5af0" stroke-width="1.5"/>
+  <line x1="24" y1="29" x2="40" y2="29" stroke="#7f5af0" stroke-width="1.5"/>
+  <line x1="24" y1="34" x2="38" y2="34" stroke="#7f5af0" stroke-width="1.5"/>
+
+  <!-- Lápiz -->
+  <polygon points="30,45 32,50 36,46 34,41" fill="#ffa07a" stroke="#333" stroke-width="1"/>
+  <polygon points="32,50 33,53 37,49 36,46" fill="#fcd9a3" stroke="#333" stroke-width="1"/>
+
+  <!-- Texto del logro -->
+  <text x="32" y="58" text-anchor="middle" font-family="'Press Start 2P', cursive" font-size="6" fill="#ffffff">Escritor</text>
+
+  <!-- Borde decorativo -->
+  <circle cx="32" cy="32" r="30" stroke="#e4ccff" stroke-width="1.5" fill="none"/>
+</svg>

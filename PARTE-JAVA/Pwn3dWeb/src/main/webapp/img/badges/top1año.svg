@@ -1,0 +1,28 @@
+<svg width="48" height="48" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Definiciones -->
+  <defs>
+    <radialGradient id="gradTop1Ano" cx="0.5" cy="0.5" r="0.7" fx="0.3" fy="0.3">
+      <stop offset="0%" stop-color="#b48bf2"/>
+      <stop offset="100%" stop-color="#6e40e1"/>
+    </radialGradient>
+    <filter id="shadowTop1Ano" x="-10%" y="-10%" width="120%" height="120%" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#7f5af0" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- Círculo de fondo con sombra -->
+  <circle cx="32" cy="32" r="28" fill="url(#gradTop1Ano)" filter="url(#shadowTop1Ano)" />
+
+  <!-- Medalla interna -->
+  <circle cx="32" cy="32" r="18" fill="#e0d7f5" stroke="#7f5af0" stroke-width="2" />
+
+  <!-- Texto de año (estrella + número) -->
+  <text x="32" y="28" text-anchor="middle" font-family="'Press Start 2P', cursive" font-size="12" fill="#6e40e1">TOP</text>
+  <text x="32" y="42" text-anchor="middle" font-family="'Press Start 2P', cursive" font-size="12" fill="#9b59b6">AÑO</text>
+
+  <!-- Corona arriba -->
+  <path d="M22 10 L24 16 L28 12 L32 18 L36 12 L40 16 L42 10 Z" fill="#9b59b6" stroke="#7f5af0" stroke-width="1.5" />
+
+  <!-- Detalles -->
+  <circle cx="32" cy="32" r="30" stroke="#9b59b6" stroke-width="1.5" fill="none"/>
+</svg>

@@ -1,0 +1,30 @@
+<svg width="48" height="48" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Definiciones -->
+  <defs>
+    <radialGradient id="gradJunior" cx="0.5" cy="0.5" r="0.7">
+      <stop offset="0%" stop-color="#c89eff"/>
+      <stop offset="100%" stop-color="#6d4dd3"/>
+    </radialGradient>
+    <filter id="glowJunior" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#b18cff" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+
+  <!-- Fondo -->
+  <circle cx="32" cy="32" r="28" fill="url(#gradJunior)" filter="url(#glowJunior)" />
+
+  <!-- Pequeño monitor / terminal -->
+  <rect x="18" y="20" width="28" height="20" rx="2" fill="#1c1c2b" stroke="#eeeeff" stroke-width="2"/>
+  <circle cx="23" cy="25" r="2" fill="#ffffff"/>
+  <rect x="20" y="30" width="18" height="2" fill="#e0d7f5"/>
+  <rect x="20" y="34" width="12" height="2" fill="#e0d7f5"/>
+
+  <!-- Sonrisa estilo pixel -->
+  <path d="M26 38 h2 v2 h8 v-2 h2" stroke="#ffffff" stroke-width="1.5" fill="none"/>
+
+  <!-- Texto del logro -->
+  <text x="32" y="55" text-anchor="middle" font-family="'Press Start 2P', cursive" font-size="6" fill="#ffffff">Junior VM</text>
+
+  <!-- Borde decorativo -->
+  <circle cx="32" cy="32" r="30" stroke="#e4ccff" stroke-width="1.5" fill="none"/>
+</svg>

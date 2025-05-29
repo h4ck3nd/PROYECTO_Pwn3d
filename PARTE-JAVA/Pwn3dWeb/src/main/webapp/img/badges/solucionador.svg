@@ -1,0 +1,29 @@
+<svg width="48" height="48" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <defs>
+    <radialGradient id="gradSolucionador" cx="0.5" cy="0.5" r="0.8">
+      <stop offset="0%" stop-color="#e0d7ff"/>
+      <stop offset="100%" stop-color="#7f5af0"/>
+    </radialGradient>
+    <filter id="glowSolucionador" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#b48bf2" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+
+  <!-- Fondo circular -->
+  <circle cx="32" cy="32" r="28" fill="url(#gradSolucionador)" filter="url(#glowSolucionador)"/>
+
+  <!-- Bombilla (idea) -->
+  <path d="M32 17c-5 0-8 3.5-8 7 0 3 1.5 5 3 6v2.5a1.5 1.5 0 0 0 3 0V30c1.5-1 3-3 3-6 0-3.5-3-7-8-7z" fill="#fff" stroke="#7f5af0" stroke-width="1.5"/>
+  <circle cx="32" cy="40" r="2" fill="#fff" stroke="#7f5af0" stroke-width="1.5"/>
+
+  <!-- Documento -->
+  <rect x="38" y="20" width="10" height="14" rx="2" fill="#ffffff" stroke="#c7b7f7" stroke-width="1.2"/>
+  <line x1="40" y1="24" x2="46" y2="24" stroke="#7f5af0" stroke-width="1.2"/>
+  <line x1="40" y1="28" x2="46" y2="28" stroke="#7f5af0" stroke-width="1.2"/>
+
+  <!-- Título -->
+  <text x="32" y="58" text-anchor="middle" font-family="'Press Start 2P', cursive" font-size="5.5" fill="#ffffff">Solucionador</text>
+
+  <!-- Contorno -->
+  <circle cx="32" cy="32" r="30" stroke="#e0c7ff" stroke-width="1.5" fill="none"/>
+</svg>

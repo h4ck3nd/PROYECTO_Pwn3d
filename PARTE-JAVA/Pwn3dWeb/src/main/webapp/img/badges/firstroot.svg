@@ -1,0 +1,29 @@
+<svg width="48" height="48" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <defs>
+    <radialGradient id="gradFirstRoot" cx="0.5" cy="0.5" r="0.8">
+      <stop offset="0%" stop-color="#e0d7ff"/>
+      <stop offset="100%" stop-color="#7f5af0"/>
+    </radialGradient>
+    <filter id="glowFirstRoot" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#b48bf2" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+
+  <!-- Fondo circular -->
+  <circle cx="32" cy="32" r="28" fill="url(#gradFirstRoot)" filter="url(#glowFirstRoot)"/>
+
+  <!-- Poste de la bandera -->
+  <rect x="28" y="12" width="4" height="40" fill="#c7b7f7" stroke="#7f5af0" stroke-width="1.5" rx="1"/>
+
+  <!-- Bandera -->
+  <path d="M32 12 L48 18 L32 24 Z" fill="#7f5af0" stroke="#b48bf2" stroke-width="1.5" />
+
+  <!-- Detalle interior de la bandera (raíz / símbolo) -->
+  <path d="M36 16 L40 20 L36 24" stroke="#e0d7ff" stroke-width="2" fill="none" stroke-linejoin="round" />
+
+  <!-- Texto debajo -->
+  <text x="32" y="58" text-anchor="middle" font-family="'Press Start 2P', cursive" font-size="5.5" fill="#ffffff">FirstRoot</text>
+
+  <!-- Contorno -->
+  <circle cx="32" cy="32" r="30" stroke="#e0c7ff" stroke-width="1.5" fill="none"/>
+</svg>

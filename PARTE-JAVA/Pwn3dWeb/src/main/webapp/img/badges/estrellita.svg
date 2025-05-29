@@ -1,0 +1,20 @@
+<svg width="48" height="48" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <defs>
+    <radialGradient id="gradEstrellita" cx="0.5" cy="0.5" r="0.8">
+      <stop offset="0%" stop-color="#f6e9ff"/>
+      <stop offset="100%" stop-color="#7f5af0"/>
+    </radialGradient>
+    <filter id="glowEstrellita" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#b48bf2" flood-opacity="0.9"/>
+    </filter>
+  </defs>
+
+  <!-- Fondo circular -->
+  <circle cx="32" cy="32" r="28" fill="url(#gradEstrellita)" filter="url(#glowEstrellita)"/>
+
+  <!-- Estrella -->
+  <path fill="#b48bf2" stroke="#7f5af0" stroke-width="2" d="M32 14l6.18 12.52L52 29l-9.91 9.66L41.36 50 32 43.14 22.64 50l-1.73-11.34L11 29l13.82-2.48L32 14z"/>
+
+  <!-- Contorno exterior -->
+  <circle cx="32" cy="32" r="30" stroke="#cfcfff" stroke-width="1.5" fill="none"/>
+</svg>

@@ -1,0 +1,31 @@
+<svg width="48" height="48" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gradiente y sombra -->
+  <defs>
+    <radialGradient id="gradWriteups" cx="0.5" cy="0.5" r="0.7">
+      <stop offset="0%" stop-color="#e5d9ff"/>
+      <stop offset="100%" stop-color="#7f5af0"/>
+    </radialGradient>
+    <filter id="glowWriteups" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#b48bf2" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+
+  <!-- Fondo circular -->
+  <circle cx="32" cy="32" r="28" fill="url(#gradWriteups)" filter="url(#glowWriteups)" />
+
+  <!-- Hoja grande -->
+  <rect x="18" y="16" width="28" height="32" rx="2" fill="#ffffff" stroke="#c7b7f7" stroke-width="1.5"/>
+  <line x1="22" y1="22" x2="42" y2="22" stroke="#7f5af0" stroke-width="1.5"/>
+  <line x1="22" y1="27" x2="42" y2="27" stroke="#7f5af0" stroke-width="1.5"/>
+  <line x1="22" y1="32" x2="42" y2="32" stroke="#7f5af0" stroke-width="1.5"/>
+  <line x1="22" y1="37" x2="42" y2="37" stroke="#7f5af0" stroke-width="1.5"/>
+
+  <!-- Número 100 -->
+  <text x="32" y="48" text-anchor="middle" font-family="'Press Start 2P', cursive" font-size="7" fill="#ffccff">100</text>
+
+  <!-- Título -->
+  <text x="32" y="59" text-anchor="middle" font-family="'Press Start 2P', cursive" font-size="5.5" fill="#ffffff">Writeups</text>
+
+  <!-- Contorno -->
+  <circle cx="32" cy="32" r="30" stroke="#e0c7ff" stroke-width="1.5" fill="none"/>
+</svg>

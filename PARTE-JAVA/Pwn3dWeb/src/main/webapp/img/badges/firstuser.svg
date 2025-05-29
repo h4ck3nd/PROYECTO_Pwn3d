@@ -1,0 +1,26 @@
+<svg width="48" height="48" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <defs>
+    <radialGradient id="gradFirstUser" cx="0.5" cy="0.5" r="0.8">
+      <stop offset="0%" stop-color="#e0d7ff"/>
+      <stop offset="100%" stop-color="#7f5af0"/>
+    </radialGradient>
+    <filter id="glowFirstUser" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#b48bf2" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+
+  <!-- Fondo circular -->
+  <circle cx="32" cy="32" r="28" fill="url(#gradFirstUser)" filter="url(#glowFirstUser)"/>
+
+  <!-- Cabeza (círculo) -->
+  <circle cx="32" cy="22" r="8" fill="#c7b7f7" stroke="#7f5af0" stroke-width="1.5"/>
+
+  <!-- Hombros (semi-oval) -->
+  <path d="M20 42 C20 34, 44 34, 44 42 Q32 54, 20 42 Z" fill="#7f5af0" stroke="#b48bf2" stroke-width="1.5" />
+
+  <!-- Contorno -->
+  <circle cx="32" cy="32" r="30" stroke="#e0c7ff" stroke-width="1.5" fill="none"/>
+
+  <!-- Texto debajo -->
+  <text x="32" y="58" text-anchor="middle" font-family="'Press Start 2P', cursive" font-size="5.5" fill="#ffffff">FirstUser</text>
+</svg>

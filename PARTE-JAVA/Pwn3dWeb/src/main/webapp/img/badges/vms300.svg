@@ -1,0 +1,44 @@
+<svg width="48" height="48" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Definiciones -->
+  <defs>
+    <radialGradient id="gradVMS300" cx="0.5" cy="0.5" r="0.8">
+      <stop offset="0%" stop-color="#e3b3ff"/>
+      <stop offset="100%" stop-color="#702bff"/>
+    </radialGradient>
+    <filter id="glowVMS300" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#b88cff" flood-opacity="0.8"/>
+    </filter>
+    <linearGradient id="rayGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#c38dff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fondo principal -->
+  <circle cx="32" cy="32" r="28" fill="url(#gradVMS300)" filter="url(#glowVMS300)" />
+
+  <!-- Rayos estilo explosión -->
+  <g stroke="url(#rayGradient)" stroke-width="2">
+    <line x1="32" y1="4" x2="32" y2="14"/>
+    <line x1="32" y1="50" x2="32" y2="60"/>
+    <line x1="4" y1="32" x2="14" y2="32"/>
+    <line x1="50" y1="32" x2="60" y2="32"/>
+    <line x1="12" y1="12" x2="18" y2="18"/>
+    <line x1="52" y1="52" x2="46" y2="46"/>
+    <line x1="12" y1="52" x2="18" y2="46"/>
+    <line x1="52" y1="12" x2="46" y2="18"/>
+  </g>
+
+  <!-- Monitor épico -->
+  <rect x="14" y="18" width="36" height="22" rx="3" ry="3" fill="#1a1a2a" stroke="#ffffff" stroke-width="2"/>
+  <rect x="20" y="23" width="10" height="3" fill="#e6d9ff"/>
+  <rect x="20" y="28" width="18" height="2" fill="#e6d9ff"/>
+  <circle cx="45" cy="23" r="2" fill="#ffe6ff"/>
+  <circle cx="50" cy="23" r="2" fill="#ffe6ff"/>
+
+  <!-- Texto del logro -->
+  <text x="32" y="54" text-anchor="middle" font-family="'Press Start 2P', cursive" font-size="7" fill="#ffffff">300 VMs</text>
+
+  <!-- Borde exterior -->
+  <circle cx="32" cy="32" r="30" stroke="#d7b8ff" stroke-width="1.5" fill="none"/>
+</svg>

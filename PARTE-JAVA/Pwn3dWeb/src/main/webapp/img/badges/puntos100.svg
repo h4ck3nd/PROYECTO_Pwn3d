@@ -1,0 +1,23 @@
+<svg width="48" height="48" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <defs>
+    <radialGradient id="gradPuntos100" cx="0.5" cy="0.5" r="0.8">
+      <stop offset="0%" stop-color="#e0d7ff"/>
+      <stop offset="100%" stop-color="#7f5af0"/>
+    </radialGradient>
+    <filter id="glowPuntos100" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="5" flood-color="#b48bf2" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+
+  <!-- Fondo circular -->
+  <circle cx="32" cy="32" r="28" fill="url(#gradPuntos100)" filter="url(#glowPuntos100)"/>
+
+  <!-- Círculo interior (moneda) -->
+  <circle cx="32" cy="32" r="18" fill="#b48bf2" stroke="#7f5af0" stroke-width="2"/>
+
+  <!-- Texto "100" -->
+  <text x="32" y="38" text-anchor="middle" font-family="'Press Start 2P', cursive" font-size="18" fill="#e0d7ff" font-weight="bold">100</text>
+
+  <!-- Contorno exterior -->
+  <circle cx="32" cy="32" r="30" stroke="#cfcfff" stroke-width="1.5" fill="none"/>
+</svg>
