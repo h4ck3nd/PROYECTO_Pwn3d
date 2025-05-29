@@ -1554,6 +1554,31 @@ label {
 
 */
 
+.vm-name-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  gap: 0.4rem;
+}
+
+.vm-name {
+  flex-grow: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  font-size: clamp(0.6rem, 4vw, 1rem); /* Se adapta al tamaño disponible */
+}
+
+.vm-size {
+  flex-shrink: 0;
+  white-space: nowrap;
+  margin-left: auto;
+  margin-right: 10px;
+}
+
 /* Pantallas medianas y móviles: los elementos se apilan */
 @media screen and (max-width: 768px) {
   .vm-name-wrapper {
@@ -2085,28 +2110,17 @@ label {
 
 /* SECCION DE DIFICULTADES SOLAMENTE (HEADER) */
 
+/*
 .badge {
   position: relative;
   display: inline-block;
   font-weight: bold;
   padding: 10px 5px;
   font-size: 1.2em;
-  color: #00ff88; /* color tipo terminal verde */
+  color: #00ff88; 
   text-shadow: 0 0 5px #00ff88;
   margin-bottom: 5px;
   cursor: default;
-}
-
-.badge::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 10%;
-  width: 80%;
-  height: 2px;
-  background: #00ff88;
-  box-shadow: 0 0 5px #00ff88;
-  animation: pulse-underline 2s infinite;
 }
 
 @keyframes pulse-underline {
@@ -2114,66 +2128,58 @@ label {
   50% { opacity: 0.3; width: 60%; }
   100% { opacity: 1; width: 80%; }
 }
+*/
 
 /* Colores personalizados por dificultad */
-.badge-easy {
-  color: #4caf50;
-  text-shadow: 0 0 5px #4caf50;
+
+/* Base para todas las badges */
+.badge-very-easy, .badge-easy, .badge-medium, .badge-hard, .badge-vms {
+  font-family: 'Source Code Pro', monospace, monospace;
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 2px 6px;
+  margin: 0 5px;
+  cursor: default;
+  position: relative;
+  color: #7f5af0; /* Morado frío base */
+  border-bottom: 1.5px solid #7f5af0;
+  user-select: none;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 0.3s ease, border-color 0.3s ease;
+  margin-bottom: 10px;
 }
-.badge-easy::after {
-  background: #4caf50;
-  box-shadow: 0 0 5px #4caf50;
+
+/* Colores específicos para cada dificultad */
+.badge-very-easy {
+  color: #14ffed; /* verde neón */
+  border-bottom-color: #14ffed;
+  filter: grayscale(20%);
+}
+
+.badge-easy {
+  color: #39ff14; /* verde neón */
+  border-bottom-color: #39ff14;
+  filter: grayscale(20%);
 }
 
 .badge-medium {
-  color: #ffc107;
-  text-shadow: 0 0 5px #ffc107;
+  color: #ffc107; /* amarillo */
+  border-bottom-color: #ffc107;
+  filter: grayscale(30%);
 }
-.badge-medium::after {
-  background: #ffc107;
-  box-shadow: 0 0 5px #ffc107;
-}
-
 .badge-hard {
-  color: #f44336;
-  text-shadow: 0 0 5px #f44336;
-}
-.badge-hard::after {
-  background: #f44336;
-  box-shadow: 0 0 5px #f44336;
+  color: #ff1414; /* rojo */
+  border-bottom-color: #f44336;
+  filter: grayscale(20%);
 }
 
 .badge-vms {
-  position: relative;
-  display: inline-block;
-  font-weight: bold;
-  padding: 10px 5px;
-  font-size: 1.2em;
-  color: #00ffff; /* cian estilo terminal */
-  text-shadow: 0 0 6px #00ffff;
-  margin-bottom: 5px;
-  cursor: default;
+  color: #7f5af0;
+  border-bottom-color: #7f5af0;
+  letter-spacing: 0.15em;
+  font-size: 1.1rem;
 }
-
-.badge-vms::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 10%;
-  width: 80%;
-  height: 2px;
-  background: #00ffff;
-  box-shadow: 0 0 5px #00ffff;
-  animation: pulse-underline-vms 2s infinite;
-}
-
-@keyframes pulse-underline-vms {
-  0%   { opacity: 1; width: 80%; }
-  50%  { opacity: 0.3; width: 60%; }
-  100% { opacity: 1; width: 80%; }
-}
-
-
 
 /*
 .badge {
@@ -2236,14 +2242,6 @@ label {
     100% {
         box-shadow: 0 0 0 0 rgba(30, 144, 255, 0);
     }
-}
-
-.badge-very-easy, #Very-Easy {
-    color: var(--color-info-bg);
-    background-color: var(--color-info-bg-light) !important;
-    border: 2px solid var(--color-info-bg);
-    animation: pulse-border-veryeasy 2s infinite;
-    border-radius: 6px;
 }
 
 @keyframes pulse-border-veryeasy {

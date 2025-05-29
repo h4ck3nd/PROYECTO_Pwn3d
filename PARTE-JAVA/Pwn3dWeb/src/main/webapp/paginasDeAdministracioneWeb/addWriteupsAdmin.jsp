@@ -232,10 +232,11 @@
       writeupsArr.forEach(w => {
         const fila = document.createElement("tr");
         fila.innerHTML =
-          "<td>" + w.name + "</td>" +
-          "<td>" + w.creator + "</td>" +
-          "<td><a href='" + w.url + "' target='_blank'>Ver</a></td>" +
-          "<td>" + w.contentType + "</td>";
+        	  "<td>" + w.name + "</td>" +
+        	  "<td>" + w.creator + "</td>" +
+        	  "<td><a href='" + w.url + "' target='_blank'>Ver</a></td>" +
+        	  "<td>" + w.contentType + "</td>" +
+        	  "<td>" + (w.language || 'desconocido') + "</td>";
         contenedor.appendChild(fila);
       });
     }
@@ -273,6 +274,7 @@
           <th>Creador</th>
           <th>URL</th>
           <th>Tipo</th>
+          <th>Idioma</th>
         </tr>
       </thead>
       <tbody id="tablaWriteups">

@@ -954,13 +954,13 @@
 			          <div class="vb-field">
 			            <label for="language">Idioma</label>
 			            <select id="language" name="Language" required>
-			              <option value="EN">English</option>
-			              <option value="ES">Español</option>
-			              <option value="FR">Français</option>
-			              <option value="DE">Deutsch</option>
-			              <option value="PT">Português</option>
-			              <option value="ZH">Chinese</option>
-			              <option value="Other">Other</option>
+			              <option value="Ingles">English</option>
+			              <option value="Español">Español</option>
+			              <option value="Frances">Français</option>
+			              <option value="Aleman">Deutsch</option>
+			              <option value="Portugues">Português</option>
+			              <option value="Chino">Chinese</option>
+			              <option value="Otro">Other</option>
 			              <option value="None">None (Just Video)</option>
 			            </select>
 			          </div>
@@ -1206,9 +1206,9 @@
 	              '<td id="vm">' +
 	                '<div class="vm-name-btn level-btn ' + machine.difficulty + '">' +
 	                  '<img class="' + machine.difficulty + '-dots" title="' + machine.os + ' VM" alt="' + machine.os + '" src="<%= request.getContextPath() %>/img/' + machine.imgNameOs + '.svg" width="22" height="22" loading="lazy">' +
-	                  '<span class="vm-name-wrapper" style="display: flex; align-items: center; gap: 0.4rem;">' +
-	                    '<span class="vm-name" style="margin-right: -60px;">' + machine.nameMachine + '</span>' +
-	                    '<span class="vm-size" style="margin-right: 20px; margin-left: auto;">' + machine.size + '</span>' +
+	                  '<span class="vm-name-wrapper">' +
+	                    '<span class="vm-name">' + machine.nameMachine + '</span>' +
+	                    '<span class="vm-size">' + machine.size + '</span>' +
 	                  '</span>' +
 	                '</div>' +
 	              '</td>' +
@@ -1545,10 +1545,12 @@
 		      if (!data || data.length === 0) {
 		        container.innerHTML = '<p style="text-align:center; color: gray;">No hay writeups para esta máquina.</p>';
 		      } else {
-		        data.forEach(w => {
-		        	let icon = w.contentType === 'Video' ? '📹' : '📄';
-		        	container.innerHTML += '<p>' + '<span class="writeup-icon">' + icon + '</span>' + ' <a href="' + w.url + '" target="_blank">' + w.name + ' - ' + w.creator + '</a></p>';
-		        });
+		    	  data.forEach(w => {
+		    		  let icon = w.contentType === 'Video' ? '📹' : '📄';
+		    		  let lang = w.language ? ' [' + w.language + ']' : '';
+		    		  container.innerHTML += '<p>' + '<span class="writeup-icon">' + icon + '</span>' + 
+		    		    ' <a href="' + w.url + '" target="_blank">' + w.name + ' - ' + w.creator + lang + '</a></p>';
+		    		});
 		      }
 		
 		      // Mostrar modal añadiendo clase .show

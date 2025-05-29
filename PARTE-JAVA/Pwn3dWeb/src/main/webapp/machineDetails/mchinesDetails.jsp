@@ -522,7 +522,7 @@ input[type="text"]:focus, input[type="number"]:focus, textarea:focus {
     	  var writeupsPercent = machine.totalWriteups ? Math.min(100, (machine.totalWriteups / maxWriteups) * 100) : 0;
 
     	  var machineImageUrl = machine.nameMachine
-    	    ? contextPath + '/img/' + machine.nameMachine + '.png'
+    	    ? contextPath + '/img/' + machine.nameMachine.toLowerCase() + '.png'
     	    : contextPath + '/img/logo-flag-white.png';
 		
     	  

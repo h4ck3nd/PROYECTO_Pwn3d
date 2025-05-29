@@ -8,7 +8,7 @@ function showCard(name, os, difficulty, creator, release, id) {
         html:
             '<div class="card-container">' +
                 '<div class="logo-section">' +
-                    '<img src="img/' + name + '.png" alt="Pwn3d! Logo" class="card-logo" style="margin-right: -10px !important;" onerror="this.onerror=null;this.src=\'img/logo-flag-white.ico\';">' +
+                    '<img src="img/' + name.toLowerCase() + '.png" alt="Pwn3d! Logo" class="card-logo" style="margin-right: -10px !important;" onerror="this.onerror=null;this.src=\'img/logo-flag-white.ico\';">' +
                 '</div>' +
                 '<div class="info-section">' + 
 				'<div style="display: flex; align-items: center;">' +
