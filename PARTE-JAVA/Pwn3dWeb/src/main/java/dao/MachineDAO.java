@@ -261,4 +261,19 @@ public class MachineDAO {
 
         return json;
     }
+    
+    public boolean isUserCreator(String usuario) {
+        String sql = "SELECT 1 FROM machines WHERE creator = ? LIMIT 1";
+        ConexionDDBB db = new ConexionDDBB();
+        try (Connection conn = db.conectar();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, usuario);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

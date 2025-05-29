@@ -55,6 +55,24 @@ public class StarsDAO {
         }
         return 0.0;
     }
+    
+    /**
+     * Verifica si el usuario tiene alguna estrella en alguna máquina.
+     * Útil para el badge "estrellita".
+     */
+    public boolean hasStars(int userId) {
+        String sql = "SELECT 1 FROM stars_machines WHERE user_id = ? LIMIT 1";
+        try (Connection conn = new ConexionDDBB().conectar();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     public void cerrarConexion() {
         try {

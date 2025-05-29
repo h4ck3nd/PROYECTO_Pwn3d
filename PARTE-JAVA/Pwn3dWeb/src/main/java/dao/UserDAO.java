@@ -355,5 +355,27 @@ public class UserDAO {
 
         return users;
     }
+    
+ // Método para obtener los puntos totales de un usuario por su userId
+    public int getUserPoints(int userId) {
+        int puntos = 0;
+        String sql = "SELECT puntos FROM users WHERE id = ?";
+
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    puntos = rs.getInt("puntos");
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return puntos;
+    }
+
 
 }

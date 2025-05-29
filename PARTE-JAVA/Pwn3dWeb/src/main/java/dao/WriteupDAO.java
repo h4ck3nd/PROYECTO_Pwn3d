@@ -101,4 +101,21 @@ public class WriteupDAO {
             }
         }
     }
+    
+    public int countWriteupsByUser(int userId) {
+        String sql = "SELECT COUNT(*) AS total FROM writeups_public WHERE user_id = ?";
+        ConexionDDBB conexion = new ConexionDDBB();
+        try (Connection conn = conexion.conectar();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("total");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.BadgeDAO;
 import dao.UserDAO;
+import model.Badge;
 import model.User;
 import utils.JWTUtil;
 
@@ -79,7 +81,14 @@ public class LoginServlet extends HttpServlet {
             cookie.setMaxAge(60 * 60 * 24); // 1 día
             cookie.setPath("/"); // importante para ser accesible desde toda la app
             response.addCookie(cookie);
-
+            
+            // Agregar creación del badge (solo si no existe)
+            BadgeDAO badgeDAO = new BadgeDAO();
+            Badge existingBadges = badgeDAO.getBadgesByUserId(user.getId());
+            if (existingBadges == null) {
+                badgeDAO.createBadgesForUser(user.getId());
+            }
+            
             // 7. Guardar userId en la sesión HTTP
             HttpSession session = request.getSession();
             session.setAttribute("userId", user.getId());

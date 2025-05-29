@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import conexionDDBB.ConexionDDBB;
 import model.Flag;
 
 public class FlagsDAO {
@@ -82,5 +83,53 @@ public class FlagsDAO {
             }
         }
         return result;
+    }
+    
+    /**
+     * Cuenta las máquinas hackeadas por un usuario (que tenga ambas flags: user y root).
+     */
+    public int countMachinesHackedByUser(int userId) throws SQLException {
+        String sql = "SELECT COUNT(*) AS total FROM (" +
+                "SELECT vm_name FROM flags WHERE id_user = ? GROUP BY vm_name HAVING COUNT(DISTINCT tipo_flag) = 2" +
+                ") AS hackeadas";
+
+        try (Connection conn = new ConexionDDBB().conectar();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("total");
+                }
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * Verifica si el usuario tiene la primera flag root.
+     */
+    public boolean hasFirstRootFlag(int userId) throws SQLException {
+        String sql = "SELECT 1 FROM flags WHERE id_user = ? AND first_flag_root = TRUE LIMIT 1";
+        try (Connection conn = new ConexionDDBB().conectar();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        }
+    }
+
+    /**
+     * Verifica si el usuario tiene la primera flag user.
+     */
+    public boolean hasFirstUserFlag(int userId) throws SQLException {
+        String sql = "SELECT 1 FROM flags WHERE id_user = ? AND first_flag_user = TRUE LIMIT 1";
+        try (Connection conn = new ConexionDDBB().conectar();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        }
     }
 }
