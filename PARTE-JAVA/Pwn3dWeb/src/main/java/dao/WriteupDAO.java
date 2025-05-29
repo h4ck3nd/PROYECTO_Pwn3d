@@ -42,6 +42,7 @@ public class WriteupDAO {
                 w.setCreator(rs.getString("creator"));
                 w.setEstado(rs.getString("estado"));
                 w.setContentType(rs.getString("content_type")); // 💥 AÑADIR ESTO
+                w.setLanguage(rs.getString("language"));
                 pending.add(w);
             }
         }
@@ -50,7 +51,7 @@ public class WriteupDAO {
 
     public List<Writeup> getWriteupsPublicByVmName(String vmName) throws SQLException {
         List<Writeup> lista = new ArrayList<>();
-        String sql = "SELECT vm_name, creator, url, content_type FROM writeups_public WHERE vm_name = ?";
+        String sql = "SELECT vm_name, creator, url, content_type, language FROM writeups_public WHERE vm_name = ?";
 
         try (Connection conn = new ConexionDDBB().conectar();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -64,6 +65,7 @@ public class WriteupDAO {
                 w.setCreator(rs.getString("creator"));
                 w.setUrl(rs.getString("url"));
                 w.setContentType(rs.getString("content_type")); // NUEVO
+                w.setLanguage(rs.getString("language"));
                 lista.add(w);
             }
         }
@@ -75,15 +77,16 @@ public class WriteupDAO {
             conn.setAutoCommit(false);
 
             try {
-                String insertSql = "INSERT INTO writeups_public (url, vm_name, user_id, creator, content_type) VALUES (?, ?, ?, ?, ?)";
-                try (PreparedStatement insertStmt = conn.prepareStatement(insertSql)) {
-                    insertStmt.setString(1, w.getUrl());
-                    insertStmt.setString(2, w.getVmName());
-                    insertStmt.setInt(3, w.getUserId());
-                    insertStmt.setString(4, w.getCreator());
-                    insertStmt.setString(5, w.getContentType() != null ? w.getContentType() : "text");
-                    insertStmt.executeUpdate();
-                }
+            	String insertSql = "INSERT INTO writeups_public (url, vm_name, user_id, creator, content_type, language) VALUES (?, ?, ?, ?, ?, ?)";
+            	try (PreparedStatement insertStmt = conn.prepareStatement(insertSql)) {
+            	    insertStmt.setString(1, w.getUrl());
+            	    insertStmt.setString(2, w.getVmName());
+            	    insertStmt.setInt(3, w.getUserId());
+            	    insertStmt.setString(4, w.getCreator());
+            	    insertStmt.setString(5, w.getContentType() != null ? w.getContentType() : "text");
+            	    insertStmt.setString(6, w.getLanguage() != null ? w.getLanguage() : "desconocido");
+            	    insertStmt.executeUpdate();
+            	}
 
                 String updateSql = "UPDATE writeups SET estado = 'Publicado' WHERE url = ?";
                 try (PreparedStatement updateStmt = conn.prepareStatement(updateSql)) {

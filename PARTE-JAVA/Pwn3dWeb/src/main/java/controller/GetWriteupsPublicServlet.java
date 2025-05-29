@@ -37,12 +37,14 @@ public class GetWriteupsPublicServlet extends HttpServlet {
                 String safeCreator = w.getCreator().replace("\"", "\\\"");
                 String safeUrl = w.getUrl().replace("\"", "\\\"");
                 String safeType = w.getContentType().replace("\"", "\\\"");
+                String safeLanguage = w.getLanguage() != null ? w.getLanguage().replace("\"", "\\\"") : "";
 
                 out.print("{");
                 out.print("\"name\": \"" + safeVmName + "\",");
                 out.print("\"creator\": \"" + safeCreator + "\",");
                 out.print("\"url\": \"" + safeUrl + "\",");
-                out.print("\"contentType\": \"" + safeType + "\"");
+                out.print("\"contentType\": \"" + safeType + "\",");
+                out.print("\"language\": \"" + safeLanguage + "\"");
                 out.print("}");
 
                 if (i < publicados.size() - 1) {

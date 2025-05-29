@@ -22,14 +22,14 @@ public class InfoNotice {
     public void setPathInfoNotice(String pathInfoNotice) {
         this.pathInfoNotice = pathInfoNotice;
     }
-    
+
     public String getSecondEnvironment() {
         return secondEnvironment;
     }
     public void setSecondEnvironment(String secondEnvironment) {
         this.secondEnvironment = secondEnvironment;
     }
-    
+
     public String getEnvironment() {
         return environment;
     }

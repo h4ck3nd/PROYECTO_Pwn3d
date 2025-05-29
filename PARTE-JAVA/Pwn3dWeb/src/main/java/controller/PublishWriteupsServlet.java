@@ -33,7 +33,8 @@ public class PublishWriteupsServlet extends HttpServlet {
                 out.println("  name: \"" + w.getVmName() + "\",");
                 out.println("  creator: \"" + w.getCreator() + "\",");
                 out.println("  url: \"" + w.getUrl() + "\",");
-                out.println("  contentType: \"" + w.getContentType() + "\"");
+                out.println("  contentType: \"" + w.getContentType() + "\",");
+                out.println("  language: \"" + (w.getLanguage() != null ? w.getLanguage() : "desconocido") + "\"");
                 out.println("};");
                 out.println("writeupsArr.push(writeupObj);");
             }
