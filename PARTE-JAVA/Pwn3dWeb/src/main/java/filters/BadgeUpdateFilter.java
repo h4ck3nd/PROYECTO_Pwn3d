@@ -18,8 +18,46 @@ public class BadgeUpdateFilter implements Filter {
             throws IOException, ServletException {
 
         HttpServletRequest httpReq = (HttpServletRequest) request;
+        String contextPath = httpReq.getContextPath();
+        String path = httpReq.getRequestURI();
+        System.out.println("DEBUG: path = " + path);
         HttpSession session = httpReq.getSession(false);
+        
+     // ✅ Excluir rutas específicas que incluyan el contextPath
+        if (path.startsWith(contextPath + "/css/") ||
+            path.startsWith(contextPath + "/js/") ||
+            path.startsWith(contextPath + "/img/") ||
+            path.startsWith(contextPath + "/paginasDeAdministracioneWeb/") ||
+            path.startsWith(contextPath + "/machineDetails/") ||
+            path.startsWith(contextPath + "/feedbacks-requests/") ||
+            path.startsWith(contextPath + "/fonts/") ||
+            path.equals(contextPath + "/machines.jsp") ||
+            path.equals(contextPath + "/ultimaMaquina") ||
+            path.equals(contextPath + "/machines-stats") ||
+            path.equals(contextPath + "/machines-stats-principal") ||
+            path.equals(contextPath + "/machineDetails") ||
+            path.equals(contextPath + "/getWriteupsPublic") ||
+            path.equals(contextPath + "/requests") ||
+            path.equals(contextPath + "/feedbacks") ||
+            path.equals(contextPath + "/sendNewVM") ||
+            path.equals(contextPath + "/submitFlag") ||
+            path.equals(contextPath + "/getNotices") ||
+            path.equals(contextPath + "/logsJson") ||
+            path.equals(contextPath + "/ultimaMaquinaIndex") ||
+            path.equals(contextPath + "/give-love") ||
+            path.equals(contextPath + "/star-rating") ||
+            path.equals(contextPath + "/editarPerfil") ||
+            path.equals(contextPath + "/subirAvatar") ||
+            path.equals(contextPath + "/actualizarPais") ||
+            path.equals(contextPath + "/ranking.jsp") ||
+            path.equals(contextPath + "/infoNoticias.jsp") ||
+            path.equals(contextPath + "/welcome.jsp") ||
+            path.startsWith(contextPath + "/login-register/")) {
 
+            chain.doFilter(request, response); // No aplicar lógica de badges
+            return;
+        }
+        
         if (session != null && session.getAttribute("userId") != null) {
             int userId = (int) session.getAttribute("userId");
 
