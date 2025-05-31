@@ -685,3 +685,32 @@ input:focus, select:focus {
   font-family: 'Press Start 2P', monospace !important;
   line-height: 3rem !important;
 }
+
+/* ESTILO DEL LOGRO PROHACKER PARA EL AVATAR */
+
+.avatar-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid transparent;
+}
+
+/* Contorno exclusivo para prohacker */
+.prohacker-border {
+  position: relative;
+  animation: pulseBorder 2s infinite;
+  box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0.6);
+}
+
+@keyframes pulseBorder {
+  0% {
+    box-shadow: 0 0 10px 3px rgba(255, 0, 0, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px 8px rgba(255, 0, 0, 0.9);
+  }
+  100% {
+    box-shadow: 0 0 10px 3px rgba(255, 0, 0, 0.5);
+  }
+}

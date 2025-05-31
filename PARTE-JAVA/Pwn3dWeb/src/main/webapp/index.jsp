@@ -52,6 +52,18 @@
         ? request.getContextPath() + "/" + img.getPathImg()
         : request.getContextPath() + "/imgProfile/default.png";
 %>
+<%@ page import="dao.BadgeDAO" %>
+<%
+    userId = (Integer) session.getAttribute("userId");
+    boolean esProHacker = false;
+
+    if (userId != null) {
+        BadgeDAO badgeDAO = new BadgeDAO();
+        esProHacker = badgeDAO.tieneBadgeProHacker(userId);
+    }
+
+    request.setAttribute("esProHacker", esProHacker); // (opcional, si también querés usarlo en EL u otros sitios)
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,7 +86,7 @@
           <!-- Botón de cerrar -->
           <button id="closeMenu" class="menu-close">❌</button>
           <div class="profile">
-            <img src="<%= imgSrc %>" alt="Avatar" class="avatar-image" />
+            <img src="<%= imgSrc %>" alt="Avatar" class="avatar-image <%= esProHacker ? "prohacker-border" : "" %>" />
             <p><strong>Username:</strong> <%= nombreUsuario %></p>
           </div>
           <hr>
@@ -235,6 +247,41 @@
     
     <script src="<%= request.getContextPath() %>/js/jsIndex.jsp"></script>
     <script>
+    	
+    	/* SHOW LOGS INDEX (DASHBOARD) */
+    	  
+    	  // Función para escapar texto y evitar inyección HTML
+    	    function escapeHtml(text) {
+    	      if (!text) return '';
+    	      return text.replace(/&/g, "&amp;")
+    	                 .replace(/</g, "&lt;")
+    	                 .replace(/>/g, "&gt;")
+    	                 .replace(/"/g, "&quot;")
+    	                 .replace(/'/g, "&#039;");
+    	    }
+
+    	    // Construye el HTML concatenado con +
+    		function buildLogsHTML(logs) {
+    		  var html = 
+    		    '<section class="logs" style="max-height: 400px; overflow-y: auto;">';
+
+    		  for (var i = 0; i < logs.length; i++) {
+    		    var log = logs[i];
+    		    html +=
+    		      '<div class="log-card">' +
+    		      '<img src="' + log.imgSrc + '" alt="' + escapeHtml(log.user) + '" class="log-avatar ' + (log.esProHacker ? 'prohacker-border' : '') + '" />' +
+    		        '<div class="log-content">' +
+    		          '<p><span class="timestamp">' + escapeHtml(log.createdAt || '') + '</span></p>' +
+    		          '<p><strong class="hacker-name">' + escapeHtml(log.user) + '</strong> got ' +
+    		            '<span class="' + escapeHtml(log.tipoFlag) + '">' + escapeHtml(log.tipoFlag) + '</span> in <em>' + escapeHtml(log.vmName) + '</em></p>' +
+    		        '</div>' +
+    		      '</div>';
+    		  }
+
+    		  html += '</div></section>';
+    		  return html;
+    		}
+    
 	 	// Cargar logs desde el servlet JSON y añadirlo al DOM
 	    fetch('<%= request.getContextPath() %>/logsJson')
 	      .then(response => response.json())

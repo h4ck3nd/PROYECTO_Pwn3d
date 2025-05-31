@@ -62,7 +62,17 @@
     List<User> ranking = dao.getRanking(periodo);
     dao.cerrarConexion();
 %>
+<%@ page import="dao.BadgeDAO" %>
+<%
+    boolean esProHacker = false;
 
+    if (userId != null) {
+        BadgeDAO badgeDAO = new BadgeDAO();
+        esProHacker = badgeDAO.tieneBadgeProHacker(userId);
+    }
+
+    request.setAttribute("esProHacker", esProHacker);
+%>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -82,7 +92,7 @@
           <!-- Botón de cerrar -->
           <button id="closeMenu" class="menu-close">❌</button>
           <div class="profile">
-            <img src="<%= imgSrc %>" alt="Avatar" class="avatar-image" />
+            <img src="<%= imgSrc %>" alt="Avatar" class="avatar-image <%= esProHacker ? "prohacker-border" : "" %>" />
             <p><strong>Username:</strong> <%= nombreUsuario %></p>
           </div>
           <hr>
@@ -224,6 +234,7 @@
           User currentUser = null;
           int posicionUsuario = -1;
           ImgProfile imgUsuario = null;
+          BadgeDAO badgeDAO = new BadgeDAO();
 
           for (User u : ranking) {
             if (u.getId() == userId) {
@@ -235,16 +246,19 @@
             ImgProfile img = imgDao.getImgProfileByUserId(u.getId());
             String imgPath = (img != null) ? request.getContextPath() + "/" + img.getPathImg() : request.getContextPath() + "/imgProfile/default.png";
             String flagPath = (u.getPais() != null) ? request.getContextPath() + "/img/flags/" + u.getPais().toLowerCase() + ".svg" : null;
-
+			
+            boolean proHacker = badgeDAO.tieneBadgeProHacker(u.getId());
+            
             String colorClass = "";
             if (pos == 1) { colorClass = "gold"; topUser = u; }
             else if (pos == 2) colorClass = "silver";
             else if (pos == 3) colorClass = "bronze";
         %>
+        
         <div class="ranking-row <%= colorClass %>">
           <div class="ranking-col">#<%= pos %></div>
           <div class="ranking-col-hackers">
-            <img src="<%= imgPath %>" class="avatar" alt="avatar"/>
+            <img src="<%= imgPath %>" class="avatar <%= proHacker ? "prohacker-border" : "" %>" alt="avatar de <%= u.getUsuario() %>" />
             <span><%= u.getNombre() %> @<%= u.getUsuario() %></span>
             <% if (flagPath != null) { %>
               <img src="<%= flagPath %>" class="flag-icon" alt="flag" />
@@ -266,12 +280,13 @@
               String flagPathUser = (currentUser.getPais() != null)
                       ? request.getContextPath() + "/img/flags/" + currentUser.getPais().toLowerCase() + ".svg"
                       : null;
+              boolean proHackerUsuario = badgeDAO.tieneBadgeProHacker(currentUser.getId());
         %>
         <hr style="border: 1px solid var(--border-color); margin: 18px auto; width: 90%;">
         <div class="ranking-row" style="border-left: 6px solid #8e7cc3;">
           <div class="ranking-col">#<%= posicionUsuario %></div>
           <div class="ranking-col-hackers">
-            <img src="<%= imgPathUser %>" class="avatar" alt="avatar"/>
+            <img src="<%= imgPathUser %>" class="avatar <%= proHackerUsuario ? "prohacker-border" : "" %>" alt="avatar"/>
             <span><%= currentUser.getNombre() %> @<%= currentUser.getUsuario() %></span>
             <% if (flagPathUser != null) { %>
               <img src="<%= flagPathUser %>" class="flag-icon" alt="flag" />

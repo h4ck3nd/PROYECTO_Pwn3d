@@ -13,7 +13,15 @@
 </head>
 <body>
     <div class="container">
-        <h2>Logros y Cómo Conseguirlos</h2>
+    	
+    	<!-- Barra de mini opciones -->
+	  <nav class="mini-nav">
+	    <button onclick="scrollToSection('logros')">Logros</button>
+	    <button onclick="scrollToSection('logros-desbloqueados')">Logros Obtenidos</button>
+	    <button onclick="scrollToSection('recompensas')">Recompensas</button>
+	  </nav>
+    	<br>
+        <h2 id="logros">Logros y Cómo Conseguirlos</h2>
 
         <button onclick="window.location.href='<%= request.getContextPath() %>/stats'" class="btn exit">
             Volver
@@ -376,9 +384,167 @@
 		      Da tu primera estrellita valorando una maquina y el trabajo del creador.
 		    </div>
 		  </div>
+		  
+		  <div class="achievement-card" style="width: 48%;">
+			  <div class="achievement-code">[hacker]</div>
+			  <img
+			    title="hacker"
+			    src="<%= request.getContextPath() %>/img/badges/hacker.svg"
+			    alt="Icono hacker"
+			    class="achievement-icon img-thumbnail"
+			    style="cursor:pointer;"
+			    data-bs-toggle="modal"
+			    data-bs-target="#imageModal"
+			    data-bs-imgsrc="<%= request.getContextPath() %>/img/badges/hacker.svg"
+			    data-bs-imgalt="Icono hacker"
+			  />
+			  <div class="achievement-title">¡Hacker!</div>
+			  <div class="achievement-desc">
+			    Has demostrado habilidades de hacker avanzadas.
+			  </div>
+			</div>
+			
+			<div class="achievement-card" style="width: 48%;">
+			  <div class="achievement-code">[prohacker]</div>
+			  <img
+			    title="prohacker"
+			    src="<%= request.getContextPath() %>/img/badges/prohacker.svg"
+			    alt="Icono prohacker"
+			    class="achievement-icon img-thumbnail"
+			    style="cursor:pointer;"
+			    data-bs-toggle="modal"
+			    data-bs-target="#imageModal"
+			    data-bs-imgsrc="<%= request.getContextPath() %>/img/badges/prohacker.svg"
+			    data-bs-imgalt="Icono prohacker"
+			  />
+			  <div class="achievement-title">¡Pro Hacker (500 máquinas)!</div>
+			  <div class="achievement-desc">
+			    Has hackeado más de 500 máquinas, ¡eres un Pro Hacker!
+			  </div>
+			</div>
+		  
 		</div>
+		<br><br><br><br>
+		<h2 id="logros-desbloqueados">LOGROS OBTENIDOS/DESBLOQUEADOS</h2>
+		<br><br>
+		<div id="badges-container" class="gadgets-achievements d-flex flex-wrap gap-3"></div>
+		
+		<br><br><br><br>
+		<h2 id="recompensas">RECOMPENSAS POR LOGROS</h2>
+		<br><br>
+		
+		<div id="reward-prohacker" class="reward-card">
+		  <div class="reward-header">[ProHacker]</div>
+		  <div class="reward-description">
+		    La recompensa tras obtener el logro <strong>ProHacker</strong> es un aura luminosa roja alrededor de tu foto de perfil.
+		  </div>
+		  <img
+		    id="avatar-prohacker"
+		    src="<%= request.getContextPath() %>/imgProfile/default.png"
+		    alt="Avatar ProHacker"
+		    class="avatar-image"
+		  />
+		  <div id="prohacker-status" class="reward-status">Bloqueado</div>
+		</div>
+		
     </div>
     
+    
+
+	<script>
+	const badgeNames = {
+	    noob: "¡Bienvenido!",
+	    top1mes: "Top 1 del mes",
+	    top1año: "Top 1 del año",
+	    creador: "Creador de máquinas",
+	    vms50: "50 máquinas hackeadas",
+	    vms100: "100 máquinas hackeadas",
+	    vms200: "200 máquinas hackeadas",
+	    vms300: "300 máquinas hackeadas",
+	    juniorvm: "Tu primera máquina",
+	    escritor: "Ha escrito writeups",
+	    writeups100: "100 writeups",
+	    solucionador: "Primer writeup",
+	    firstroot: "Primera root flag",
+	    firstuser: "Primera user flag",
+	    puntos100: "100 puntos",
+	    puntos1000: "1000 puntos",
+	    puntos2000: "2000 puntos",
+	    puntos3000: "3000 puntos",
+	    estrellita: "Ha dado estrellas",
+	    hacker: "¡Hacker!",
+	    prohacker: "¡Pro Hacker (500 máquinas)!"
+	};
+	
+	async function loadUserBadges() {
+	    try {
+	        const res = await fetch('<%= request.getContextPath() %>/user-stats-badges');
+	        if (!res.ok) throw new Error("Error al obtener badges");
+
+	        const badges = await res.json();
+
+	        const container = document.getElementById("reward-prohacker");
+	        const avatar = document.getElementById("avatar-prohacker");
+	        const statusText = document.getElementById("prohacker-status");
+
+	        if (badges.prohacker === true) {
+	            avatar.classList.add("prohacker-border");
+	            avatar.style.opacity = "1";
+
+	            container.classList.remove("prohacker-locked");
+	            container.classList.add("prohacker-unlocked");
+
+	            statusText.textContent = "Desbloqueado";
+	            statusText.style.color = "#4a6600";  // verde-amarillo
+	        } else {
+	        	avatar.classList.add("prohacker-border");
+	            avatar.style.opacity = "1";
+	            
+	            container.classList.add("prohacker-locked");
+
+	            statusText.textContent = "Bloqueado";
+	            statusText.style.color = "#666";
+	        }
+
+
+
+	        const containerBadges = document.getElementById("badges-container");
+	        containerBadges.innerHTML = "";
+
+	        for (const badge in badgeNames) {
+	            const obtained = badges[badge] === true;
+
+	            const div = document.createElement("div");
+	            div.className = "gadget-achievement " + (obtained ? "obtained" : "locked");
+	            div.innerHTML =
+	                '<img src="<%= request.getContextPath() %>/img/badges/' + badge + '.svg" ' +
+	                'alt="Logro ' + badge + '" ' +
+	                'title="' + badgeNames[badge] + '" ' +
+	                'class="gadget-icon" />' +
+	                '<div class="gadget-title">' + badgeNames[badge] + '</div>' +
+	                '<div class="gadget-status">' + (obtained ? "Logro obtenido" : "Bloqueado") + '</div>';
+
+	            containerBadges.appendChild(div);
+	        }
+
+	    } catch (e) {
+	        console.error(e);
+	        document.getElementById("badges-container").innerHTML = "<p>Error cargando badges.</p>";
+	    }
+	}
+	
+	window.onload = loadUserBadges;
+	</script>
+
+	<script>
+	  function scrollToSection(id) {
+	    const section = document.getElementById(id);
+	    if (section) {
+	      section.scrollIntoView({ behavior: 'smooth' });
+	    }
+	  }
+	</script>
+
     <!-- Modal Bootstrap para mostrar la imagen ampliada -->
 	<div
 	  class="modal fade"

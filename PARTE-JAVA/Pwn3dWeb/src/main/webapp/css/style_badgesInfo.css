@@ -165,3 +165,220 @@ body {
 	  .modal-backdrop.show {
 	    background-color: rgba(26, 26, 46, 0.85);
 	  }
+	  
+	  .gadgets-achievements {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.gadget-achievement {
+    width: 140px;
+    min-width: 140px;
+    max-width: 160px;
+    text-align: center;
+    padding: 6px 10px; /* menos padding vertical */
+    border-radius: 8px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    user-select: none;
+    box-sizing: border-box;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px; /* separación entre elementos */
+    height: 140px; /* fijo para que no sea muy alto */
+    justify-content: center; /* centra verticalmente el contenido */
+}
+
+.gadget-icon {
+    width: 60px;  /* más pequeño para ahorrar altura */
+    height: 60px;
+    object-fit: contain;
+}
+
+.gadget-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.gadget-status {
+    font-size: 0.85rem;
+    font-weight: 500;
+    line-height: 1.1;
+}
+
+/* Logros obtenidos */
+.gadget-achievement.obtained {
+    border-color: #28a745;
+    background-color: #e6ffed;
+    box-shadow: 0 0 12px 3px rgba(40, 167, 69, 0.6);
+    color: #28a745;
+}
+
+/* Logros bloqueados */
+.gadget-achievement.locked {
+    filter: grayscale(80%);
+    opacity: 0.6;
+    position: relative;
+    animation: pulseLocked 2.5s infinite;
+    cursor: default;
+    background-color: #f8f9fa;
+    border-color: #ccc;
+    color: #888;
+}
+
+/* Animación para bloqueados */
+@keyframes pulseLocked {
+    0%, 100% {
+        box-shadow: 0 0 5px 2px rgba(150, 150, 150, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 12px 4px rgba(150, 150, 150, 0.6);
+    }
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .gadget-achievement {
+        width: 100px;
+        min-width: 100px;
+        max-width: 120px;
+        height: 110px;
+        padding: 5px 8px;
+        gap: 3px;
+    }
+    .gadget-icon {
+        width: 50px;
+        height: 50px;
+    }
+    .gadget-title {
+        font-size: 0.85rem;
+    }
+    .gadget-status {
+        font-size: 0.75rem;
+    }
+}
+
+ /* ESTILO DEL LOGRO PROHACKER PARA EL AVATAR */
+
+  .avatar-image {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid transparent;
+  transition: opacity 0.5s ease, box-shadow 0.5s ease;
+  margin-bottom: 12px;
+  /* Aura roja fija pero invisible por defecto */
+  box-shadow: 0 0 15px 6px rgba(255, 0, 0, 0);
+  z-index: 1000;
+}
+
+/* Cuando tiene el border, se ve la aura */
+.prohacker-border {
+  box-shadow: 0 0 15px 6px rgba(255, 0, 0, 0.6);
+  animation: pulseBorder 2s infinite;
+  opacity: 1 !important;
+}
+
+/* Animación del aura */
+@keyframes pulseBorder {
+  0% {
+    box-shadow: 0 0 10px 3px rgba(255, 0, 0, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px 8px rgba(255, 0, 0, 0.9);
+  }
+  100% {
+    box-shadow: 0 0 10px 3px rgba(255, 0, 0, 0.5);
+  }
+}
+  
+
+
+/* Estilo para cuando está bloqueado */
+.prohacker-locked {
+  background-color: #ddd; /* gris claro */
+  border-radius: 12px;
+  opacity: 0.7;
+  transition: background-color 0.5s ease, opacity 0.5s ease;
+  color: #666;
+  font-weight: bold;
+  padding: 8px 0;
+  user-select: none;
+}
+
+.reward-card {
+  max-width: 220px;
+  margin: 30px auto;
+  padding: 20px 15px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  text-align: center;
+  color: #333;
+  transition: background-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.reward-header {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #6b5b9a; /* morado oscuro */
+}
+
+.reward-description {
+  font-size: 0.7rem;
+  color: #666;
+  margin-bottom: 18px;
+  line-height: 1.4;
+}
+
+.avatar-image {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid transparent;
+  transition: opacity 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease;
+  margin-bottom: 12px;
+}
+
+.reward-status {
+  font-weight: 600;
+  font-size: 1rem;
+  user-select: none;
+}
+
+/* SECCION HEADER */
+
+.mini-nav {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    align-content: center;
+    margin-left: 7.5rem;
+  }
+  .mini-nav button {
+    background-color: #825ac8;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+  .mini-nav button:hover {
+    background-color: #6b479e;
+  }

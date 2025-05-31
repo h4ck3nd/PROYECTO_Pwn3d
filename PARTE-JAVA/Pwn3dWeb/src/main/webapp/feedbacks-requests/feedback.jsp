@@ -52,6 +52,18 @@
         ? request.getContextPath() + "/" + img.getPathImg()
         : request.getContextPath() + "/imgProfile/default.png";
 %>
+<%@ page import="dao.BadgeDAO" %>
+<%
+    userId = (Integer) session.getAttribute("userId");
+    boolean esProHacker = false;
+
+    if (userId != null) {
+        BadgeDAO badgeDAO = new BadgeDAO();
+        esProHacker = badgeDAO.tieneBadgeProHacker(userId);
+    }
+
+    request.setAttribute("esProHacker", esProHacker); // (opcional, si también querés usarlo en EL u otros sitios)
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,7 +82,7 @@
     <aside class="sidebar">
       <button id="closeMenu" class="menu-close">❌</button>
       <div class="profile">
-        <img src="<%= imgSrc %>" alt="Avatar" class="avatar-image" />
+        <img src="<%= imgSrc %>" alt="Avatar" class="avatar-image <%= esProHacker ? "prohacker-border" : "" %>" />
         <p style="font-size: 1rem;"><strong>Username:</strong> <%= nombreUsuario %></p>
       </div>
       <hr style="width: 20rem; font-weight: bold !important;">
@@ -211,7 +223,7 @@
 	    let html = "";
 	    feedbacks.forEach(function(fb) {
 	      html += '<div class="comment">';
-	      html +=   '<img class="avatar" src="' + contextPath + '/' + fb.avatarPath + '" alt="' + fb.username + ' avatar" />';
+	      html += '<img class="avatar ' + (fb.esProHacker ? 'prohacker-border' : '') + '" src="' + contextPath + fb.avatarPath + '" alt="' + fb.username + ' avatar" />';
 	      html +=   '<h2 class="username pink">' + fb.username + '</h2>';
 	      html +=   '<div class="user-msg">' + fb.message + '</div>';
 	      html +=   '<div class="admin-reply">' + fb.estado + '</div>';  // Mostrar siempre estado aquí

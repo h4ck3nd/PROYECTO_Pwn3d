@@ -7,6 +7,7 @@
 <%@ page import="utils.JWTUtil" %>
 <%@ page import="javax.servlet.http.Cookie" %>
 <%@ page import="java.util.Map" %>
+<%@ page import="dao.BadgeDAO" %>
 
 <%
 	Machine machine = null;
@@ -56,7 +57,17 @@
 	String imgSrc = (img != null && img.getPathImg() != null && !img.getPathImg().isEmpty())
 	    ? request.getContextPath() + "/" + img.getPathImg()
 	    : request.getContextPath() + "/imgProfile/default.png";
+	
+	// Badge ProHacker
+    boolean esProHacker = false;
+    if (userId != null) {
+        BadgeDAO badgeDAO = new BadgeDAO();
+        esProHacker = badgeDAO.tieneBadgeProHacker(userId);
+        System.out.println("Es ProHacker: " + esProHacker);
+    }
+    request.setAttribute("esProHacker", esProHacker);
 %>
+
 <!DOCTYPE html>
 <html lang="es">
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
@@ -98,7 +109,7 @@
           <!-- Botón de cerrar -->
           <button id="closeMenu" class="menu-close" style="font-size: 1.4rem !important;">❌</button>
           <div class="profile">
-            <img src="<%= imgSrc %>" alt="Avatar" class="avatar-image" />
+            <img src="<%= imgSrc %>" alt="Avatar" class="avatar-image <%= esProHacker ? "prohacker-border" : "" %>"/>
             <p style="font-size: 1.2rem !important; line-height: 30px !important;"><strong style="font-size: 1.4rem !important;">Username:</strong> <%= nombreUsuario %></p>
           </div>
           <hr>
@@ -388,7 +399,7 @@
 		<!-- IMAGEN DE LA PAGINA DE MAQUINAS PRINCIPAL -->
 		
 		<div id="machinesStatsContainer"></div>
-
+		
 		<script>
 		  document.addEventListener("DOMContentLoaded", function () {
 		    document.querySelectorAll('.progress-fill-img-machines').forEach(bar => {
@@ -895,6 +906,15 @@
 				<p id="search-message" style="display:none;">
 				  No hay coincidencias para <span id="query"></span>. Pruebe con otra búsqueda.
 				</p>
+			</div>
+			
+			<div class="center-button-container">
+			  <button 
+			    type="button" 
+			    class="docker-btn" 
+			    onclick="window.location.href='<%= request.getContextPath() %>/pages_informations/dockerDeploy.jsp'">
+			    Info Deploy Docker
+			  </button>
 			</div>
 			
 			<!-- SECCION DE ENVIAR WRITEUP -->
@@ -1794,7 +1814,7 @@
 		        html += '</div>';
 		        html += '</div>';
 		      }
-		
+				
 		      html += '</div>'; // end right bars
 		      html += '</div>'; // end container
 		

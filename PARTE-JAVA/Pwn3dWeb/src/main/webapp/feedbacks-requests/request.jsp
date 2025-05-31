@@ -58,6 +58,18 @@
         ? request.getContextPath() + "/" + img.getPathImg()
         : request.getContextPath() + "/imgProfile/default.png";
 %>
+<%@ page import="dao.BadgeDAO" %>
+<%
+    userId = (Integer) session.getAttribute("userId");
+    boolean esProHacker = false;
+
+    if (userId != null) {
+        BadgeDAO badgeDAO = new BadgeDAO();
+        esProHacker = badgeDAO.tieneBadgeProHacker(userId);
+    }
+
+    request.setAttribute("esProHacker", esProHacker); // (opcional, si también querés usarlo en EL u otros sitios)
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -83,7 +95,7 @@
     <aside class="sidebar">
       <button id="closeMenu" class="menu-close">❌</button>
       <div class="profile">
-        <img src="<%= imgSrc %>" alt="Avatar" class="avatar-image" />
+        <img src="<%= imgSrc %>" alt="Avatar" class="avatar-image <%= esProHacker ? "prohacker-border" : "" %>" />
         <p style="font-size: 1rem;"><strong>Username:</strong> <%= nombreUsuario %></p>
       </div>
       <hr style="width: 20rem; font-weight: bold !important;">
@@ -273,7 +285,7 @@ fetch(contextPath + "/requests")
       container.innerHTML +=
         '<div class="comment">' +
           '<div class="fancy-terminal">' +
-            '<img src="' + imgSrc + '" alt="Profile" class="avatar" />' +
+          '<img src="' + imgSrc + '" alt="Profile" class="avatar ' + (item.esProHacker ? 'prohacker-border' : '') + '" />' +
             '<p>' + item.user + '</p><br>' +
             '<div class="mac-body">' +
               '<p>' + item.message + '</p>' +

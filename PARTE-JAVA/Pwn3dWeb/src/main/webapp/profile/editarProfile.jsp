@@ -5,6 +5,7 @@
 <%@ page import="dao.EditProfileDAO" %>
 <%@ page import="model.EditProfile" %>
 <%@ page import="utils.JWTUtil" %>
+<%@ page import="dao.BadgeDAO" %>
 <%
 
 	String token = null; // Declarada fuera para ser accesible globalmente
@@ -58,6 +59,15 @@
     dao.cerrarConexion();
     
     String paisActual = dao.getPaisByUserId(userId);
+    
+ // Badge ProHacker
+    boolean esProHacker = false;
+    if (userId != null) {
+        BadgeDAO badgeDAO = new BadgeDAO();
+        esProHacker = badgeDAO.tieneBadgeProHacker(userId);
+        System.out.println("Es ProHacker: " + esProHacker);
+    }
+    request.setAttribute("esProHacker", esProHacker);
 %>
 
 <!DOCTYPE html>
@@ -100,7 +110,7 @@
           <!-- Botón de cerrar -->
           <button id="closeMenu" class="menu-close">❌</button>
           <div class="profile">
-            <img src="<%= imgSrc %>" alt="Avatar" class="avatar-image" />
+            <img src="<%= imgSrc %>" alt="Avatar" class="avatar-image <%= esProHacker ? "prohacker-border" : "" %>" />
             <p style="font-size: 1rem;"><strong>Username:</strong> <%= nombreUsuario %></p>
           </div>
           <hr style="width: 18rem;">
@@ -227,7 +237,7 @@
       <!-- IZQUIERDA: Avatar y datos básicos -->
       <div class="profile-left">
         <div class="avatar-box">
-		    <img src="<%= imgSrc %>" alt="Avatar" class="avatar-image" />
+		    <img src="<%= imgSrc %>" alt="Avatar" class="avatar-image <%= esProHacker ? "prohacker-border" : "" %>" />
 		    <form action="<%= request.getContextPath() %>/subirAvatar" method="post" enctype="multipart/form-data" id="avatarForm">
 		        <input
 		            type="file"

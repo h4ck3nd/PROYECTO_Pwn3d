@@ -3802,4 +3802,86 @@ body.sidebar-closed .container-img-machines {
 	.swal2-range output {
 		color: #7800dd !important;
 	}
-	    
+	
+	
+/* ESTILO DEL LOGRO PROHACKER PARA EL AVATAR */
+
+.avatar-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid transparent;
+}
+
+/* Contorno exclusivo para prohacker */
+.prohacker-border {
+  position: relative;
+  animation: pulseBorder 2s infinite;
+  box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0.6);
+}
+
+@keyframes pulseBorder {
+  0% {
+    box-shadow: 0 0 10px 3px rgba(255, 0, 0, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px 8px rgba(255, 0, 0, 0.9);
+  }
+  100% {
+    box-shadow: 0 0 10px 3px rgba(255, 0, 0, 0.5);
+  }
+}
+
+.center-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20rem;
+  margin-top: 40px;
+}
+
+.docker-btn {
+  display: flex;
+  width: 20rem;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 0.35rem;
+  padding: 1.2rem;
+  border: 1px solid #444;
+  background-color: var(--color-filter-bg);
+  color: var(--color-filter-text);
+  box-shadow: 0 2px 6px var(--color-filter-shadow);
+  overflow: hidden;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  margin-left: clamp(1rem, 10vw, 55rem);
+  margin-right: clamp(-2rem, -5vw, -16rem);
+  white-space: nowrap;
+  
+}
+
+.docker-btn::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0%;
+  height: 0%;
+  background: radial-gradient(circle, var(--color-filter-glow) -30%, transparent 90%);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: width 0.4s ease, height 0.4s ease, opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.docker-btn:hover {
+  background-color: var(--color-filter-hover-bg);
+  transform: scale(1.03);
+  box-shadow: 0 0 12px var(--color-filter-glow);
+}
+
+.docker-btn:hover::before {
+  width: 220%;
+  height: 220%;
+  opacity: 1;
+}
