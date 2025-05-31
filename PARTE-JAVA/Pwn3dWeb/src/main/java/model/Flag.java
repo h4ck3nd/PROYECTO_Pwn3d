@@ -13,6 +13,16 @@ public class Flag {
     private boolean firstFlagRoot;
     private Timestamp createdAt;
     private String imgSrc;
+    private boolean esProHacker;
+
+    public boolean isEsProHacker() {
+        return esProHacker;
+    }
+
+    public void setEsProHacker(boolean esProHacker) {
+        this.esProHacker = esProHacker;
+    }
+
 
     // Constructor completo
     public Flag(int id, int idUser, String vmName, String user, String tipoFlag, String flag,

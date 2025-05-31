@@ -115,6 +115,7 @@ public class RequestDAO {
             while (rs.next()) {
                 Request r = new Request();
                 r.setId(rs.getInt("id"));
+                r.setUserId(rs.getInt("user_id")); 
                 r.setMessage(rs.getString("message"));
                 r.setEstado(rs.getString("estado"));
                 r.setUserName(rs.getString("usuario"));

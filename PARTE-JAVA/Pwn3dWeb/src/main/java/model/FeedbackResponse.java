@@ -8,6 +8,16 @@ public class FeedbackResponse {
     private String username;
     private String avatarPath;
     private String adminReply; // si tienes alguna respuesta admin
+    private boolean esProHacker;
+
+    public boolean isEsProHacker() {
+        return esProHacker;
+    }
+
+    public void setEsProHacker(boolean esProHacker) {
+        this.esProHacker = esProHacker;
+    }
+
 
     public FeedbackResponse() {}
 

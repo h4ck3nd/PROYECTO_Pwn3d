@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.util.List;
+import dao.BadgeDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,7 +29,9 @@ public class LogServlet extends HttpServlet {
         ImgProfileDAO imgDao = new ImgProfileDAO();
 
         String contextPath = request.getContextPath();
-
+        
+        BadgeDAO badgeDAO = new BadgeDAO();
+        
         for (Flag log : logs) {
             ImgProfile img = imgDao.getImgProfileByUserId(log.getIdUser());
             String imgSrc;
@@ -38,6 +41,10 @@ public class LogServlet extends HttpServlet {
                 imgSrc = contextPath + "/imgProfile/default.png";
             }
             log.setImgSrc(imgSrc);
+            
+            // Nuevo: Verifica si tiene el badge proHacker
+            boolean esProHacker = badgeDAO.tieneBadgeProHacker(log.getIdUser());
+            log.setEsProHacker(esProHacker);
         }
 
         imgDao.cerrarConexion();

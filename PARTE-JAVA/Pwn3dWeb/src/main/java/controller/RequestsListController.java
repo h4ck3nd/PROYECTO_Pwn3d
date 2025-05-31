@@ -3,6 +3,7 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import dao.BadgeDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,8 +35,9 @@ public class RequestsListController extends HttpServlet {
         }
 
         RequestDAO dao = new RequestDAO();
+        BadgeDAO badgeDAO = new BadgeDAO();
+
         List<Request> requestList = dao.getAllWithLoves(userId);
-        dao.cerrarConexion();
 
         JSONArray jsonArray = new JSONArray();
 
@@ -48,12 +50,20 @@ public class RequestsListController extends HttpServlet {
             json.put("userImgPath", req.getUserImgPath());
             json.put("loves", req.getLoves());
             json.put("lovedByUser", req.isLovedByUser());
+
+            boolean esProHacker = badgeDAO.tieneBadgeProHacker(req.getUserId());
+            System.out.println("UserID: " + req.getUserId() + " esProHacker: " + esProHacker);
+            json.put("esProHacker", esProHacker);
+
             jsonArray.put(json);
         }
+
+        dao.cerrarConexion();
 
         PrintWriter out = response.getWriter();
         out.print(jsonArray.toString());
         out.flush();
+
     }
 }
 

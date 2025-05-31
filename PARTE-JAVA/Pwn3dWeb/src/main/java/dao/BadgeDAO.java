@@ -102,4 +102,30 @@ public class BadgeDAO {
         }
         return false;
     }
+    
+    public boolean tieneBadgeProHacker(int userId) {
+        boolean tiene = false;
+        ConexionDDBB conexionDDBB = new ConexionDDBB();
+        Connection conexion = conexionDDBB.conectar();
+
+        try {
+            String query = "SELECT prohacker FROM badges WHERE userid = ?";
+            PreparedStatement stmt = conexion.prepareStatement(query);
+            stmt.setInt(1, userId);
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                tiene = rs.getBoolean("prohacker");
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            conexionDDBB.cerrarConexion();
+        }
+
+        return tiene;
+    }
 }

@@ -12,6 +12,15 @@ public class Request {
     private String userImgPath; // nueva propiedad
     private int loves;
     private boolean lovedByUser;
+    private boolean esProHacker;
+
+    public boolean isEsProHacker() {
+        return esProHacker;
+    }
+
+    public void setEsProHacker(boolean esProHacker) {
+        this.esProHacker = esProHacker;
+    }
 
     // getters y setters
     public int getLoves() { return loves; }
