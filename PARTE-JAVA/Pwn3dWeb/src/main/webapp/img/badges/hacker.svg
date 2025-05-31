@@ -1,0 +1,23 @@
+<svg width="48" height="48" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <defs>
+    <linearGradient id="gradHacker" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7f5af0"/>
+      <stop offset="100%" stop-color="#b48bf2"/>
+    </linearGradient>
+    <filter id="glowHacker" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#9b59b6" flood-opacity="0.7"/>
+    </filter>
+  </defs>
+
+  <!-- Fondo círculo con gradiente y brillo -->
+  <circle cx="32" cy="32" r="28" fill="url(#gradHacker)" filter="url(#glowHacker)" stroke="#6e40e1" stroke-width="2"/>
+
+  <!-- Icono de máscara hacker estilizada -->
+  <path d="M22 28 Q32 20 42 28 Q38 38 26 38 Z" fill="#cfcfcf" stroke="#7f5af0" stroke-width="2"/>
+  <circle cx="27" cy="30" r="3" fill="#7f5af0"/>
+  <circle cx="37" cy="30" r="3" fill="#7f5af0"/>
+
+  <!-- Líneas estilo circuito -->
+  <line x1="32" y1="32" x2="32" y2="44" stroke="#b48bf2" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="24" y1="38" x2="40" y2="38" stroke="#b48bf2" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

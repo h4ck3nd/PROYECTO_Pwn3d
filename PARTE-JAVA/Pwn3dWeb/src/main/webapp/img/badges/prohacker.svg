@@ -1,0 +1,33 @@
+<svg width="48" height="48" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <defs>
+    <linearGradient id="gradProHacker" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#9b59b6"/>
+      <stop offset="100%" stop-color="#6e40e1"/>
+    </linearGradient>
+    <filter id="glowProHacker" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="4" flood-color="#b48bf2" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+
+  <!-- Fondo hexagonal -->
+  <polygon points="32 4 52 14 52 34 32 44 12 34 12 14" fill="url(#gradProHacker)" filter="url(#glowProHacker)" stroke="#7f5af0" stroke-width="2"/>
+
+  <!-- Icono de hacker (máscara estilo digital) -->
+  <path stroke="#e0d7f5" stroke-width="2" fill="none" d="
+    M22 38 
+    Q32 28 42 38
+    M22 38 
+    Q32 48 42 38
+    M27 35 
+    L29 33
+    M37 35
+    L35 33
+  "/>
+
+  <!-- Circuitos y detalles -->
+  <circle cx="32" cy="22" r="3" stroke="#cfcfcf" stroke-width="1.5" fill="#7f5af0"/>
+  <line x1="32" y1="25" x2="32" y2="38" stroke="#cfcfcf" stroke-width="1"/>
+
+  <!-- Contorno exterior -->
+  <circle cx="32" cy="24" r="20" stroke="#b48bf2" stroke-width="1.5" fill="none"/>
+</svg>
