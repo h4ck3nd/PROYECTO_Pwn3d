@@ -1,0 +1,28 @@
+<svg width="48" height="48" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <defs>
+    <linearGradient id="gradAnon" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7f5af0"/>
+      <stop offset="100%" stop-color="#b48bf2"/>
+    </linearGradient>
+    <filter id="glowAnon" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="2" flood-color="#9b59b6" flood-opacity="0.7"/>
+    </filter>
+  </defs>
+
+  <!-- Cara de la máscara -->
+  <ellipse cx="32" cy="32" rx="20" ry="24" fill="url(#gradAnon)" filter="url(#glowAnon)" stroke="#6e40e1" stroke-width="2"/>
+
+  <!-- Ojos -->
+  <rect x="18" y="26" width="6" height="4" rx="1" ry="1" fill="#2c2c3a"/>
+  <rect x="40" y="26" width="6" height="4" rx="1" ry="1" fill="#2c2c3a"/>
+
+  <!-- Boca pixelada -->
+  <rect x="24" y="42" width="16" height="4" fill="#2c2c3a" />
+  <rect x="24" y="42" width="4" height="4" fill="#b48bf2"/>
+  <rect x="36" y="42" width="4" height="4" fill="#b48bf2"/>
+
+  <!-- Detalles de la máscara (líneas pixeladas) -->
+  <rect x="26" y="18" width="4" height="2" fill="#b48bf2"/>
+  <rect x="34" y="18" width="4" height="2" fill="#b48bf2"/>
+  <rect x="30" y="36" width="4" height="2" fill="#b48bf2"/>
+</svg>

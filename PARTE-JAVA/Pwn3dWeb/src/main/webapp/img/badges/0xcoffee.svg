@@ -1,0 +1,27 @@
+<svg width="48" height="48" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <defs>
+    <linearGradient id="gradCoffee" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7f5af0"/>
+      <stop offset="100%" stop-color="#b48bf2"/>
+    </linearGradient>
+    <filter id="glowCoffee" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="2" flood-color="#9b59b6" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- Base taza -->
+  <rect x="16" y="24" width="32" height="20" rx="4" ry="4" fill="url(#gradCoffee)" filter="url(#glowCoffee)" stroke="#6e40e1" stroke-width="2"/>
+  
+  <!-- Asa de la taza -->
+  <path d="M48 26 Q54 30 48 34" stroke="#6e40e1" stroke-width="3" fill="none" filter="url(#glowCoffee)"/>
+
+  <!-- Líneas de vapor pixeladas -->
+  <rect x="24" y="12" width="4" height="6" fill="#b48bf2" />
+  <rect x="32" y="10" width="4" height="8" fill="#b48bf2" />
+  <rect x="40" y="14" width="4" height="4" fill="#b48bf2" />
+
+  <!-- Detalles de taza (base pixelada) -->
+  <rect x="18" y="28" width="6" height="12" fill="#cfcfcf" opacity="0.2" />
+  <rect x="30" y="28" width="6" height="12" fill="#cfcfcf" opacity="0.3" />
+  <rect x="42" y="28" width="6" height="12" fill="#cfcfcf" opacity="0.2" />
+</svg>

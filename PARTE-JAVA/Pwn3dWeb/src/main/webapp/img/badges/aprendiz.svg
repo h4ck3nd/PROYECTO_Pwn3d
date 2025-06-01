@@ -1,0 +1,22 @@
+<svg width="48" height="48" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <defs>
+    <linearGradient id="gradAprendiz" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7f5af0"/>
+      <stop offset="100%" stop-color="#b48bf2"/>
+    </linearGradient>
+    <filter id="glowAprendiz" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="2" flood-color="#9b59b6" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- Círculo base con gradiente y resplandor -->
+  <circle cx="32" cy="32" r="28" fill="url(#gradAprendiz)" filter="url(#glowAprendiz)" stroke="#6e40e1" stroke-width="2"/>
+
+  <!-- Icono de libro abierto (símbolo de aprendizaje) -->
+  <path d="M20 20 L32 28 L44 20 L44 44 L20 44 Z" fill="#cfcfcf" stroke="#7f5af0" stroke-width="2" />
+  <line x1="32" y1="28" x2="32" y2="44" stroke="#7f5af0" stroke-width="1.5" stroke-linecap="round" />
+  <line x1="26" y1="24" x2="38" y2="24" stroke="#b48bf2" stroke-width="1.5" />
+  <line x1="26" y1="30" x2="38" y2="30" stroke="#b48bf2" stroke-width="1.5" />
+  <line x1="26" y1="36" x2="38" y2="36" stroke="#b48bf2" stroke-width="1.5" />
+
+</svg>

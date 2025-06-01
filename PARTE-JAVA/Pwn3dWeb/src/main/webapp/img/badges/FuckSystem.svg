@@ -1,0 +1,27 @@
+<svg width="48" height="48" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <defs>
+    <linearGradient id="gradSystem" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7f5af0"/>
+      <stop offset="100%" stop-color="#b48bf2"/>
+    </linearGradient>
+    <filter id="glowSystem" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="2" flood-color="#9b59b6" flood-opacity="0.7"/>
+    </filter>
+  </defs>
+
+  <!-- Fondo circular con gradiente -->
+  <circle cx="32" cy="32" r="24" fill="url(#gradSystem)" filter="url(#glowSystem)" stroke="#6e40e1" stroke-width="2"/>
+
+  <!-- Símbolo estilo chip o circuito -->
+  <rect x="22" y="22" width="20" height="20" rx="3" ry="3" fill="#2c2c3a" stroke="#b48bf2" stroke-width="2"/>
+  
+  <!-- Líneas de circuito internas -->
+  <line x1="32" y1="22" x2="32" y2="42" stroke="#7f5af0" stroke-width="2"/>
+  <line x1="22" y1="32" x2="42" y2="32" stroke="#7f5af0" stroke-width="2"/>
+
+  <!-- Pequeños círculos de conexión -->
+  <circle cx="32" cy="22" r="3" fill="#b48bf2" />
+  <circle cx="32" cy="42" r="3" fill="#b48bf2" />
+  <circle cx="22" cy="32" r="3" fill="#b48bf2" />
+  <circle cx="42" cy="32" r="3" fill="#b48bf2" />
+</svg>
