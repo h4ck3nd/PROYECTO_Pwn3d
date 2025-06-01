@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Logros - Descripciones y Objetivos</title>
+	<link rel="icon" href="<%= request.getContextPath() %>/img/logo-flag-white.ico">
+    <title>Badges Info - Pwn3d!</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/dynamicFonts.jsp" />
     
     <!-- Incluye Bootstrap CSS y JS en tu proyecto -->
@@ -422,6 +423,101 @@
 			    Has hackeado más de 500 máquinas, ¡eres un Pro Hacker!
 			  </div>
 			</div>
+			
+			<div class="achievement-card" style="width: 48%;">
+			  <div class="achievement-code">[aprendiz]</div>
+			  <img
+			    title="aprendiz"
+			    src="<%= request.getContextPath() %>/img/badges/aprendiz.svg"
+			    alt="Icono aprendiz"
+			    class="achievement-icon img-thumbnail"
+			    style="cursor:pointer;"
+			    data-bs-toggle="modal"
+			    data-bs-target="#imageModal"
+			    data-bs-imgsrc="<%= request.getContextPath() %>/img/badges/aprendiz.svg"
+			    data-bs-imgalt="Icono aprendiz"
+			  />
+			  <div class="achievement-title">Aprendiz de Hacker</div>
+			  <div class="achievement-desc">
+			    Estás empezando tu camino en el mundo del hacking.
+			  </div>
+			</div>
+			
+			<div class="achievement-card" style="width: 48%;">
+			  <div class="achievement-code">[0xcoffee]</div>
+			  <img
+			    title="0xcoffee"
+			    src="<%= request.getContextPath() %>/img/badges/0xcoffee.svg"
+			    alt="Icono 0xcoffee"
+			    class="achievement-icon img-thumbnail"
+			    style="cursor:pointer;"
+			    data-bs-toggle="modal"
+			    data-bs-target="#imageModal"
+			    data-bs-imgsrc="<%= request.getContextPath() %>/img/badges/0xcoffee.svg"
+			    data-bs-imgalt="Icono 0xcoffee"
+			  />
+			  <div class="achievement-title">Amante del café 0xCoffee</div>
+			  <div class="achievement-desc">
+			    Porque el café es el mejor compañero para hackear.
+			  </div>
+			</div>
+			
+			<div class="achievement-card" style="width: 48%;">
+			  <div class="achievement-code">[anonymous]</div>
+			  <img
+			    title="anonymous"
+			    src="<%= request.getContextPath() %>/img/badges/anonymous.svg"
+			    alt="Icono anonymous"
+			    class="achievement-icon img-thumbnail"
+			    style="cursor:pointer;"
+			    data-bs-toggle="modal"
+			    data-bs-target="#imageModal"
+			    data-bs-imgsrc="<%= request.getContextPath() %>/img/badges/anonymous.svg"
+			    data-bs-imgalt="Icono anonymous"
+			  />
+			  <div class="achievement-title">Anonymous</div>
+			  <div class="achievement-desc">
+			    El espíritu libre e impredecible del hacking.
+			  </div>
+			</div>
+			
+			<div class="achievement-card" style="width: 48%;">
+			  <div class="achievement-code">[FuckSystem]</div>
+			  <img
+			    title="FuckSystem"
+			    src="<%= request.getContextPath() %>/img/badges/FuckSystem.svg"
+			    alt="Icono FuckSystem"
+			    class="achievement-icon img-thumbnail"
+			    style="cursor:pointer;"
+			    data-bs-toggle="modal"
+			    data-bs-target="#imageModal"
+			    data-bs-imgsrc="<%= request.getContextPath() %>/img/badges/FuckSystem.svg"
+			    data-bs-imgalt="Icono FuckSystem"
+			  />
+			  <div class="achievement-title">Fuck the System</div>
+			  <div class="achievement-desc">
+			    Desafías todas las reglas establecidas.
+			  </div>
+			</div>
+			
+			<div class="achievement-card" style="width: 48%;">
+			  <div class="achievement-code">[god]</div>
+			  <img
+			    title="god"
+			    src="<%= request.getContextPath() %>/img/badges/god.svg"
+			    alt="Icono god"
+			    class="achievement-icon img-thumbnail"
+			    style="cursor:pointer;"
+			    data-bs-toggle="modal"
+			    data-bs-target="#imageModal"
+			    data-bs-imgsrc="<%= request.getContextPath() %>/img/badges/god.svg"
+			    data-bs-imgalt="Icono god"
+			  />
+			  <div class="achievement-title">Dios del Hackeo</div>
+			  <div class="achievement-desc">
+			    Nivel máximo alcanzado en el mundo del hacking.
+			  </div>
+			</div>
 		  
 		</div>
 		<br><br><br><br>
@@ -473,7 +569,12 @@
 	    puntos3000: "3000 puntos",
 	    estrellita: "Ha dado estrellas",
 	    hacker: "¡Hacker!",
-	    prohacker: "¡Pro Hacker (500 máquinas)!"
+	    prohacker: "¡Pro Hacker (500 máquinas)!",
+	    aprendiz: "Aprendiz de Hacker",
+	    "0xcoffee": "Amante del café 0xCoffee",
+	    anonymous: "Anonymous",
+	    FuckSystem: "Fuck the System",
+	    god: "Dios del Hackeo"
 	};
 	
 	async function loadUserBadges() {

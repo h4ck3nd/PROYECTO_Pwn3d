@@ -6,7 +6,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Noticias Públicas</title>
+    <link rel="icon" href="<%= request.getContextPath() %>/img/logo-flag-white.ico">
+    <title>Info Noticias - Pwn3d!</title>
 
     <!-- Tipografía personalizada -->
     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/cssInfoNotice.jsp">

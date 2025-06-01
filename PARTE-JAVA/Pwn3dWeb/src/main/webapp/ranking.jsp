@@ -227,8 +227,14 @@
           <div>Hacker</div>
           <div style="text-align:right;">Puntos</div>
         </div>
-
         <%
+		    if (ranking == null || ranking.isEmpty()) {
+		%>
+		    <p style="text-align:center; font-weight:bold; margin-top: 2rem;">
+		        ⚠️ No hay usuarios registrados para este <%= periodo.equals("mes") ? "mes" : "período" %>.
+		    </p>
+		<%
+		    } else {
           int pos = 1;
           User topUser = null;
           User currentUser = null;
@@ -318,7 +324,10 @@
           <div class="top1-points"><%= topUser.getPuntos() %> puntos</div>
         </div>
       </div>
-      <% } %>
+      <% 
+	      }
+		}
+      %>
     </div>
   </div>
 </main>

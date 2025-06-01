@@ -2,7 +2,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Árbol de Estadísticas</title>
+	<link rel="icon" href="<%= request.getContextPath() %>/img/logo-flag-white.ico">
+    <title>Árbol de Estadísticas - Pwn3d!</title>
     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/dynamicFonts.jsp" />
     <link rel="stylesheet" href="<%= request.getContextPath() %>/css/cssStatsTree.jsp">
 </head>
@@ -83,7 +84,12 @@
 	            puntos3000: "3000 puntos",
 	            estrellita: "Ha dado estrellas",
 	            hacker: "¡Hacker!",
-	            prohacker: "¡Pro Hacker (500 máquinas)!"
+	            prohacker: "¡Pro Hacker (500 máquinas)!",
+	    	    aprendiz: "Aprendiz de Hacker",
+	    	    "0xcoffee": "Amante del café 0xCoffee",
+	    	    anonymous: "Anonymous",
+	    	    FuckSystem: "Fuck the System",
+	    	    god: "Dios del Hackeo"
 	        };
 	
 	        var badgesHTML = "";

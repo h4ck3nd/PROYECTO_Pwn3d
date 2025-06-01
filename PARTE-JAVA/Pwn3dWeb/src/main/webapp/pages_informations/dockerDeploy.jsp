@@ -3,7 +3,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Guía de Ejecución de Máquinas Docker - Pwn3d!</title>
+    <link rel="icon" href="<%= request.getContextPath() %>/img/logo-flag-white.ico">
+    <title>Info Máquinas Docker - Pwn3d!</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         body {

@@ -1091,7 +1091,7 @@
 	</main>
 	<footer>
 		<img src="<%= request.getContextPath() %>/img/logo-flag-white.png" alt="Pwn3d! small footer logo" loading="lazy" style="width: 25px !important; height: 25px !important;">
-		<p>© Pwn3d! 2024-2025</p>
+		<p>© Pwn3d! 2024-2025 | <a href="<%= request.getContextPath() %>/pages_informations/politics.jsp" target="_blank" rel="noopener noreferrer" style="cursor: pointer; text-decoration: none;">Políticas</a></p>
 		
 		<!-- REDES SOCIALES -->
 		
