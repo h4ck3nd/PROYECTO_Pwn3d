@@ -1,8 +1,14 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+
 import conexionDDBB.ConexionDDBB;
-import java.sql.*;
-import java.util.*;
 
 public class UserStatsDAO {
 
@@ -53,7 +59,7 @@ public class UserStatsDAO {
             if (rs.next()) {
                 stats.put("requests", rs.getInt(1));
             }
-            
+
             // Dentro de getUserStatsById
             String badgeQuery = "SELECT * FROM badges WHERE userid = ?";
             PreparedStatement badgeStmt = conn.prepareStatement(badgeQuery);
@@ -72,7 +78,7 @@ public class UserStatsDAO {
                 }
             }
             stats.put("badges", badges);
-            
+
             // Obtener las primeras flags de user y root por usuario
             String firstFlagsQuery = "SELECT " +
                     "COUNT(CASE WHEN first_flag_user = TRUE THEN 1 END) AS firstUserCount, " +
@@ -95,7 +101,7 @@ public class UserStatsDAO {
 
         return stats;
     }
-    
+
     public int getMaquinasResueltas(int userId) {
         int count = 0;
         ConexionDDBB db = new ConexionDDBB();

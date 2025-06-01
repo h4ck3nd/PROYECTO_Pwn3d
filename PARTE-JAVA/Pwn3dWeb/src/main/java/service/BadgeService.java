@@ -2,7 +2,13 @@ package service;
 
 import java.sql.SQLException;
 
-import dao.*;
+import dao.BadgeDAO;
+import dao.FlagsDAO;
+import dao.MachineDAO;
+import dao.RankingDAO;
+import dao.StarsDAO;
+import dao.UserDAO;
+import dao.WriteupDAO;
 import model.Badge;
 import model.User;
 
@@ -24,7 +30,9 @@ public class BadgeService {
         }
 
         User user = usersDAO.getUserById(userId);
-        if (user == null) return; // Usuario no encontrado
+        if (user == null) {
+			return; // Usuario no encontrado
+		}
 
         String usuario = user.getUsuario();
 
@@ -58,8 +66,12 @@ public class BadgeService {
             badgeDAO.updateBadge(userId, "vms50");
         }
         if (hackedCount >= 100) {
-            if (!badge.isVms100()) badgeDAO.updateBadge(userId, "vms100");
-            if (!badge.isHacker()) badgeDAO.updateBadge(userId, "hacker");
+            if (!badge.isVms100()) {
+				badgeDAO.updateBadge(userId, "vms100");
+			}
+            if (!badge.isHacker()) {
+				badgeDAO.updateBadge(userId, "hacker");
+			}
         }
         if (hackedCount >= 200 && !badge.isVms200()) {
             badgeDAO.updateBadge(userId, "vms200");
@@ -124,6 +136,31 @@ public class BadgeService {
         // 10. estrellita
         if (starsMachinesDAO.hasStars(userId) && !badge.isEstrellita()) {
             badgeDAO.updateBadge(userId, "estrellita");
+        }
+        
+        // 11. Rangos
+        if (puntos >= 100 && !badge.isAprendiz()) {
+            badgeDAO.updateBadge(userId, "aprendiz");
+            badge = badgeDAO.getBadgesByUserId(userId);
+        }
+
+        if (puntos >= 1000 && !badge.isCoffee()) {
+            badgeDAO.updateBadge(userId, "0xcoffee");
+            badge = badgeDAO.getBadgesByUserId(userId);
+        }
+
+        if (puntos >= 2000 && !badge.isAnonymous()) {
+            badgeDAO.updateBadge(userId, "anonymous");
+            badge = badgeDAO.getBadgesByUserId(userId);
+        }
+
+        if (puntos >= 3000 && !badge.isFuckSystem()) {
+            badgeDAO.updateBadge(userId, "FuckSystem");
+            badge = badgeDAO.getBadgesByUserId(userId);
+        }
+
+        if (puntos >= 5000 && !badge.isGod()) {
+            badgeDAO.updateBadge(userId, "god");
         }
     }
 }

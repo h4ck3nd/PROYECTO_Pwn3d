@@ -355,7 +355,7 @@ public class UserDAO {
 
         return users;
     }
-    
+
  // Método para obtener los puntos totales de un usuario por su userId
     public int getUserPoints(int userId) {
         int puntos = 0;

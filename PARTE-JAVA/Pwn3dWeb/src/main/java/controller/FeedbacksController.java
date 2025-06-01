@@ -3,7 +3,6 @@ package controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import dao.BadgeDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import dao.BadgeDAO;
 import dao.FeedbackDAO;
 import model.FeedbackResponse;
 
@@ -29,14 +29,14 @@ public class FeedbacksController extends HttpServlet {
 
         try {
             feedbackList = dao.listarFeedbacksConUsuarioYAvatar();
-            
+
          // Para cada feedback, preguntamos si el usuario tiene el badge proHacker
             for (FeedbackResponse feedback : feedbackList) {
                 int userId = feedback.getUserId();  // suponiendo que FeedbackResponse tiene getUserId()
                 boolean esProHacker = badgeDAO.tieneBadgeProHacker(userId);
                 feedback.setEsProHacker(esProHacker); // asegurate que FeedbackResponse tenga este setter
             }
-            
+
         } catch (SQLException e) {
             e.printStackTrace();
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

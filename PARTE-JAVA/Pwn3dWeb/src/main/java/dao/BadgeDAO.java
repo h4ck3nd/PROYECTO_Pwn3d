@@ -1,9 +1,12 @@
 package dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import conexionDDBB.ConexionDDBB;
 import model.Badge;
-
-import java.sql.*;
 
 public class BadgeDAO {
 
@@ -43,6 +46,11 @@ public class BadgeDAO {
                     badge.setPuntos2000(rs.getBoolean("puntos2000"));
                     badge.setPuntos3000(rs.getBoolean("puntos3000"));
                     badge.setEstrellita(rs.getBoolean("estrellita"));
+                    badge.setAprendiz(rs.getBoolean("aprendiz"));
+                    badge.setCoffee(rs.getBoolean("0xcoffee"));
+                    badge.setAnonymous(rs.getBoolean("anonymous"));
+                    badge.setFuckSystem(rs.getBoolean("FuckSystem"));
+                    badge.setGod(rs.getBoolean("god"));
                 }
             }
 
@@ -95,14 +103,16 @@ public class BadgeDAO {
             "top1mes", "creador", "vms100", "vms200", "vms300", "vms50", "juniorvm",
             "hacker", "prohacker", "escritor", "writeups100", "firstroot", "firstuser",
             "solucionador", "noob", "top1año", "puntos1000", "puntos100", "puntos2000",
-            "puntos3000", "estrellita"
+            "puntos3000", "estrellita", "aprendiz", "0xcoffee", "anonymous", "FuckSystem", "god"
         };
         for (String col : validColumns) {
-            if (col.equals(column)) return true;
+            if (col.equals(column)) {
+				return true;
+			}
         }
         return false;
     }
-    
+
     public boolean tieneBadgeProHacker(int userId) {
         boolean tiene = false;
         ConexionDDBB conexionDDBB = new ConexionDDBB();

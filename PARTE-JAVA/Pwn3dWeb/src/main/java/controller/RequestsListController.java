@@ -3,7 +3,6 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import dao.BadgeDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import dao.BadgeDAO;
 import dao.RequestDAO;
 import model.Request;
 

@@ -2,7 +2,10 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -68,7 +71,8 @@ public class UserStatsBadgesServlet extends HttpServlet {
         String[] badgeKeys = {
             "noob", "top1mes", "top1año", "creador", "vms50", "vms100", "vms200", "vms300",
             "juniorvm", "escritor", "writeups100", "solucionador", "firstroot", "firstuser",
-            "puntos100", "puntos1000", "puntos2000", "puntos3000", "estrellita", "prohacker", "hacker"
+            "puntos100", "puntos1000", "puntos2000", "puntos3000", "estrellita", "prohacker", "hacker", 
+            "aprendiz", "0xcoffee", "anonymous", "FuckSystem", "god"
         };
 
         for (String b : badgeKeys) {

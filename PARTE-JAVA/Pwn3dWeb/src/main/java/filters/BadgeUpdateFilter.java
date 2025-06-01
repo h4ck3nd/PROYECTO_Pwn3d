@@ -1,12 +1,17 @@
 package filters;
 
-import service.BadgeService;
+import java.io.IOException;
 
-import javax.servlet.*;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
+
+import service.BadgeService;
 
 @WebFilter("/*")
 public class BadgeUpdateFilter implements Filter {
@@ -22,7 +27,7 @@ public class BadgeUpdateFilter implements Filter {
         String path = httpReq.getRequestURI();
         System.out.println("DEBUG: path = " + path);
         HttpSession session = httpReq.getSession(false);
-        
+
      // ✅ Excluir rutas específicas que incluyan el contextPath
         if (path.startsWith(contextPath + "/css/") ||
             path.startsWith(contextPath + "/js/") ||
@@ -57,7 +62,7 @@ public class BadgeUpdateFilter implements Filter {
             chain.doFilter(request, response); // No aplicar lógica de badges
             return;
         }
-        
+
         if (session != null && session.getAttribute("userId") != null) {
             int userId = (int) session.getAttribute("userId");
 

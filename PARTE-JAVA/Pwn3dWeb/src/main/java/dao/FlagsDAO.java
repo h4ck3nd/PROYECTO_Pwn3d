@@ -84,7 +84,7 @@ public class FlagsDAO {
         }
         return result;
     }
-    
+
     /**
      * Cuenta las máquinas hackeadas por un usuario (que tenga ambas flags: user y root).
      */

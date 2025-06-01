@@ -24,6 +24,27 @@ public class Badge {
     private boolean puntos2000;
     private boolean puntos3000;
     private boolean estrellita;
+    private boolean aprendiz;
+    private boolean coffee;
+    private boolean anonymous;
+    private boolean fuckSystem;
+    private boolean god;
+
+    // Getters y Setters
+    public boolean isAprendiz() { return aprendiz; }
+    public void setAprendiz(boolean aprendiz) { this.aprendiz = aprendiz; }
+
+    public boolean isCoffee() { return coffee; }
+    public void setCoffee(boolean coffee) { this.coffee = coffee; }
+
+    public boolean isAnonymous() { return anonymous; }
+    public void setAnonymous(boolean anonymous) { this.anonymous = anonymous; }
+
+    public boolean isFuckSystem() { return fuckSystem; }
+    public void setFuckSystem(boolean fuckSystem) { this.fuckSystem = fuckSystem; }
+
+    public boolean isGod() { return god; }
+    public void setGod(boolean god) { this.god = god; }
 
     // Constructor vacío
     public Badge() {}

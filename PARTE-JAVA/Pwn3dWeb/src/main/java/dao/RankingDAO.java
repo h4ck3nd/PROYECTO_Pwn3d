@@ -47,7 +47,7 @@ public class RankingDAO {
 
         return ranking;
     }
-    
+
  // Método para obtener el usuario top del periodo
     public User getTopUserByPeriod(String periodo) {
         String query = "";
@@ -80,7 +80,7 @@ public class RankingDAO {
 
         return null;
     }
-    
+
     public void cerrarConexion() {
         try {
             if (conexion != null) {

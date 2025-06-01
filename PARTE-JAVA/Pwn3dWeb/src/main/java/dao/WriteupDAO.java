@@ -101,7 +101,7 @@ public class WriteupDAO {
             }
         }
     }
-    
+
     public int countWriteupsByUser(int userId) {
         String sql = "SELECT COUNT(*) AS total FROM writeups_public WHERE user_id = ?";
         ConexionDDBB conexion = new ConexionDDBB();

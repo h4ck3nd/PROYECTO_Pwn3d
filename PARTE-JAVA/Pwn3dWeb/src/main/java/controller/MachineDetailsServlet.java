@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import conexionDDBB.ConexionDDBB;
+import dao.BadgeDAO;
 import dao.StarsDAO;
 import model.Machine;
 
@@ -175,6 +176,43 @@ public class MachineDetailsServlet extends HttpServlet {
                     }
                 }
             }
+            
+            int firstUserId = -1;
+            int firstRootId = -1;
+            boolean firstUserIsProHacker = false;
+            boolean firstRootIsProHacker = false;
+
+            if (!firstUserName.isEmpty()) {
+                String userIdQuery = "SELECT id FROM users WHERE usuario = ?";
+                try (PreparedStatement stmt1 = conn.prepareStatement(userIdQuery)) {
+                    stmt1.setString(1, firstUserName);
+                    ResultSet rs1 = stmt1.executeQuery();
+                    if (rs1.next()) {
+                        firstUserId = rs1.getInt("id");
+                    }
+                }
+
+                if (firstUserId != -1) {
+                    BadgeDAO badgeDAO = new BadgeDAO();
+                    firstUserIsProHacker = badgeDAO.tieneBadgeProHacker(firstUserId);
+                }
+            }
+
+            if (!firstRootName.isEmpty()) {
+                String rootIdQuery = "SELECT id FROM users WHERE usuario = ?";
+                try (PreparedStatement stmt1 = conn.prepareStatement(rootIdQuery)) {
+                    stmt1.setString(1, firstRootName);
+                    ResultSet rs1 = stmt1.executeQuery();
+                    if (rs1.next()) {
+                        firstRootId = rs1.getInt("id");
+                    }
+                }
+
+                if (firstRootId != -1) {
+                    BadgeDAO badgeDAO = new BadgeDAO();
+                    firstRootIsProHacker = badgeDAO.tieneBadgeProHacker(firstRootId);
+                }
+            }
 
          // NUEVO: Obtener logs recientes de flags
             List<String> logs = new ArrayList<>();
@@ -249,6 +287,8 @@ public class MachineDetailsServlet extends HttpServlet {
                         + "\"logs\":" + logsJson.toString() + ","
                         + "\"firstUserImg\":\"" + (firstUserImg != null ? firstUserImg : "") + "\","
                         + "\"firstRootImg\":\"" + (firstRootImg != null ? firstRootImg : "") + "\","
+                        + "\"firstUserIsProHacker\":" + firstUserIsProHacker + ","
+                        + "\"firstRootIsProHacker\":" + firstRootIsProHacker + ","
                         + "\"description\":\"" + (machine.getDescription() != null ? machine.getDescription().replace("\"", "\\\"") : "") + "\""
                         + "}";
 

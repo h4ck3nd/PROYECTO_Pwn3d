@@ -261,7 +261,7 @@ public class MachineDAO {
 
         return json;
     }
-    
+
     public boolean isUserCreator(String usuario) {
         String sql = "SELECT 1 FROM machines WHERE creator = ? LIMIT 1";
         ConexionDDBB db = new ConexionDDBB();

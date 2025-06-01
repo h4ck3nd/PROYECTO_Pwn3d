@@ -55,7 +55,7 @@ public class StarsDAO {
         }
         return 0.0;
     }
-    
+
     /**
      * Verifica si el usuario tiene alguna estrella en alguna máquina.
      * Útil para el badge "estrellita".
