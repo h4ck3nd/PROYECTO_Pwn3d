@@ -114,6 +114,22 @@
           </div>
           <hr>
       <nav class="menu">
+      
+      <!-- Seccion Perfil Usuario -->
+      	<a href="<%= request.getContextPath() %>/profile/profile.jsp" style="font-size: 1.3rem !important;">
+      	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 64 64" fill="none">
+		  <!-- Contorno del círculo exterior -->
+		  <circle cx="32" cy="32" r="30" stroke="#ffffff" stroke-width="5" fill="none" />
+		  
+		  <!-- Cabeza (solo contorno) -->
+		  <circle cx="32" cy="24" r="8" stroke="#ffffff" stroke-width="5" fill="none" />
+		  
+		  <!-- Cuerpo estilizado (contorno) -->
+		  <path d="M20 44c0-6.6 5.4-12 12-12s12 5.4 12 12" stroke="#ffffff" stroke-width="5" fill="none" />
+		</svg>
+      	Perfil
+      	</a>
+      	
       <!-- Seccion Usuarios -->
       	<a href="<%= request.getContextPath() %>/perfil" style="font-size: 1.3rem !important;">
       	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Editar Perfil">
