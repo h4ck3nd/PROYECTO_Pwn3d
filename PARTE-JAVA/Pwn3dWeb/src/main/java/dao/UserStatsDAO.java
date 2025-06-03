@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import conexionDDBB.ConexionDDBB;
@@ -30,6 +32,9 @@ public class UserStatsDAO {
                 stats.put("flags_root", rs.getInt("flags_root"));
                 stats.put("puntos", rs.getInt("puntos"));
                 stats.put("ultimo_inicio", rs.getTimestamp("ultimo_inicio"));
+                
+                // 💜 Nuevo: incluir "loves"
+                stats.put("loves", rs.getInt("loves"));
             }
 
             ps = conn.prepareStatement("SELECT COUNT(*) FROM writeups_public WHERE user_id = ?");
@@ -59,6 +64,37 @@ public class UserStatsDAO {
             if (rs.next()) {
                 stats.put("requests", rs.getInt(1));
             }
+            
+            String nombreUsuario = (String) stats.get("usuario");
+            PreparedStatement psVm = conn.prepareStatement("SELECT COUNT(*) FROM machines WHERE creator = ?");
+            psVm.setString(1, nombreUsuario);
+            ResultSet rsVm = psVm.executeQuery();
+            if (rsVm.next()) {
+                stats.put("vms_creadas", rsVm.getInt(1));
+            }
+            
+            // Redes sociales públicas
+            String socialQuery = "SELECT social_icon, url_social FROM editprofile WHERE user_id = ? AND estado = 'Publico'";
+            PreparedStatement psSocial = conn.prepareStatement(socialQuery);
+            psSocial.setInt(1, userId);
+            ResultSet rsSocial = psSocial.executeQuery();
+
+            Map<String, String> redesSociales = new HashMap<>();
+            while (rsSocial.next()) {
+                String icon = rsSocial.getString("social_icon");
+                String url = rsSocial.getString("url_social");
+                if (icon != null && url != null && !icon.trim().isEmpty() && !url.trim().isEmpty()) {
+                    redesSociales.put(icon, url);
+                }
+            }
+
+            // Si no hay redes públicas, indicamos estado privado
+            if (redesSociales.isEmpty()) {
+                stats.put("redes_privadas", true);
+            } else {
+                stats.put("redes_privadas", false);
+                stats.put("redes", redesSociales);
+            }
 
             // Dentro de getUserStatsById
             String badgeQuery = "SELECT * FROM badges WHERE userid = ?";
@@ -78,6 +114,55 @@ public class UserStatsDAO {
                 }
             }
             stats.put("badges", badges);
+            
+         // Determinar rango del usuario basado en el orden de prioridad
+            String[] rangos = {
+                "god", "FuckSystem", "anonymous", "0xcoffee", "aprendiz", "proHacker", "hacker", "noob"
+            };
+
+            String rangoUsuario = "Sin Rango";
+
+            for (String r : rangos) {
+                Boolean tiene = badges.get(r);
+                if (tiene != null && tiene) {
+                    rangoUsuario = r;
+                    break;
+                }
+            }
+            
+            PreparedStatement psMachines = conn.prepareStatement("SELECT name_machine, download_url, size FROM machines WHERE creator = ?");
+            psMachines.setString(1, nombreUsuario);
+            ResultSet rsMachines = psMachines.executeQuery();
+
+            List<Map<String, String>> machines = new ArrayList<>();
+            while (rsMachines.next()) {
+                Map<String, String> machine = new HashMap<>();
+                machine.put("name", rsMachines.getString("name_machine"));
+                machine.put("url", rsMachines.getString("download_url"));
+                machine.put("size", rsMachines.getString("size"));
+                machines.add(machine);
+            }
+            stats.put("machines", machines);
+
+            PreparedStatement psWriteups = conn.prepareStatement("SELECT vm_name, url, language FROM writeups_public WHERE user_id = ?");
+            psWriteups.setInt(1, userId);
+            ResultSet rsWriteups = psWriteups.executeQuery();
+
+            List<Map<String, String>> writeups = new ArrayList<>();
+            while (rsWriteups.next()) {
+                Map<String, String> writeup = new HashMap<>();
+                writeup.put("vm", rsWriteups.getString("vm_name"));
+                writeup.put("url", rsWriteups.getString("url"));
+                writeup.put("lang", rsWriteups.getString("language"));
+                writeups.add(writeup);
+            }
+            stats.put("writeups", writeups);
+
+            // Capitalizar primera letra si es necesario
+            rangoUsuario = Character.toUpperCase(rangoUsuario.charAt(0)) + rangoUsuario.substring(1);
+
+            // Poner el rango en stats
+            stats.put("rango", rangoUsuario);
 
             // Obtener las primeras flags de user y root por usuario
             String firstFlagsQuery = "SELECT " +

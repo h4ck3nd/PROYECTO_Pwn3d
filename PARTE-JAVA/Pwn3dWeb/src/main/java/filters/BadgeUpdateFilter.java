@@ -54,6 +54,7 @@ public class BadgeUpdateFilter implements Filter {
             path.equals(contextPath + "/editarPerfil") ||
             path.equals(contextPath + "/subirAvatar") ||
             path.equals(contextPath + "/actualizarPais") ||
+            path.equals(contextPath + "/user-stats") ||
             path.equals(contextPath + "/ranking.jsp") ||
             path.equals(contextPath + "/infoNoticias.jsp") ||
             path.equals(contextPath + "/welcome.jsp") ||
