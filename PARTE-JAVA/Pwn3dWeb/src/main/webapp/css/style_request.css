@@ -329,7 +329,7 @@ body.sidebar-closed .content {
     .menu {
       display: flex;
       flex-direction: column;
-      gap: 15px;
+      gap: 6px;
       margin-top: 80px;
       margin-left: -60px;
     }

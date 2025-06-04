@@ -421,7 +421,7 @@
     .menu {
       display: flex;
       flex-direction: column;
-      gap: 1.63rem;
+      gap: 22px;
       margin-top: 80px;
     }
 

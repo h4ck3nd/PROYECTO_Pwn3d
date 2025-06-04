@@ -1222,6 +1222,7 @@
 	          .then(res => res.json())
 	          .then(machine => {
 	            const isNew = machine.id == ultimoId;
+	            const contextPath = "<%= request.getContextPath() %>";
 	            const newBadge = isNew
 	              ? '<div style="position: absolute; top: 5px; left: 5px; background: red; color: white; font-weight: bold; font-size: 10px; padding: 2px 6px; border-radius: 8px;">NEW</div>'
 	              : '';
@@ -1298,13 +1299,19 @@
 	                  '</article>' +
 	                '</section>' +
 	              '</td>' +
-	              '<td class="first-user">' + machine.creator + '</td>' +
+	              '<td class="first-user">' +
+		              '<a href="' + contextPath + '/profile/profile-user-public.jsp?id=' + machine.creatorId + '" style="display: contents;">' +
+		                machine.creator +
+		              '</a>' +
+		            '</td>' +
 	              '<td class="first-user">' +
 	                '<button title="Primera Flag User/Root" type="button" class="btn-flag" ' +
 	                'data-first-user="' + machine.firstUser + '" ' +
 	                'data-first-root="' + machine.firstRoot + '" ' +
 	                'data-first-user-date="' + machine.firstUserDate + '" ' +
 	                'data-first-root-date="' + machine.firstRootDate + '" ' +
+	                'data-first-user-id="' + machine.firstUserId + '"' +
+	                'data-first-root-id="' + machine.firstRootId + '"' +
 	                'onclick="openPopup(this)" style="background:none; border:none; padding:0; cursor:pointer;">' +
 	                  '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 64 64" fill="none" stroke="#ec0725" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
 	                    '<circle cx="32" cy="36" r="20" fill="#222" stroke="#ec0725" stroke-width="3" />' +
@@ -1620,6 +1627,17 @@
 		  const firstRoot = button.getAttribute('data-first-root') || 'N/A';
 		  const firstUserDate = button.getAttribute('data-first-user-date') || '';
 		  const firstRootDate = button.getAttribute('data-first-root-date') || '';
+		  const firstUserId = button.getAttribute('data-first-user-id') || '';
+		  const firstRootId = button.getAttribute('data-first-root-id') || '';
+		  const contextPath = "<%= request.getContextPath() %>";
+		  
+		  const firstUserLink = (firstUser !== 'N/A' && firstUserId)
+			  ? '<a href="' + contextPath + '/profile/profile-user-public.jsp?id=' + firstUserId + '" style="font-size: 1.35rem; font-weight: 600; color: #ffffff; margin-top: 5px;">' + firstUser + '</a>'
+			  : '<span style="font-size: 1.35rem; font-weight: 600; color: #ffffff; margin-top: 5px;">' + firstUser + '</span>';
+	
+			const firstRootLink = (firstRoot !== 'N/A' && firstRootId)
+			  ? '<a href="' + contextPath + '/profile/profile-user-public.jsp?id=' + firstRootId + '" style="font-size: 1.35rem; font-weight: 600; color: #ffffff; margin-top: 5px;">' + firstRoot + '</a>'
+			  : '<span style="font-size: 1.35rem; font-weight: 600; color: #ffffff; margin-top: 5px;">' + firstRoot + '</span>';
 		
 		  const popup = document.createElement('div');
 		  popup.id = 'flagPopupDynamic';
@@ -1664,16 +1682,16 @@
 		      '<p style="font-size: 1rem; color: #d0cde1; margin-bottom: 30px; line-height: 2rem;">¡Los más rápidos en capturar User y Root!</p>' +
 		
 		      '<div style="margin-bottom: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; line-height: 2rem;">' +
-		        '<div style="font-size: 1rem; color: #aaa;">👤 <strong style="color:#80ffea;">First User:</strong></div>' +
-		        '<div style="font-size: 1.35rem; font-weight: 600; color: #ffffff; margin-top: 5px;">' + firstUser + '</div>' +
-		        '<div style="font-size: 0.9rem; color: #b3b3b3; margin-top: 6px;">🗓️ ' + formatDate(firstUserDate) + '</div>' +
-		      '</div>' +
-		
-		      '<div style="margin-bottom: 10px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; line-height: 2rem;">' +
-		        '<div style="font-size: 1rem; color: #aaa;">👑 <strong style="color:#ff7eb9;">First Root:</strong></div>' +
-		        '<div style="font-size: 1.35rem; font-weight: 600; color: #ffffff; margin-top: 5px;">' + firstRoot + '</div>' +
-		        '<div style="font-size: 0.9rem; color: #b3b3b3; margin-top: 6px;">🗓️ ' + formatDate(firstRootDate) + '</div>' +
-		      '</div>' +
+			      '<div style="font-size: 1rem; color: #aaa;">👤 <strong style="color:#80ffea;">First User:</strong></div>' +
+			      '<div style="font-size: 1.35rem; font-weight: 600; margin-top: 5px;">' + firstUserLink + '</div>' +
+			      '<div style="font-size: 0.9rem; color: #b3b3b3; margin-top: 6px;">🗓️ ' + formatDate(firstUserDate) + '</div>' +
+			    '</div>' +
+	
+			    '<div style="margin-bottom: 10px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; line-height: 2rem;">' +
+			      '<div style="font-size: 1rem; color: #aaa;">👑 <strong style="color:#ff7eb9;">First Root:</strong></div>' +
+			      '<div style="font-size: 1.35rem; font-weight: 600; margin-top: 5px;">' + firstRootLink + '</div>' +
+			      '<div style="font-size: 0.9rem; color: #b3b3b3; margin-top: 6px;">🗓️ ' + formatDate(firstRootDate) + '</div>' +
+			    '</div>' +
 		    '</div>';
 		
 		  document.body.appendChild(popup);

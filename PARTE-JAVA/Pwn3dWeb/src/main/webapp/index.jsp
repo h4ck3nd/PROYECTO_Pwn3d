@@ -277,25 +277,35 @@
 
     	    // Construye el HTML concatenado con +
     		function buildLogsHTML(logs) {
-    		  var html = 
-    		    '<section class="logs" style="max-height: 400px; overflow-y: auto;">';
-
-    		  for (var i = 0; i < logs.length; i++) {
-    		    var log = logs[i];
-    		    html +=
-    		      '<div class="log-card">' +
-    		      '<img src="' + log.imgSrc + '" alt="' + escapeHtml(log.user) + '" class="log-avatar ' + (log.esProHacker ? 'prohacker-border' : '') + '" />' +
-    		        '<div class="log-content">' +
-    		          '<p><span class="timestamp">' + escapeHtml(log.createdAt || '') + '</span></p>' +
-    		          '<p><strong class="hacker-name">' + escapeHtml(log.user) + '</strong> got ' +
-    		            '<span class="' + escapeHtml(log.tipoFlag) + '">' + escapeHtml(log.tipoFlag) + '</span> in <em>' + escapeHtml(log.vmName) + '</em></p>' +
-    		        '</div>' +
-    		      '</div>';
-    		  }
-
-    		  html += '</div></section>';
-    		  return html;
-    		}
+			  var html = '<section class="logs" style="max-height: 400px; overflow-y: auto;">';
+			
+			  for (var i = 0; i < logs.length; i++) {
+			    var log = logs[i];
+			    var linkUrl = '<%= request.getContextPath() %>/profile/profile-user-public.jsp?id=' + encodeURIComponent(log.idUser);
+			    var tipoClass = log.tipoFlag === "root" ? "root" : "user";
+			    var tag = "";
+			
+			    if ((log.tipoFlag === "root" && log.firstFlagRoot) || (log.tipoFlag === "user" && log.firstFlagUser)) {
+			      tag = " 💥 First Blood!";
+			    }
+			
+			    html +=
+			      '<div class="log-card">' +
+			        '<a href="' + linkUrl + '">' +
+			          '<img src="' + log.imgSrc + '" alt="' + escapeHtml(log.user) + '" class="log-avatar ' + (log.esProHacker ? 'prohacker-border' : '') + '" />' +
+			        '</a>' +
+			        '<div class="log-content">' +
+			          '<p><span class="timestamp">' + escapeHtml(log.createdAt || '') + '</span></p>' +
+			          '<p><strong class="hacker-name">' + escapeHtml(log.user) + '</strong> got ' +
+			            '<span class="' + tipoClass + '">' + escapeHtml(log.tipoFlag) + '</span> in <em>' + escapeHtml(log.vmName) + '</em>' +
+			            tag + '</p>' +
+			        '</div>' +
+			      '</div>';
+			  }
+			
+			  html += '</section>';
+			  return html;
+			}
     
 	 	// Cargar logs desde el servlet JSON y añadirlo al DOM
 	    fetch('<%= request.getContextPath() %>/logsJson')

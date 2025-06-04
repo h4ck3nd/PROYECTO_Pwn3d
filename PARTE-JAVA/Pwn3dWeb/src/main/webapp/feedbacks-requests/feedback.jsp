@@ -239,7 +239,9 @@
 	    let html = "";
 	    feedbacks.forEach(function(fb) {
 	      html += '<div class="comment">';
-	      html += '<img class="avatar ' + (fb.esProHacker ? 'prohacker-border' : '') + '" src="' + contextPath + fb.avatarPath + '" alt="' + fb.username + ' avatar" />';
+	      html +=   '<a href="' + contextPath + '/profile/profile-user-public.jsp?id=' + fb.userId + '">';
+	      html +=     '<img class="avatar ' + (fb.esProHacker ? 'prohacker-border' : '') + '" src="' + contextPath + fb.avatarPath + '" alt="' + fb.username + ' avatar" />';
+	      html +=   '</a>';
 	      html +=   '<h2 class="username pink">' + fb.username + '</h2>';
 	      html +=   '<div class="user-msg">' + fb.message + '</div>';
 	      html +=   '<div class="admin-reply">' + fb.estado + '</div>';  // Mostrar siempre estado aquí

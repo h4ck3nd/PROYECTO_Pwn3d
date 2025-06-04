@@ -280,7 +280,9 @@
         <div class="ranking-row <%= colorClass %>">
           <div class="ranking-col">#<%= pos %></div>
           <div class="ranking-col-hackers">
-            <img src="<%= imgPath %>" class="avatar <%= proHacker ? "prohacker-border" : "" %>" alt="avatar de <%= u.getUsuario() %>" />
+            <a href="<%= request.getContextPath() %>/profile/profile-user-public.jsp?id=<%= u.getId() %>" style="display: contents;">
+			  <img src="<%= imgPath %>" class="avatar <%= proHacker ? "prohacker-border" : "" %>" alt="avatar de <%= u.getUsuario() %>" />
+			</a>
             <span><%= u.getNombre() %> @<%= u.getUsuario() %></span>
             <% if (flagPath != null) { %>
               <img src="<%= flagPath %>" class="flag-icon" alt="flag" />
@@ -308,7 +310,9 @@
         <div class="ranking-row" style="border-left: 6px solid #8e7cc3;">
           <div class="ranking-col">#<%= posicionUsuario %></div>
           <div class="ranking-col-hackers">
-            <img src="<%= imgPathUser %>" class="avatar <%= proHackerUsuario ? "prohacker-border" : "" %>" alt="avatar"/>
+            <a href="<%= request.getContextPath() %>/profile/profile-user-public.jsp?id=<%= currentUser.getId() %>" style="display: contents;">
+			  <img src="<%= imgPathUser %>" class="avatar <%= proHackerUsuario ? "prohacker-border" : "" %>" alt="avatar"/>
+			</a>
             <span><%= currentUser.getNombre() %> @<%= currentUser.getUsuario() %></span>
             <% if (flagPathUser != null) { %>
               <img src="<%= flagPathUser %>" class="flag-icon" alt="flag" />

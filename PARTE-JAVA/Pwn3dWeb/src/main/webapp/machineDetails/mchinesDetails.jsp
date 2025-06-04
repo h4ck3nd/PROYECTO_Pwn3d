@@ -45,7 +45,17 @@
     	    ? contextPath + '/img/' + machine.nameMachine.toLowerCase() + '.png'
     	    : contextPath + '/img/logo-flag-white.png';
 		
-    	  
+    	    const firstRootName = machine.firstRoot || 'N/A';
+    	    const firstUserName = machine.firstUser || 'N/A';
+
+    	    const firstRootHTML = (firstRootName !== 'N/A' && machine.firstRootId)
+    	      ? '<a href="' + contextPath + '/profile/profile-user-public.jsp?id=' + machine.firstRootId + '" style="color:#fff; text-decoration:none;">' + firstRootName + '</a>'
+    	      : '<span style="color:#fff;">' + firstRootName + '</span>';
+
+    	    const firstUserHTML = (firstUserName !== 'N/A' && machine.firstUserId)
+    	      ? '<a href="' + contextPath + '/profile/profile-user-public.jsp?id=' + machine.firstUserId + '" style="color:#fff; text-decoration:none;">' + firstUserName + '</a>'
+    	      : '<span style="color:#fff;">' + firstUserName + '</span>';
+    	    
     	  var html = '';
 
     	  // Contenedor flex para info e imagen
@@ -194,7 +204,7 @@
 				      '<strong>First Root:</strong>' +
 				      '<img class="' + (machine.firstRootIsProHacker ? "prohacker-border" : "") + '" src="' + (machine.firstRootImg ? contextPath + '/' + machine.firstRootImg : contextPath + '/imgProfile/default.png') + '" alt="Foto First Root" ' +
 				           'style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 4px #a362ff;" />' +
-				      '<span>' + (machine.firstRoot || 'N/A') + '</span>' +
+				           firstRootHTML +
 				    '</p>' +
 				  '</div>' +
 
@@ -204,7 +214,7 @@
 				      '<strong>First User:</strong>' +
 				      '<img class="' + (machine.firstUserIsProHacker ? "prohacker-border" : "") + '" src="' + (machine.firstUserImg ? contextPath + '/' + machine.firstUserImg : contextPath + '/imgProfile/default.png') + '" alt="Foto First User" ' +
 				           'style="width: 30px; height: 30px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 4px #a362ff;" />' +
-				      '<span>' + (machine.firstUser || 'N/A') + '</span>' +
+				           firstUserHTML +
 				    '</p>' +
 				  '</div>' +
 				  '<br>' + '<br>' +

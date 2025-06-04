@@ -297,11 +297,14 @@ fetch(contextPath + "/requests")
         '</svg>';
 
       var heartSVG = item.lovedByUser ? heartFilledSVG : heartEmptySVG;
+      var linkUrl = contextPath + "/profile/profile-user-public.jsp?id=" + encodeURIComponent(item.userId);
 
       container.innerHTML +=
         '<div class="comment">' +
           '<div class="fancy-terminal">' +
-          '<img src="' + imgSrc + '" alt="Profile" class="avatar ' + (item.esProHacker ? 'prohacker-border' : '') + '" />' +
+          '<a href="' + linkUrl + '">' +
+	          '<img src="' + imgSrc + '" alt="Profile" class="avatar ' + (item.esProHacker ? 'prohacker-border' : '') + '" />' +
+	        '</a>' +
             '<p>' + item.user + '</p><br>' +
             '<div class="mac-body">' +
               '<p>' + item.message + '</p>' +
