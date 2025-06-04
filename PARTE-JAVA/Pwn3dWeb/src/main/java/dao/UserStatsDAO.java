@@ -143,6 +143,41 @@ public class UserStatsDAO {
                 machines.add(machine);
             }
             stats.put("machines", machines);
+            
+            // Obtener logs de flags por usuario
+            PreparedStatement psFlags = conn.prepareStatement(""
+                    + "SELECT vm_name, tipo_flag, first_flag_user, first_flag_root, created_at "
+                    + "FROM flags WHERE id_user = ? ORDER BY created_at DESC");
+            psFlags.setInt(1, userId);
+            ResultSet rsFlags = psFlags.executeQuery();
+
+            List<Map<String, Object>> flagsLogs = new ArrayList<>();
+            while (rsFlags.next()) {
+                Map<String, Object> flagLog = new HashMap<>();
+                flagLog.put("vm", rsFlags.getString("vm_name"));
+                flagLog.put("tipo", rsFlags.getString("tipo_flag"));
+                flagLog.put("firstUser", rsFlags.getBoolean("first_flag_user"));
+                flagLog.put("firstRoot", rsFlags.getBoolean("first_flag_root"));
+                flagLog.put("fecha", rsFlags.getTimestamp("created_at"));
+                flagsLogs.add(flagLog);
+            }
+            stats.put("flags_logs", flagsLogs);
+            
+            // Calcular posición en ranking por puntos
+            PreparedStatement rankStmt = conn.prepareStatement(
+                "SELECT id FROM users ORDER BY puntos DESC"
+            );
+            ResultSet rankRs = rankStmt.executeQuery();
+
+            int posicion = 1;
+            while (rankRs.next()) {
+                int id = rankRs.getInt("id");
+                if (id == userId) {
+                    break;
+                }
+                posicion++;
+            }
+            stats.put("ranking", posicion);
 
             PreparedStatement psWriteups = conn.prepareStatement("SELECT vm_name, url, language FROM writeups_public WHERE user_id = ?");
             psWriteups.setInt(1, userId);

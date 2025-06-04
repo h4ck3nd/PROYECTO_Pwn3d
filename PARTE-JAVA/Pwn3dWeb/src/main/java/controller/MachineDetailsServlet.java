@@ -26,6 +26,7 @@ public class MachineDetailsServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String machineId = request.getParameter("id");
         System.out.println("👉 ID recibido desde el cliente: " + machineId);
+        int creatorId = -1;
 
         if (machineId == null || machineId.isEmpty()) {
             System.out.println("⚠️ No se proporcionó un ID válido en la solicitud.");
@@ -69,7 +70,20 @@ public class MachineDetailsServlet extends HttpServlet {
             } else {
                 System.out.println("❌ No se encontró ninguna máquina con ID: " + machineId);
             }
-
+            
+            String creatorUsername = machine.getCreator();
+            String creatorIdQuery = "SELECT id FROM users WHERE usuario = ?";
+            try (PreparedStatement stmtCreator = conn.prepareStatement(creatorIdQuery)) {
+                stmtCreator.setString(1, creatorUsername);
+                ResultSet rsCreator = stmtCreator.executeQuery();
+                if (rsCreator.next()) {
+                    creatorId = rsCreator.getInt("id");
+                }
+            } catch (SQLException e) {
+                System.err.println("💥 Error al obtener el ID del creador:");
+                e.printStackTrace();
+            }
+            
             int totalWriteups = 0;
             if (machine != null) {
                 String writeupsQuery = "SELECT COUNT(*) FROM writeups_public WHERE vm_name = ?";
@@ -289,6 +303,9 @@ public class MachineDetailsServlet extends HttpServlet {
                         + "\"firstRootImg\":\"" + (firstRootImg != null ? firstRootImg : "") + "\","
                         + "\"firstUserIsProHacker\":" + firstUserIsProHacker + ","
                         + "\"firstRootIsProHacker\":" + firstRootIsProHacker + ","
+                        + "\"creatorId\":" + creatorId + ","
+                        + "\"firstUserId\":" + firstUserId + ","
+                        + "\"firstRootId\":" + firstRootId + ","
                         + "\"description\":\"" + (machine.getDescription() != null ? machine.getDescription().replace("\"", "\\\"") : "") + "\""
                         + "}";
 

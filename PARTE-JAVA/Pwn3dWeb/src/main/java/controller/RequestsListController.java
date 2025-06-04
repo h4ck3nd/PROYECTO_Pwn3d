@@ -54,6 +54,7 @@ public class RequestsListController extends HttpServlet {
             boolean esProHacker = badgeDAO.tieneBadgeProHacker(req.getUserId());
             System.out.println("UserID: " + req.getUserId() + " esProHacker: " + esProHacker);
             json.put("esProHacker", esProHacker);
+            json.put("userId", req.getUserId());
 
             jsonArray.put(json);
         }
