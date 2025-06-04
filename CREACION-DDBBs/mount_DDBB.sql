@@ -275,3 +275,16 @@ ADD COLUMN "0xcoffee" BOOLEAN DEFAULT FALSE,
 ADD COLUMN anonymous BOOLEAN DEFAULT FALSE,
 ADD COLUMN "FuckSystem" BOOLEAN DEFAULT FALSE,
 ADD COLUMN god BOOLEAN DEFAULT FALSE;
+
+-- TABLA LOVES DE USERS PUBLICS
+
+DROP TABLE IF EXISTS lovesusers;
+CREATE TABLE lovesusers (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    user_id_guest INTEGER NOT NULL,
+    loves INTEGER DEFAULT 1,
+    UNIQUE(user_id, user_id_guest), -- Solo un love por visitante
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id_guest) REFERENCES users(id) ON DELETE CASCADE
+);
