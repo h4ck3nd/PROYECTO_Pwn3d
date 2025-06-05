@@ -376,6 +376,33 @@ public class UserDAO {
 
         return puntos;
     }
+    
+    public Integer getUserIdByUsername(String username) {
+        String query = "SELECT id FROM users WHERE usuario = ?";
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
 
+        try {
+            conn = new ConexionDDBB().conectar();
+            stmt = conn.prepareStatement(query);
+            stmt.setString(1, username);
+            rs = stmt.executeQuery();
 
+            if (rs.next()) {
+                return rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return null; // Si no se encontró el usuario
+    }
 }

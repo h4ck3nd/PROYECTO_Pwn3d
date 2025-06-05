@@ -14,6 +14,16 @@ public class InfoNotice {
     private String environment;
     private String secondEnvironment;
     private String pathInfoNotice;
+    private String creator;
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
+
 
     public String getPathInfoNotice() {
         return pathInfoNotice;

@@ -33,6 +33,7 @@ public class InfoNoticeDAO {
                 notice.setEnvironment(rs.getString("environment"));
                 notice.setSecondEnvironment(rs.getString("second_environment"));
                 notice.setPathInfoNotice(rs.getString("path_info_notice"));
+                notice.setCreator(rs.getString("creator"));
                 noticias.add(notice);
             }
 
