@@ -232,6 +232,8 @@ ALTER TABLE info_notices_machines
 ADD COLUMN second_environment VARCHAR(100);
 ALTER TABLE info_notices_machines
 ADD COLUMN path_info_notice TEXT;
+ALTER TABLE info_notices_machines
+ADD COLUMN creator VARCHAR(100);
 
 -- TABLA DE BADGES (LOGROS DE LA PAGINA)
 
