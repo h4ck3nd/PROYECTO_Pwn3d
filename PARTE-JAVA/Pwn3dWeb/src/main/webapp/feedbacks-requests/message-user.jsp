@@ -218,12 +218,12 @@
 
     <div class="box">
       ¡Pídenos lo que quieras!<br>
-      Ej1: Quiero más máquinas virtuales de Wordpress.<br>
-      Ej2: Quiero más retos de programación.<br><br>
+      Ej1: Quiero más máquinas virtuales Windows.<br>
+      Ej2: Quiero más CTFs de BufferOverflow.<br><br>
 
       ¿Quieres darnos tu opinión? ¡La apreciamos mucho!<br>
       Ej1: Me encanta la comunidad.<br>
-      Ej2: ¡Usa IRC en lugar de Discord!
+      Ej2: Estaria bien un apartado para hablar con el Admin.
 	</div>
     
     <br>

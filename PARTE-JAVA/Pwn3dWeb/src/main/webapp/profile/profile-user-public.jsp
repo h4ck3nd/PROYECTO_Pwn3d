@@ -53,8 +53,10 @@
     String pais = usuario.getPais();
     String iso = (pais != null && !pais.trim().isEmpty()) ? pais.toLowerCase() : null;
     
-    // Obtener ID del usuario actual que esta visitando
+ 	// Obtener ID del usuario actual que está visitando
     Integer guestId = null;
+    User visitante = null;
+    String guestUsername = "Invitado";
 
     javax.servlet.http.Cookie[] cookies = request.getCookies();
     String token = null;
@@ -70,20 +72,81 @@
 
     if (token != null && !token.trim().isEmpty()) {
         guestId = JWTUtil.getUserIdFromToken(token);
+        if (guestId != null) {
+            UserDAO userDaoGuest = new UserDAO();
+            visitante = userDaoGuest.getUserById(guestId);
+            if (visitante != null) {
+                guestUsername = visitante.getUsuario();
+            }
+        }
     }
 
     boolean isOwner = (guestId != null && guestId.equals(userId));
+
+ 	// Obtener imagen de perfil del usuario visitante
+    ImgProfileDAO imgDao2 = new ImgProfileDAO();
+    ImgProfile imgGuest = imgDao2.getImgProfileByUserId(guestId);
+    imgDao2.cerrarConexion();
+
+    String imgSrcGuest = (imgGuest != null && imgGuest.getPathImg() != null && !imgGuest.getPathImg().isEmpty())
+        ? request.getContextPath() + "/" + imgGuest.getPathImg()
+        : request.getContextPath() + "/imgProfile/default.png";
+%>
+<%@ page import="dao.BadgeDAO" %>
+<%
+    boolean esProHacker = false;
+
+    if (guestId != null) {
+        BadgeDAO badgeDAO = new BadgeDAO();
+        esProHacker = badgeDAO.tieneBadgeProHacker(guestId);
+    }
+
+    request.setAttribute("esProHacker", esProHacker); // opcional
+    
+    boolean esProHackerOwner = false;
+
+    if (userId != null) {
+        BadgeDAO badgeDAO = new BadgeDAO();
+        esProHackerOwner = badgeDAO.tieneBadgeProHacker(userId);
+    }
+
+    request.setAttribute("esProHackerOwner", esProHackerOwner); // opcional
 %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="<%= request.getContextPath() %>/img/logo-flag-white.ico">
     <title>Perfil <%= nombreUsuario %> - Pwn3d!</title>
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/dynamicFonts.jsp" />
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	<!-- Incluye SweetAlert2 si no lo has hecho -->
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
+    
+    	:root {
+		  /* Oscuro por defecto */
+		  /*--color-background: #2c2b30;*/ /* ANTIGUO COLOR MAS CLARO DEL FONDO */
+		  --color-background: #1e1b27;
+		  --color-sidebar-bg: #2c2c3a;
+		  --shadow-color: rgba(0, 0, 0, 0.6);
+		  --color-text-aside: #fff;
+		  --color-text: #fff;
+		  --color-text-muted: #6a0dad;
+		  --color-accent: #ff4f87;
+		  --color-accent-alt: #8340c4;
+		  --color-dot: #c9aee0;
+		  --color-hover-bg: #2a2a2a;
+		  --color-card-bg: #1a1a1a;
+		  --color-download-bg: #c9aee0;
+		  --color-shadow: rgba(0, 0, 0, 0.3);
+		  --color-border: #333;
+		  --color-gray-dark: #444;
+		  --color-timestamp: #888;
+		  --color-root: #9b6ad1;
+		  --color-user: #00ffff;
+		}
+    
         body {
             background-color: #1e1b27;
             font-family: 'Press Start 2P', monospace;
@@ -265,9 +328,366 @@
 		    margin-bottom: 5px;
 		    border-radius: 5px;
 		}  
+		
+		/* Contenido del menú */
+    .sidebar {
+      position: relative;
+      height: 100%;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      
+      /* Añadido para evitar forzar scroll */
+	  max-width: 100vw;
+	  max-height: 100vh;
+	  overflow: hidden;
+    }
+
+    .sidebar a {
+      color: var(--color-text-aside) !important;
+      text-decoration: none;
+      padding: 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: color 0.2s ease;
+    }
+
+    .sidebar a:hover {
+      color: var(--color-accent);
+    }
+
+    /* Botón de cerrar dentro del menú */
+    .menu-close {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 1.0rem;
+      background: none;
+      color: var(--color-text);
+      border: none;
+      cursor: pointer;
+      z-index: 2001;
+      display: none;
+    }
+
+    /* Mostrar botón de cerrar solo cuando el menú está abierto */
+    .sidebar-wrapper.open .menu-close {
+      display: block;
+    }
+
+    /* Botón de hamburguesa (☰) */
+    .menu-toggle {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      font-size: 2rem;
+      background: none;
+      color: var(--color-text);
+      border: none;
+      cursor: pointer;
+      z-index: 2000;
+      display: none;
+    }
+
+    /* Mostrar hamburguesa solo cuando el menú está cerrado */
+    .sidebar-wrapper.closed + .menu-toggle {
+      display: block;
+    }
+
+   /* Menú lateral */
+	.sidebar-wrapper {
+	  position: fixed;
+	  top: 0;
+	  left: 0;
+	  width: 340px;
+	  height: 100vh;
+	  background-color: var(--color-sidebar-bg);
+	  box-shadow: 4px 0 10px var(--shadow-color);
+	  overflow-y: hidden; /* <-- esto evita la barra de scroll */
+	  z-index: 1000;
+	  transition: transform 0.3s ease;
+	  align-items: center;
+	  text-align: center;
+	  align-content: center;
+	}
+
+    /* Menú abierto */
+    .sidebar-wrapper.open {
+      transform: translateX(0);
+    }
+
+    /* Menú cerrado */
+    .sidebar-wrapper.closed {
+      transform: translateX(-100%);
+    }
+
+    .sidebar-wrapper.closed ~ .main-content {
+      margin-left: -10rem;
+      margin-right: -10rem;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 40px;
+      margin-left: 40px;
+      margin-right: -280px;
+    }
+
+    /* En pantallas pequeñas, el contenido debe ajustarse */
+    @media (max-width: 768px) {
+      .main-content {
+        margin-left: 0;
+        padding: 60px 20px 20px;
+      }
+    }
+
+    .profile {
+      text-align: center;
+    }
+
+    .profile img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+    }
+    
+    .profile p {
+    	color: white !important;
+    	opacity: 1 !important;
+    }
+
+    .avatar {
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+    }
+
+    .username {
+      margin-top: 10px;
+      font-weight: bold;
+      font-size: 0.95rem;
+      color: white !important;
+    }
+
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-top: 70px;
+    }
+
+    .menu a {
+      color: var(--color-text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s ease;
+    }
+
+    .menu a:hover {
+      color: var(--color-text);
+    }
+
+    .hero {
+	  display: flex;
+	  flex-wrap: wrap;
+	  justify-content: space-between;
+	  align-items: flex-start;
+	  gap: 2rem; /* Mejor que márgenes negativos */
+	  padding: 1rem 2rem; 
+	}
+	
+	hr {
+		margin-top: -13px;
+		border-width: 1px;
+		color: white;
+		opacity: 1;
+	}
+	
+	.title {
+	  font-size: 2.5rem;
+	  font-weight: 700;
+	  margin: 0;           
+	}
+	
+	/* ESTILO DEL LOGRO PROHACKER PARA EL AVATAR */
+
+	.avatar-image {
+	  width: 120px;
+	  height: 120px;
+	  border-radius: 50%;
+	  object-fit: cover;
+	  border: 3px solid transparent;
+	}
+	
+	/* Contorno exclusivo para prohacker */
+	.prohacker-border {
+	  position: relative;
+	  animation: pulseBorder 2s infinite;
+	  box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0.6);
+	}
+	
+	@keyframes pulseBorder {
+	  0% {
+	    box-shadow: 0 0 10px 3px rgba(255, 0, 0, 0.5);
+	  }
+	  50% {
+	    box-shadow: 0 0 20px 8px rgba(255, 0, 0, 0.9);
+	  }
+	  100% {
+	    box-shadow: 0 0 10px 3px rgba(255, 0, 0, 0.5);
+	  }
+	}
     </style>
 </head>
 <body>
+
+<!-- MENU DE HABURGUESA -->
+
+    <button id="hamburger" class="menu-toggle" style="display: none;">☰</button>
+  <div class="app">
+    <div id="sidebarWrapper" class="sidebar-wrapper open">
+        <aside class="sidebar">
+          <!-- Botón de cerrar -->
+          <button id="closeMenu" class="menu-close">❌</button>
+          <div class="profile">
+            <img src="<%= imgSrcGuest %>" alt="Avatar" class="avatar-image <%= esProHacker ? "prohacker-border" : "" %>" />
+    		<p><strong>Username:</strong> <%= guestUsername %></p>
+          </div>
+          <hr style="width: 18rem; font-weight: bold !important;">
+      <nav class="menu">
+      <!-- Seccion Perfil Usuario -->
+      	<a href="<%= request.getContextPath() %>/profile/profile.jsp">
+      	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 64 64" fill="none">
+		  <!-- Contorno del círculo exterior -->
+		  <circle cx="32" cy="32" r="30" stroke="#ffffff" stroke-width="5" fill="none" />
+		  
+		  <!-- Cabeza (solo contorno) -->
+		  <circle cx="32" cy="24" r="8" stroke="#ffffff" stroke-width="5" fill="none" />
+		  
+		  <!-- Cuerpo estilizado (contorno) -->
+		  <path d="M20 44c0-6.6 5.4-12 12-12s12 5.4 12 12" stroke="#ffffff" stroke-width="5" fill="none" />
+		</svg>
+      	Perfil
+      	</a>
+      	
+      <!-- Seccion Usuarios -->
+      	<a href="<%= request.getContextPath() %>/perfil">
+      	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Editar Perfil">
+		  <!-- Cabeza (círculo) -->
+		  <circle cx="12" cy="7" r="4" />
+		  
+		  <!-- Hombros (curva) -->
+		  <path d="M5 21c0-4 14-4 14 0" />
+		
+		  <!-- Tuerca (engranaje) -->
+		  <g transform="translate(18, 10) scale(0.6)" stroke="currentColor" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round">
+		    <circle cx="0" cy="0" r="4" />
+		    <!-- Dientes -->
+		    <line x1="0" y1="-6" x2="0" y2="-4" />
+		    <line x1="0" y1="6" x2="0" y2="4" />
+		    <line x1="-6" y1="0" x2="-4" y2="0" />
+		    <line x1="6" y1="0" x2="4" y2="0" />
+		    <line x1="-4.2" y1="-4.2" x2="-3" y2="-3" />
+		    <line x1="4.2" y1="4.2" x2="3" y2="3" />
+		    <line x1="-4.2" y1="4.2" x2="-3" y2="3" />
+		    <line x1="4.2" y1="-4.2" x2="3" y2="-3" />
+		    <!-- Círculo interior -->
+		    <circle cx="0" cy="0" r="1.5" fill="currentColor" />
+		  </g>
+		</svg>
+      	Ajustes Cuenta
+      	</a>
+        <a href="<%= request.getContextPath() %>/stats">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" role="img" aria-label="Dashboard Icon">
+		  <!-- Contorno general -->
+		  <rect x="2" y="3" width="20" height="18" rx="2" ry="2" />
+		  
+		  <!-- Barra 1 (más baja) -->
+		  <rect x="6" y="16" width="3" height="5" />
+		  <!-- Barra 2 (media) -->
+		  <rect x="11" y="12" width="3" height="9" />
+		  <!-- Barra 3 (más alta) -->
+		  <rect x="16" y="8" width="3" height="13" />
+		</svg> 
+        Dashboard
+        </a>
+        <a href="<%= request.getContextPath() %>/machines.jsp" style="color: #b600ff; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
+		 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 32 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" role="img" aria-label="Terminal Icon">
+		  <!-- Contorno de la terminal -->
+		  <rect x="1" y="1" width="30" height="22" rx="2" ry="2"/>
+		  
+		  <!-- Línea de prompt -->
+		  <polyline points="6 12 10 16 6 20" />
+		  
+		  <!-- Línea horizontal que representa texto -->
+		  <line x1="14" y1="16" x2="26" y2="16" />
+		</svg>
+		  Machines
+		</a>
+		
+		<a href="<%= request.getContextPath() %>/feedbacks-requests/request.jsp" style="color: #b600ff; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
+		  <svg xmlns="http://www.w3.org/2000/svg" 
+		     width="30" height="30" viewBox="0 0 24 24" 
+		     fill="none" stroke="currentColor" stroke-width="1.8" 
+		     stroke-linecap="round" stroke-linejoin="round">
+		  <!-- Bocadillo de diálogo -->
+		  <path d="M19 13a2 2 0 0 1-2 2H8l-3 3V6a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2z"></path>
+		  <!-- Check mark para feedback -->
+		  <polyline points="8 11 11 14 18 7"></polyline>
+		</svg>
+		  FeedBack
+		</a>
+		
+		<a href="<%= request.getContextPath() %>/ranking.jsp" style="color: #b600ff; text-decoration:none; display:inline-flex; align-items:center; gap:8px;">
+		  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" viewBox="0 0 24 24" role="img" aria-label="Ranking icon">
+		    <path d="M17 4V2H7v2H2v3c0 2.76 2.24 5 5 5 .68 0 1.32-.14 1.91-.39A6.98 6.98 0 0 0 11 15.9V19H8v2h8v-2h-3v-3.1a6.98 6.98 0 0 0 2.09-4.29c.59.25 1.23.39 1.91.39 2.76 0 5-2.24 5-5V4h-5zM4 7V6h3v2.93c-1.72-.23-3-1.69-3-2.93zm16 0c0 1.24-1.28 2.7-3 2.93V6h3v1z"/>
+		  </svg>
+		  Ranking
+		</a>
+
+        <!--<hr/>  -->
+        <!-- Seccion de Autenticacion -->
+        <!--<a href="#">⚙️ Settings</a>-->
+        
+        <!-- BOTON/FORMULARIO PARA CERRAR SESION DEL USUSARIO ACTUAL POR ID -->
+        <br><br>
+        <form action="<%= request.getContextPath() %>/logout" method="get" style="display: inline;">
+		    <button type="submit" style="
+		        font-size: 0.7rem;
+		        background-color: #7e0036; /* morado-rojizo */
+		        border: none;
+		        padding: 6px 10px 6px 8px;
+		        color: #fff;
+		        font-family: 'Press Start 2P', monospace !important;
+		        cursor: pointer;
+		        border-radius: 6px;
+		        display: flex;
+		        align-items: center;
+		        gap: 6px;
+		    ">
+		        <!-- SVG de logout (simple y elegante) -->
+		        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+				  <path d="M16 17l1.41-1.41L13.83 12l3.58-3.59L16 7l-5 5 5 5z"/>
+				  <path d="M19 3H5c-1.1 0-2 .9-2 2v4h2V5h14v14H5v-4H3v4c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/>
+				</svg>
+		        Cerrar sesión
+		    </button>
+		</form>
+      </nav>
+      <!-- 
+      <div class="theme-toggle">
+        <button id="toggle-theme">Modo Claro 🌞</button>
+      </div>
+       -->
+    </aside>
+</div>
+
+<!-- CONTENIDO PRINCIPAL -->
+
+<main class="main-content">
 
 <!-- PROFILE HEADER -->
 <div class="profile-header">
@@ -318,7 +738,7 @@
 
     <!-- AVATAR CENTER -->
     <div class="avatar-section">
-        <img src="<%= imgSrc %>" alt="Avatar" class="avatar-img">
+        <img src="<%= imgSrc %>" alt="Avatar" class="avatar-img <%= esProHackerOwner ? "prohacker-border" : "" %>">
         <div class="quote">– Informacion de <%= nombreUsuario %>.</div>
         <button class="btn-message">
 	        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" stroke="#cb9cf0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
@@ -388,11 +808,13 @@
     </table>
 </div>
 
-<!-- FLAGS SECTION -->
+<!-- LOGS SECTION -->
 <div class="machines-section" style="max-height: 300px; overflow-y: auto;">
     <div class="machines-title">Logs<span style="color: white;">.</span></div>
     <ul id="flags-log" class="flags-log-list"></ul>
 </div>
+
+</main>
 
 <!-- Define tu CustomSwal con un estilo oscuro/morado -->
 <script>
@@ -405,6 +827,36 @@ const CustomSwal = Swal.mixin({
 </script>
 
 <script>
+
+	const hamburger = document.getElementById("hamburger");
+	const closeBtn = document.getElementById("closeMenu");
+	const sidebarWrapper = document.getElementById("sidebarWrapper");
+	
+	function openMenu() {
+	  sidebarWrapper.classList.remove("closed");
+	  sidebarWrapper.classList.add("open");
+	  hamburger.style.display = "none";     // Oculta el botón ☰
+	  closeBtn.style.display = "block";     // Muestra el botón ❌
+	}
+	
+	function closeMenu() {
+	  sidebarWrapper.classList.remove("open");
+	  sidebarWrapper.classList.add("closed");
+	  hamburger.style.display = "block";    // Muestra el botón ☰
+	  closeBtn.style.display = "none";      // Oculta el botón ❌
+	}
+	
+	// Eventos
+	hamburger.addEventListener("click", openMenu);
+	closeBtn.addEventListener("click", closeMenu);
+	
+	// inicializacion
+	document.addEventListener("DOMContentLoaded", () => {
+	  openMenu(); // Mostramos el menú por defecto
+	});
+	
+	/* CARGAR INFORMACION DEL PERFIL */
+
 	async function loadStats() {
 		const params = new URLSearchParams(window.location.search);
 		const id = params.get("id");

@@ -2,6 +2,7 @@
 <%@ page import="model.InfoNotice" %>
 <%@ page import="dao.InfoNoticeDAO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="dao.UserDAO" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -39,6 +40,20 @@
 			
 			            <span style="color: #d98eff;">NAME: </span><%= n.getVmName() %><br><br>
 			            <span class="date-badge"><%= n.getDate() %></span>
+			            <br><br>
+			            <%
+				            UserDAO userDAO = new UserDAO();
+				            Integer creatorId = userDAO.getUserIdByUsername(n.getCreator());
+				        %>
+						<% if (creatorId != null) { %>
+						    <span style="font-size: 10px;">
+						        By: <a href="<%= request.getContextPath() %>/profile/profile-user-public.jsp?id=<%= creatorId %>" style="color: #cb9cf0; text-decoration: none;">
+						            <%= n.getCreator() %>
+						        </a>
+						    </span>
+						<% } else { %>
+						    <span style="font-size: 10px; color: #aaa;">By: <%= n.getCreator() %></span>
+						<% } %>
 			        </h3>
 			    </div>
 			

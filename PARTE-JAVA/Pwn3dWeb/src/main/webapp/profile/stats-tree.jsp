@@ -11,7 +11,7 @@
 <div class="tree">
     <h2 id="userTitle">Cargando...</h2>
     <div style="display: flex; justify-content: center; margin: 3rem 0;">
-	  <button onclick="window.location.href='<%= request.getContextPath() %>/stats'" class="btn exit" style="font-family: 'Press Start 2P', monospace !important;">Volver</button>
+	  <button onclick="window.location.href='<%= request.getContextPath() %>/profile/profile.jsp'" class="btn exit" style="font-family: 'Press Start 2P', monospace !important;">Volver</button>
 	</div>
 	<br>
     <div class="tree-node" id="node-info">
@@ -48,7 +48,9 @@
 	        document.getElementById("info").innerHTML =
 	            "<p><span class='label'>Nombre:</span> " + data.nombre + " " + data.apellido + "</p>" +
 	            "<p><span class='label'>País:</span> " + data.pais + "</p>" +
-	            "<p><span class='label'>Último inicio:</span> " + data.ultimo_inicio + "</p>";
+	            "<p><span class='label'>Último inicio:</span> " + data.ultimo_inicio + "</p>" +
+	            "<p><span class='label'>Rango:</span> " + data.rango + "</p>" +
+	            "<p><span class='label'>Posicion del Ranking:</span> " + "#" + data.ranking + "</p>";
 	
 	            document.getElementById("flags").innerHTML =
 	                "<p><span class='label'>Flags user:</span> " + data.flags_user + "</p>" +
@@ -61,7 +63,9 @@
 	            "<p><span class='label'>Writeups públicos:</span> " + data.total_writeups + "</p>" +
 	            "<p><span class='label'>Estrellas dadas:</span> " + data.estrellas_dadas + "</p>" +
 	            "<p><span class='label'>Feedbacks:</span> " + data.feedbacks + "</p>" +
-	            "<p><span class='label'>Requests creadas:</span> " + data.requests + "</p>";
+	            "<p><span class='label'>Requests creadas:</span> " + data.requests + "</p>" +
+	            "<p><span class='label'>Loves de perfil:</span> " + data.loves + "</p>" +
+	            "<p><span class='label'>VMs creadas:</span> " + data.vms_creadas + "</p>";
 	
 	        var badgeNames = {
 	            noob: "¡Bienvenido!",

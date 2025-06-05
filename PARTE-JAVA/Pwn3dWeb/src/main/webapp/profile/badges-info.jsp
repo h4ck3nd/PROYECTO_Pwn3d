@@ -24,7 +24,7 @@
     	<br>
         <h2 id="logros">Logros y Cómo Conseguirlos</h2>
 
-        <button onclick="window.location.href='<%= request.getContextPath() %>/stats'" class="btn exit">
+        <button onclick="window.location.href='<%= request.getContextPath() %>/profile/profile.jsp'" class="btn exit">
             Volver
         </button>
 

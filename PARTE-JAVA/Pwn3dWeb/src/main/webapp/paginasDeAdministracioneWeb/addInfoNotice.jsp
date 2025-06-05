@@ -6,6 +6,7 @@
 
     String cambiarEstadoId = request.getParameter("id_estado");
     String accionEstado = request.getParameter("accion_estado");
+    String creator = request.getParameter("creator");
 
     if (cambiarEstadoId != null && accionEstado != null) {
         ConexionDDBB db = new ConexionDDBB();
@@ -50,19 +51,20 @@
 
                 // Paso 2: Insertar la nueva noticia
                 PreparedStatement ps2 = conn.prepareStatement(
-                    "INSERT INTO info_notices_machines " +
-                    "(description, vm_name, date, time_created, estado, os, difficulty, environment, second_environment, path_info_notice) " +
-                    "VALUES (?, ?, ?, CURRENT_TIMESTAMP, 'publico', ?, ?, ?, ?, ?)"
-                );
-                ps2.setString(1, description);
-                ps2.setString(2, vmName);
-                ps2.setString(3, date);
-                ps2.setString(4, os);
-                ps2.setString(5, difficulty);
-                ps2.setString(6, environment);
-                ps2.setString(7, secondEnvironment);
-                ps2.setString(8, pathInfoNotice != null && !pathInfoNotice.isEmpty()
-                              ? "img/notices/" + pathInfoNotice : null);
+				    "INSERT INTO info_notices_machines " +
+				    "(description, vm_name, date, time_created, estado, os, difficulty, environment, second_environment, path_info_notice, creator) " +
+				    "VALUES (?, ?, ?, CURRENT_TIMESTAMP, 'publico', ?, ?, ?, ?, ?, ?)"
+				);
+				
+				ps2.setString(1, description);
+				ps2.setString(2, vmName);
+				ps2.setString(3, date);
+				ps2.setString(4, os);
+				ps2.setString(5, difficulty);
+				ps2.setString(6, environment);
+				ps2.setString(7, secondEnvironment);
+				ps2.setString(8, pathInfoNotice != null && !pathInfoNotice.isEmpty() ? "img/notices/" + pathInfoNotice : null);
+				ps2.setString(9, creator);
 
                 ps2.executeUpdate();
                 conn.commit();
@@ -266,6 +268,9 @@
   
   <label for="pathInfoNotice">Nombre de Imagen de Portada</label>
   <input type="text" name="pathInfoNotice" id="pathInfoNotice" placeholder="Ej. test.png" maxlength="255" />
+  
+  <label for="creator">Creador *</label>
+  <input type="text" name="creator" id="creator" required maxlength="100" />
   
   <input type="submit" value="Añadir Noticia" />
 </form>

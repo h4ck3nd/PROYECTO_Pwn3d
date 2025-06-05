@@ -88,6 +88,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="<%= request.getContextPath() %>/img/logo-flag-white.ico">
     <title>Perfil <%= nombreUsuario %> - Pwn3d!</title>
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/dynamicFonts.jsp" />
     <style>
@@ -419,7 +420,12 @@
       height: 80px;
       border-radius: 50%;
     }
-
+	
+	.profile p {
+    	color: white !important;
+    	opacity: 1 !important;
+    }
+	
     .avatar {
       border-radius: 50%;
       width: 80px;
@@ -462,6 +468,7 @@
 	
 	hr {
 		margin-top: -10px;
+		opacity: 1;
 	}
 	
 	.title {
@@ -498,6 +505,26 @@
 	    box-shadow: 0 0 10px 3px rgba(255, 0, 0, 0.5);
 	  }
 	}
+	
+	.custom-button {
+        display: inline-block;
+        padding: 12px 14px;
+        font-size: 8px;
+        font-family: 'Press Start 2P', monospace;
+        text-decoration: none;
+        border: 2px solid #cb9cf0;
+        background-color: #1e1b27;
+        color: #cb9cf0;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        text-align: center;
+    }
+
+    .custom-button:hover {
+        background-color: #cb9cf0;
+        color: #1e1b27;
+        box-shadow: 0 0 10px #cb9cf0;
+    }
     </style>
 </head>
 <body>
@@ -723,6 +750,14 @@
 	    <div class="trophy-icons" id="rrss-icons">
 	        <!-- JS insertará aquí las imágenes -->
 	    </div>
+	    
+	    <!-- Botones -->
+		<br><br>
+		<a href="<%= request.getContextPath() %>/profile/stats-tree.jsp" class="custom-button">Ver Árbol de estadísticas</a>
+		
+		<br><br>
+		<a href="<%= request.getContextPath() %>/profile/badges-info.jsp" class="custom-button">Ver Info. Logros</a>
+
 	</div>
 
 
