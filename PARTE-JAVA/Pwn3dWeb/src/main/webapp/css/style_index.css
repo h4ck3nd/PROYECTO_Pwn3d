@@ -211,7 +211,7 @@ body::-webkit-scrollbar-track {
     .menu {
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 1px;
       margin-top: 80px;
     }
 

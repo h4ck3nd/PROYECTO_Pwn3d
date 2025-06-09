@@ -1,0 +1,73 @@
+body {
+            margin: 0;
+            font-family: 'Press Start 2P', cursive;
+            background-color: #0e0e1a;
+            color: #d1b3ff;
+            text-align: center;
+        }
+
+        header {
+            background: linear-gradient(90deg, #6a0dad, #37006b);
+            padding: 2rem;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+        }
+
+        nav {
+            margin-top: 1rem;
+        }
+
+        nav a {
+            color: #d1b3ff;
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ffffff;
+        }
+
+        .container {
+            padding: 3rem 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .platform-card {
+            background-color: #1b1b2f;
+            border: 1px solid #6a0dad;
+            width: 250px;
+            border-radius: 12px;
+            box-shadow: 0 2px 6px rgba(255,255,255,0.1);
+            overflow: hidden;
+        }
+
+        .platform-card img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-bottom: 1px solid #6a0dad;
+        }
+
+        .platform-card h2 {
+            font-size: 0.8rem;
+            margin: 1rem 0 0.5rem;
+            color: #e0ccff;
+        }
+
+        .platform-card p {
+            font-size: 0.55rem;
+            color: #a892cc;
+            padding: 0 1rem 1rem;
+        }
+
+        footer {
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: #0b0b15;
+            font-size: 0.5rem;
+            color: #777;
+        }

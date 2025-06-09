@@ -91,443 +91,40 @@
     <link rel="icon" href="<%= request.getContextPath() %>/img/logo-flag-white.ico">
     <title>Perfil <%= nombreUsuario %> - Pwn3d!</title>
 	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/dynamicFonts.jsp" />
-    <style>
-    
-    	:root {
-		  /* Oscuro por defecto */
-		  /*--color-background: #2c2b30;*/ /* ANTIGUO COLOR MAS CLARO DEL FONDO */
-		  --color-background: #1e1b27;
-		  --color-sidebar-bg: #2c2c3a;
-		  --shadow-color: rgba(0, 0, 0, 0.6);
-		  --color-text-aside: #fff;
-		  --color-text: #fff;
-		  --color-text-muted: #6a0dad;
-		  --color-accent: #ff4f87;
-		  --color-accent-alt: #8340c4;
-		  --color-dot: #c9aee0;
-		  --color-hover-bg: #2a2a2a;
-		  --color-card-bg: #1a1a1a;
-		  --color-download-bg: #c9aee0;
-		  --color-shadow: rgba(0, 0, 0, 0.3);
-		  --color-border: #333;
-		  --color-gray-dark: #444;
-		  --color-timestamp: #888;
-		  --color-root: #9b6ad1;
-		  --color-user: #00ffff;
-		}
-    
-        body {
-            background-color: #1e1b27;
-            font-family: 'Press Start 2P', monospace;
-            color: #d6d6d6;
-            margin: 0 15rem;
-            padding: 60px 8%;
-            text-shadow: 1px 1px 1px #000000;
-        }
-
-        .profile-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-wrap: wrap;
-        }
-
-        .stats-section, .trophies-section {
-            width: 25%;
-            min-width: 220px;
-        }
-
-        .avatar-section {
-            text-align: center;
-            flex: 1;
-        }
-
-        .avatar-img {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            border: 6px solid #cb9cf0;
-            object-fit: cover;
-            background-color: #2c323e;
-        }
-
-        .username-title {
-            font-size: 18px;
-            color: #cb9cf0;
-            margin-bottom: 10px;
-        }
-
-        .btn-love {
-		    background-color: transparent;
-		    border-radius: 5px;
-		    color: #cb9cf0;
-		    border: 2px solid #cb9cf0;
-		    padding: 10px 20px;
-		    font-size: 11px;
-		    margin-top: 10px;
-		    font-family: 'Press Start 2P', monospace;
-		    cursor: pointer;
-		    transition: all 0.3s ease;
-		}
-		.btn-love:hover {
-		    background-color: #cb9cf0;
-		    color: #000;
-		}
-		
-		.btn-love:hover svg {
-		    fill: #000;
-		}
-		
-		.btn-message {
-		    background-color: transparent;
-		    border-radius: 5px;
-		    color: #cb9cf0;
-		    border: 2px solid #cb9cf0;
-		    padding: 10px 20px;
-		    font-size: 11px;
-		    margin-top: 10px;
-		    font-family: 'Press Start 2P', monospace;
-		    cursor: pointer;
-		    transition: all 0.3s ease;
-		}
-		.btn-message:hover {
-		    background-color: #cb9cf0;
-		    color: #000;
-		}
-		
-		.btn-message:hover svg {
-		    stroke: #000;
-		}
-
-        .quote {
-            font-size: 8px;
-            color: #999;
-            margin-top: 10px;
-        }
-
-        ul.stats-list {
-            list-style: none;
-            padding-left: 0;
-            font-size: 10px;
-            line-height: 1.8;
-        }
-
-        .trophy-icons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 10px;
-        }
-
-        .trophy-icons img {
-            width: 28px;
-            height: 28px;
-            image-rendering: pixelated;
-            padding: 2px;
-        }
-
-        .machines-section {
-            margin-top: 70px;
-            text-align: center;
-            max-height: 400px; /* o el valor que prefieras */
-		    overflow-y: auto;
-		    /*border: 1px solid #6f42c1;*/ /* opcional: para delimitar visualmente */
-		    padding-right: 5px; /* espacio para scroll */
-        }
-        
-        .machines-section::-webkit-scrollbar {
-		    width: 6px;
-		}
-		
-		.machines-section::-webkit-scrollbar-thumb {
-		    background-color: #6f42c1;
-		    border-radius: 3px;
-		}
-		
-		.machines-section::-webkit-scrollbar-track {
-		    background-color: #1e1b27;
-		}
-        
-
-        .machines-title {
-            font-size: 16px;
-            color: #cb9cf0;
-            margin-bottom: 15px;
-        }
-
-        .machines-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 11px;
-        }
-
-        .machines-table th, .machines-table td {
-            padding: 10px;
-            border-bottom: 1px solid #6f42c1;
-            text-align: center;
-        }
-
-        a {
-            color: #cb9cf0;
-        }
-
-        @media screen and (max-width: 900px) {
-            .profile-header {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .stats-section, .trophies-section {
-                width: 100%;
-                text-align: center;
-                margin-top: 30px;
-            }
-        }
-        .flags-log-list {
-		    list-style: none;
-		    font-size: 10px;
-		    padding: 0;
-		    color: #eee;
-		}
-		
-		.flags-log-list li {
-		    background-color: #2c253a;
-		    border-left: 4px solid #cb9cf0;
-		    padding: 8px;
-		    margin-bottom: 5px;
-		    border-radius: 5px;
-		}  
-		/* Contenido del menú */
-    .sidebar {
-      position: relative;
-      height: 100%;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      
-      /* Añadido para evitar forzar scroll */
-	  max-width: 100vw;
-	  max-height: 100vh;
-	  overflow: hidden;
-    }
-
-    .sidebar a {
-      color: var(--color-text-aside) !important;
-      text-decoration: none;
-      padding: 10px 0;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transition: color 0.2s ease;
-    }
-
-    .sidebar a:hover {
-      color: var(--color-accent);
-    }
-
-    /* Botón de cerrar dentro del menú */
-    .menu-close {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      font-size: 1.0rem;
-      background: none;
-      color: var(--color-text);
-      border: none;
-      cursor: pointer;
-      z-index: 2001;
-      display: none;
-    }
-
-    /* Mostrar botón de cerrar solo cuando el menú está abierto */
-    .sidebar-wrapper.open .menu-close {
-      display: block;
-    }
-
-    /* Botón de hamburguesa (☰) */
-    .menu-toggle {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      font-size: 2rem;
-      background: none;
-      color: var(--color-text);
-      border: none;
-      cursor: pointer;
-      z-index: 2000;
-      display: none;
-    }
-
-    /* Mostrar hamburguesa solo cuando el menú está cerrado */
-    .sidebar-wrapper.closed + .menu-toggle {
-      display: block;
-    }
-
-   /* Menú lateral */
-	.sidebar-wrapper {
-	  position: fixed;
-	  top: 0;
-	  left: 0;
-	  width: 340px;
-	  height: 100vh;
-	  background-color: var(--color-sidebar-bg);
-	  box-shadow: 4px 0 10px var(--shadow-color);
-	  overflow-y: hidden; /* <-- esto evita la barra de scroll */
-	  z-index: 1000;
-	  transition: transform 0.3s ease;
-	  align-items: center;
-	  text-align: center;
-	  align-content: center;
-	}
-
-    /* Menú abierto */
-    .sidebar-wrapper.open {
-      transform: translateX(0);
-    }
-
-    /* Menú cerrado */
-    .sidebar-wrapper.closed {
-      transform: translateX(-100%);
-    }
-
-    .sidebar-wrapper.closed ~ .main-content {
-      margin-left: -10rem;
-      margin-right: -10rem;
-    }
-
-    .main-content {
-      flex: 1;
-      padding: 40px;
-      margin-left: 40px;
-      margin-right: -280px;
-    }
-
-    /* En pantallas pequeñas, el contenido debe ajustarse */
-    @media (max-width: 768px) {
-      .main-content {
-        margin-left: 0;
-        padding: 60px 20px 20px;
-      }
-    }
-
-    .profile {
-      text-align: center;
-    }
-
-    .profile img {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-    }
-	
-	.profile p {
-    	color: white !important;
-    	opacity: 1 !important;
-    }
-	
-    .avatar {
-      border-radius: 50%;
-      width: 80px;
-      height: 80px;
-    }
-
-    .username {
-      margin-top: 10px;
-      font-weight: bold;
-      font-size: 0.95rem;
-      color: white !important;
-    }
-
-    .menu {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-top: 70px;
-    }
-
-    .menu a {
-      color: var(--color-text-muted);
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.2s ease;
-    }
-
-    .menu a:hover {
-      color: var(--color-text);
-    }
-
-    .hero {
-	  display: flex;
-	  flex-wrap: wrap;
-	  justify-content: space-between;
-	  align-items: flex-start;
-	  gap: 2rem; /* Mejor que márgenes negativos */
-	  padding: 1rem 2rem; 
-	}
-	
-	hr {
-		margin-top: -10px;
-		opacity: 1;
-	}
-	
-	.title {
-	  font-size: 2.5rem;
-	  font-weight: 700;
-	  margin: 0;           
-	}
-	
-	/* ESTILO DEL LOGRO PROHACKER PARA EL AVATAR */
-
-	.avatar-image {
-	  width: 120px;
-	  height: 120px;
-	  border-radius: 50%;
-	  object-fit: cover;
-	  border: 3px solid transparent;
-	}
-	
-	/* Contorno exclusivo para prohacker */
-	.prohacker-border {
-	  position: relative;
-	  animation: pulseBorder 2s infinite;
-	  box-shadow: 0 0 15px 5px rgba(255, 0, 0, 0.6);
-	}
-	
-	@keyframes pulseBorder {
-	  0% {
-	    box-shadow: 0 0 10px 3px rgba(255, 0, 0, 0.5);
-	  }
-	  50% {
-	    box-shadow: 0 0 20px 8px rgba(255, 0, 0, 0.9);
-	  }
-	  100% {
-	    box-shadow: 0 0 10px 3px rgba(255, 0, 0, 0.5);
-	  }
-	}
-	
-	.custom-button {
-        display: inline-block;
-        padding: 12px 14px;
-        font-size: 8px;
-        font-family: 'Press Start 2P', monospace;
-        text-decoration: none;
-        border: 2px solid #cb9cf0;
-        background-color: #1e1b27;
-        color: #cb9cf0;
-        border-radius: 8px;
-        transition: all 0.3s ease;
-        text-align: center;
-    }
-
-    .custom-button:hover {
-        background-color: #cb9cf0;
-        color: #1e1b27;
-        box-shadow: 0 0 10px #cb9cf0;
-    }
-    </style>
+	<link rel="stylesheet" href="<%= request.getContextPath() %>/css/cssProfile.jsp" />
 </head>
 <body>
+
+<!-- Fondo oscurecido -->
+<div id="messages-overlay" style="
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+">
+    <!-- Panel de mensajes -->
+    <div id="messages-list" style="
+	    background: #2a2a2a;
+	    border: 1px solid #444;
+	    border-radius: 8px;
+	    padding: 24px;
+	    width: 360px; /* más ancho */
+	    max-height: 500px;
+	    overflow-y: auto;
+	    color: #fff;
+	    z-index: 1000;
+	    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.8);
+	">
+        <strong style="font-size: 16px;">Mensajes no leídos</strong>
+        <ul id="senders-list" style="list-style: none; padding-left: 0; margin-top: 8px;"></ul>
+        <div id="no-messages" style="display:none; margin-top: 10px; color: #bbb;">No hay mensajes nuevos</div>
+    </div>
+</div>
 
 <!-- MENU DE HABURGUESA -->
 
@@ -632,6 +229,16 @@
 		  </svg>
 		  Ranking
 		</a>
+		
+		<!-- Seccion Reconocimientos paginas -->
+      	<a href="<%= request.getContextPath() %>/appreciation.jsp">
+      	<svg width="24" height="24" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+		  <path d="M32 2L8 12V30C8 47 22 59 32 62C42 59 56 47 56 30V12L32 2Z" fill="none" stroke="#ffffff" stroke-width="4"/>
+		  <path d="M32 20L35.09 26.26L42 27.27L37 32.14L38.18 39.02L32 35.77L25.82 39.02L27 32.14L22 27.27L28.91 26.26L32 20Z"
+		        fill="#ffffff"/>
+		</svg>
+      	Reconocimientos
+      	</a>
 
         <!--<hr/>  -->
         <!-- Seccion de Autenticacion -->
@@ -760,7 +367,37 @@
 
 	</div>
 
-
+	<!-- Botón email con badge de mensajes no leídos -->
+	<div id="messages-button" style="position: relative; margin-left: auto; cursor: pointer; width: 24px; height: 24px;">
+	    <!-- SVG envoltorio -->
+	    <svg xmlns="http://www.w3.org/2000/svg"
+	         width="24" height="24"
+	         fill="none" stroke="#cb9cf0"
+	         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+	         viewBox="0 0 24 24">
+	        <path d="M4 4h16v16H4z"/>
+	        <path d="M22 6l-10 7L2 6"/>
+	    </svg>
+	
+	    <!-- Badge de mensajes no leídos -->
+	    <span id="unread-count" style="
+	        position: absolute;
+	        top: -6px;
+	        right: -6px;
+	        background: red;
+	        color: white;
+	        font-size: 11px;
+	        font-weight: bold;
+	        border-radius: 50%;
+	        width: 18px;
+	        height: 18px;
+	        display: none;
+	        text-align: center;
+	        line-height: 18px;
+	        pointer-events: none;
+	        z-index: 1;
+	    ">0</span>
+	</div>
 
 </div>
 
@@ -983,6 +620,92 @@
 	}
 	
 	window.onload = loadStats;
+	
+	/* LOGICA DE LOS MENSAJES NO LEIDOS DEL PERFIL DE USUARIO */
+	
+	async function loadUnreadSenders() {
+	    const currentUserId = <%= userId %>;
+
+	    try {
+	        const res = await fetch('<%= request.getContextPath() %>/getUnreadSenders?currentUserId=' + currentUserId);
+	        if (!res.ok) throw new Error('Error al obtener mensajes');
+	        const data = await res.json();
+
+	        const unreadCountElem = document.getElementById('unread-count');
+	        const sendersList = document.getElementById('senders-list');
+	        const noMessages = document.getElementById('no-messages');
+
+	        let totalUnread = 0;
+	        for (let i = 0; i < data.length; i++) {
+	            totalUnread += data[i].unreadCount;
+	        }
+
+	        if (totalUnread > 0) {
+	            unreadCountElem.style.display = 'block';
+	            unreadCountElem.textContent = totalUnread > 99 ? '99+' : totalUnread;
+	        } else {
+	            unreadCountElem.style.display = 'none';
+	        }
+
+	        sendersList.innerHTML = '';
+
+	        if (data.length === 0) {
+	            noMessages.style.display = 'block';
+	        } else {
+	            noMessages.style.display = 'none';
+
+	            for (let i = 0; i < data.length; i++) {
+	                let sender = data[i];
+	                let li = document.createElement('li');
+	                li.style.cursor = 'pointer';
+	                li.style.padding = '6px 4px';
+	                li.style.borderBottom = '1px solid #444';
+
+	                // Aquí concatenamos con + en lugar de template literals
+	                li.innerHTML = sender.senderName + 
+	                    ' <span style="background:red; color:white; border-radius:12px; padding:2px 6px; font-size: 12px;">' + 
+	                    sender.unreadCount + 
+	                    '</span>';
+
+	                li.addEventListener('click', function() {
+	                    window.location.href = '<%= request.getContextPath() %>/profile/chat.jsp?id=' + sender.senderId;
+	                });
+
+	                sendersList.appendChild(li);
+	            }
+	        }
+	    } catch (err) {
+	        console.error('Error cargando mensajes:', err);
+	    }
+	}
+	
+	// ✅ Llamar automáticamente al cargar la página
+	document.addEventListener('DOMContentLoaded', function () {
+	    loadUnreadSenders();
+	});
+
+	const messagesButton = document.getElementById('messages-button');
+	const messagesOverlay = document.getElementById('messages-overlay');
+
+	messagesButton.addEventListener('click', () => {
+	    if (messagesOverlay.style.display === 'none' || messagesOverlay.style.display === '') {
+	        messagesOverlay.style.display = 'flex'; // Para centrar con flexbox
+	        loadUnreadSenders();
+	    } else {
+	        messagesOverlay.style.display = 'none';
+	    }
+	});
+
+	// Cerrar al hacer clic fuera del panel
+	document.addEventListener('click', (event) => {
+	    if (
+	        !messagesButton.contains(event.target) &&
+	        !document.getElementById('messages-list').contains(event.target)
+	    ) {
+	        messagesOverlay.style.display = 'none';
+	    }
+	});
+
 </script>
 </body>
 </html>

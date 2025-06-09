@@ -205,6 +205,16 @@
 		  </svg>
 		  Ranking
 		</a>
+		
+		<!-- Seccion Reconocimientos paginas -->
+      	<a href="<%= request.getContextPath() %>/appreciation.jsp">
+      	<svg width="24" height="24" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+		  <path d="M32 2L8 12V30C8 47 22 59 32 62C42 59 56 47 56 30V12L32 2Z" fill="none" stroke="#ffffff" stroke-width="4"/>
+		  <path d="M32 20L35.09 26.26L42 27.27L37 32.14L38.18 39.02L32 35.77L25.82 39.02L27 32.14L22 27.27L28.91 26.26L32 20Z"
+		        fill="#ffffff"/>
+		</svg>
+      	Reconocimientos
+      	</a>
 
         <!--<hr/>  -->
         <!-- Seccion de Autenticacion -->

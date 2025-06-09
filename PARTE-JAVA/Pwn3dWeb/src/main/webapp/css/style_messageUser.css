@@ -187,7 +187,7 @@ body.sidebar-closed .content {
     .menu {
       display: flex;
       flex-direction: column;
-      gap: 2px;
+      gap: 0px;
       margin-top: 60px;
       margin-left: -60px;
     }
