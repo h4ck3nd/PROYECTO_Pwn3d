@@ -32,7 +32,7 @@ public class UserStatsDAO {
                 stats.put("flags_root", rs.getInt("flags_root"));
                 stats.put("puntos", rs.getInt("puntos"));
                 stats.put("ultimo_inicio", rs.getTimestamp("ultimo_inicio"));
-                
+
                 // 💜 Nuevo: incluir "loves"
                 stats.put("loves", rs.getInt("loves"));
             }
@@ -64,7 +64,7 @@ public class UserStatsDAO {
             if (rs.next()) {
                 stats.put("requests", rs.getInt(1));
             }
-            
+
             String nombreUsuario = (String) stats.get("usuario");
             PreparedStatement psVm = conn.prepareStatement("SELECT COUNT(*) FROM machines WHERE creator = ?");
             psVm.setString(1, nombreUsuario);
@@ -72,7 +72,7 @@ public class UserStatsDAO {
             if (rsVm.next()) {
                 stats.put("vms_creadas", rsVm.getInt(1));
             }
-            
+
             // Redes sociales públicas
             String socialQuery = "SELECT social_icon, url_social FROM editprofile WHERE user_id = ? AND estado = 'Publico'";
             PreparedStatement psSocial = conn.prepareStatement(socialQuery);
@@ -114,7 +114,7 @@ public class UserStatsDAO {
                 }
             }
             stats.put("badges", badges);
-            
+
          // Determinar rango del usuario basado en el orden de prioridad
             String[] rangos = {
                 "god", "FuckSystem", "anonymous", "0xcoffee", "aprendiz", "proHacker", "hacker", "noob"
@@ -129,7 +129,7 @@ public class UserStatsDAO {
                     break;
                 }
             }
-            
+
             PreparedStatement psMachines = conn.prepareStatement("SELECT name_machine, download_url, size FROM machines WHERE creator = ?");
             psMachines.setString(1, nombreUsuario);
             ResultSet rsMachines = psMachines.executeQuery();
@@ -143,7 +143,7 @@ public class UserStatsDAO {
                 machines.add(machine);
             }
             stats.put("machines", machines);
-            
+
             // Obtener logs de flags por usuario
             PreparedStatement psFlags = conn.prepareStatement(""
                     + "SELECT vm_name, tipo_flag, first_flag_user, first_flag_root, created_at "
@@ -162,7 +162,7 @@ public class UserStatsDAO {
                 flagsLogs.add(flagLog);
             }
             stats.put("flags_logs", flagsLogs);
-            
+
             // Calcular posición en ranking por puntos
             PreparedStatement rankStmt = conn.prepareStatement(
                 "SELECT id FROM users ORDER BY puntos DESC"

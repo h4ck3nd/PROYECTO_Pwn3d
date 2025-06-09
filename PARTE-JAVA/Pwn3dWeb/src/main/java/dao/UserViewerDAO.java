@@ -1,9 +1,16 @@
 package dao;
 
-import conexionDDBB.ConexionDDBB;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import java.sql.*;
-import java.util.*;
+import conexionDDBB.ConexionDDBB;
 
 public class UserViewerDAO {
 
@@ -42,7 +49,9 @@ public class UserViewerDAO {
             }
 
             data.put("redes_privadas", redes.isEmpty());
-            if (!redes.isEmpty()) data.put("redes", redes);
+            if (!redes.isEmpty()) {
+				data.put("redes", redes);
+			}
 
             // Badges
             String sqlBadges = "SELECT * FROM badges WHERE userid = ?";
@@ -126,7 +135,9 @@ public class UserViewerDAO {
             rs = ps.executeQuery();
             int pos = 1;
             while (rs.next()) {
-                if (rs.getInt("id") == userId) break;
+                if (rs.getInt("id") == userId) {
+					break;
+				}
                 pos++;
             }
             data.put("ranking", pos);

@@ -57,7 +57,12 @@ public class BadgeUpdateFilter implements Filter {
             path.equals(contextPath + "/user-stats") ||
             path.equals(contextPath + "/user-viewer") ||
             path.equals(contextPath + "/giveLoveUser") ||
+            path.equals(contextPath + "/getMessages") ||
+            path.equals(contextPath + "/sendMessageAjax") ||
+            path.equals(contextPath + "/getUnreadSenders") ||
             path.equals(contextPath + "/ranking.jsp") ||
+            path.equals(contextPath + "/appreciation.jsp") ||
+            path.equals(contextPath + "/chat.jsp") ||
             path.equals(contextPath + "/infoNoticias.jsp") ||
             path.equals(contextPath + "/welcome.jsp") ||
             path.startsWith(contextPath + "/login-register/")) {

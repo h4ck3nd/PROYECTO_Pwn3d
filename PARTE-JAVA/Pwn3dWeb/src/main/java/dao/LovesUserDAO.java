@@ -1,11 +1,11 @@
 package dao;
 
-import conexionDDBB.ConexionDDBB;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import conexionDDBB.ConexionDDBB;
 
 public class LovesUserDAO {
     private Connection connection;
@@ -52,15 +52,21 @@ public class LovesUserDAO {
             }
             throw e;
         } finally {
-            if (insertStmt != null) insertStmt.close();
-            if (updateStmt != null) updateStmt.close();
+            if (insertStmt != null) {
+				insertStmt.close();
+			}
+            if (updateStmt != null) {
+				updateStmt.close();
+			}
             connection.setAutoCommit(true); // conexión correcta
         }
     }
 
     public void cerrarConexion() {
         try {
-            if (connection != null) connection.close();
+            if (connection != null) {
+				connection.close();
+			}
         } catch (SQLException e) {
             e.printStackTrace();
         }

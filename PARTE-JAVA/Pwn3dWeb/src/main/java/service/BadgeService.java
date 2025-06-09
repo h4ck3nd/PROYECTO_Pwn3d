@@ -137,7 +137,7 @@ public class BadgeService {
         if (starsMachinesDAO.hasStars(userId) && !badge.isEstrellita()) {
             badgeDAO.updateBadge(userId, "estrellita");
         }
-        
+
         // 11. Rangos
         if (puntos >= 100 && !badge.isAprendiz()) {
             badgeDAO.updateBadge(userId, "aprendiz");

@@ -49,12 +49,22 @@ public class BadgeChecker {
         if (puntos >= 3000) {
 			badgeDAO.updateBadge(userId, "puntos3000");
 		}
-        
-        if (puntos >= 100) badgeDAO.updateBadge(userId, "aprendiz");
-        if (puntos >= 1000) badgeDAO.updateBadge(userId, "0xcoffee");
-        if (puntos >= 2000) badgeDAO.updateBadge(userId, "anonymous");
-        if (puntos >= 3000) badgeDAO.updateBadge(userId, "FuckSystem");
-        if (puntos >= 5000) badgeDAO.updateBadge(userId, "god");
+
+        if (puntos >= 100) {
+			badgeDAO.updateBadge(userId, "aprendiz");
+		}
+        if (puntos >= 1000) {
+			badgeDAO.updateBadge(userId, "0xcoffee");
+		}
+        if (puntos >= 2000) {
+			badgeDAO.updateBadge(userId, "anonymous");
+		}
+        if (puntos >= 3000) {
+			badgeDAO.updateBadge(userId, "FuckSystem");
+		}
+        if (puntos >= 5000) {
+			badgeDAO.updateBadge(userId, "god");
+		}
     }
 
     public BadgeDAO getBadgeDAO() {

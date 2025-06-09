@@ -70,7 +70,7 @@ public class MachineDetailsServlet extends HttpServlet {
             } else {
                 System.out.println("❌ No se encontró ninguna máquina con ID: " + machineId);
             }
-            
+
             String creatorUsername = machine.getCreator();
             String creatorIdQuery = "SELECT id FROM users WHERE usuario = ?";
             try (PreparedStatement stmtCreator = conn.prepareStatement(creatorIdQuery)) {
@@ -83,7 +83,7 @@ public class MachineDetailsServlet extends HttpServlet {
                 System.err.println("💥 Error al obtener el ID del creador:");
                 e.printStackTrace();
             }
-            
+
             int totalWriteups = 0;
             if (machine != null) {
                 String writeupsQuery = "SELECT COUNT(*) FROM writeups_public WHERE vm_name = ?";
@@ -190,7 +190,7 @@ public class MachineDetailsServlet extends HttpServlet {
                     }
                 }
             }
-            
+
             int firstUserId = -1;
             int firstRootId = -1;
             boolean firstUserIsProHacker = false;

@@ -376,7 +376,7 @@ public class UserDAO {
 
         return puntos;
     }
-    
+
     public Integer getUserIdByUsername(String username) {
         String query = "SELECT id FROM users WHERE usuario = ?";
         Connection conn = null;
@@ -396,9 +396,15 @@ public class UserDAO {
             e.printStackTrace();
         } finally {
             try {
-                if (rs != null) rs.close();
-                if (stmt != null) stmt.close();
-                if (conn != null) conn.close();
+                if (rs != null) {
+					rs.close();
+				}
+                if (stmt != null) {
+					stmt.close();
+				}
+                if (conn != null) {
+					conn.close();
+				}
             } catch (SQLException e) {
                 e.printStackTrace();
             }

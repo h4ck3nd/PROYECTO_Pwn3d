@@ -71,7 +71,7 @@ public class UserStatsBadgesServlet extends HttpServlet {
         String[] badgeKeys = {
             "noob", "top1mes", "top1año", "creador", "vms50", "vms100", "vms200", "vms300",
             "juniorvm", "escritor", "writeups100", "solucionador", "firstroot", "firstuser",
-            "puntos100", "puntos1000", "puntos2000", "puntos3000", "estrellita", "prohacker", "hacker", 
+            "puntos100", "puntos1000", "puntos2000", "puntos3000", "estrellita", "prohacker", "hacker",
             "aprendiz", "0xcoffee", "anonymous", "FuckSystem", "god"
         };
 
