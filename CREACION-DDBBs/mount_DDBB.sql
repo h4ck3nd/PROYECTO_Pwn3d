@@ -290,3 +290,14 @@ CREATE TABLE lovesusers (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (user_id_guest) REFERENCES users(id) ON DELETE CASCADE
 );
+
+-- TABLA DONDE SE GUARDAN LOS MENSAJES
+
+CREATE TABLE messages (
+    id SERIAL PRIMARY KEY,
+    sender_id INTEGER NOT NULL REFERENCES users(id),
+    receiver_id INTEGER NOT NULL REFERENCES users(id),
+    content TEXT NOT NULL,
+    sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_read BOOLEAN DEFAULT FALSE
+);
